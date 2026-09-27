@@ -136,18 +136,48 @@ def parse_public_transcript_text(text: str):
     return out
 
 def fetch_english_via_public_transcript(video_id: str):
-    try:
-        import requests
-        url=f'https://youtube-transcript.ai/transcript/{video_id}.txt?lang=en'
-        r=requests.get(url,timeout=25,headers={'User-Agent':'Mozilla/5.0'})
-        if r.ok:
-            rows=parse_public_transcript_text(r.text)
+    # Free public transcript mirrors are a last-resort caption source. They
+    # preserve timestamps from YouTube's public captions and avoid local AI.
+    import requests
+    from bs4 import BeautifulSoup
+    def parse_timestamped_html(html):
+        text=BeautifulSoup(html,'html.parser').get_text('\n')
+        rows=[]
+        # youtube2text renders transcript entries like: "1. 0:05 text"
+        pat=re.compile(r'^\s*\d+\.\s*(?P<t>(?:\d+:)?\d{1,2}:\d{2})\s+(?P<txt>.+?)\s*$')
+        for line in text.splitlines():
+            m=pat.match(clean_text(line))
+            if not m:continue
+            parts=m.group('t').split(':')
+            try:
+                sec=(int(parts[0])*60+int(parts[1])) if len(parts)==2 else (int(parts[0])*3600+int(parts[1])*60+int(parts[2]))
+            except Exception:continue
+            txt=clean_text(m.group('txt'))
+            if txt:rows.append({'start':sec,'end':sec+4,'en':txt})
+        out=[]
+        for i,row in enumerate(rows):
+            if out and row['en'].lower()==out[-1]['en'].lower() and abs(row['start']-out[-1]['start'])<0.5:continue
+            row=dict(row)
+            row['end']=rows[i+1]['start'] if i+1<len(rows) and rows[i+1]['start']>row['start'] else row['start']+4
+            out.append(row)
+        return out
+    urls=[
+        f'https://youtube2text.diguardia.org/v/{video_id}',
+        f'https://youtubetotranscript.com/transcript?current_language_code=en&v={video_id}',
+        f'https://youtube-transcript.ai/transcript/{video_id}.txt?lang=en',
+    ]
+    for url in urls:
+        try:
+            r=requests.get(url,timeout=25,headers={'User-Agent':'Mozilla/5.0'})
+            if not r.ok:continue
+            rows=parse_timestamped_html(r.text) if 'youtube2text' in url else parse_public_transcript_text(r.text)
             if len(rows)>=CONFIG['minSegments'] and len(' '.join(x['en'] for x in rows))>=180:
                 return rows
-    except Exception:
-        pass
+        except Exception:
+            continue
     return []
-    
+
+
 def transcript_candidates(video_id: str):
     if YouTubeTranscriptApi is None:
         return []
