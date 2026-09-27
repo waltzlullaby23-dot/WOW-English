@@ -1,6 +1,9 @@
 name: 三木Eng Free Video Discovery
 
 on:
+  push:
+    paths:
+      - ".github/workflows/content-pipeline.yml"
   schedule:
     - cron: "17 2 * * *"
   workflow_dispatch:
