@@ -120,12 +120,59 @@ function fmt(s){s=Number(s)||0;return String(Math.floor(s/60)).padStart(2,'0')+'
 function clickableSentence(text,videoId){return esc(text).replace(/[A-Za-z]+(?:'[A-Za-z]+)?/g,w=>{const k=w.toLowerCase();const info=wordBank.words?.[k];if(['a','an','the','and','or','but','if','to','of','in','on','at','for','from','by','with','as','is','are','was','were','be','been','being','am','do','does','did','have','has','had','can','could','will','would','should','may','might','must','this','that','these','those','it','its','they','them','their','we','our','you','your','i','he','she','his','her','what','which','who','when','where','why','how'].includes(k))return w;return `<button class="word-token ${info?'known':''}" onclick='event.stopPropagation();openWord(${JSON.stringify(k)},${JSON.stringify(videoId)},${JSON.stringify(text)})'>${w}</button>`;});}
 function markHistory(v){let h=history(),i=h.findIndex(x=>x.id===v.id);const item={id:v.id,title:v.title,updatedAt:new Date().toISOString()};if(i>=0)h[i]={...h[i],...item};else h.unshift(item);save('sanmu-history',h.slice(0,200));let d=daily();d.minutes+=1;d.sessions+=1;save('sanmu-daily',d);}
 function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];save('sanmu-favs',f);render();}
-function openWord(word,sourceVideoId='',sourceSentence=''){const info=wordBank.words?.[String(word).toLowerCase()]||{};state.word={word,sourceVideoId,sourceSentence,...info};render();}
+async function enrichWord(word){
+  const key=String(word||'').trim().toLowerCase();
+  if(!key)return;
+  try{
+    const tr=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key));
+    if(tr.ok){
+      const data=await tr.json();
+      const zh=(data?.[0]||[]).map(x=>x?.[0]||'').join('').trim();
+      if(zh&&state.word&&String(state.word.word).toLowerCase()===key){state.word.definition_zh=zh;render();}
+    }
+  }catch{}
+  try{
+    const dr=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key));
+    if(dr.ok){
+      const data=await dr.json(); const e=data?.[0];
+      const gloss=(e?.meanings||[]).flatMap(m=>m.definitions||[]).slice(0,2).map(d=>d.definition).filter(Boolean).join('；');
+      if(gloss&&state.word&&String(state.word.word).toLowerCase()===key){state.word.gloss=gloss;render();}
+    }
+  }catch{}
+}
+function openWord(word,sourceVideoId='',sourceSentence=''){
+  const info=wordBank.words?.[String(word).toLowerCase()]||{};
+  state.word={word,sourceVideoId,sourceSentence,...info};
+  render();
+  if(!info.definition_zh||!info.gloss) enrichWord(word);
+}
 function closeWord(){state.word=null;render();}
-function speak(text,locale){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=locale;speechSynthesis.speak(u);}
+function speak(text,locale){
+  if(!window.speechSynthesis)return;
+  const voices=window.speechSynthesis.getVoices();
+  const exact=voices.find(v=>String(v.lang||'').toLowerCase()===locale.toLowerCase());
+  const prefix=voices.find(v=>String(v.lang||'').toLowerCase().startsWith(locale.slice(0,2).toLowerCase()) && String(v.name||'').toLowerCase().includes(locale.slice(3).toLowerCase()));
+  const voice=exact||prefix||voices.find(v=>String(v.lang||'').toLowerCase().startsWith(locale.slice(0,2).toLowerCase()));
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(String(text)); u.lang=locale; if(voice)u.voice=voice; u.rate=.9; u.pitch=1;
+  speechSynthesis.speak(u);
+}
+
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
-function wordModal(){const w=state.word,fav=Object.keys(vocab()).includes(String(w.word).toLowerCase());return `<div class="modal-backdrop" onclick="closeWord()"><div class="word-modal" onclick="event.stopPropagation()"><div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div>${esc(w.pos||'')}</div></div><button onclick="closeWord()">×</button></div><div class="pron-row"><span>英式 ${esc(w.phonetic_uk||'')}</span><button onclick="speak(${JSON.stringify(w.word)},'en-GB')">🔊 英式</button><span>美式 ${esc(w.phonetic_us||'')}</span><button onclick="speak(${JSON.stringify(w.word)},'en-US')">🔊 美式</button></div><section><label>中文解釋</label><p>${esc(w.definition_zh||'目前尚無完整詞條，之後可由 AI 詞典層補充。')}</p></section><section><label>English meaning</label><p>${esc(w.gloss||'—')}</p></section><section><label>例句</label><p>${esc(w.example||w.sourceSentence||'—')}</p></section><button class="primary" onclick="addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button></div></div>`;}
-function grammar(){const done=Object.values(prog()).filter(Boolean).length;return `<div class="section-head"><div><h2>英文文法 · 30 章 / 150 微課</h2><p>Form → Meaning → Use → Contrast → Error；每課都有說明、句型、例句、常見錯誤與練習。</p></div><span class="count-pill">${done}/150</span></div><div class="overview-progress"><strong>${done} / 150 課</strong><div><i style="width:${done/1.5}%"></i></div></div><div class="chapter-grid">${lessons.chapters.map(c=>{const ms=lessons.microLessons.filter(m=>m.chapter_id===c[0]);return `<article class="chapter"><div class="chapter-head"><h3>${c[0]}. ${esc(c[1])}</h3><span>${esc(c[3]||'')}</span></div><p>${esc(c[2])}</p><div class="micro-list">${ms.map(m=>`<button class="micro-btn ${prog()[m.lesson_id]?'done':''}" onclick="go('lesson','${m.lesson_id}')"><span>${m.lesson_id.split('-')[1]}</span>${esc(m.title_zh)}<i>→</i></button>`).join('')}</div></article>`}).join('')}</div>`;}
+function wordModal(){
+  const w=state.word,fav=Object.keys(vocab()).includes(String(w.word).toLowerCase());
+  return `<div class="modal-backdrop" onclick="closeWord()"><div class="word-modal" onclick="event.stopPropagation()">
+    <div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div>${esc(w.pos||'')}</div></div><button onclick="closeWord()">×</button></div>
+    <div class="pron-row">
+      <span>英式 ${esc(w.phonetic_uk||'')}</span><button onclick="speak(${JSON.stringify(w.word)},'en-GB')">🔊 英式發音</button>
+      <span>美式 ${esc(w.phonetic_us||'')}</span><button onclick="speak(${JSON.stringify(w.word)},'en-US')">🔊 美式發音</button>
+    </div>
+    <section><label>中文解釋</label><p>${esc(w.definition_zh||'正在取得中文解釋…')}</p></section>
+    <section><label>English meaning</label><p>${esc(w.gloss||'正在取得英文解釋…')}</p></section>
+    <section><label>例句</label><p>${esc(w.example||w.sourceSentence||'—')}</p><button class="secondary" onclick="speak(${JSON.stringify(w.example||w.sourceSentence||w.word)},'en-US')">🔊 例句</button></section>
+    <button class="primary" onclick="addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button>
+  </div></div>`;
+}function grammar(){const done=Object.values(prog()).filter(Boolean).length;return `<div class="section-head"><div><h2>英文文法 · 30 章 / 150 微課</h2><p>Form → Meaning → Use → Contrast → Error；每課都有說明、句型、例句、常見錯誤與練習。</p></div><span class="count-pill">${done}/150</span></div><div class="overview-progress"><strong>${done} / 150 課</strong><div><i style="width:${done/1.5}%"></i></div></div><div class="chapter-grid">${lessons.chapters.map(c=>{const ms=lessons.microLessons.filter(m=>m.chapter_id===c[0]);return `<article class="chapter"><div class="chapter-head"><h3>${c[0]}. ${esc(c[1])}</h3><span>${esc(c[3]||'')}</span></div><p>${esc(c[2])}</p><div class="micro-list">${ms.map(m=>`<button class="micro-btn ${prog()[m.lesson_id]?'done':''}" onclick="go('lesson','${m.lesson_id}')"><span>${m.lesson_id.split('-')[1]}</span>${esc(m.title_zh)}<i>→</i></button>`).join('')}</div></article>`}).join('')}</div>`;}
 function lesson(){const l=lessons.microLessons.find(x=>x.lesson_id===state.selectedLesson);if(!l)return '<div class="empty">找不到微課。</div>';const done=!!prog()[l.lesson_id];return `<div class="lesson-page"><div class="section-head"><div><div class="eyebrow">MICRO LESSON ${l.lesson_id}</div><h2>${esc(l.title_zh)}</h2><p>${esc(l.cefr)} ・ ${esc(l.title_en)}</p></div><span class="count-pill">${done?'已完成':'未完成'}</span></div><div class="lesson-grid"><div class="panel big-copy"><h3>① 觀念</h3><p>${esc(l.explanation)}</p></div><div class="panel big-copy"><h3>② 句型</h3><div class="formula">${esc(l.pattern)}</div></div><div class="panel big-copy"><h3>③ 例句</h3>${l.examples.map(e=>`<p class="example">${esc(e)} <button onclick="speak(${JSON.stringify(e)},'en-US')">🔊</button></p>`).join('')}</div><div class="panel big-copy"><h3>④ 常見錯誤</h3>${l.common_errors.map(e=>`<p>⚠ ${esc(e)}</p>`).join('')}</div><div class="panel big-copy"><h3>⑤ Contrast</h3>${l.contrast.map(e=>`<p>${esc(e)}</p>`).join('')}</div><div class="panel big-copy"><h3>⑥ 微練習</h3>${l.practice.map((e,i)=>`<p>${i+1}. ${esc(e)}</p>`).join('')}<div class="tip">Mastery tip：${esc(l.mastery_tip)}</div></div></div><div class="lesson-actions"><button onclick="go('grammar')">← 回到 30 章</button><button class="primary" onclick="toggleLesson('${l.lesson_id}')">${done?'取消完成':'完成本微課'}</button><button onclick="go('quiz')">做分級測驗 →</button></div></div>`;}
 function toggleLesson(id){const p=prog();p[id]=!p[id];save('sanmu-lessons',p);render();}
 function quiz(){const bands=Object.keys(toeic.bands||{}),band=toeic.bands[state.quizBand]||toeic.bands['400-600'],q=(band.questions||[])[state.quizIndex]||band.questions[0],answered=state.quizAnswers[state.quizBand]?.[state.quizIndex]!==undefined;return `<div class="quiz-page"><div class="section-head"><div><h2>多益分級練習 · 20 題</h2><p>依目標分數帶選題：400分以下、400–600、600–800、800–990。</p></div><span class="count-pill">第 ${state.quizIndex+1} / 20 題</span></div><div class="band-grid">${bands.map(b=>`<button class="band-card ${state.quizBand===b?'active':''}" onclick="state.quizBand='${b}';state.quizIndex=0;state.quizAnswers={};renderMain()"><strong>${esc(toeic.bands[b].label)}</strong><small>${esc(toeic.bands[b].description)}</small></button>`).join('')}</div><div class="quiz-card"><h3>${esc(q.prompt)}</h3><div class="answers">${q.options.map((o,i)=>`<button class="answer ${answered&&i===q.answer?'correct':''} ${answered&&state.quizAnswers[state.quizBand][state.quizIndex]===i&&i!==q.answer?'wrong':''}" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div>${answered?`<div class="quiz-explain"><strong>${state.quizAnswers[state.quizBand][state.quizIndex]===q.answer?'答對了':'再想一次'}</strong><p>${esc(q.explanation)}</p><button class="primary" onclick="nextQuiz()">${state.quizIndex===19?'完成':'下一題'}</button></div>`:''}</div></div>`;}
@@ -313,11 +360,7 @@ function watch(){
       </div>
     </div>
 
-    <div class="learning-row">
-      <div class="panel"><div class="panel-head"><h2>單字</h2><span>${(unit.vocabulary||[]).length}</span></div><div class="unit-list">${(unit.vocabulary||[]).slice(0,10).map(x=>`<button onclick='openWord(${JSON.stringify(x.word||'')},${JSON.stringify(v.id)},${JSON.stringify(x.example||'')})'><b>${esc(x.word||'')}</b>${x.definition_zh?' · '+esc(x.definition_zh):''}</button>`).join('')||'尚未生成'}</div></div>
-      <div class="panel"><div class="panel-head"><h2>片語</h2><span>${(unit.phrases||[]).length}</span></div><div class="unit-list">${(unit.phrases||[]).slice(0,8).map(x=>`<div><b>${esc(x.phrase||'')}</b>${x.meaning_zh?' · '+esc(x.meaning_zh):''}</div>`).join('')||'尚未生成'}</div></div>
-      <div class="panel"><div class="panel-head"><h2>文法</h2><span>${(unit.grammar||[]).length}</span></div><div class="unit-list">${(unit.grammar||[]).slice(0,6).map(x=>`<div><b>${esc(x.topic||'')}</b>${x.explanation_zh?' · '+esc(x.explanation_zh):''}</div>`).join('')||'尚未生成'}</div></div>
-    </div>
+
   </div>`;
 }
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`}
