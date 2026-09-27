@@ -351,6 +351,21 @@ function syncSubtitle(t){
 }
 function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null;}try{ytPlayer?.destroy?.();}catch{}ytPlayer=null;lastSubtitleIndex=-1;}
 function seek(sec){if(ytPlayer?.seekTo){try{ytPlayer.seekTo(Number(sec),true);ytPlayer.playVideo?.();}catch{}}}
+function replaySentence(){
+  const v=selectedVideo(), seg=v?.transcript?.[lastSubtitleIndex];
+  if(seg) seek(Number(seg.start)||0);
+}
+let sentenceLoopTimer=null;
+function toggleSentenceLoop(){
+  if(sentenceLoopTimer){clearInterval(sentenceLoopTimer);sentenceLoopTimer=null;renderMain();return;}
+  sentenceLoopTimer=setInterval(()=>{
+    const v=selectedVideo(), seg=v?.transcript?.[lastSubtitleIndex];
+    if(!seg||!ytPlayer?.getCurrentTime)return;
+    const now=Number(ytPlayer.getCurrentTime())||0;
+    if(now >= (Number(seg.end)||Number(seg.start)+4)){seek(Number(seg.start)||0);}
+  },180);
+  renderMain();
+}
 function setSpeed(s){state.speed=Number(s)||1;if(ytPlayer?.setPlaybackRate){try{ytPlayer.setPlaybackRate(state.speed);}catch{}}document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===state.speed));}
 function setSubtitleSize(s){const allowed=[75,100,125,150,200];const n=Number(s)||100;state.subtitleSize=allowed.includes(n)?n:100;const list=$('.subtitle-list');if(list)list.dataset.scale=String(state.subtitleSize);document.querySelectorAll('.subtitle-scale-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.scale)===state.subtitleSize));}
 function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
@@ -366,30 +381,33 @@ function watch(){
   const scale=state.subtitleSize||100;
   const offset=Number(state.subtitleOffset)||0;
   const rate=Number(state.subtitleRate)||1;
+  const loopOn=!!sentenceLoopTimer;
   return `<div class="watch-page">
     <div class="player-card">
       <div class="player"><iframe id="yt" src="${ytEmbed(v.id)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 
-      <!-- 第一層：影片播放控制 -->
       <div class="watch-toolbar watch-toolbar-main">
-        <div class="toolbar-segment">
-          <span class="tool-label">語速</span>
+        <div class="toolbar-segment speed-group">
+          <span class="tool-label">速度</span>
+          <button data-speed="0.25" onclick="setSpeed(.25)">0.25×</button>
+          <button data-speed="0.5" onclick="setSpeed(.5)">0.5×</button>
           <button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button>
-          <button data-speed="1" class="active" onclick="setSpeed(1)">1×</button>
+          <button data-speed="1" class="active" onclick="setSpeed(1)">原速 1.0×</button>
           <button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button>
           <button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button>
+          <span class="current-speed">目前 ${state.speed||1}×</span>
         </div>
-        <button class="toolbar-favorite" onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏影片'}</button>
+        <button class="watch-action" onclick="replaySentence()">↶ 單句重播</button>
+        <button class="watch-action ${loopOn?'active':''}" onclick="toggleSentenceLoop()">↻ ${loopOn?'循環播放中':'循環播放'}</button>
+        <button class="toolbar-favorite" onclick="toggleFav('${v.id}')">♡ 收藏影片</button>
       </div>
 
-      <!-- 標題獨立於字幕區，位於語速列正下方 -->
       <div class="video-title-strip">
         <h1>${esc(v.title)}</h1>
         <p class="title-zh">${esc(titleZh(v))}</p>
-        <p class="watch-meta">${esc(v.channel)} ・ ${esc(v.duration||'')} ・ 难易度 ${esc(difficultyLabel(v.cefr))}</p>
+        <p class="watch-meta">${esc(v.channel)} ・ ${esc(v.duration||'')} ・ 難易度 ${esc(difficultyLabel(v.cefr))}</p>
       </div>
 
-      <!-- 第二層：字幕控制，與影片標題清楚分隔 -->
       <div class="watch-toolbar watch-toolbar-subtitle">
         <div class="toolbar-segment">
           <span class="tool-label">字幕顯示</span>
@@ -399,19 +417,19 @@ function watch(){
         </div>
         <div class="toolbar-segment">
           <span class="tool-label">字幕同步</span>
-          <button class="subtitle-offset-btn ${offset===-2?'active':''}" data-offset="-2" onclick="setSubtitleOffset(-2)">提前2秒</button>
-          <button class="subtitle-offset-btn ${offset===-1?'active':''}" data-offset="-1" onclick="setSubtitleOffset(-1)">提前1秒</button>
-          <button class="subtitle-offset-btn ${offset===0?'active':''}" data-offset="0" onclick="setSubtitleOffset(0)">預設</button>
-          <button class="subtitle-offset-btn ${offset===1?'active':''}" data-offset="1" onclick="setSubtitleOffset(1)">延後1秒</button>
-          <button class="subtitle-offset-btn ${offset===2?'active':''}" data-offset="2" onclick="setSubtitleOffset(2)">延後2秒</button>
+          <button class="subtitle-offset-btn ${offset===-2?'active':''}" onclick="setSubtitleOffset(-2)">提前</button>
+          <button class="subtitle-offset-btn ${offset===-1?'active':''}" onclick="setSubtitleOffset(-1)">提前1秒</button>
+          <button class="subtitle-offset-btn ${offset===0?'active':''}" onclick="setSubtitleOffset(0)">預設</button>
+          <button class="subtitle-offset-btn ${offset===1?'active':''}" onclick="setSubtitleOffset(1)">延後1秒</button>
+          <button class="subtitle-offset-btn ${offset===2?'active':''}" onclick="setSubtitleOffset(2)">延後</button>
         </div>
         <div class="toolbar-segment">
           <span class="tool-label">字幕速度</span>
-          <button class="subtitle-rate-btn ${rate===0.9?'active':''}" data-rate="0.9" onclick="setSubtitleRate(.9)">0.9×</button>
-          <button class="subtitle-rate-btn ${rate===0.95?'active':''}" data-rate="0.95" onclick="setSubtitleRate(.95)">0.95×</button>
-          <button class="subtitle-rate-btn ${rate===1?'active':''}" data-rate="1" onclick="setSubtitleRate(1)">1×</button>
-          <button class="subtitle-rate-btn ${rate===1.05?'active':''}" data-rate="1.05" onclick="setSubtitleRate(1.05)">1.05×</button>
-          <button class="subtitle-rate-btn ${rate===1.1?'active':''}" data-rate="1.1" onclick="setSubtitleRate(1.1)">1.1×</button>
+          <button class="subtitle-rate-btn ${rate===0.9?'active':''}" onclick="setSubtitleRate(.9)">0.9×</button>
+          <button class="subtitle-rate-btn ${rate===0.95?'active':''}" onclick="setSubtitleRate(.95)">0.95×</button>
+          <button class="subtitle-rate-btn ${rate===1?'active':''}" onclick="setSubtitleRate(1)">1×</button>
+          <button class="subtitle-rate-btn ${rate===1.05?'active':''}" onclick="setSubtitleRate(1.05)">1.05×</button>
+          <button class="subtitle-rate-btn ${rate===1.1?'active':''}" onclick="setSubtitleRate(1.1)">1.1×</button>
         </div>
         <div class="toolbar-segment">
           <span class="tool-label">字幕大小</span>
@@ -429,7 +447,6 @@ function watch(){
     </div>
   </div>`;
 }
-
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`}
 
 function grammar(){
