@@ -37,6 +37,9 @@ function latestVideos(){
 function filteredVideos(){
   const q=state.search.trim().toLowerCase();
   return latestVideos().filter(v=>{
+    // Only expose release-ready videos. Review/incomplete records stay in the
+    // backend review queue and can never be opened as a "learning" video.
+    if(v.status!=='accepted' || v.captionQuality!=='verified') return false;
     const txt=[v.title,v.channel,v.category,v.subcategory,...(v.tags||[])].join(' ').toLowerCase();
     const difficulty=String(v.cefr||'').toUpperCase();
     return (!q||txt.includes(q))
