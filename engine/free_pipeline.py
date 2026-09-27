@@ -127,38 +127,49 @@ def fetch_english_transcript(video_id: str):
             continue
     return None,[]
 
-def fetch_english_via_ytdlp(video_url: str):
-    # YouTube periodically changes which player clients expose caption tracks.
-    # Try several documented yt-dlp clients instead of relying on a single default.
-    client_args=[
-        'youtube:player-client=web_embedded,web,ios',
-        'youtube:player-client=web_embedded,ios,web',
-        'youtube:player-client=default',
+def fetch_english_via_timedtext(video_id: str):
+    import requests
+    urls=[
+      f'https://www.youtube.com/api/timedtext?v={video_id}&lang=en&fmt=vtt',
+      f'https://www.youtube.com/api/timedtext?v={video_id}&lang=en&kind=asr&fmt=vtt',
+      f'https://www.youtube.com/api/timedtext?v={video_id}&lang=en-US&kind=asr&fmt=vtt',
     ]
+    for url in urls:
+        try:
+            r=requests.get(url,timeout=20,headers={'User-Agent':'Mozilla/5.0'})
+            if r.ok and 'WEBVTT' in r.text[:100]:
+                from tempfile import NamedTemporaryFile
+                with NamedTemporaryFile('w+',suffix='.vtt',encoding='utf-8') as f:
+                    f.write(r.text);f.flush()
+                    rows=parse_vtt(Path(f.name))
+                if len(rows)>=CONFIG['minSegments'] and len(' '.join(x['en'] for x in rows))>=180:
+                    return Path(f.name),rows
+        except Exception:
+            pass
+    return None,[]
+
+def fetch_english_via_ytdlp(video_url: str):
+    client_args=['youtube:player-client=web_embedded,ios','youtube:player-client=ios,web_embedded']
     with tempfile.TemporaryDirectory() as td:
         out=str(Path(td)/'%(id)s.%(language)s.%(ext)s')
         for client in client_args:
-            cmd=['yt-dlp','--skip-download','--write-subs','--write-auto-subs',
-                 '--sub-format','vtt/srt/best','--sub-langs','en.*','-o',out,
-                 '--extractor-args',client,video_url]
-            for attempt in range(2):
-                try:
-                    p=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=180)
-                    files=sorted(Path(td).glob('*.vtt'))+sorted(Path(td).glob('*.srt'))
-                    usable=[]
-                    for fp in files:
-                        try:
-                            rows=parse_vtt(fp)
-                            if len(rows)>=CONFIG['minSegments'] and len(' '.join(x['en'] for x in rows))>=180:
-                                usable.append((fp,rows))
-                        except Exception:
-                            pass
-                    if p.returncode==0 and usable:
-                        usable.sort(key=lambda x:len(x[1]),reverse=True)
-                        return usable[0]
-                except Exception:
-                    pass
-                time.sleep(2*(attempt+1))
+            cmd=['yt-dlp','--skip-download','--write-subs','--write-auto-subs','--sub-format','vtt/srt/best','--sub-langs','en.*','-o',out,'--extractor-args',client,video_url]
+            try:
+                p=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=70)
+                files=sorted(Path(td).glob('*.vtt'))+sorted(Path(td).glob('*.srt'))
+                usable=[]
+                for fp in files:
+                    try:
+                        rows=parse_vtt(fp)
+                        if len(rows)>=CONFIG['minSegments'] and len(' '.join(x['en'] for x in rows))>=180:
+                            usable.append((fp,rows))
+                    except Exception:
+                        pass
+                if p.returncode==0 and usable:
+                    usable.sort(key=lambda x:len(x[1]),reverse=True)
+                    return usable[0]
+            except Exception:
+                pass
     return None,[]
 
 def translation_codes(tr):
@@ -339,8 +350,15 @@ def process_video(video_id, meta, existing, idx=0):
     if not title:return None,{'id':video_id,'title':'','status':'review','reason':'missing-title'}
     duration=float(info.get('duration') or 0)
     tr,segs=fetch_english_transcript(video_id)
+    transcript_source='youtube-transcript-api' if segs else ''
     if not segs:
-        tr,segs=fetch_english_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
+        _,segs=fetch_english_via_timedtext(video_id)
+        transcript_source='timedtext' if segs else ''
+        tr=None
+    if not segs:
+        _,segs=fetch_english_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
+        transcript_source='yt-dlp' if segs else transcript_source
+        tr=None
     if not segs:
         return None,{'id':video_id,'title':title,'status':'review','reason':'no-english-transcript'}
     ratio=language_ratios(' '.join(x['en'] for x in segs))
@@ -371,7 +389,7 @@ def process_video(video_id, meta, existing, idx=0):
       'englishScore':round(ratio['english'],3),'multilingualScore':round(ratio['nonEnglish'],3),
       'spokenLanguage':'en','spokenEvidence':{'method':spoken_source,'confidence':spoken_conf},
       'captionLanguage':'en','captionQuality':'verified','subtitleCoverage':round(coverage,3),
-      'captionSource':'youtube-transcript-api' if tr else 'yt-dlp','translation':'available',
+      'captionSource':transcript_source or ('youtube-transcript-api' if tr else 'yt-dlp'),'translation':'available',
       'translationSource':zh_source,'status':'accepted','sourceUrl':f'https://www.youtube.com/watch?v={video_id}',
       'captions':'available','discoveryQuery':meta.get('query',''),'tags':[],
       'fingerprint':fp,'titleFingerprint':tf,'transcript':transcript,
@@ -398,7 +416,7 @@ def main():
                 'term':v.get('subcategory',''),
                 'title':v.get('title','')
             }))
-    repair_candidates=repair_candidates[:int(CONFIG['maxProcess'])]
+    repair_candidates=repair_candidates[:min(int(CONFIG['maxProcess']),4)]
 
     new=[];review=[]
     repaired=0
@@ -420,7 +438,7 @@ def main():
         time.sleep(float(CONFIG['queryCooldown']))
     candidates=list(cand.items())[:int(CONFIG['maxCandidates'])]
     processed=0
-    for idx,(vid,meta) in enumerate(candidates[:int(CONFIG['maxProcess'])]):
+    for idx,(vid,meta) in enumerate(candidates[:min(int(CONFIG['maxProcess']),4)]):
         rec,err=process_video(vid,meta,existing,idx)
         processed+=1
         if rec:
