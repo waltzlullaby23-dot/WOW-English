@@ -1,30 +1,12 @@
-# 三木Eng V6 Free — 套用方式
+# 三木Eng V6.2 安裝
 
-1. 下載此 ZIP。
-2. 把 ZIP 內所有檔案解壓縮到目前 `WOW-English` Repo 根目錄（與 `app.js`、`styles.css` 同一層）。
-3. 執行：
+1. 把本 ZIP 解壓到 `WOW-English` 根目錄。
+2. 覆蓋同名檔案；新增 `engine/translation_argos.py`、`engine/setup_translation_model.py`、`.github/workflows/content-pipeline.yml`。
+3. 執行 `python apply_v6_free.py`，讓前端 override 寫入既有 `app.js` 與 `styles.css`。
+4. 將所有變更上傳 GitHub `main`。
+5. GitHub → Actions → `三木Eng Free Video Discovery` → Run workflow。
+6. 必須等 workflow 完成後，確認 `data/catalog.json` 的 `stats.newAccepted` 大於 0（若首次沒有可接受影片，至少確認 candidates > 0 且 review 原因合理）。
+7. static.yml 會在內容 commit 後重新部署 Pages。
 
-```bash
-python apply_v6_free.py
-```
-
-4. 把變更後的檔案上傳到 GitHub `main`。
-5. 到 Actions 執行 `三木Eng Free Video Discovery`，先手動跑一次確認。
-6. 成功後每天 03:30（台灣時間）自動執行。
-
-## 這版不需要
-- OPENAI_API_KEY
-- YOUTUBE_API_KEY
-- 付費 AI
-- 本機 AI
-- 本機模型
-
-## 驗收條件
-正式 `accepted` 影片必須同時具備：
-- 完整英文 transcript
-- 驗證字幕品質 `captionQuality=verified`
-- `subtitleCoverage` 通過門檻
-- 每一個英文句都有中文翻譯
-- 可切換 英文／中英／中文
-
-注意：這裡的「100% 有字幕」指的是「正式入庫的影片 100% 通過字幕完整性驗證」，不是 YouTube 上任意影片都保證有字幕。
+### 注意
+「字幕 100% 有」的工程定義是：**進入 accepted 的影片必須通過完整英文字幕驗證，且每一句均有中文翻譯**。不是承諾 YouTube 上任意影片都一定有字幕。

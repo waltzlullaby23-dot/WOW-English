@@ -1,17 +1,36 @@
-# 三木Eng V6 Free Patch
+# 三木Eng V6.2 — Free / Scroll & Subtitle Fix
 
-這個補丁把影片探索/字幕/翻譯流程改成「零 API 費用」版本：不需要 OpenAI API，也不需要 YouTube Data API key。
+這一版針對目前實際網站的三個問題重做：
 
-## 內容
-- `apply_v6_free.py`：放進現有 WOW-English 專案根目錄執行，會自動把前端 V6 修正、免費影片引擎、GitHub Actions 工作流程套上去。
-- `.github/workflows/content-pipeline.yml`：每天自動找新影片、驗證完整英文字幕、取得 YouTube 免費逐句中文翻譯、分類、CEFR、去重並寫回 `data/catalog.json`。
-- `engine/discover.py`：改成免費引擎 wrapper，不再呼叫 OpenAI。
-- `engine/translate.py`：改成 YouTube transcript translation wrapper，不再呼叫 OpenAI。
-- `engine/free_pipeline.py`：主要免費影片探索/字幕/翻譯/分類/CEFR/去重引擎。
-- `engine/verify_free.py`：發版前檢查，正式影片必須具有完整英文字幕與完整中文逐句翻譯。
-- `requirements.txt`：移除 OpenAI 套件依賴。
+1. **頁面滾動卡住**：取消 topbar/sidebar sticky 與字幕區內嵌 scroll，watch 頁只保留瀏覽器整頁滾動。
+2. **字幕同步**：YouTube IFrame API 改成等待 API ready 後初始化；逐句 active 與手動滾動暫停機制保留。
+3. **影片沒有增加 / 翻譯沒有增加**：加入正式 GitHub Actions pipeline；只將完整英文字幕 + 完整中文翻譯通過的影片放入 accepted。
 
-## 重要
-目前 ChatGPT 對該 GitHub Repo 的讀取正常，但寫入權限仍回傳 403，因此這一版尚未直接推回你的 Repo；補丁是針對目前 `WOW-English` 結構製作的。
+## 零付費架構
+- GitHub Pages
+- GitHub Actions
+- yt-dlp / youtube-transcript-api
+- Argos Translate（開源）
+- OpenCC / wordfreq
+- 不需要 OpenAI API
+- 不需要本機 AI
 
-套用後，不需要建立任何 API Secret。GitHub Actions 只使用自己的免費 runner 與公開 YouTube 資料。
+## 安裝
+把 ZIP 內容解壓到 `WOW-English` 根目錄並覆蓋同名檔案。
+
+執行：
+
+```bash
+python apply_v6_free.py
+```
+
+然後把變更上傳 GitHub `main`。最後在 Actions 執行 `三木Eng Free Video Discovery` 的 `workflow_dispatch`。
+
+## 驗收
+首次 workflow 必須在 log 顯示：
+- `ARGOS_EN_ZH_READY`
+- `TEST_FREE_PIPELINE_OK`
+- `FREE_RELEASE_OK accepted=...`
+- growth report 顯示 `newAccepted`。
+
+若 `newAccepted=0`，log 會保留 candidates / processed / review 數字，方便定位到底是 YouTube 搜尋、字幕完整度、翻譯或去重造成 0 新增。

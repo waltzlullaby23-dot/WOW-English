@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from common import DATA, ROOT, load_json, dump_json, clean_text, language_ratios, text_fingerprint, title_fingerprint, lexical_similarity, parse_iso_duration, pretty_duration
+from translation_argos import translate_lines, translate_one
 
 try:
     from yt_dlp import YoutubeDL
@@ -39,7 +40,7 @@ CONFIG = {
     'maxCandidates': 140,
     'maxProcess': 36,
     'minSegments': 8,
-    'minCoverage': 0.82,
+    'minCoverage': 0.90,
     'minCharsPerMinute': 42,
     'maxCharsPerMinute': 1800,
     'searchRetries': 3,
@@ -174,6 +175,21 @@ def translate_from_youtube(tr, en_segments):
     if not all(clean_text(x) for x in zh_text):return None,'youtube-translate-incomplete'
     return zh_text,target
 
+def translate_with_argos(en_segments):
+    lines=[s.get('en','') for s in en_segments]
+    # Batch paragraphs first; fall back to one-by-one if line alignment changes.
+    out=[]
+    for i in range(0,len(lines),20):
+        chunk=lines[i:i+20]
+        got=translate_lines(chunk)
+        if got is None or len(got)!=len(chunk):
+            got=[translate_one(x) for x in chunk]
+        out.extend(got)
+    if len(out)!=len(lines) or not all(clean_text(x) for x in out):
+        return None,'argos-incomplete'
+    return out,'argos-en-zh'
+
+
 def validate_transcript(segs: list[dict[str,Any]], duration: float):
     if len(segs)<CONFIG['minSegments']:return False,0.0,'too-few-segments'
     last=max((float(x['end']) for x in segs),default=0.0)
@@ -183,6 +199,9 @@ def validate_transcript(segs: list[dict[str,Any]], duration: float):
         cpm=(words/max(duration/60,0.1))
         if cpm < CONFIG['minCharsPerMinute'] or cpm > CONFIG['maxCharsPerMinute']:
             return False,coverage,'caption-density-outlier'
+        gaps=[float(segs[i+1]['start'])-float(segs[i]['end']) for i in range(len(segs)-1)]
+        if gaps and max(gaps) > 15 and duration >= 120:
+            return False,coverage,'caption-gap-too-large'
     if duration>=120 and coverage < CONFIG['minCoverage']:
         return False,coverage,'coverage-below-threshold'
     if len(' '.join(x['en'] for x in segs))<180:return False,coverage,'too-little-text'
@@ -311,6 +330,8 @@ def main():
             review.append({'id':vid,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken})
             continue
         zh,zh_source=translate_from_youtube(tr,segs)
+        if zh is None:
+            zh,zh_source=translate_with_argos(segs)
         if zh is None:
             review.append({'id':vid,'title':title,'status':'review','reason':zh_source,'coverage':round(coverage,3)})
             continue
