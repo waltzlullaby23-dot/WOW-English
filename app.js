@@ -58,16 +58,45 @@ function home(){
 function videoCard(v){return `<article class="video-card" onclick="go('watch','${v.id}')"><div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/hqdefault.jpg" alt=""><span class="grade">${esc(v.cefr)}</span><span class="duration">${esc(v.duration)}</span></div><div class="video-info"><h3>${esc(v.title)}</h3><p>${esc(v.channel)}</p><div class="chips"><span>EN ${pct(v.englishScore)}</span><span>${esc(v.subcategory)}</span><span>${v.translation==='available'?'中譯已備妥':'中譯待補'}</span></div></div></article>`;}
 function explore(){const vs=filteredVideos(), subs=[...new Set(vs.map(v=>v.subcategory).filter(Boolean))];return `<div class="section-head"><div><h2>影片探索</h2><p>大量 Discovery → 語言檢查 → 字幕 → AI CEFR / 分類 → 去重。</p></div><span class="count-pill">${vs.length} 部</span></div><div class="filters"><select onchange="state.category=this.value;state.subcategory='all';renderMain()"><option value="all">全部分類</option>${taxonomy.categories.map(c=>`<option value="${c.id}" ${state.category===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select><select onchange="state.subcategory=this.value;renderMain()"><option value="all">全部子類</option>${subs.map(s=>`<option ${state.subcategory===s?'selected':''}>${esc(s)}</option>`).join('')}</select><select onchange="state.level=this.value;renderMain()"><option value="all">全部 CEFR</option>${['A1','A2','B1','B2','C1','C2'].map(x=>`<option ${state.level===x?'selected':''}>${x}</option>`).join('')}</select><select onchange="state.caption=this.value;renderMain()"><option value="all">字幕狀態</option><option value="ready" ${state.caption==='ready'?'selected':''}>英文字幕已驗證</option><option value="pending" ${state.caption==='pending'?'selected':''}>字幕待補</option></select></div><div class="results-meta">Spoken Language ・ Caption Language ・ English Score ・ Multilingual Score ・ CEFR ・ AI Category ・ Fingerprint / Embedding Dedup</div><div class="video-grid">${vs.map(videoCard).join('')||'<div class="empty">沒有符合目前條件的影片。</div>'}</div>`;}
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;}
-function initPlayer(){if(state.route!=='watch')return;const iframe=$('#yt');if(!iframe)return;if(window.YT&&YT.Player){ytPlayer=new YT.Player('yt',{events:{onReady:()=>startSubtitleSync()}});}else if(!window.__ytWaiter){window.__ytWaiter=true;window.addEventListener('ytapiready',()=>{window.__ytWaiter=false;initPlayer()},{once:true});}}
+function initPlayer(){
+  if(state.route!=='watch')return;
+  const iframe=$('#yt'); if(!iframe)return;
+  const mount=()=>{
+    try{
+      if(!window.YT||!YT.Player)return;
+      if(ytPlayer&&typeof ytPlayer.getCurrentTime==='function')return;
+      ytPlayer=new YT.Player('yt',{events:{
+        onReady:()=>{startSubtitleSync();syncSubtitle(0);}
+      }});
+    }catch(e){setTimeout(initPlayer,500);}
+  };
+  if(window.YT&&YT.Player) mount();
+  else if(!window.__ytWaiter){
+    window.__ytWaiter=true;
+    window.addEventListener('ytapiready',()=>{window.__ytWaiter=false;mount()},{once:true});
+    const started=Date.now();
+    const poll=()=>{if(state.route!=='watch'||Date.now()-started>10000)return;if(window.YT&&YT.Player)mount();else setTimeout(poll,250);};
+    poll();
+  }
+}
 function startSubtitleSync(){if(ytTimer)clearInterval(ytTimer);ytTimer=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;let t=0;try{t=ytPlayer.getCurrentTime()}catch{return}syncSubtitle(t);},180);}
 function syncSubtitle(t){
   const v=catalog.videos.find(x=>x.id===state.selectedVideo); if(!v)return;
   const seg=v.transcript||[]; let idx=-1;
-  for(let i=0;i<seg.length;i++){const a=Number(seg[i].start)||0,b=Number(seg[i].end)||a+6;if(t>=a&&t<b){idx=i;break}}
-  if(idx<0){for(let i=seg.length-1;i>=0;i--){if(t>=Number(seg[i].start)||0){idx=i;break}}}
-  document.querySelectorAll('.segment').forEach((el,i)=>el.classList.toggle('active',i===idx));
-  const active=document.querySelector('.segment.active');
-  if(active && !window.__userScrollingSubtitle) active.scrollIntoView({behavior:'smooth',block:'center'});
+  for(let i=0;i<seg.length;i++){
+    const a=Number(seg[i].start)||0;
+    const b=Number(seg[i].end)||((Number(seg[i+1]?.start)||a+6));
+    if(t>=a&&t<b){idx=i;break}
+  }
+  if(idx<0 && seg.length && t>=Number(seg[seg.length-1].start||0)) idx=seg.length-1;
+  const nodes=document.querySelectorAll('.segment');
+  nodes.forEach((el,i)=>el.classList.toggle('active',i===idx));
+  const active=idx>=0?nodes[idx]:null;
+  const list=$('.subtitle-list');
+  if(active && list && !window.__userScrollingSubtitle){
+    const top=active.offsetTop-list.clientHeight/2+active.offsetHeight/2;
+    list.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+  }
 }
 function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null}try{ytPlayer?.destroy?.()}catch{}ytPlayer=null;}
 function seek(t){if(ytPlayer?.seekTo){ytPlayer.seekTo(Number(t),true);ytPlayer.playVideo?.();}}
