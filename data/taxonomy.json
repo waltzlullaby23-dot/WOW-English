@@ -1,5 +1,6 @@
 {
-  "version": 3,
+  "version": 4,
+  "totalSubcategories": 104,
   "categories": [
     {
       "id": "english-learning",
@@ -41,12 +42,12 @@
       "searchTerms": [
         "world history documentary",
         "ancient civilization documentary",
-        "history explained",
         "geography explained",
         "world geography",
         "historical figures",
         "archaeology documentary",
-        "culture history"
+        "culture history",
+        "natural geography"
       ]
     },
     {
@@ -236,8 +237,8 @@
         "academic lecture English",
         "business keynote",
         "leadership talk",
-        "communication lecture",
-        "graduation speech",
+        "communication skills lecture",
+        "graduation speech English",
         "conference talk English"
       ]
     },
@@ -248,21 +249,21 @@
         "國際新聞",
         "社會",
         "氣候",
-        "科學新聞",
+        "科技新聞",
+        "經濟新聞",
         "調查報導",
-        "政治社會",
         "紀錄片",
         "公共議題"
       ],
       "searchTerms": [
-        "BBC news documentary",
-        "VOA news English",
-        "international news documentary",
-        "climate news documentary",
-        "science news English",
-        "investigative documentary",
+        "international news English",
         "social issues documentary",
-        "public affairs English"
+        "climate news",
+        "technology news English",
+        "economic news English",
+        "investigative documentary",
+        "news documentary",
+        "public issues lecture"
       ]
     },
     {
@@ -270,49 +271,48 @@
       "name": "動漫卡通",
       "subs": [
         "動畫",
-        "卡通",
-        "角色對話",
-        "兒童英語",
-        "動畫評論",
-        "動漫文化",
+        "動漫",
+        "漫畫",
+        "角色",
         "配音",
-        "圖像故事"
+        "作品解析",
+        "兒童英文",
+        "流行文化"
       ],
       "searchTerms": [
-        "cartoon English dialogue",
-        "animation English",
-        "kids English cartoon",
-        "animated short English",
-        "animation commentary",
-        "anime culture English",
+        "anime interview English",
+        "animation documentary",
+        "manga culture",
         "voice acting English",
-        "animated story English"
+        "animation analysis",
+        "kids English cartoon",
+        "cartoon history",
+        "pop culture animation"
       ]
     },
     {
       "id": "philosophy",
       "name": "哲學",
       "subs": [
-        "哲學導論",
+        "哲學入門",
         "倫理學",
         "邏輯",
         "存在主義",
+        "認識論",
         "形上學",
-        "政治哲學",
-        "心靈哲學",
-        "思想史"
+        "思想史",
+        "哲學演講"
       ],
       "searchTerms": [
-        "philosophy lecture English",
+        "philosophy explained",
         "ethics lecture",
         "logic explained",
         "existentialism lecture",
-        "metaphysics explained",
-        "political philosophy lecture",
-        "philosophy of mind",
-        "history of ideas lecture"
+        "epistemology explained",
+        "metaphysics lecture",
+        "history of philosophy",
+        "philosophy talk English"
       ]
     }
-  ],
-  "totalSubcategories": 104
+  ]
 }

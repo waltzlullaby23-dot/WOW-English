@@ -1,945 +1,746 @@
 {
-  "schemaVersion": 2,
-  "generatedAt": "2026-09-27T03:22:05.738618+00:00",
+  "version": 2,
   "units": {
     "0Nv-zlhdb7Y": {
       "vocabulary": [
         {
           "word": "order",
-          "definition_zh": "命令；訂單",
-          "example": "The waiter took our order.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "An order or a request?"
         },
         {
           "word": "request",
           "definition_zh": "請求；要求",
-          "example": "Could I make a request?",
-          "pos": "noun/verb"
+          "gloss": "something you ask for politely; to ask for something",
+          "example": "Could I make a request?"
         },
         {
           "word": "questions",
-          "definition_zh": "問題；疑問句",
-          "example": "She asked two questions.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Why questions are politer than imperatives."
         },
         {
           "word": "politer",
-          "definition_zh": "更有禮貌的",
-          "example": "This form sounds politer.",
-          "pos": "adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Why questions are politer than imperatives."
         },
         {
           "word": "imperatives",
-          "definition_zh": "祈使句",
-          "example": "Open the door is an imperative.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Why questions are politer than imperatives."
         }
       ],
-      "phrases": [],
-      "grammar": [
+      "phrases": [
         {
-          "topic": "modal",
-          "explanation_zh": "依影片語境建立對應文法節點。",
-          "pattern": "See micro-lesson G11-01",
-          "lesson_ids": [
-            "G11-01"
-          ]
+          "phrase": "An order or a",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "An order or a request?"
         },
         {
-          "topic": "comparatives",
-          "explanation_zh": "依影片語境建立對應文法節點。",
-          "pattern": "See micro-lesson G16-01",
-          "lesson_ids": [
-            "G16-01"
-          ]
+          "phrase": "Why questions are politer",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Why questions are politer than imperatives."
+        }
+      ],
+      "grammar": [
+        {
+          "topic": "Polite questions",
+          "explanation_zh": "Could you…? 是常見的禮貌請求形式。",
+          "pattern": "Could you + base verb?"
         }
       ],
       "questions": [
         {
-          "question": "What is the main meaning of this sentence?",
+          "prompt": "What is the main learning point of this sentence?",
           "options": [
-            "An order or a request?",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
           ],
           "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        },
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Why questions are politer than imperatives.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        },
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Can or could?",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
         }
-      ],
-      "generator": "heuristic-fallback",
-      "videoId": "0Nv-zlhdb7Y",
-      "cefr": "B1",
-      "category": "learning",
-      "subcategory": "口說",
-      "updatedAt": "2026-09-27T03:22:05.738287+00:00"
+      ]
     },
     "3NM72kTE2oQ": {
       "vocabulary": [
         {
-          "word": "polite",
-          "definition_zh": "有禮貌的",
-          "example": "She is always polite.",
-          "pos": "adjective"
-        },
-        {
           "word": "politeness",
           "definition_zh": "禮貌",
-          "example": "Politeness matters in the workplace.",
-          "pos": "noun"
+          "gloss": "the quality of being polite",
+          "example": "Politeness is important."
         },
         {
           "word": "important",
           "definition_zh": "重要的",
-          "example": "This point is important.",
-          "pos": "adjective"
+          "gloss": "having great value or effect",
+          "example": "This point is important."
+        },
+        {
+          "word": "polite",
+          "definition_zh": "有禮貌的",
+          "gloss": "having good manners",
+          "example": "She is very polite."
         },
         {
           "word": "english",
-          "definition_zh": "英語；英文的",
-          "example": "English is widely used internationally.",
-          "pos": "noun/adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Politeness is very important, but how can you be polite in English?"
         },
         {
           "word": "different",
           "definition_zh": "不同的",
-          "example": "We have different opinions.",
-          "pos": "adjective"
+          "gloss": "not the same",
+          "example": "There are different ways to say it."
         },
         {
           "word": "ways",
-          "definition_zh": "方式；方法",
-          "example": "There are several ways to solve it.",
-          "pos": "noun"
-        },
-        {
-          "word": "expressing",
-          "definition_zh": "表達",
-          "example": "She is expressing her opinion.",
-          "pos": "verb"
-        },
-        {
-          "word": "depending",
-          "definition_zh": "取決於",
-          "example": "It depends on the situation.",
-          "pos": "verb"
-        },
-        {
-          "word": "want",
-          "definition_zh": "想要",
-          "example": "I want to improve my English.",
-          "pos": "verb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "There are different ways of expressing it, depending on how polite you want to be."
         }
       ],
       "phrases": [
         {
-          "phrase": "be polite in English",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Be polite in English."
+          "phrase": "Politeness is very important",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Politeness is very important, but how can you be polite in English?"
         },
         {
-          "phrase": "different ways of expressing",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Different ways of expressing."
-        }
-      ],
-      "grammar": [],
-      "questions": [
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Politeness is very important, but how can you be polite in English?",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        },
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "There are different ways of expressing it, depending on how polite you want to be.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        }
-      ],
-      "generator": "heuristic-fallback",
-      "videoId": "3NM72kTE2oQ",
-      "cefr": "B1",
-      "category": "learning",
-      "subcategory": "口說",
-      "updatedAt": "2026-09-27T03:22:05.738355+00:00"
-    },
-    "4C4wlOAscvY": {
-      "vocabulary": [
-        {
-          "word": "english",
-          "definition_zh": "英語；英文的",
-          "example": "English is widely used internationally.",
-          "pos": "noun/adjective"
-        },
-        {
-          "word": "welcome",
-          "definition_zh": "歡迎",
-          "example": "Welcome to the class.",
-          "pos": "verb/adjective"
-        },
-        {
-          "word": "real",
-          "definition_zh": "真正的；真實的",
-          "example": "This is a real example.",
-          "pos": "adjective"
-        },
-        {
-          "word": "easy",
-          "definition_zh": "容易的",
-          "example": "The exercise is easy.",
-          "pos": "adjective"
-        },
-        {
-          "word": "learning",
-          "definition_zh": "學習",
-          "example": "Learning takes time.",
-          "pos": "noun/verb"
-        },
-        {
-          "word": "today",
-          "definition_zh": "今天",
-          "example": "We are studying today.",
-          "pos": "adverb/noun"
-        },
-        {
-          "word": "talking",
-          "definition_zh": "談話",
-          "example": "They are talking about travel.",
-          "pos": "verb/noun"
-        },
-        {
-          "word": "food",
-          "definition_zh": "食物",
-          "example": "The food was delicious.",
-          "pos": "noun"
-        },
-        {
-          "word": "particular",
-          "definition_zh": "特定的；特別的",
-          "example": "Is there a particular reason?",
-          "pos": "adjective"
-        },
-        {
-          "word": "we'll",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
-        }
-      ],
-      "phrases": [
-        {
-          "phrase": "how often we eat",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "How often we eat."
-        }
-      ],
-      "grammar": [],
-      "questions": [
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Welcome to Real Easy English from BBC Learning English.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        },
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Today we are talking about food.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        },
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "In particular, we'll talk about our favourite foods and how often we eat them.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        }
-      ],
-      "generator": "heuristic-fallback",
-      "videoId": "4C4wlOAscvY",
-      "cefr": "A2",
-      "category": "daily",
-      "subcategory": "飲食",
-      "updatedAt": "2026-09-27T03:22:05.738411+00:00"
-    },
-    "SMIgI-qDNCA": {
-      "vocabulary": [
-        {
-          "word": "passive",
-          "definition_zh": "被動的；被動語態",
-          "example": "The sentence is in the passive voice.",
-          "pos": "adjective/noun"
-        },
-        {
-          "word": "what's",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
-        },
-        {
-          "word": "voice",
-          "definition_zh": "語態；聲音",
-          "example": "Active and passive voice are different.",
-          "pos": "noun"
-        },
-        {
-          "word": "let's",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
-        },
-        {
-          "word": "look",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
-        },
-        {
-          "word": "changes",
-          "definition_zh": "改變；變化",
-          "example": "Small changes can help.",
-          "pos": "verb/noun"
-        },
-        {
-          "word": "focus",
-          "definition_zh": "焦點；專注",
-          "example": "The focus is on clarity.",
-          "pos": "noun/verb"
-        },
-        {
-          "word": "sentence",
-          "definition_zh": "句子",
-          "example": "Write one complete sentence.",
-          "pos": "noun"
-        }
-      ],
-      "phrases": [
-        {
-          "phrase": "passive voice",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Passive voice."
-        },
-        {
-          "phrase": "changes the focus",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Changes the focus."
+          "phrase": "There are different ways",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "There are different ways of expressing it, depending on how polite you want to be."
         }
       ],
       "grammar": [
         {
-          "topic": "passive",
-          "explanation_zh": "依影片語境建立對應文法節點。",
-          "pattern": "See micro-lesson G19-01",
-          "lesson_ids": [
-            "G19-01"
-          ]
+          "topic": "Polite questions",
+          "explanation_zh": "Could you…? 是常見的禮貌請求形式。",
+          "pattern": "Could you + base verb?"
         }
       ],
       "questions": [
         {
-          "question": "What is the main meaning of this sentence?",
+          "prompt": "What is the main learning point of this sentence?",
           "options": [
-            "What's the passive voice?",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
           ],
           "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
+        }
+      ]
+    },
+    "4C4wlOAscvY": {
+      "vocabulary": [
+        {
+          "word": "welcome",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
         },
         {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Let's look at how the passive changes the focus of a sentence.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "word": "real",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
+        },
+        {
+          "word": "easy",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
+        },
+        {
+          "word": "english",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
+        },
+        {
+          "word": "learning",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
+        },
+        {
+          "word": "talking",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Today we are talking about food."
         }
       ],
-      "generator": "heuristic-fallback",
-      "videoId": "SMIgI-qDNCA",
-      "cefr": "B1",
-      "category": "learning",
-      "subcategory": "文法",
-      "updatedAt": "2026-09-27T03:22:05.738445+00:00"
+      "phrases": [
+        {
+          "phrase": "Welcome to Real Easy",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Welcome to Real Easy English from BBC Learning English."
+        },
+        {
+          "phrase": "Today we are talking",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Today we are talking about food."
+        },
+        {
+          "phrase": "In particular, we'll talk",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "In particular, we'll talk about our favourite foods and how often we eat them."
+        }
+      ],
+      "grammar": [
+        {
+          "topic": "Present simple",
+          "explanation_zh": "用於習慣、事實與一般狀態。",
+          "pattern": "S + base verb"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "What is the main learning point of this sentence?",
+          "options": [
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
+          ],
+          "answer": 0,
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
+        }
+      ]
+    },
+    "SMIgI-qDNCA": {
+      "vocabulary": [
+        {
+          "word": "what's",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "What's the passive voice?"
+        },
+        {
+          "word": "passive",
+          "definition_zh": "被動的；被動語態",
+          "gloss": "a grammatical form where the receiver of an action is the focus",
+          "example": "The passive changes the focus."
+        },
+        {
+          "word": "voice",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "What's the passive voice?"
+        },
+        {
+          "word": "let's",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's look at how the passive changes the focus of a sentence."
+        },
+        {
+          "word": "look",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's look at how the passive changes the focus of a sentence."
+        },
+        {
+          "word": "changes",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's look at how the passive changes the focus of a sentence."
+        }
+      ],
+      "phrases": [
+        {
+          "phrase": "What's the passive voice",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "What's the passive voice?"
+        },
+        {
+          "phrase": "Let's look at how",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Let's look at how the passive changes the focus of a sentence."
+        }
+      ],
+      "grammar": [
+        {
+          "topic": "Passive voice",
+          "explanation_zh": "被動語態把動作承受者放在句子焦點。",
+          "pattern": "be + past participle"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "What is the main learning point of this sentence?",
+          "options": [
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
+          ],
+          "answer": 0,
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
+        }
+      ]
     },
     "uz2C3bQot6o": {
       "vocabulary": [
         {
           "word": "lots",
-          "definition_zh": "很多",
-          "example": "There are lots of examples.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "There are lots of synonyms in English, but how do you choose which one to use?"
         },
         {
           "word": "synonyms",
           "definition_zh": "同義詞",
-          "example": "Big and large are synonyms.",
-          "pos": "noun"
+          "gloss": "words with similar meanings",
+          "example": "English has many synonyms."
         },
         {
           "word": "english",
-          "definition_zh": "英語；英文的",
-          "example": "English is widely used internationally.",
-          "pos": "noun/adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "There are lots of synonyms in English, but how do you choose which one to use?"
         },
         {
           "word": "choose",
-          "definition_zh": "選擇",
-          "example": "Choose the best answer.",
-          "pos": "verb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "There are lots of synonyms in English, but how do you choose which one to use?"
         },
         {
           "word": "context",
-          "definition_zh": "語境",
-          "example": "Context changes meaning.",
-          "pos": "noun"
+          "definition_zh": "語境；上下文",
+          "gloss": "the situation in which something happens",
+          "example": "Context is the key."
         },
         {
           "word": "often",
-          "definition_zh": "經常",
-          "example": "I often review vocabulary.",
-          "pos": "adverb"
-        },
-        {
-          "word": "choosing",
-          "definition_zh": "選擇",
-          "example": "Choosing the right word takes practice.",
-          "pos": "verb"
-        },
-        {
-          "word": "right",
-          "definition_zh": "正確的；右邊的",
-          "example": "That is the right answer.",
-          "pos": "adjective/adverb"
-        },
-        {
-          "word": "word",
-          "definition_zh": "單字；詞",
-          "example": "Look up the new word.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Context is often the key to choosing the right word."
         }
       ],
       "phrases": [
         {
-          "phrase": "choosing the right word",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Choosing the right word."
-        }
-      ],
-      "grammar": [],
-      "questions": [
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "There are lots of synonyms in English, but how do you choose which one to use?",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "phrase": "There are lots of",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "There are lots of synonyms in English, but how do you choose which one to use?"
         },
         {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Context is often the key to choosing the right word.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "phrase": "Context is often the",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Context is often the key to choosing the right word."
         }
       ],
-      "generator": "heuristic-fallback",
-      "videoId": "uz2C3bQot6o",
-      "cefr": "B2",
-      "category": "learning",
-      "subcategory": "字彙",
-      "updatedAt": "2026-09-27T03:22:05.738480+00:00"
+      "grammar": [
+        {
+          "topic": "Context and word choice",
+          "explanation_zh": "根據語境選擇適合的詞。",
+          "pattern": "word choice + context"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "What is the main learning point of this sentence?",
+          "options": [
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
+          ],
+          "answer": 0,
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
+        }
+      ]
     },
     "x6Pdp8GBwTM": {
       "vocabulary": [
         {
           "word": "english",
-          "definition_zh": "英語；英文的",
-          "example": "English is widely used internationally.",
-          "pos": "noun/adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "The English words think, three, this and then all start with a th sound."
         },
         {
           "word": "words",
-          "definition_zh": "單字；詞",
-          "example": "New words become easier with context.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "The English words think, three, this and then all start with a th sound."
         },
         {
           "word": "think",
-          "definition_zh": "思考；認為",
-          "example": "Think about the meaning.",
-          "pos": "verb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "The English words think, three, this and then all start with a th sound."
         },
         {
           "word": "three",
-          "definition_zh": "三",
-          "example": "Three examples are enough.",
-          "pos": "number"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "The English words think, three, this and then all start with a th sound."
         },
         {
           "word": "start",
-          "definition_zh": "開始",
-          "example": "Let's start the lesson.",
-          "pos": "verb/noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "The English words think, three, this and then all start with a th sound."
         },
         {
           "word": "sound",
-          "definition_zh": "聲音；聽起來",
-          "example": "That word has a /θ/ sound.",
-          "pos": "noun/verb"
-        },
-        {
-          "word": "let's",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
-        },
-        {
-          "word": "learn",
-          "definition_zh": "學習",
-          "example": "We learn from practice.",
-          "pos": "verb"
-        },
-        {
-          "word": "pronounce",
-          "definition_zh": "發音",
-          "example": "How do you pronounce this word?",
-          "pos": "verb"
-        },
-        {
-          "word": "properly",
-          "definition_zh": "正確地；適當地",
-          "example": "Say the word properly.",
-          "pos": "adverb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "The English words think, three, this and then all start with a th sound."
         }
       ],
       "phrases": [
         {
-          "phrase": "learn how to pronounce",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Learn how to pronounce."
-        }
-      ],
-      "grammar": [],
-      "questions": [
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "The English words think, three, this and then all start with a th sound.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "phrase": "The English words think",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "The English words think, three, this and then all start with a th sound."
         },
         {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Let's learn how to pronounce them properly.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "phrase": "Let's learn how to",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Let's learn how to pronounce them properly."
         }
       ],
-      "generator": "heuristic-fallback",
-      "videoId": "x6Pdp8GBwTM",
-      "cefr": "A2",
-      "category": "learning",
-      "subcategory": "發音",
-      "updatedAt": "2026-09-27T03:22:05.738511+00:00"
+      "grammar": [
+        {
+          "topic": "Present simple",
+          "explanation_zh": "用於習慣、事實與一般狀態。",
+          "pattern": "S + base verb"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "What is the main learning point of this sentence?",
+          "options": [
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
+          ],
+          "answer": 0,
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
+        }
+      ]
     },
     "x72gP4HrU58": {
       "vocabulary": [
         {
-          "word": "english",
-          "definition_zh": "英語；英文的",
-          "example": "English is widely used internationally.",
-          "pos": "noun/adjective"
-        },
-        {
           "word": "welcome",
-          "definition_zh": "歡迎",
-          "example": "Welcome to the class.",
-          "pos": "verb/adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
         },
         {
           "word": "real",
-          "definition_zh": "真正的；真實的",
-          "example": "This is a real example.",
-          "pos": "adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
         },
         {
           "word": "easy",
-          "definition_zh": "容易的",
-          "example": "The exercise is easy.",
-          "pos": "adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
+        },
+        {
+          "word": "english",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
         },
         {
           "word": "learning",
-          "definition_zh": "學習",
-          "example": "Learning takes time.",
-          "pos": "noun/verb"
-        },
-        {
-          "word": "today",
-          "definition_zh": "今天",
-          "example": "We are studying today.",
-          "pos": "adverb/noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to Real Easy English from BBC Learning English."
         },
         {
           "word": "we're",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
-        },
-        {
-          "word": "talking",
-          "definition_zh": "談話",
-          "example": "They are talking about travel.",
-          "pos": "verb/noun"
-        },
-        {
-          "word": "families",
-          "definition_zh": "家庭；家族",
-          "example": "Many families live nearby.",
-          "pos": "noun"
-        },
-        {
-          "word": "compare",
-          "definition_zh": "比較",
-          "example": "Compare the two sentences.",
-          "pos": "verb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Today we're talking about families and how we compare things."
         }
       ],
-      "phrases": [],
-      "grammar": [],
+      "phrases": [
+        {
+          "phrase": "Welcome to Real Easy",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Welcome to Real Easy English from BBC Learning English."
+        },
+        {
+          "phrase": "Today we're talking about",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Today we're talking about families and how we compare things."
+        }
+      ],
+      "grammar": [
+        {
+          "topic": "Present simple",
+          "explanation_zh": "用於習慣、事實與一般狀態。",
+          "pattern": "S + base verb"
+        }
+      ],
       "questions": [
         {
-          "question": "What is the main meaning of this sentence?",
+          "prompt": "What is the main learning point of this sentence?",
           "options": [
-            "Welcome to Real Easy English from BBC Learning English.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
           ],
           "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        },
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Today we're talking about families and how we compare things.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
         }
-      ],
-      "generator": "heuristic-fallback",
-      "videoId": "x72gP4HrU58",
-      "cefr": "A2",
-      "category": "daily",
-      "subcategory": "家庭",
-      "updatedAt": "2026-09-27T03:22:05.738540+00:00"
+      ]
     },
     "z5V0d1nBCX8": {
       "vocabulary": [
         {
           "word": "let's",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's learn ten easy English words you can use in the bathroom."
         },
         {
           "word": "learn",
-          "definition_zh": "學習",
-          "example": "We learn from practice.",
-          "pos": "verb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's learn ten easy English words you can use in the bathroom."
         },
         {
           "word": "easy",
-          "definition_zh": "容易的",
-          "example": "The exercise is easy.",
-          "pos": "adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's learn ten easy English words you can use in the bathroom."
         },
         {
           "word": "english",
-          "definition_zh": "英語；英文的",
-          "example": "English is widely used internationally.",
-          "pos": "noun/adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's learn ten easy English words you can use in the bathroom."
         },
         {
           "word": "words",
-          "definition_zh": "單字；詞",
-          "example": "New words become easier with context.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's learn ten easy English words you can use in the bathroom."
         },
         {
           "word": "bathroom",
-          "definition_zh": "浴室；洗手間",
-          "example": "The bathroom is upstairs.",
-          "pos": "noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Let's learn ten easy English words you can use in the bathroom."
         }
       ],
-      "phrases": [],
-      "grammar": [],
+      "phrases": [
+        {
+          "phrase": "Let's learn ten easy",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Let's learn ten easy English words you can use in the bathroom."
+        }
+      ],
+      "grammar": [
+        {
+          "topic": "Present simple",
+          "explanation_zh": "用於習慣、事實與一般狀態。",
+          "pattern": "S + base verb"
+        }
+      ],
       "questions": [
         {
-          "question": "What is the main meaning of this sentence?",
+          "prompt": "What is the main learning point of this sentence?",
           "options": [
-            "Let's learn ten easy English words you can use in the bathroom.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
           ],
           "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
         }
-      ],
-      "generator": "heuristic-fallback",
-      "videoId": "z5V0d1nBCX8",
-      "cefr": "A1",
-      "category": "daily",
-      "subcategory": "居家",
-      "updatedAt": "2026-09-27T03:22:05.738562+00:00"
+      ]
     },
     "O43nLSRMqHU": {
       "vocabulary": [
         {
           "word": "welcome",
-          "definition_zh": "歡迎",
-          "example": "Welcome to the class.",
-          "pos": "verb/adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to the London to Edinburgh Challenge."
         },
         {
           "word": "london",
-          "definition_zh": "倫敦",
-          "example": "London is a historic city.",
-          "pos": "proper noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to the London to Edinburgh Challenge."
         },
         {
           "word": "edinburgh",
-          "definition_zh": "愛丁堡",
-          "example": "Edinburgh is in Scotland.",
-          "pos": "proper noun"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Welcome to the London to Edinburgh Challenge."
         },
         {
           "word": "challenge",
           "definition_zh": "挑戰",
-          "example": "The challenge is manageable.",
-          "pos": "noun/verb"
-        }
-      ],
-      "phrases": [],
-      "grammar": [],
-      "questions": [
-        {
-          "question": "What is the main meaning of this sentence?",
-          "options": [
-            "Welcome to the London to Edinburgh Challenge.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
-          ],
-          "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
-        }
-      ],
-      "generator": "heuristic-fallback",
-      "videoId": "O43nLSRMqHU",
-      "cefr": "A2",
-      "category": "travel",
-      "subcategory": "城市",
-      "updatedAt": "2026-09-27T03:22:05.738579+00:00"
-    },
-    "KFajmtdj-J0": {
-      "vocabulary": [
-        {
-          "word": "today",
-          "definition_zh": "今天",
-          "example": "We are studying today.",
-          "pos": "adverb/noun"
-        },
-        {
-          "word": "we're",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
-        },
-        {
-          "word": "looking",
-          "definition_zh": "看；尋找",
-          "example": "We are looking at the example.",
-          "pos": "verb"
-        },
-        {
-          "word": "bond",
-          "definition_zh": "連結；情感紐帶",
-          "example": "The sisters share a strong bond.",
-          "pos": "noun"
-        },
-        {
-          "word": "between",
-          "definition_zh": "在兩者之間",
-          "example": "The difference between them is clear.",
-          "pos": "preposition"
-        },
-        {
-          "word": "sisters",
-          "definition_zh": "姊妹",
-          "example": "The sisters work together.",
-          "pos": "noun"
+          "gloss": "a difficult task or situation",
+          "example": "It is a good challenge."
         }
       ],
       "phrases": [
         {
-          "phrase": "looking at the bond",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Looking at the bond."
+          "phrase": "Welcome to the London",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Welcome to the London to Edinburgh Challenge."
         }
       ],
-      "grammar": [],
+      "grammar": [
+        {
+          "topic": "Present simple",
+          "explanation_zh": "用於習慣、事實與一般狀態。",
+          "pattern": "S + base verb"
+        }
+      ],
       "questions": [
         {
-          "question": "What is the main meaning of this sentence?",
+          "prompt": "What is the main learning point of this sentence?",
           "options": [
-            "Today we're looking at the bond between sisters.",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
           ],
           "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
         }
-      ],
-      "generator": "heuristic-fallback",
-      "videoId": "KFajmtdj-J0",
-      "cefr": "B1",
-      "category": "history",
-      "subcategory": "人物",
-      "updatedAt": "2026-09-27T03:22:05.738597+00:00"
+      ]
     },
     "-XcALxwXJVY": {
       "vocabulary": [
         {
           "word": "ever",
-          "definition_zh": "曾經",
-          "example": "Have you ever tried it?",
-          "pos": "adverb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Have you ever used a language-learning app?"
         },
         {
           "word": "used",
-          "definition_zh": "使用；用過的",
-          "example": "Have you ever used this app?",
-          "pos": "verb/adjective"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Have you ever used a language-learning app?"
         },
         {
           "word": "language",
           "definition_zh": "語言",
-          "example": "English is a global language.",
-          "pos": "noun"
+          "gloss": "a system of communication",
+          "example": "Language changes over time."
         },
         {
           "word": "learning",
-          "definition_zh": "學習",
-          "example": "Learning takes time.",
-          "pos": "noun/verb"
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Have you ever used a language-learning app?"
         }
       ],
       "phrases": [
         {
-          "phrase": "language-learning app",
-          "meaning_zh": "從影片語境學習的實用片語",
-          "example": "Language-learning app."
+          "phrase": "Have you ever used",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Have you ever used a language-learning app?"
         }
       ],
       "grammar": [
         {
-          "topic": "present perfect",
-          "explanation_zh": "依影片語境建立對應文法節點。",
-          "pattern": "See micro-lesson G08-01",
-          "lesson_ids": [
-            "G08-01"
-          ]
+          "topic": "Present simple",
+          "explanation_zh": "用於習慣、事實與一般狀態。",
+          "pattern": "S + base verb"
         }
       ],
       "questions": [
         {
-          "question": "What is the main meaning of this sentence?",
+          "prompt": "What is the main learning point of this sentence?",
           "options": [
-            "Have you ever used a language-learning app?",
-            "An unrelated statement",
-            "A different topic",
-            "None of the above"
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
           ],
           "answer": 0,
-          "explanation_zh": "從字幕句子辨識語意。"
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
+        }
+      ]
+    },
+    "KFajmtdj-J0": {
+      "vocabulary": [
+        {
+          "word": "we're",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Today we're looking at the bond between sisters."
+        },
+        {
+          "word": "looking",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Today we're looking at the bond between sisters."
+        },
+        {
+          "word": "bond",
+          "definition_zh": "連結；感情",
+          "gloss": "a strong connection",
+          "example": "They share a close bond."
+        },
+        {
+          "word": "between",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Today we're looking at the bond between sisters."
+        },
+        {
+          "word": "sisters",
+          "definition_zh": "待補",
+          "gloss": "",
+          "example": "Today we're looking at the bond between sisters."
         }
       ],
-      "generator": "heuristic-fallback",
-      "videoId": "-XcALxwXJVY",
-      "cefr": "B1",
-      "category": "technology",
-      "subcategory": "AI",
-      "updatedAt": "2026-09-27T03:22:05.738616+00:00"
+      "phrases": [
+        {
+          "phrase": "Today we're looking at",
+          "meaning_zh": "依上下文理解的常用片語",
+          "example": "Today we're looking at the bond between sisters."
+        }
+      ],
+      "grammar": [
+        {
+          "topic": "Present simple",
+          "explanation_zh": "用於習慣、事實與一般狀態。",
+          "pattern": "S + base verb"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "What is the main learning point of this sentence?",
+          "options": [
+            "The topic introduced in the sentence",
+            "A random unrelated fact",
+            "A spelling rule only",
+            "A pronunciation error"
+          ],
+          "answer": 0,
+          "explanation": "The first sentence introduces the topic and provides context for the lesson."
+        }
+      ]
     }
   }
 }

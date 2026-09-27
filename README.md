@@ -1,36 +1,35 @@
 # 三木Eng｜影音・文法・多益
 
-Bright English-learning platform for GitHub Pages.
+本版本是 GitHub Pages 靜態前端 + GitHub Actions 內容引擎。
 
-## Core modules
+## 已落地
 
-- 影片探索：13 大類 / 104 子類
-- English-first quality gate：Spoken Language / Caption Language / English Score / Multilingual Score
-- Subtitle fallback：A → B → C
-- Subtitle modes：English / 中英 / 中文
-- Subtitle size control
-- Clickable vocabulary with Chinese explanation + British/American pronunciation
-- Vocabulary favorites
-- 30 grammar chapters × 5 micro-lessons = 150 lessons
-- Grammar lesson detail: explanation / pattern / examples / common errors / contrast / practice
-- TOEIC-style original practice with four score bands:
-  - 400 以下
-  - 400–600
-  - 600–800
-  - 800–990
-- Watch history / favorites / progress
-- GitHub Actions content discovery pipeline
+- 左側可收合/展開
+- 分類改為點擊後選擇
+- 13 大類 / 78+ 子類探索架構
+- 文法 30 章 / 150 微課
+- TOEIC 400以下 / 400–600 / 600–800 / 800–990 四級距，每級 20 題
+- 影片下方字幕工作區：英文 / 中英 / 中文
+- 字幕大小 14–32px
+- YouTube IFrame API 播放時間同步：逐句高亮、自動捲動、點字幕跳轉
+- 單字點選：中文解釋、English meaning、英式/美式朗讀、收藏
+- A/B/C 字幕 fallback
+- AI 分類 + CEFR
+- 批次翻譯 + 逐句重試 + contextual retry
+- 自動 learning units
+- GitHub Actions 每小時影片探索
 
-## Video ads
+## Secrets
 
-YouTube embedded players can still show YouTube-controlled advertising. This project uses `youtube-nocookie.com`, `rel=0`, and reduced branding, but the site cannot reliably or lawfully remove advertisements from an ordinary YouTube embed. A future fully ad-free mode would require content that we have the rights to host/play ourselves.
+在 Repository → Settings → Secrets and variables → Actions 建立：
 
-## Grammar source
+- `YOUTUBE_API_KEY`
+- `OPENAI_API_KEY`
 
-The 30-chapter / 150-micro-lesson architecture follows the existing English grammar teaching specification: Form → Meaning → Use → Contrast → Error, CEFR A1–C2, with lesson fields for objectives, explanation, pattern, examples, common errors, practice and mastery. The source specification is maintained separately in the project library.
+## Pages
 
-## Deployment
+Settings → Pages → Source = GitHub Actions。
 
-For GitHub Pages, use **GitHub Actions** as the Pages source and keep `.github/workflows/pages.yml`.
+## 注意
 
-Content discovery requires GitHub repository secrets for the external APIs used by the engine. Do not put API keys into frontend JavaScript.
+YouTube 嵌入播放器的廣告由 YouTube 控制，網站不能可靠保證所有 YouTube embed 無廣告。若產品最終需要完全無廣告，需改用有授權的自有/託管影片來源。

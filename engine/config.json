@@ -1,22 +1,19 @@
 {
-  "acceptEnglishScore": 0.8,
-  "reviewEnglishScore": 0.6,
-  "rejectMultilingualScore": 0.25,
-  "minLanguageConfidence": 0.6,
-  "maxQueriesPerRun": 24,
+  "maxQueriesPerRun": 32,
   "maxResultsPerQuery": 50,
   "searchPages": 2,
   "maxCandidates": 1000,
+  "maxProcessCandidates": 80,
+  "acceptEnglishScore": 0.80,
+  "reviewEnglishScore": 0.60,
+  "rejectMultilingualScore": 0.25,
+  "minLanguageConfidence": 0.60,
   "embeddingDuplicateThreshold": 0.965,
   "translateBatchSize": 20,
   "spokenSampleSeconds": 45,
-  "maxTranscriptChars": 14000,
   "models": {
-    "language": "gpt-5.6-luna",
-    "classification": "gpt-5.6-luna",
-    "translation": "gpt-5.6-luna",
-    "learning": "gpt-5.6-luna",
-    "embedding": "text-embedding-3-small",
-    "transcription": "gpt-4o-mini-transcribe"
+    "text": "gpt-5.6-luna",
+    "transcription": "gpt-4o-mini-transcribe",
+    "embedding": "text-embedding-3-small"
   }
 }

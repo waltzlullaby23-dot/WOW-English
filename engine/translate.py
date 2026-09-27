@@ -1,64 +1,42 @@
-"""Independent subtitle translation layer: batch -> sentence retry -> contextual retry."""
 from __future__ import annotations
 import json, os, re, requests
 from datetime import datetime, timezone
-from pathlib import Path
-
-from common import DATA, dump_json, load_json
-
+from common import DATA, load_json, dump_json
 CAT=DATA/'catalog.json'
-
-def call(prompt: str):
-    key=os.getenv('OPENAI_API_KEY')
+def call(prompt):
+    key=os.getenv('OPENAI_API_KEY');
     if not key:return None
-    body={'model':os.getenv('OPENAI_TRANSLATE_MODEL','gpt-5.6-luna'),'input':prompt}
-    r=requests.post('https://api.openai.com/v1/responses',headers={'Authorization':f'Bearer {key}','Content-Type':'application/json'},json=body,timeout=90)
-    if not r.ok:return None
-    t=r.json().get('output_text','');m=re.search(r'\[.*\]',t,re.S)
-    if not m:return None
-    try:return json.loads(m.group(0))
+    try:
+        r=requests.post('https://api.openai.com/v1/responses',headers={'Authorization':f'Bearer {key}','Content-Type':'application/json'},json={'model':os.getenv('OPENAI_TEXT_MODEL','gpt-5.6-luna'),'input':prompt},timeout=90)
+        if not r.ok:return None
+        text=r.json().get('output_text','');m=re.search(r'\[.*\]',text,re.S);return json.loads(m.group(0)) if m else None
     except Exception:return None
-
 def translate_segments(segments):
-    out=[None]*len(segments); size=int(os.getenv('TRANSLATE_BATCH_SIZE','20'))
-    for start in range(0,len(segments),size):
-        chunk=segments[start:start+size]
-        payload=json.dumps([{'i':i,'en':s.get('en','')} for i,s in enumerate(chunk,start)],ensure_ascii=False)
-        res=call('''Translate each English subtitle sentence into natural Traditional Chinese. Preserve the exact i values and return one object for every item. Do not merge items. Return JSON array only.\n'''+payload)
+    out=[None]*len(segments);size=20
+    for st in range(0,len(segments),size):
+        batch=segments[st:st+size];payload=json.dumps([{'i':i,'en':s.get('en','')} for i,s in enumerate(batch,st)],ensure_ascii=False)
+        res=call('Return JSON array only. Translate each English subtitle sentence to natural Traditional Chinese. Preserve each i and do not merge or omit sentences.\n'+payload)
         if res:
-            for row in res:
+            for x in res:
                 try:
-                    i=int(row.get('i',-1)); zh=row.get('zh')
-                    if 0<=i<len(out) and zh: out[i]=zh.strip()
-                except Exception: continue
-        for i in range(start,min(start+size,len(segments))):
+                    i=int(x.get('i',-1));out[i]=x.get('zh','').strip() if 0<=i<len(out) else None
+                except Exception:pass
+        for i in range(st,min(st+size,len(segments))):
             if out[i]:continue
-            one=call('Translate this English subtitle sentence into Traditional Chinese. Return JSON array only: [{"i":0,"zh":"..."}].\n'+json.dumps([{'i':0,'en':segments[i].get('en','')}],ensure_ascii=False))
-            if one and one[0].get('zh'):out[i]=one[0]['zh'].strip()
-        for i in range(start,min(start+size,len(segments))):
-            if out[i]:continue
-            prev=segments[i-1].get('en','') if i>0 else ''; nxt=segments[i+1].get('en','') if i+1<len(segments) else ''
-            ctx=call('Translate target into Traditional Chinese using subtitle context. Return JSON array only with one object.\n'+json.dumps({'prev':prev,'target':segments[i].get('en',''),'next':nxt},ensure_ascii=False))
-            if ctx and ctx[0].get('zh'):out[i]=ctx[0]['zh'].strip()
+            res=call('Return JSON array only as [{"i":0,"zh":"..."}]. Translate this sentence to Traditional Chinese with subtitle context.\n'+json.dumps({'prev':segments[i-1].get('en','') if i else '', 'target':segments[i].get('en',''),'next':segments[i+1].get('en','') if i+1<len(segments) else ''},ensure_ascii=False))
+            if res and res[0].get('zh'):out[i]=res[0]['zh'].strip()
     return out
-
 def main():
-    data=load_json(CAT,{'videos':[]})
-    counts={'full':0,'partial':0,'pending':0,'sentences':0,'translated':0}
-    for video in data.get('videos',[]):
-        if video.get('status')!='accepted':continue
-        seg=video.get('transcript') or []
+    data=load_json(CAT,{'videos':[]});stats={'full':0,'partial':0,'pending':0,'translated':0,'sentences':0}
+    for v in data.get('videos',[]):
+        if v.get('status')!='accepted':continue
+        seg=v.get('transcript') or [];stats['sentences']+=len(seg)
         if not seg:continue
-        counts['sentences']+=len(seg)
-        if video.get('translation')=='available' and all(s.get('zh') for s in seg):counts['full']+=1;continue
-        translated=translate_segments(seg)
-        n=0
-        for i,zh in enumerate(translated):
-            if zh:seg[i]['zh']=zh;n+=1
-        counts['translated']+=n
-        if n==len(seg):video['translation']='available';counts['full']+=1
-        elif n:video['translation']='partial';counts['partial']+=1
-        else:video['translation']='pending';counts['pending']+=1
-    data['generatedAt']=datetime.now(timezone.utc).isoformat();data['translationPipeline']='batch>sentence retry>contextual fallback';data['translationStats']=counts;dump_json(CAT,data)
-    print(json.dumps(counts,ensure_ascii=False))
+        tr=translate_segments(seg)
+        for i,zh in enumerate(tr):
+            if zh:seg[i]['zh']=zh;stats['translated']+=1
+        if all(s.get('zh') for s in seg):v['translation']='available';stats['full']+=1
+        elif any(s.get('zh') for s in seg):v['translation']='partial';stats['partial']+=1
+        else:v['translation']='pending';stats['pending']+=1
+    data['generatedAt']=datetime.now(timezone.utc).isoformat();data['translationStats']=stats;dump_json(CAT,data)
 if __name__=='__main__':main()
