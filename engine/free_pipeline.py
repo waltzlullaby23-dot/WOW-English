@@ -71,9 +71,17 @@ def now_iso():
 def normalize_segments(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     out=[]
     for x in rows:
-        text=clean_text(getattr(x,'text',None) if not isinstance(x,dict) else x.get('text',''))
+        text=clean_text(
+            getattr(x,'text',None)
+            if not isinstance(x,dict)
+            else (x.get('text') or x.get('en') or x.get('caption') or x.get('utf8',''))
+        )
         start=float(getattr(x,'start',0) if not isinstance(x,dict) else x.get('start',0) or 0)
-        dur=float(getattr(x,'duration',0) if not isinstance(x,dict) else x.get('duration',0) or 0)
+        dur=float(
+            getattr(x,'duration',0)
+            if not isinstance(x,dict)
+            else (x.get('duration') or max(0.1,float(x.get('end',0) or 0)-start))
+        )
         if not text:
             continue
         end=start+max(0.1,dur)
