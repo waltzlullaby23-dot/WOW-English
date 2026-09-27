@@ -1,6 +1,6 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-09-27T13:05:56.151665+00:00",
+  "generatedAt": "2026-09-27T13:59:07.768182+00:00",
   "source": "continuous-free-youtube-discovery",
   "videos": [
     {
@@ -414,10 +414,12 @@
     "accepted": 0,
     "totalRecords": 11,
     "newAccepted": 0,
-    "processed": 12,
-    "candidates": 96,
+    "repaired": 0,
+    "processed": 4,
+    "repairCandidates": 4,
+    "candidates": 73,
     "queries": 16,
-    "lastRun": "2026-09-27T13:05:56.151702+00:00"
+    "lastRun": "2026-09-27T13:59:07.768213+00:00"
   },
   "translationPipeline": "A/B/C subtitle fallback -> normalized -> batch -> sentence retry -> contextual retry",
   "translationStats": {
