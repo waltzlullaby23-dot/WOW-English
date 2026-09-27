@@ -133,3 +133,14 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
   .sidebar{position:static!important;overflow:visible!important}
   .subtitle-scale{width:100%}
 }
+
+
+/* V11 viewing cleanup */
+.subtitle-workarea{margin-top:18px;background:transparent;border:0;box-shadow:none}
+.subtitle-workarea .tabs{padding:0 0 10px;border:0;background:transparent}
+.subtitle-workarea .subtitle-list{border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow);overflow:visible}
+.title-block{margin-top:18px!important;padding:22px 8px 6px!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.title-block h1{font-size:28px!important;line-height:1.25!important;margin:0 0 8px!important;font-weight:800!important}
+.title-block .title-zh{font-size:28px!important;line-height:1.3!important;margin:0 0 10px!important;font-weight:800!important;color:var(--brand)!important}
+.title-block .watch-meta{font-size:14px!important}
+.subtitle-workarea .segment .zh{display:block!important}
