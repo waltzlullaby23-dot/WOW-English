@@ -437,36 +437,116 @@ def ydl_info(video_id):
             }
     return {}
  
+def best_english_transcript(video_id: str, duration: float):
+    candidates=[]
+    try:
+        tr,segs=fetch_english_transcript(video_id)
+        if segs:
+            candidates.append(('youtube-transcript-api',tr,segs))
+    except Exception:
+        pass
+    try:
+        ok,segs=fetch_english_via_timedtext(video_id)
+        if segs:
+            candidates.append(('youtube-timedtext',None,segs))
+    except Exception:
+        pass
+    try:
+        en_rows,zh_rows=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
+        if en_rows:
+            candidates.append(('yt-dlp',None,en_rows))
+    except Exception:
+        pass
+    try:
+        segs=fetch_english_via_public_transcript(video_id)
+        if segs:
+            candidates.append(('public-transcript',None,segs))
+    except Exception:
+        pass
+    valid=[]
+    for source,tr,segs in candidates:
+        try:
+            ok,coverage,reason=validate_transcript(segs,duration)
+            if ok:
+                valid.append((coverage,len(segs),source,tr,segs))
+        except Exception:
+            continue
+    if not valid:
+        return None,None,0.0,'no-complete-english-transcript'
+    valid.sort(key=lambda x:(x[0],x[1]),reverse=True)
+    coverage,_,source,tr,segs=valid[0]
+    return tr,segs,coverage,source
+
+def translate_public_google(text: str):
+    import requests
+    q=clean_text(text)
+    if not q:return ''
+    url='https://translate.googleapis.com/translate_a/single'
+    try:
+        r=requests.get(url,params={'client':'gtx','sl':'en','tl':'zh-TW','dt':'t','q':q},
+                       timeout=20,headers={'User-Agent':'Mozilla/5.0'})
+        if r.ok:
+            data=r.json()
+            return clean_text(''.join((x[0] or '') for x in (data[0] or []) if x))
+    except Exception:
+        pass
+    return ''
+
+def translate_lines_public_google(lines):
+    out=[]
+    for line in lines:
+        out.append(translate_public_google(line))
+        time.sleep(0.12)
+    return out
+
 def process_video(video_id, meta, existing, idx=0):
     info=ydl_info(video_id)
     title=clean_text(info.get('title') or meta.get('title') or '')
     if not title:return None,{'id':video_id,'title':'','status':'review','reason':'missing-title'}
     duration=float(info.get('duration') or 0)
-    tr,segs=fetch_english_transcript(video_id)
-    transcript_source='youtube-transcript-api' if segs else ''
+
+    tr,segs,coverage,transcript_source=best_english_transcript(video_id,duration)
     if not segs:
-        _,segs=fetch_english_via_timedtext(video_id)
-        transcript_source='timedtext' if segs else ''
-        tr=None
-    if not segs:
-        _,segs=fetch_english_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
-        transcript_source='yt-dlp' if segs else transcript_source
-        tr=None
-    if not segs:
-        return None,{'id':video_id,'title':title,'status':'review','reason':'no-english-transcript'}
+        return None,{'id':video_id,'title':title,'status':'review','reason':'no-complete-english-transcript'}
+
     ratio=language_ratios(' '.join(x['en'] for x in segs))
     spoken,spoken_source,spoken_conf=infer_language(info,ratio)
     valid,coverage,reason=validate_transcript(segs,duration)
     if not valid or spoken!='en' or ratio['nonEnglish']>0.18:
         return None,{'id':video_id,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken}
+
     zh=None; zh_source='none'
-    zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
+
+    # 1) YouTube's own player translation first.
+    try:
+        zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
+    except Exception:
+        zh=None
+    # 2) Transcript API translation, if its track object is available.
     if zh is None:
-        zh,zh_source=translate_from_youtube(tr,segs)
+        try:
+            zh,zh_source=translate_from_youtube(tr,segs)
+        except Exception:
+            zh=None
+    # 3) Free Google Translate public endpoint (no key).
     if zh is None:
-        zh,zh_source=translate_with_argos(segs)
+        try:
+            lines=[s['en'] for s in segs]
+            got=translate_lines_public_google(lines)
+            if len(got)==len(lines) and all(got):
+                zh,zh_source=got,'google-public-translate'
+        except Exception:
+            zh=None
+    # 4) Local/offline translator if present.
     if zh is None:
-        return None,{'id':video_id,'title':title,'status':'review','reason':zh_source,'coverage':round(coverage,3)}
+        try:
+            zh,zh_source=translate_with_argos(segs)
+        except Exception:
+            zh=None
+
+    if zh is None or len(zh)!=len(segs) or not all(clean_text(x) for x in zh):
+        return None,{'id':video_id,'title':title,'status':'review','reason':zh_source or 'translation-incomplete','coverage':round(coverage,3)}
+
     transcript=[{'start':s['start'],'end':s['end'],'en':s['en'],'zh':clean_text(z)} for s,z in zip(segs,zh)]
     category=meta['category']
     sub=classify(category,meta.get('query',''),title,' '.join(x['en'] for x in transcript),idx)
@@ -476,7 +556,7 @@ def process_video(video_id, meta, existing, idx=0):
         if old_id==video_id:continue
         if old.get('fingerprint')==fp or (old.get('titleFingerprint')==tf and lexical_similarity(old.get('title',''),title)>.9):
             return None,{'id':video_id,'title':title,'status':'review','reason':'duplicate'}
-    title_zh=translate_one(title) or ''
+    title_zh=translate_public_google(title) or translate_one(title) or ''
     rec={
       'id':video_id,'title':title,'titleZh':clean_text(title_zh),
       'channel':clean_text(info.get('channel') or info.get('uploader') or ''),
@@ -485,7 +565,7 @@ def process_video(video_id, meta, existing, idx=0):
       'englishScore':round(ratio['english'],3),'multilingualScore':round(ratio['nonEnglish'],3),
       'spokenLanguage':'en','spokenEvidence':{'method':spoken_source,'confidence':spoken_conf},
       'captionLanguage':'en','captionQuality':'verified','subtitleCoverage':round(coverage,3),
-      'captionSource':transcript_source or ('youtube-transcript-api' if tr else 'yt-dlp'),'translation':'available',
+      'captionSource':transcript_source,'translation':'available',
       'translationSource':zh_source,'status':'accepted','sourceUrl':f'https://www.youtube.com/watch?v={video_id}',
       'captions':'available','discoveryQuery':meta.get('query',''),'tags':[],
       'fingerprint':fp,'titleFingerprint':tf,'transcript':transcript,
@@ -512,7 +592,7 @@ def main():
                 'term':v.get('subcategory',''),
                 'title':v.get('title','')
             }))
-    repair_candidates=repair_candidates[:min(int(CONFIG['maxProcess']),4)]
+    repair_candidates=repair_candidates[:11]
 
     new=[];review=[]
     repaired=0
