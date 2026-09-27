@@ -144,3 +144,19 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
 .title-block .title-zh{font-size:28px!important;line-height:1.3!important;margin:0 0 10px!important;font-weight:800!important;color:var(--brand)!important}
 .title-block .watch-meta{font-size:14px!important}
 .subtitle-workarea .segment .zh{display:block!important}
+
+
+/* V8 watch-page cleanup: subtitles are part of the document, not a boxed mini-app. */
+.watch-page .player-card{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+.watch-page .subtitle-workarea{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;margin-top:14px!important}
+.watch-page .subtitle-workarea .tabs{border:0!important;background:transparent!important}
+.watch-page .subtitle-list{border:0!important;background:transparent!important}
+.watch-page .subtitle-list .segment{border-left:0!important;border-right:0!important;border-radius:0!important}
+.watch-page .title-block{margin-top:18px!important;padding:22px 8px!important}
+.watch-page .title-block h1{font-size:clamp(24px,2.2vw,34px)!important;line-height:1.25!important;margin-bottom:8px!important}
+.watch-page .title-block .title-zh{font-size:clamp(22px,2vw,30px)!important;line-height:1.35!important;font-weight:600!important}
+.watch-page .subtitle-list .zh{order:1!important;font-size:1.08em!important;line-height:1.7!important;margin-bottom:7px!important}
+.watch-page .subtitle-list .en{order:2!important;line-height:1.65!important}
+.watch-page .subtitle-list .segment{display:flex!important;flex-direction:column!important}
+.word-modal button{cursor:pointer}
+.pron-row button{cursor:pointer}
