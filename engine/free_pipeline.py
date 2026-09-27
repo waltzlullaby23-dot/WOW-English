@@ -264,73 +264,56 @@ def search_queries(tax, offset, count):
     jobs=jobs[offset%len(jobs):]+jobs[:offset%len(jobs)]
     return jobs[:count]
 
-def ydl_search(query, n):
-    if YoutubeDL is None:return []
-    opts={'quiet':True,'skip_download':True,'extract_flat':True,'ignoreerrors':True,'no_warnings':True,'socket_timeout':15}
+def youtube_api_get(path, params):
+    key=os.environ.get('YOUTUBE_API_KEY','').strip()
+    if not key:
+        return {}
+    import requests
+    p=dict(params or {})
+    p['key']=key
     for attempt in range(3):
         try:
-            with YoutubeDL(opts) as ydl:
-                info=ydl.extract_info(f'ytsearch{n}:{query}',download=False)
-            return [x for x in (info.get('entries') or []) if x and x.get('id')]
+            r=requests.get('https://www.googleapis.com/youtube/v3/'+path,params=p,timeout=20)
+            if r.ok:
+                return r.json()
         except Exception:
-            time.sleep(2*(attempt+1))
+            pass
+        time.sleep(1.5*(attempt+1))
+    return {}
+
+def ydl_search(query, n):
+    # Primary: free YouTube Data API v3. search.list costs quota but does not require
+    # yt-dlp to access YouTube search pages, avoiding GitHub-runner bot checks.
+    key=os.environ.get('YOUTUBE_API_KEY','').strip()
+    if key:
+        info=youtube_api_get('search',{'part':'snippet','q':query,'type':'video','maxResults':min(50,int(n)),'relevanceLanguage':'en'})
+        out=[]
+        for row in info.get('items',[]) or []:
+            vid=((row.get('id') or {}).get('videoId'))
+            if vid:
+                sn=row.get('snippet') or {}
+                out.append({'id':vid,'title':sn.get('title',''),'channel':sn.get('channelTitle',''),'description':sn.get('description','')})
+        return out
     return []
 
 def ydl_info(video_id):
-    opts={'quiet':True,'skip_download':True,'ignoreerrors':True,'no_warnings':True,'socket_timeout':15}
-    for attempt in range(3):
-        try:
-            with YoutubeDL(opts) as ydl:
-                return ydl.extract_info(f'https://www.youtube.com/watch?v={video_id}',download=False) or {}
-        except Exception:
-            time.sleep(2*(attempt+1))
+    key=os.environ.get('YOUTUBE_API_KEY','').strip()
+    if key:
+        info=youtube_api_get('videos',{'part':'snippet,contentDetails','id':video_id})
+        row=(info.get('items') or [None])[0]
+        if row:
+            sn=row.get('snippet') or {}
+            return {
+                'id':video_id,
+                'title':sn.get('title',''),
+                'channel':sn.get('channelTitle',''),
+                'uploader':sn.get('channelTitle',''),
+                'upload_date':str(sn.get('publishedAt',''))[:10].replace('-',''),
+                'duration':parse_iso_duration((row.get('contentDetails') or {}).get('duration','')),
+                'language':sn.get('defaultLanguage') or sn.get('defaultAudioLanguage') or ''
+            }
     return {}
-
-def repair_existing(existing: dict[str,dict[str,Any]]):
-    repaired=0
-    targets=[v for v in existing.values() if v.get('status') in {'accepted','review'} and (len(v.get('transcript') or [])<CONFIG['minSegments'] or not all(clean_text(x.get('zh','')) for x in (v.get('transcript') or [])))]
-    for v in targets[:12]:
-        vid=v.get('id')
-        if not vid:
-            continue
-        info=ydl_info(vid)
-        duration=float(info.get('duration') or 0)
-        if not duration:
-            m=re.match(r'^(?:(\d+):)?(\d+):(\d+)$',str(v.get('duration') or ''))
-            if m:
-                duration=int(m.group(1) or 0)*3600+int(m.group(2))*60+int(m.group(3))
-        tr,segs=fetch_english_transcript(vid)
-        if not segs:
-            _,segs=fetch_english_via_ytdlp(f'https://www.youtube.com/watch?v={vid}')
-        if not segs:
-            continue
-        ratio=language_ratios(' '.join(x['en'] for x in segs))
-        valid,coverage,_=validate_transcript(segs,duration)
-        if not valid or ratio['english']<0.82:
-            continue
-        zh,zh_source=translate_from_youtube(tr,segs)
-        if zh is None:
-            zh,zh_source=translate_with_argos(segs)
-        if zh is None:
-            continue
-        v['transcript']=[{'start':x['start'],'end':x['end'],'en':x['en'],'zh':clean_text(z)} for x,z in zip(segs,zh)]
-        v['captions']='available'
-        v['captionLanguage']='en'
-        v['captionQuality']='verified'
-        v['subtitleCoverage']=round(coverage,3)
-        v['translation']='available'
-        v['translationSource']=zh_source
-        v['spokenLanguage']='en'
-        v['status']='accepted'
-        if info.get('title'):
-            v['title']=clean_text(info['title'])
-        if info.get('channel'):
-            v['channel']=clean_text(info['channel'])
-        if duration:
-            v['duration']=pretty_duration(duration)
-        repaired+=1
-    return repaired
-
+ 
 def main():
     cfg=load_json(ROOT/'engine/config.json',{})
     for k,v in cfg.items():
