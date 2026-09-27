@@ -1,7 +1,7 @@
 {
   "schemaVersion": 5,
-  "generatedAt": "2026-09-27T10:28:11.956834+00:00",
-  "source": "continuous-free-youtube-discovery",
+  "generatedAt": "2026-09-27T10:29:07.836Z",
+  "source": "seed-v4-legacy-preserved",
   "videos": [
     {
       "id": "0Nv-zlhdb7Y",
@@ -33,7 +33,7 @@
           "zh": "要用 can 還是 could？"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -44,7 +44,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -71,7 +70,7 @@
           "zh": "根據你想要的禮貌程度，有不同的表達方式。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -82,7 +81,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -115,7 +113,7 @@
           "zh": "特別會談到我們最喜歡的食物，以及我們多久吃一次。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -126,7 +124,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -153,7 +150,7 @@
           "zh": "我們看看被動語態如何改變句子的焦點。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -164,7 +161,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -191,7 +187,7 @@
           "zh": "語境通常是選擇正確單字的關鍵。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -202,7 +198,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -229,7 +224,7 @@
           "zh": "一起學習正確的發音方式。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -240,7 +235,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -267,7 +261,7 @@
           "zh": "今天我們要談談家庭，以及如何比較事物。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -278,7 +272,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -299,7 +292,7 @@
           "zh": "一起學習十個你在浴室裡會用到的簡單英文單字。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -310,7 +303,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -331,7 +323,7 @@
           "zh": "歡迎來到倫敦到愛丁堡挑戰。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -342,7 +334,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -363,7 +354,7 @@
           "zh": "你曾經使用過語言學習 App 嗎？"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -374,7 +365,6 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     },
     {
@@ -395,7 +385,7 @@
           "zh": "今天我們要探討姊妹之間的情感連結。"
         }
       ],
-      "status": "review",
+      "status": "accepted",
       "captions": "available",
       "spokenLanguage": "en",
       "captionLanguage": "en",
@@ -406,18 +396,18 @@
         "zh-TW"
       ],
       "tags": [],
-      "reviewReason": "legacy-incomplete-caption-or-translation",
       "captionQuality": "incomplete"
     }
   ],
   "stats": {
-    "accepted": 0,
-    "totalRecords": 11,
+    "accepted": 11,
+    "seedCount": 11,
+    "processed": 11,
+    "candidates": 11,
+    "review": 0,
+    "rejected": 0,
     "newAccepted": 0,
-    "processed": 12,
-    "candidates": 100,
-    "queries": 16,
-    "lastRun": "2026-09-27T10:28:11.956866+00:00"
+    "repaired": 0
   },
   "translationPipeline": "A/B/C subtitle fallback -> normalized -> batch -> sentence retry -> contextual retry",
   "translationStats": {
