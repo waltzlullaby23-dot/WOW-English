@@ -1,12 +1,11 @@
 from __future__ import annotations
-
 from typing import Iterable
+import time
 
 try:
-    import argostranslate.package
-    import argostranslate.translate
+    from deep_translator import GoogleTranslator
 except Exception:
-    argostranslate = None
+    GoogleTranslator = None
 
 try:
     from opencc import OpenCC
@@ -14,69 +13,37 @@ try:
 except Exception:
     _S2T = None
 
-
-def _installed_pairs() -> set[tuple[str, str]]:
-    if argostranslate is None:
-        return set()
-    pairs = set()
-    try:
-        for lang in argostranslate.translate.get_installed_languages():
-            for tr in getattr(lang, 'translations', []) or []:
-                src = getattr(tr, 'from_lang', None)
-                dst = getattr(tr, 'to_lang', None)
-                src_code = getattr(src, 'code', None)
-                dst_code = getattr(dst, 'code', None)
-                if src_code and dst_code:
-                    pairs.add((src_code, dst_code))
-    except Exception:
-        pass
-    return pairs
-
-
-def ensure_en_zh() -> bool:
-    """Ensure an English -> Chinese Argos model is installed on the runner."""
-    if argostranslate is None:
-        return False
-    if ('en', 'zh') in _installed_pairs():
-        return True
-    try:
-        argostranslate.package.update_package_index()
-        packages = argostranslate.package.get_available_packages()
-        pkg = next((p for p in packages if p.from_code == 'en' and p.to_code == 'zh'), None)
-        if pkg is None:
-            return False
-        argostranslate.package.install_from_path(pkg.download())
-        return ('en', 'zh') in _installed_pairs()
-    except Exception:
-        return False
-
+def _convert(text: str) -> str:
+    text=str(text or '').strip()
+    return _S2T.convert(text) if (_S2T and text) else text
 
 def translate_lines(lines: Iterable[str]) -> list[str] | None:
-    """Translate English lines to Chinese without a paid API."""
-    if argostranslate is None:
+    """Free translation fallback using the public Google Translate web service via deep-translator.
+    No API key or paid AI service is used. This is a fallback; YouTube's own translated captions
+    are preferred by free_pipeline.py when available.
+    """
+    if GoogleTranslator is None:
         return None
-    if not ensure_en_zh():
-        return None
-    try:
-        text = '\n'.join(str(x or '').strip() for x in lines)
-        if not text.strip():
-            return [''] * len(lines)
-        out = argostranslate.translate.translate(text, 'en', 'zh')
-        parts = [p.strip() for p in str(out).splitlines()]
-        if len(parts) == len(text.splitlines()):
-            if _S2T:
-                parts = [_S2T.convert(p) if p else p for p in parts]
-            return parts
-    except Exception:
-        return None
+    src=[str(x or '').strip() for x in lines]
+    if not src:
+        return []
+    for attempt in range(3):
+        try:
+            tr=GoogleTranslator(source='en',target='zh-TW')
+            if hasattr(tr,'translate_batch'):
+                out=tr.translate_batch(src)
+                if out and len(out)==len(src) and all(str(x or '').strip() for x in out):
+                    return [_convert(x) for x in out]
+            out=[]
+            for text in src:
+                out.append(_convert(tr.translate(text)))
+                time.sleep(0.12)
+            if len(out)==len(src) and all(out):
+                return out
+        except Exception:
+            time.sleep(1.5*(attempt+1))
     return None
 
-
 def translate_one(text: str) -> str:
-    if not argostranslate or not ensure_en_zh():
-        return ''
-    try:
-        out = argostranslate.translate.translate(text, 'en', 'zh')
-        return _S2T.convert(out) if _S2T else out
-    except Exception:
-        return ''
+    got=translate_lines([text])
+    return got[0] if got else ''
