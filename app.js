@@ -254,32 +254,19 @@ function startSubtitleSync(){
   },120);
 }
 function syncSubtitle(t){
-  const v=selectedVideo();
-  const segs=v?.transcript||[];
+  const v=selectedVideo(); const segs=v?.transcript||[];
   if(!segs.length) return;
   let idx=-1;
   for(let i=0;i<segs.length;i++){
-    const a=Number(segs[i].start)||0;
-    const b=Number(segs[i].end);
-    const end=Number.isFinite(b)&&b>a?b:a+8;
-    if(t>=a && t<end){idx=i;break;}
+    const a=Number(segs[i].start)||0; const b=Number(segs[i].end);
+    const end=Number.isFinite(b)&&b>a?b:a+6;
+    if(t>=a&&t<end){idx=i;break;}
   }
-  if(idx<0){
-    for(let i=segs.length-1;i>=0;i--){
-      if(t>=(Number(segs[i].start)||0)){idx=i;break;}
-    }
-  }
-  const list=document.querySelector('.subtitle-list');
-  if(!list) return;
+  if(idx<0) for(let i=segs.length-1;i>=0;i--){if(t>=(Number(segs[i].start)||0)){idx=i;break;}}
+  const list=document.querySelector('.subtitle-list'); if(!list)return;
   list.querySelectorAll('.segment').forEach((el,i)=>el.classList.toggle('active',i===idx));
   const active=list.querySelector('.segment.active');
-  if(active && idx>=0){
-    const r=active.getBoundingClientRect();
-    const lr=list.getBoundingClientRect();
-    if(r.top<lr.top+18 || r.bottom>lr.bottom-18){
-      active.scrollIntoView({behavior:'smooth',block:'nearest'});
-    }
-  }
+  if(active&&idx>=0&&!window.__userScrollingSubtitle) active.scrollIntoView({behavior:'smooth',block:'center'});
 }
 function destroyPlayer(){
   if(ytTimer){clearInterval(ytTimer);ytTimer=null;}
@@ -338,14 +325,13 @@ function shell(main){
   const done=Object.values(prog()).filter(Boolean).length;
   return `<div class="app ${collapsed?'sidebar-collapsed':''}">
   <header class="topbar">
-    <button class="menu-btn" onclick="toggleSidebar()" aria-label="收合側欄">☰</button>
     <a class="brand" href="#learning"><img src="assets/logo.png" alt="三木Eng"></a>
     <div class="search"><input value="${esc(state.search)}" oninput="updateSearch(this.value)" onkeydown="handleSearchKey(event,this.value)" placeholder="搜尋影片、主題、單字、頻道… 或貼上 YouTube 網址"></div>
     <div class="top-actions"><button onclick="go('learning')">影片學習</button></div>
   </header>
   <div class="layout">
     <aside class="sidebar">
-      <div class="brand-mini"><span>三木</span><button onclick="toggleSidebar()">${collapsed?'»':'«'}</button></div>
+      <div class="brand-mini"><span>三木</span><button class="sidebar-toggle" onclick="toggleSidebar()">${collapsed?'»':'«'}</button></div>
       <button class="side-main ${['learning','watch'].includes(state.route)?'active':''}" onclick="go('learning')"><span class="side-icon">▶</span><span><b>影片學習</b><small>影片・字幕・單字</small></span></button>
       <button class="side-main ${['grammar','lesson'].includes(state.route)?'active':''}" onclick="go('grammar')"><span class="side-icon">文</span><span><b>英文文法</b><small>30 章 · 150 微課</small></span></button>
       <button class="side-main ${state.route==='quiz'?'active':''}" onclick="go('quiz')"><span class="side-icon">測</span><span><b>多益練習</b><small>4 級距 · 20 題</small></span></button>
