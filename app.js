@@ -301,8 +301,7 @@ function watch(){
 
       <div class="subtitle-control scale-control"><label>字幕大小</label><button class="subtitle-scale-btn ${scale===75?'active':''}" onclick="setSubtitleSize(75)">75%</button><button class="subtitle-scale-btn ${scale===100?'active':''}" onclick="setSubtitleSize(100)">100%</button><button class="subtitle-scale-btn ${scale===125?'active':''}" onclick="setSubtitleSize(125)">125%</button><button class="subtitle-scale-btn ${scale===150?'active':''}" onclick="setSubtitleSize(150)">150%</button><button class="subtitle-scale-btn ${scale===200?'active':''}" onclick="setSubtitleSize(200)">200%</button></div>
 
-      <div class="panel subtitle-panel">
-        <div class="panel-head"><div><h2>字幕工作區</h2><p>英文 / 中英 / 中文逐句翻譯；字幕會跟著影片時間高亮。</p></div><span class="pill green">${(v.transcript||[]).length?'逐句字幕':'字幕待取得'}</span></div>
+      <div class="subtitle-workarea">
         <div class="tabs"><button class="${state.transcriptTab==='english'?'active':''}" onclick="setTab('english')">英文</button><button class="${state.transcriptTab==='bilingual'?'active':''}" onclick="setTab('bilingual')">中英</button><button class="${state.transcriptTab==='chinese'?'active':''}" onclick="setTab('chinese')">中文</button></div>
         <div class="subtitle-list" data-scale="${scale}">${subtitleHTML(v)}</div>
       </div>
