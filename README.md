@@ -21,5 +21,3 @@ python APPLY_V7.py
 
 GitHub Actions 第一次請手動 Run workflow。工作流需要 repository 的 Actions workflow permission 允許 Contents: write，才能把更新後的 catalog.json commit 回 main。
 
-
-<!-- github-write-test-2026-09-27 -->
