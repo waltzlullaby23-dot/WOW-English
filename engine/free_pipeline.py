@@ -36,15 +36,16 @@ REVIEW = DATA / 'review.json'
 
 CONFIG = {
     'queriesPerRun': 24,
-    'resultsPerQuery': 8,
-    'maxCandidates': 140,
-    'maxProcess': 36,
+    'resultsPerQuery': 12,
+    'maxCandidates': 200,
+    'maxProcess': 25,
     'minSegments': 8,
     'minCoverage': 0.90,
     'minCharsPerMinute': 42,
     'maxCharsPerMinute': 1800,
     'searchRetries': 3,
-    'queryCooldown': 0.35,
+    'queryCooldown': 0.15,
+    'dailyTarget': 100,
 }
 
 SUB_HINTS = {
