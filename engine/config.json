@@ -1,12 +1,12 @@
 {
-  "queriesPerRun": 32,
-  "resultsPerQuery": 10,
-  "maxCandidates": 220,
-  "maxProcess": 36,
+  "queriesPerRun": 16,
+  "resultsPerQuery": 8,
+  "maxCandidates": 120,
+  "maxProcess": 12,
   "minSegments": 8,
   "minCoverage": 0.9,
   "minCharsPerMinute": 42,
   "maxCharsPerMinute": 1800,
   "searchRetries": 3,
-  "queryCooldown": 0.35
+  "queryCooldown": 0.2
 }
