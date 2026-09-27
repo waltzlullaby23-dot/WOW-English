@@ -148,57 +148,47 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
 }
 function closeWord(){state.word=null;render();}
 let speechAudio=null;
-function playGoogleTTS(value,target){
+async function playGoogleTTS(value,target){
+  const text=String(value||'').trim();
+  if(!text)return;
   try{
-    if(speechAudio){speechAudio.pause();speechAudio.src='';}
-    const src='https://translate.googleapis.com/translate_a/tts?client=gtx&ie=UTF-8&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value);
-    speechAudio=new Audio(src);
+    if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}
+    const url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(text);
+    speechAudio=new Audio(url);
     speechAudio.preload='auto';
-    const p=speechAudio.play();
-    if(p?.catch)p.catch(()=>{});
-  }catch{}
-}
-function pickEnglishVoice(target){
-  const voices=window.speechSynthesis?.getVoices?.()||[];
-  const wanted=target.toLowerCase();
-  const exact=voices.find(v=>String(v.lang||'').toLowerCase()===wanted);
-  if(exact)return exact;
-  if(target==='en-GB'){
-    return voices.find(v=>/^en-gb/i.test(v.lang||'')) || voices.find(v=>/british|uk|daniel|george|hazel|serena|kate/i.test(v.name||'')) || voices.find(v=>/^en/i.test(v.lang||''));
-  }
-  return voices.find(v=>/^en-us/i.test(v.lang||'')) || voices.find(v=>/american|us|alex|samantha|aria|jenny/i.test(v.name||'')) || voices.find(v=>/^en/i.test(v.lang||''));
+    speechAudio.volume=1;
+    await speechAudio.play();
+  }catch(e){}
 }
 function speak(text,locale){
   const value=String(text||'').trim();
   if(!value)return;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  // Use the browser voice first, then the direct Google TTS audio fallback.
   const synth=window.speechSynthesis;
   if(synth){
     try{
       synth.cancel();
+      const voices=synth.getVoices?.()||[];
+      const voice=target==='en-GB'
+        ? (voices.find(v=>/^en-gb/i.test(v.lang||''))||voices.find(v=>/british|uk|daniel|george|hazel|serena|kate/i.test(v.name||'')))
+        : (voices.find(v=>/^en-us/i.test(v.lang||''))||voices.find(v=>/american|us|alex|samantha|aria|jenny/i.test(v.name||'')));
       const u=new SpeechSynthesisUtterance(value);
       u.lang=target;
-      u.voice=pickEnglishVoice(target)||null;
-      u.rate=.82; u.pitch=1; u.volume=1;
-      let finished=false;
-      u.onend=()=>{finished=true;};
-      u.onerror=()=>{if(!finished)playGoogleTTS(value,target);};
+      u.voice=voice||null;
+      u.rate=.88;
+      u.volume=1;
+      u.onend=()=>{};
+      u.onerror=()=>{playGoogleTTS(value,target);};
       synth.speak(u);
-      setTimeout(()=>{
-        const voices=synth.getVoices?.()||[];
-        if(voices.length && !u.voice){u.voice=pickEnglishVoice(target);}
-      },50);
-      // If the browser has no usable English voice, use Google TTS immediately.
-      if(!u.voice && voicesUnavailableLongEnough(synth))playGoogleTTS(value,target);
+      // Chrome may expose voices asynchronously; give it a short window.
+      if(!voice) setTimeout(()=>{ if((window.speechSynthesis?.getVoices?.()||[]).length===0) playGoogleTTS(value,target); },450);
       return;
-    }catch{}
+    }catch(e){}
   }
   playGoogleTTS(value,target);
 }
-function voicesUnavailableLongEnough(synth){
-  const voices=synth?.getVoices?.()||[];
-  return voices.length===0;
-}
+
 
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
