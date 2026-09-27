@@ -266,7 +266,7 @@ def search_queries(tax, offset, count):
 
 def ydl_search(query, n):
     if YoutubeDL is None:return []
-    opts={'quiet':True,'skip_download':True,'extract_flat':True,'ignoreerrors':True,'no_warnings':True}
+    opts={'quiet':True,'skip_download':True,'extract_flat':True,'ignoreerrors':True,'no_warnings':True,'socket_timeout':15}
     for attempt in range(3):
         try:
             with YoutubeDL(opts) as ydl:
@@ -277,7 +277,7 @@ def ydl_search(query, n):
     return []
 
 def ydl_info(video_id):
-    opts={'quiet':True,'skip_download':True,'ignoreerrors':True,'no_warnings':True}
+    opts={'quiet':True,'skip_download':True,'ignoreerrors':True,'no_warnings':True,'socket_timeout':15}
     for attempt in range(3):
         try:
             with YoutubeDL(opts) as ydl:
