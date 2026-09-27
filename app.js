@@ -117,28 +117,56 @@ function setSubtitleOffset(sec){state.subtitleOffset=Number(sec)||0;save('sanmu-
 function setSubtitleRate(rate){state.subtitleRate=Number(rate)||1;save('sanmu-subtitle-rate',state.subtitleRate);document.querySelectorAll('.subtitle-rate-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.rate)===state.subtitleRate));}
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;}
 function fmt(s){s=Number(s)||0;return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');}
-function clickableSentence(text,videoId){return esc(text).replace(/[A-Za-z]+(?:'[A-Za-z]+)?/g,w=>{const k=w.toLowerCase();const info=wordBank.words?.[k];if(['a','an','the','and','or','but','if','to','of','in','on','at','for','from','by','with','as','is','are','was','were','be','been','being','am','do','does','did','have','has','had','can','could','will','would','should','may','might','must','this','that','these','those','it','its','they','them','their','we','our','you','your','i','he','she','his','her','what','which','who','when','where','why','how'].includes(k))return w;return `<button class="word-token ${info?'known':''}" onclick='event.stopPropagation();openWord(${JSON.stringify(k)},${JSON.stringify(videoId)},${JSON.stringify(text)})'>${w}</button>`;});}
+function clickableSentence(text,videoId){
+  return esc(text).replace(/[A-Za-z]+(?:['’][A-Za-z]+)?/g,w=>{
+    const k=w.toLowerCase();
+    const info=wordBank.words?.[k];
+    return `<button class="word-token ${info?'known':''}" title="中文解釋＋英式／美式發音" onclick='event.stopPropagation();openWord(${JSON.stringify(k)},${JSON.stringify(videoId)},${JSON.stringify(text)})'>${w}</button>`;
+  });
+}
+
 function markHistory(v){let h=history(),i=h.findIndex(x=>x.id===v.id);const item={id:v.id,title:v.title,updatedAt:new Date().toISOString()};if(i>=0)h[i]={...h[i],...item};else h.unshift(item);save('sanmu-history',h.slice(0,200));let d=daily();d.minutes+=1;d.sessions+=1;save('sanmu-daily',d);}
 function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];save('sanmu-favs',f);render();}
 async function enrichWord(word){
   const key=String(word||'').trim().toLowerCase();
   if(!key)return;
+  let zh='',gloss='',phoneticUk='',phoneticUs='',audioUk='',audioUs='',pos='';
   try{
     const tr=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key));
     if(tr.ok){
       const data=await tr.json();
-      const zh=(data?.[0]||[]).map(x=>x?.[0]||'').join('').trim();
-      if(zh&&state.word&&String(state.word.word).toLowerCase()===key){state.word.definition_zh=zh;render();}
+      zh=(data?.[0]||[]).map(x=>x?.[0]||'').join('').trim();
     }
   }catch{}
   try{
     const dr=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key));
     if(dr.ok){
-      const data=await dr.json(); const e=data?.[0];
-      const gloss=(e?.meanings||[]).flatMap(m=>m.definitions||[]).slice(0,2).map(d=>d.definition).filter(Boolean).join('；');
-      if(gloss&&state.word&&String(state.word.word).toLowerCase()===key){state.word.gloss=gloss;render();}
+      const data=await dr.json();
+      const entries=Array.isArray(data)?data:[];
+      const e=entries[0]||{};
+      pos=e?.meanings?.[0]?.partOfSpeech||'';
+      gloss=(e?.meanings||[]).flatMap(m=>m.definitions||[]).slice(0,3).map(d=>d.definition).filter(Boolean).join('；');
+      const phs=(e?.phonetics||[]).filter(p=>p?.text||p?.audio);
+      const us=phs.find(p=>/us/i.test(String(p.audio||'')))||{};
+      const uk=phs.find(p=>/uk|gb/i.test(String(p.audio||'')))||{};
+      phoneticUs=us.text||phs[0]?.text||'';
+      phoneticUk=uk.text||phs.find(p=>p?.text)?.text||'';
+      audioUs=us.audio||phs.find(p=>p?.audio)?.audio||'';
+      audioUk=uk.audio||phs.find(p=>p?.audio)?.audio||'';
     }
   }catch{}
+  if(state.word&&String(state.word.word).toLowerCase()===key){
+    state.word={...state.word,
+      definition_zh:zh||state.word.definition_zh||'目前暫無中文解釋',
+      gloss:gloss||state.word.gloss||'暫無英文定義',
+      phonetic_uk:phoneticUk||state.word.phonetic_uk||'',
+      phonetic_us:phoneticUs||state.word.phonetic_us||'',
+      audio_uk:audioUk||state.word.audio_uk||'',
+      audio_us:audioUs||state.word.audio_us||'',
+      pos:pos||state.word.pos||''
+    };
+    render();
+  }
 }
 function openWord(word,sourceVideoId='',sourceSentence=''){
   const info=wordBank.words?.[String(word).toLowerCase()]||{};
@@ -148,23 +176,27 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
 }
 function closeWord(){state.word=null;render();}
 let speechAudio=null;
+async function playAudioUrl(url,fallbackText,target){
+  try{
+    if(url){
+      if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}
+      speechAudio=new Audio(url); speechAudio.preload='auto'; speechAudio.volume=1;
+      await speechAudio.play(); return;
+    }
+  }catch{}
+  playGoogleTTS(fallbackText,target);
+}
 async function playGoogleTTS(value,target){
-  const text=String(value||'').trim();
-  if(!text)return;
+  const text=String(value||'').trim(); if(!text)return;
   try{
     if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}
     const url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(text);
-    speechAudio=new Audio(url);
-    speechAudio.preload='auto';
-    speechAudio.volume=1;
-    await speechAudio.play();
-  }catch(e){}
+    speechAudio=new Audio(url); speechAudio.preload='auto'; speechAudio.volume=1; await speechAudio.play();
+  }catch{}
 }
 function speak(text,locale){
-  const value=String(text||'').trim();
-  if(!value)return;
+  const value=String(text||'').trim(); if(!value)return;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  // Use the browser voice first, then the direct Google TTS audio fallback.
   const synth=window.speechSynthesis;
   if(synth){
     try{
@@ -174,21 +206,15 @@ function speak(text,locale){
         ? (voices.find(v=>/^en-gb/i.test(v.lang||''))||voices.find(v=>/british|uk|daniel|george|hazel|serena|kate/i.test(v.name||'')))
         : (voices.find(v=>/^en-us/i.test(v.lang||''))||voices.find(v=>/american|us|alex|samantha|aria|jenny/i.test(v.name||'')));
       const u=new SpeechSynthesisUtterance(value);
-      u.lang=target;
-      u.voice=voice||null;
-      u.rate=.88;
-      u.volume=1;
-      u.onend=()=>{};
-      u.onerror=()=>{playGoogleTTS(value,target);};
+      u.lang=target; u.voice=voice||null; u.rate=.88; u.volume=1;
+      u.onerror=()=>playGoogleTTS(value,target);
       synth.speak(u);
-      // Chrome may expose voices asynchronously; give it a short window.
-      if(!voice) setTimeout(()=>{ if((window.speechSynthesis?.getVoices?.()||[]).length===0) playGoogleTTS(value,target); },450);
+      if(!voice)setTimeout(()=>{if((synth.getVoices?.()||[]).length===0)playGoogleTTS(value,target);},500);
       return;
-    }catch(e){}
+    }catch{}
   }
   playGoogleTTS(value,target);
 }
-
 
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
@@ -196,8 +222,10 @@ function wordModal(){
   return `<div class="modal-backdrop" onclick="closeWord()"><div class="word-modal" onclick="event.stopPropagation()">
     <div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div>${esc(w.pos||'')}</div></div><button onclick="closeWord()">×</button></div>
     <div class="pron-row">
-      <span>英式 ${esc(w.phonetic_uk||'')}</span><button onclick="speak(${JSON.stringify(w.word)},'en-GB')">🔊 英式發音</button>
-      <span>美式 ${esc(w.phonetic_us||'')}</span><button onclick="speak(${JSON.stringify(w.word)},'en-US')">🔊 美式發音</button>
+      <span>英式 ${esc(w.phonetic_uk||'')}</span>
+      <button onclick="playAudioUrl(${JSON.stringify(w.audio_uk||'')},${JSON.stringify(w.word)},'en-GB')">🔊 英式發音</button>
+      <span>美式 ${esc(w.phonetic_us||'')}</span>
+      <button onclick="playAudioUrl(${JSON.stringify(w.audio_us||'')},${JSON.stringify(w.word)},'en-US')">🔊 美式發音</button>
     </div>
     <section><label>中文解釋</label><p>${esc(w.definition_zh||'正在取得中文解釋…')}</p></section>
     <section><label>English meaning</label><p>${esc(w.gloss||'正在取得英文解釋…')}</p></section>
