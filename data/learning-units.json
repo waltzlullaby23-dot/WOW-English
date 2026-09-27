@@ -1,0 +1,820 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-27T03:22:05.738618+00:00",
+  "units": {
+    "0Nv-zlhdb7Y": {
+      "vocabulary": [
+        {
+          "word": "order",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "request",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "questions",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "politer",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "imperatives",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [
+        {
+          "topic": "modal",
+          "explanation_zh": "依影片語境建立對應文法節點。",
+          "pattern": "See micro-lesson G11-01",
+          "lesson_ids": [
+            "G11-01"
+          ]
+        },
+        {
+          "topic": "comparatives",
+          "explanation_zh": "依影片語境建立對應文法節點。",
+          "pattern": "See micro-lesson G16-01",
+          "lesson_ids": [
+            "G16-01"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "An order or a request?",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Why questions are politer than imperatives.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Can or could?",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "0Nv-zlhdb7Y",
+      "cefr": "B1",
+      "category": "learning",
+      "subcategory": "口說",
+      "updatedAt": "2026-09-27T03:22:05.738287+00:00"
+    },
+    "3NM72kTE2oQ": {
+      "vocabulary": [
+        {
+          "word": "polite",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "politeness",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "important",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "english",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "different",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "ways",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "expressing",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "depending",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "want",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Politeness is very important, but how can you be polite in English?",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "There are different ways of expressing it, depending on how polite you want to be.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "3NM72kTE2oQ",
+      "cefr": "B1",
+      "category": "learning",
+      "subcategory": "口說",
+      "updatedAt": "2026-09-27T03:22:05.738355+00:00"
+    },
+    "4C4wlOAscvY": {
+      "vocabulary": [
+        {
+          "word": "english",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "welcome",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "real",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "easy",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "learning",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "today",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "talking",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "food",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "particular",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "we'll",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Welcome to Real Easy English from BBC Learning English.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Today we are talking about food.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "In particular, we'll talk about our favourite foods and how often we eat them.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "4C4wlOAscvY",
+      "cefr": "A2",
+      "category": "daily",
+      "subcategory": "飲食",
+      "updatedAt": "2026-09-27T03:22:05.738411+00:00"
+    },
+    "SMIgI-qDNCA": {
+      "vocabulary": [
+        {
+          "word": "passive",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "what's",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "voice",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "let's",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "look",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "changes",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "focus",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "sentence",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [
+        {
+          "topic": "passive",
+          "explanation_zh": "依影片語境建立對應文法節點。",
+          "pattern": "See micro-lesson G19-01",
+          "lesson_ids": [
+            "G19-01"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "What's the passive voice?",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Let's look at how the passive changes the focus of a sentence.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "SMIgI-qDNCA",
+      "cefr": "B1",
+      "category": "learning",
+      "subcategory": "文法",
+      "updatedAt": "2026-09-27T03:22:05.738445+00:00"
+    },
+    "uz2C3bQot6o": {
+      "vocabulary": [
+        {
+          "word": "lots",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "synonyms",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "english",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "choose",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "context",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "often",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "choosing",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "right",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "word",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "There are lots of synonyms in English, but how do you choose which one to use?",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Context is often the key to choosing the right word.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "uz2C3bQot6o",
+      "cefr": "B2",
+      "category": "learning",
+      "subcategory": "字彙",
+      "updatedAt": "2026-09-27T03:22:05.738480+00:00"
+    },
+    "x6Pdp8GBwTM": {
+      "vocabulary": [
+        {
+          "word": "english",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "words",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "think",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "three",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "start",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "sound",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "let's",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "learn",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "pronounce",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "properly",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "The English words think, three, this and then all start with a th sound.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Let's learn how to pronounce them properly.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "x6Pdp8GBwTM",
+      "cefr": "A2",
+      "category": "learning",
+      "subcategory": "發音",
+      "updatedAt": "2026-09-27T03:22:05.738511+00:00"
+    },
+    "x72gP4HrU58": {
+      "vocabulary": [
+        {
+          "word": "english",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "welcome",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "real",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "easy",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "learning",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "today",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "we're",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "talking",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "families",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "compare",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Welcome to Real Easy English from BBC Learning English.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        },
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Today we're talking about families and how we compare things.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "x72gP4HrU58",
+      "cefr": "A2",
+      "category": "daily",
+      "subcategory": "家庭",
+      "updatedAt": "2026-09-27T03:22:05.738540+00:00"
+    },
+    "z5V0d1nBCX8": {
+      "vocabulary": [
+        {
+          "word": "let's",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "learn",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "easy",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "english",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "words",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "bathroom",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Let's learn ten easy English words you can use in the bathroom.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "z5V0d1nBCX8",
+      "cefr": "A1",
+      "category": "daily",
+      "subcategory": "居家",
+      "updatedAt": "2026-09-27T03:22:05.738562+00:00"
+    },
+    "O43nLSRMqHU": {
+      "vocabulary": [
+        {
+          "word": "welcome",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "london",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "edinburgh",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "challenge",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Welcome to the London to Edinburgh Challenge.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "O43nLSRMqHU",
+      "cefr": "A2",
+      "category": "travel",
+      "subcategory": "城市",
+      "updatedAt": "2026-09-27T03:22:05.738579+00:00"
+    },
+    "KFajmtdj-J0": {
+      "vocabulary": [
+        {
+          "word": "today",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "we're",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "looking",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "bond",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "between",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "sisters",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Today we're looking at the bond between sisters.",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "KFajmtdj-J0",
+      "cefr": "B1",
+      "category": "history",
+      "subcategory": "人物",
+      "updatedAt": "2026-09-27T03:22:05.738597+00:00"
+    },
+    "-XcALxwXJVY": {
+      "vocabulary": [
+        {
+          "word": "ever",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "used",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "language",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        },
+        {
+          "word": "learning",
+          "definition_zh": "待 AI 解釋",
+          "example": ""
+        }
+      ],
+      "phrases": [],
+      "grammar": [
+        {
+          "topic": "present perfect",
+          "explanation_zh": "依影片語境建立對應文法節點。",
+          "pattern": "See micro-lesson G08-01",
+          "lesson_ids": [
+            "G08-01"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "What is the main meaning of this sentence?",
+          "options": [
+            "Have you ever used a language-learning app?",
+            "An unrelated statement",
+            "A different topic",
+            "None of the above"
+          ],
+          "answer": 0,
+          "explanation_zh": "從字幕句子辨識語意。"
+        }
+      ],
+      "generator": "heuristic-fallback",
+      "videoId": "-XcALxwXJVY",
+      "cefr": "B1",
+      "category": "technology",
+      "subcategory": "AI",
+      "updatedAt": "2026-09-27T03:22:05.738616+00:00"
+    }
+  }
+}

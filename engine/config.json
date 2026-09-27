@@ -1,0 +1,22 @@
+{
+  "acceptEnglishScore": 0.80,
+  "reviewEnglishScore": 0.60,
+  "rejectMultilingualScore": 0.25,
+  "minLanguageConfidence": 0.60,
+  "maxQueriesPerRun": 24,
+  "maxResultsPerQuery": 50,
+  "searchPages": 1,
+  "maxCandidates": 500,
+  "embeddingDuplicateThreshold": 0.965,
+  "translateBatchSize": 20,
+  "spokenSampleSeconds": 45,
+  "maxTranscriptChars": 14000,
+  "models": {
+    "language": "gpt-5.6-luna",
+    "classification": "gpt-5.6-luna",
+    "translation": "gpt-5.6-luna",
+    "learning": "gpt-5.6-luna",
+    "embedding": "text-embedding-3-small",
+    "transcription": "gpt-4o-mini-transcribe"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "cefr":"A1-C2",
+  "chapters":[
+    [1,"Sentence Foundations","句子基礎","A1-A2"],[2,"Be / Have / Do","三大核心動詞","A1-B1"],[3,"Nouns","名詞","A1-B2"],[4,"Articles","冠詞","A1-C1"],[5,"Pronouns","代名詞","A1-B2"],
+    [6,"Present Tenses","現在時態","A1-B2"],[7,"Past Tenses","過去時態","A1-B2"],[8,"Perfect Tenses","完成時態","A2-C1"],[9,"Perfect Continuous","完成進行式","B1-C1"],[10,"Future","未來表達","A2-C1"],
+    [11,"Modal Verbs","情態動詞","A2-C1"],[12,"Questions","疑問句","A1-B2"],[13,"Negatives","否定句","A1-C1"],[14,"Adjectives","形容詞","A1-B2"],[15,"Adverbs","副詞","A1-C1"],
+    [16,"Comparison","比較級與最高級","A1-B2"],[17,"Prepositions","介系詞","A1-C1"],[18,"Gerunds & Infinitives","動名詞與不定詞","A2-C1"],[19,"Passive Voice","被動語態","A2-C1"],[20,"Relative Clauses","關係子句","A2-C1"],
+    [21,"Noun Clauses","名詞子句","B1-C1"],[22,"Adverb Clauses","副詞子句","A2-C1"],[23,"Conditionals","條件句","A2-C1"],[24,"Reported Speech","間接引語","A2-C1"],[25,"Conjunctions & Linking","連接詞與篇章銜接","A2-C1"],
+    [26,"Participles & Reduced Clauses","分詞與簡化子句","B2-C1"],[27,"Causative & Special Verbs","使役與特殊動詞","B1-C1"],[28,"Emphasis & Inversion","強調與倒裝","B2-C2"],[29,"Advanced Grammar & Style","高階文法與語體","B2-C2"],[30,"Common Errors & Confusing Grammar","易錯與混淆文法","A2-C2"]
+  ],
+  "lessonsPerChapter":5,
+  "design":{"formMeaningUseContrastError":true,"practicePerLesson":"5-10","chapterQuiz":20}
+}

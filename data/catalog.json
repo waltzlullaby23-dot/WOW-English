@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-27T03:22:06.299977+00:00",
+  "source": "bootstrap-seed",
+  "videos": [
+    {
+      "id": "0Nv-zlhdb7Y",
+      "title": "How to be Polite in English",
+      "channel": "BBC Learning English",
+      "duration": "03:55",
+      "published": "2021-09-27",
+      "category": "learning",
+      "subcategory": "口說",
+      "cefr": "B1",
+      "englishScore": 0.98,
+      "multilingualScore": 0.01,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=0Nv-zlhdb7Y",
+      "captions": "available",
+      "translation": "available",
+      "tags": [
+        "politeness",
+        "requests",
+        "modal verbs"
+      ],
+      "transcript": [
+        {
+          "start": 25,
+          "end": 40,
+          "en": "An order or a request?",
+          "zh": "命令和請求之間有什麼差別？"
+        },
+        {
+          "start": 50,
+          "end": 70,
+          "en": "Why questions are politer than imperatives.",
+          "zh": "為什麼疑問句通常比祈使句更有禮貌？"
+        },
+        {
+          "start": 102,
+          "end": 123,
+          "en": "Can or could?",
+          "zh": "要用 can 還是 could？"
+        }
+      ]
+    },
+    {
+      "id": "3NM72kTE2oQ",
+      "title": "How to be polite in English: Ask BBC Learning English",
+      "channel": "BBC Learning English",
+      "duration": "04:04",
+      "published": "2025-11-04",
+      "category": "learning",
+      "subcategory": "口說",
+      "cefr": "B1",
+      "englishScore": 0.99,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=3NM72kTE2oQ",
+      "captions": "available",
+      "translation": "available",
+      "tags": [
+        "speaking",
+        "politeness",
+        "phrases"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 17,
+          "en": "Politeness is very important, but how can you be polite in English?",
+          "zh": "禮貌非常重要，但怎麼用英文表達禮貌？"
+        },
+        {
+          "start": 45,
+          "end": 68,
+          "en": "There are different ways of expressing it, depending on how polite you want to be.",
+          "zh": "根據你想要的禮貌程度，有不同的表達方式。"
+        }
+      ]
+    },
+    {
+      "id": "4C4wlOAscvY",
+      "title": "Talking about food — Real Easy English",
+      "channel": "BBC Learning English",
+      "duration": "05:28",
+      "published": "2026-03-14",
+      "category": "daily",
+      "subcategory": "飲食",
+      "cefr": "A2",
+      "englishScore": 0.99,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=4C4wlOAscvY",
+      "captions": "available",
+      "translation": "available",
+      "tags": [
+        "food",
+        "frequency",
+        "daily English"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 14,
+          "en": "Welcome to Real Easy English from BBC Learning English.",
+          "zh": "歡迎來到 BBC Learning English 的 Real Easy English。"
+        },
+        {
+          "start": 31,
+          "end": 44,
+          "en": "Today we are talking about food.",
+          "zh": "今天我們要談談食物。"
+        },
+        {
+          "start": 45,
+          "end": 57,
+          "en": "In particular, we'll talk about our favourite foods and how often we eat them.",
+          "zh": "特別會談到我們最喜歡的食物，以及我們多久吃一次。"
+        }
+      ]
+    },
+    {
+      "id": "SMIgI-qDNCA",
+      "title": "What's the passive voice? Ask BBC Learning English",
+      "channel": "BBC Learning English",
+      "duration": "05:17",
+      "published": "2025-05-30",
+      "category": "learning",
+      "subcategory": "文法",
+      "cefr": "B1",
+      "englishScore": 0.98,
+      "multilingualScore": 0.01,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=SMIgI-qDNCA",
+      "captions": "available",
+      "translation": "pending",
+      "tags": [
+        "passive voice",
+        "grammar",
+        "writing"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 15,
+          "en": "What's the passive voice?",
+          "zh": "什麼是被動語態？"
+        },
+        {
+          "start": 75,
+          "end": 100,
+          "en": "Let's look at how the passive changes the focus of a sentence.",
+          "zh": "我們看看被動語態如何改變句子的焦點。"
+        }
+      ]
+    },
+    {
+      "id": "uz2C3bQot6o",
+      "title": "Synonyms: How do I know which to choose?",
+      "channel": "BBC Learning English",
+      "duration": "04:08",
+      "published": "2025-11-18",
+      "category": "learning",
+      "subcategory": "字彙",
+      "cefr": "B2",
+      "englishScore": 0.98,
+      "multilingualScore": 0.01,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=uz2C3bQot6o",
+      "captions": "available",
+      "translation": "pending",
+      "tags": [
+        "synonyms",
+        "vocabulary",
+        "word choice"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 18,
+          "en": "There are lots of synonyms in English, but how do you choose which one to use?",
+          "zh": "英文裡有很多同義詞，但該怎麼選擇？"
+        },
+        {
+          "start": 82,
+          "end": 103,
+          "en": "Context is often the key to choosing the right word.",
+          "zh": "語境通常是選擇正確單字的關鍵。"
+        }
+      ]
+    },
+    {
+      "id": "x6Pdp8GBwTM",
+      "title": "How do I pronounce 'th' sounds?",
+      "channel": "BBC Learning English",
+      "duration": "04:30",
+      "published": "2025-10-07",
+      "category": "learning",
+      "subcategory": "發音",
+      "cefr": "A2",
+      "englishScore": 0.99,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=x6Pdp8GBwTM",
+      "captions": "available",
+      "translation": "available",
+      "tags": [
+        "pronunciation",
+        "th",
+        "speaking"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 20,
+          "en": "The English words think, three, this and then all start with a th sound.",
+          "zh": "英文的 think、three、this、then 都以 th 音開頭。"
+        },
+        {
+          "start": 55,
+          "end": 75,
+          "en": "Let's learn how to pronounce them properly.",
+          "zh": "一起學習正確的發音方式。"
+        }
+      ]
+    },
+    {
+      "id": "x72gP4HrU58",
+      "title": "Talking about family: Real Easy English",
+      "channel": "BBC Learning English",
+      "duration": "05:28",
+      "published": "2026-07-31",
+      "category": "daily",
+      "subcategory": "家庭",
+      "cefr": "A2",
+      "englishScore": 0.98,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=x72gP4HrU58",
+      "captions": "available",
+      "translation": "available",
+      "tags": [
+        "family",
+        "conversation",
+        "comparison"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 20,
+          "en": "Welcome to Real Easy English from BBC Learning English.",
+          "zh": "歡迎來到 BBC Learning English 的 Real Easy English。"
+        },
+        {
+          "start": 44,
+          "end": 66,
+          "en": "Today we're talking about families and how we compare things.",
+          "zh": "今天我們要談談家庭，以及如何比較事物。"
+        }
+      ]
+    },
+    {
+      "id": "z5V0d1nBCX8",
+      "title": "10 Easy English Words: In the bathroom",
+      "channel": "BBC Learning English",
+      "duration": "06:10",
+      "published": "2026-06-12",
+      "category": "daily",
+      "subcategory": "居家",
+      "cefr": "A1",
+      "englishScore": 0.98,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=z5V0d1nBCX8",
+      "captions": "available",
+      "translation": "pending",
+      "tags": [
+        "everyday English",
+        "home",
+        "vocabulary"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 18,
+          "en": "Let's learn ten easy English words you can use in the bathroom.",
+          "zh": "一起學習十個你在浴室裡會用到的簡單英文單字。"
+        }
+      ]
+    },
+    {
+      "id": "O43nLSRMqHU",
+      "title": "The London to Edinburgh Challenge — Episode 1",
+      "channel": "BBC Learning English",
+      "duration": "05:35",
+      "published": "2026-05-20",
+      "category": "travel",
+      "subcategory": "城市",
+      "cefr": "A2",
+      "englishScore": 0.98,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=O43nLSRMqHU",
+      "captions": "available",
+      "translation": "pending",
+      "tags": [
+        "travel",
+        "UK",
+        "cities"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 14,
+          "en": "Welcome to the London to Edinburgh Challenge.",
+          "zh": "歡迎來到倫敦到愛丁堡挑戰。"
+        }
+      ]
+    },
+    {
+      "id": "KFajmtdj-J0",
+      "title": "The bond between sisters — 6 Minute English",
+      "channel": "BBC Learning English",
+      "duration": "06:00",
+      "published": "2026-03-01",
+      "category": "history",
+      "subcategory": "人物",
+      "cefr": "B1",
+      "englishScore": 0.97,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=KFajmtdj-J0",
+      "captions": "available",
+      "translation": "pending",
+      "tags": [
+        "relationships",
+        "family",
+        "6 minute english"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 18,
+          "en": "Today we're looking at the bond between sisters.",
+          "zh": "今天我們要探討姊妹之間的情感連結。"
+        }
+      ]
+    },
+    {
+      "id": "-XcALxwXJVY",
+      "title": "Can apps teach you a language? — 6 Minute English",
+      "channel": "BBC Learning English",
+      "duration": "06:00",
+      "published": "2026-09-10",
+      "category": "technology",
+      "subcategory": "AI",
+      "cefr": "B1",
+      "englishScore": 0.98,
+      "multilingualScore": 0.0,
+      "spokenLanguage": "en",
+      "captionLanguage": "en",
+      "status": "accepted",
+      "sourceUrl": "https://www.youtube.com/watch?v=-XcALxwXJVY",
+      "captions": "available",
+      "translation": "pending",
+      "tags": [
+        "language learning",
+        "apps",
+        "technology"
+      ],
+      "transcript": [
+        {
+          "start": 0,
+          "end": 20,
+          "en": "Have you ever used a language-learning app?",
+          "zh": "你曾經使用過語言學習 App 嗎？"
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "accepted": 10,
+    "rejected": 0,
+    "review": 0,
+    "processed": 10
+  },
+  "translationPipeline": "batch>sentence retry>contextual fallback",
+  "translationStats": {
+    "full": 5,
+    "partial": 0,
+    "pending": 6,
+    "sentences": 20,
+    "translated": 0
+  }
+}
