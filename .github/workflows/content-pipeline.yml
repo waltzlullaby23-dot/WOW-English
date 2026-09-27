@@ -76,7 +76,12 @@ jobs:
           print("ACCEPTED=",len(accepted))
           print("VERIFIED_CAPTIONS=",len(verified))
           print("FULLY_TRANSLATED=",len(translated))
-          if accepted and len(translated) < len(accepted):
+          # Never report a successful release when zero videos passed the
+          # content gate. The previous check was vacuously true with accepted=0,
+          # which hid the real subtitle-repair failure.
+          if len(accepted) == 0:
+              raise SystemExit("Release blocked: zero videos passed the complete-caption acceptance gate.")
+          if len(translated) < len(accepted):
               raise SystemExit("Release blocked: accepted videos must have complete sentence-level Chinese translation.")
           PY
 
