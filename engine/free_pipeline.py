@@ -163,24 +163,57 @@ def fetch_english_transcript(video_id: str):
             continue
     return None,[]
 
-def fetch_timedtext(video_id: str, lang='en', kind=None, tlang=None):
-    import requests
-    qs=f'v={video_id}&lang={lang}&fmt=vtt'
-    if kind: qs += f'&kind={kind}'
-    if tlang: qs += f'&tlang={tlang}'
-    url='https://www.youtube.com/api/timedtext?'+qs
+def _download_vtt_url(url: str):
     try:
-        r=requests.get(url,timeout=20,headers={'User-Agent':'Mozilla/5.0'})
+        import requests
+        r=requests.get(url,timeout=25,headers={'User-Agent':'Mozilla/5.0'})
         if r.ok and 'WEBVTT' in r.text[:100]:
             from tempfile import NamedTemporaryFile
             with NamedTemporaryFile('w+',suffix='.vtt',encoding='utf-8') as f:
                 f.write(r.text);f.flush()
                 rows=parse_vtt(Path(f.name))
-            if len(rows)>=CONFIG['minSegments']:
-                return rows
+            return rows
     except Exception:
         pass
     return []
+
+def fetch_caption_tracks_from_player(video_id: str):
+    # Read YouTube's own caption-track URLs from yt-dlp's player metadata.
+    # This is more reliable than guessing timedtext URLs and lets us request
+    # YouTube's native translation layer with tlang=zh-TW.
+    try:
+        import yt_dlp
+        url=f'https://www.youtube.com/watch?v={video_id}'
+        opts={'quiet':True,'no_warnings':True,'skip_download':True,'noplaylist':True}
+        with yt_dlp.YoutubeDL(opts) as ydl:
+            info=ydl.extract_info(url,download=False)
+        tracks=info.get('subtitles') or {}
+        auto=info.get('automatic_captions') or {}
+        pool=[]
+        for source_name,source in (('manual',tracks),('auto',auto)):
+            for lang,entries in source.items():
+                ll=str(lang).lower()
+                if not ll.startswith('en'): continue
+                for e in entries or []:
+                    u=e.get('url')
+                    if u and ('vtt' in str(e.get('ext','')).lower() or 'timedtext' in u):
+                        pool.append((len(u),source_name,lang,u))
+        # Prefer auto English, then manual English; prefer webvtt.
+        pool.sort(key=lambda x:(0 if x[1]=='auto' else 1,0 if 'en-us' in x[2].lower() else 1,len(x[0] and x[0] or '')))
+        for _,source_name,lang,u in pool:
+            en_rows=_download_vtt_url(u)
+            if len(en_rows)<CONFIG['minSegments'] or len(' '.join(x['en'] for x in en_rows))<180: continue
+            zh_rows=[]
+            sep='&' if '?' in u else '?'
+            for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
+                zh_rows=_download_vtt_url(u+sep+'tlang='+tlang)
+                if len(zh_rows)>=max(CONFIG['minSegments'],int(len(en_rows)*0.6)):
+                    break
+            return en_rows,zh_rows,source_name,lang
+    except Exception:
+        pass
+    return [],[],'',''
+
 
 def fetch_english_via_timedtext(video_id: str):
     for kind in (None,'asr'):
@@ -440,42 +473,39 @@ def ydl_info(video_id):
 def best_english_transcript(video_id: str, duration: float):
     candidates=[]
     try:
-        tr,segs=fetch_english_transcript(video_id)
-        if segs:
-            candidates.append(('youtube-transcript-api',tr,segs))
+        en,zh,source,lang=fetch_caption_tracks_from_player(video_id)
+        if en:
+            candidates.append(('youtube-player-track',None,en,zh))
     except Exception:
         pass
+    try:
+        tr,segs=fetch_english_transcript(video_id)
+        if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
+    except Exception:pass
     try:
         ok,segs=fetch_english_via_timedtext(video_id)
-        if segs:
-            candidates.append(('youtube-timedtext',None,segs))
-    except Exception:
-        pass
+        if segs:candidates.append(('youtube-timedtext',None,segs,[]))
+    except Exception:pass
     try:
-        en_rows,zh_rows=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
-        if en_rows:
-            candidates.append(('yt-dlp',None,en_rows))
-    except Exception:
-        pass
+        en,zh=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
+        if en:candidates.append(('yt-dlp',None,en,zh))
+    except Exception:pass
     try:
         segs=fetch_english_via_public_transcript(video_id)
-        if segs:
-            candidates.append(('public-transcript',None,segs))
-    except Exception:
-        pass
+        if segs:candidates.append(('public-transcript',None,segs,[]))
+    except Exception:pass
+
     valid=[]
-    for source,tr,segs in candidates:
+    for source,tr,segs,zhrows in candidates:
         try:
             ok,coverage,reason=validate_transcript(segs,duration)
-            if ok:
-                valid.append((coverage,len(segs),source,tr,segs))
-        except Exception:
-            continue
-    if not valid:
-        return None,None,0.0,'no-complete-english-transcript'
+            if ok:valid.append((coverage,len(segs),source,tr,segs,zhrows))
+        except Exception:pass
+    if not valid:return None,None,0.0,'no-complete-english-transcript',[]
     valid.sort(key=lambda x:(x[0],x[1]),reverse=True)
-    coverage,_,source,tr,segs=valid[0]
-    return tr,segs,coverage,source
+    coverage,_,source,tr,segs,zhrows=valid[0]
+    return tr,segs,coverage,source,zhrows
+
 
 def translate_public_google(text: str):
     import requests
@@ -505,7 +535,7 @@ def process_video(video_id, meta, existing, idx=0):
     if not title:return None,{'id':video_id,'title':'','status':'review','reason':'missing-title'}
     duration=float(info.get('duration') or 0)
 
-    tr,segs,coverage,transcript_source=best_english_transcript(video_id,duration)
+    tr,segs,coverage,transcript_source,youtube_zh_rows=best_english_transcript(video_id,duration)
     if not segs:
         return None,{'id':video_id,'title':title,'status':'review','reason':'no-complete-english-transcript'}
 
@@ -517,11 +547,14 @@ def process_video(video_id, meta, existing, idx=0):
 
     zh=None; zh_source='none'
 
-    # 1) YouTube's own player translation first.
-    try:
-        zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
-    except Exception:
-        zh=None
+    # 1) YouTube's own caption track translated by tlang (same source as the player).
+    if youtube_zh_rows:
+        zh=align_translation_segments(segs,youtube_zh_rows)
+        if zh and all(clean_text(x) for x in zh): zh_source='youtube-player-translation'
+    # 2) YouTube timedtext translation fallback.
+    if zh is None:
+        try: zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
+        except Exception: zh=None
     # 2) Transcript API translation, if its track object is available.
     if zh is None:
         try:
