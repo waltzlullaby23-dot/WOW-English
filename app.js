@@ -148,15 +148,34 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
 }
 function closeWord(){state.word=null;render();}
 function speak(text,locale){
-  if(!window.speechSynthesis)return;
-  const voices=window.speechSynthesis.getVoices();
-  const exact=voices.find(v=>String(v.lang||'').toLowerCase()===locale.toLowerCase());
-  const prefix=voices.find(v=>String(v.lang||'').toLowerCase().startsWith(locale.slice(0,2).toLowerCase()) && String(v.name||'').toLowerCase().includes(locale.slice(3).toLowerCase()));
-  const voice=exact||prefix||voices.find(v=>String(v.lang||'').toLowerCase().startsWith(locale.slice(0,2).toLowerCase()));
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(String(text)); u.lang=locale; if(voice)u.voice=voice; u.rate=.9; u.pitch=1;
-  speechSynthesis.speak(u);
+  const value=String(text||'').trim();
+  if(!value)return;
+  const lang=String(locale||'en-US').toLowerCase();
+  const target=lang.startsWith('en-gb')?'en-GB':'en-US';
+  const synth=window.speechSynthesis;
+  if(synth){
+    try{
+      synth.cancel();
+      const voices=synth.getVoices();
+      const exact=voices.find(v=>String(v.lang||'').toLowerCase()===target.toLowerCase());
+      const family=voices.find(v=>String(v.lang||'').toLowerCase().startsWith(target.slice(0,2).toLowerCase()) &&
+        (target==='en-GB' ? /uk|brit|daniel|george|hazel|serena|kate/i.test(v.name||'') :
+                             /us|american|alex|samantha|aria|jenny/i.test(v.name||'')));
+      const any=voices.find(v=>String(v.lang||'').toLowerCase().startsWith('en'));
+      const u=new SpeechSynthesisUtterance(value);
+      u.lang=target; u.voice=exact||family||any||null; u.rate=.9; u.pitch=1; u.volume=1;
+      synth.speak(u);
+      if((exact||family||any)||voices.length===0)return;
+    }catch{}
+  }
+  // Final no-key fallback. This is Google Translate's public TTS endpoint;
+  // if the browser blocks it, the Web Speech API above remains the primary path.
+  try{
+    const src='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value);
+    const audio=new Audio(src); audio.preload='auto'; audio.play().catch(()=>{});
+  }catch{}
 }
+
 
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
@@ -326,8 +345,8 @@ function setSubtitleSize(s){const allowed=[75,100,125,150,200];const n=Number(s)
 function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
 function subtitleHTML(v){
   const segs=v?.transcript||[];
-  if(!segs.length)return '<div class="empty"><b>目前沒有逐句字幕資料</b><p>完整字幕會在內容引擎取得並驗證後加入。</p></div>';
-  return segs.map((x,i)=>`<div class="segment" data-index="${i}" onclick="seek(${Number(x.start)||0})"><div class="time">${fmt(x.start)} · sentence ${i+1}</div>${state.transcriptTab!=='chinese'?'<div class="en">'+clickableSentence(x.en||'',v.id)+'</div>':''}${state.transcriptTab!=='english'?'<div class="zh">'+esc(x.zh||'翻譯待補')+'</div>':''}</div>`).join('');
+  if(!segs.length)return '<div class="empty"><b>這部影片的完整字幕正在整理中</b><p>系統會先取得完整英文字幕，再逐句建立中文翻譯；沒有完整字幕的影片不列入正式學習庫。</p></div>';
+  return segs.map((x,i)=>{const zh=String(x.zh||'').trim();const en=String(x.en||'').trim();return `<div class="segment" data-index="${i}" onclick="seek(${Number(x.start)||0})"><div class="time">${fmt(x.start)} · sentence ${i+1}</div>${state.transcriptTab!=='english'?`<div class="zh">${esc(zh||'翻譯整理中…')}</div>`:''}${state.transcriptTab!=='chinese'?`<div class="en">${clickableSentence(en,v.id)}</div>`:''}</div>`}).join('');
 }
 function watch(){
   const v=selectedVideo();
@@ -427,4 +446,5 @@ window.handleSearchKey=handleSearchKey;
 window.setSubtitleScale=setSubtitleScale;
 window.answerMicroPractice=answerMicroPractice;
 
+if(window.speechSynthesis){ window.speechSynthesis.addEventListener('voiceschanged',()=>window.speechSynthesis.getVoices()); setTimeout(()=>window.speechSynthesis.getVoices(),300); }
 boot();
