@@ -51,10 +51,20 @@ def main():
     catalog=load_json(CAT,{'videos':[]}); lessons=load_json(LES,{'chapters':[]})
     # Build a simple lesson lookup so generated links are stable even before all 150 lesson bodies exist.
     lesson_index={}
-    for row in lessons.get('chapters',[]):
-        chapter=row[0];
-        for i in range(1, int(lessons.get('lessonsPerChapter',5))+1):
-            lesson_index[f'G{chapter:02d}-{i:02d}']={'lesson_id':f'G{chapter:02d}-{i:02d}','chapter_id':chapter,'title_en':row[1],'title_zh':row[2],'cefr':row[3]}
+    if lessons.get('microLessons'):
+        for item in lessons.get('microLessons', []):
+            lesson_index[item['lesson_id']] = {
+                'lesson_id': item['lesson_id'],
+                'chapter_id': item['chapter_id'],
+                'title_en': item.get('title_en',''),
+                'title_zh': item.get('title_zh',''),
+                'cefr': item.get('cefr','')
+            }
+    else:
+        for row in lessons.get('chapters',[]):
+            chapter=row[0]
+            for i in range(1, int(lessons.get('lessonsPerChapter',5))+1):
+                lesson_index[f'G{chapter:02d}-{i:02d}']={'lesson_id':f'G{chapter:02d}-{i:02d}','chapter_id':chapter,'title_en':row[1],'title_zh':row[2],'cefr':row[3]}
     result=load_json(OUT,{'schemaVersion':1,'generatedAt':'','units':{}})
     for video in catalog.get('videos',[]):
         if video.get('status')!='accepted': continue

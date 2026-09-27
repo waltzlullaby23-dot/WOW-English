@@ -1,0 +1,518 @@
+{
+  "version": 1,
+  "words": {
+    "order": {
+      "word": "order",
+      "pos": "noun",
+      "definition_zh": "命令；訂單",
+      "gloss": "a request or instruction, or something bought from a business",
+      "example": "The waiter took our order.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "request": {
+      "word": "request",
+      "pos": "noun/verb",
+      "definition_zh": "請求；要求",
+      "gloss": "something you ask for politely; to ask for something",
+      "example": "Could I make a request?",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "question": {
+      "word": "question",
+      "pos": "noun",
+      "definition_zh": "問題；疑問句",
+      "gloss": "a sentence used to ask for information",
+      "example": "That is a good question.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "questions": {
+      "word": "questions",
+      "pos": "noun",
+      "definition_zh": "問題；疑問句",
+      "gloss": "plural of question",
+      "example": "She asked two questions.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "politer": {
+      "word": "politer",
+      "pos": "adjective",
+      "definition_zh": "更有禮貌的",
+      "gloss": "more polite",
+      "example": "This form sounds politer.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "imperatives": {
+      "word": "imperatives",
+      "pos": "noun",
+      "definition_zh": "祈使句",
+      "gloss": "verb forms used for commands or instructions",
+      "example": "Open the door is an imperative.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "polite": {
+      "word": "polite",
+      "pos": "adjective",
+      "definition_zh": "有禮貌的",
+      "gloss": "showing good manners",
+      "example": "She is always polite.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "politeness": {
+      "word": "politeness",
+      "pos": "noun",
+      "definition_zh": "禮貌",
+      "gloss": "the quality of being polite",
+      "example": "Politeness matters in the workplace.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "important": {
+      "word": "important",
+      "pos": "adjective",
+      "definition_zh": "重要的",
+      "gloss": "having great value or effect",
+      "example": "This point is important.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "english": {
+      "word": "english",
+      "pos": "noun/adjective",
+      "definition_zh": "英語；英文的",
+      "gloss": "the language of England and many other countries",
+      "example": "English is widely used internationally.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "different": {
+      "word": "different",
+      "pos": "adjective",
+      "definition_zh": "不同的",
+      "gloss": "not the same",
+      "example": "We have different opinions.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "ways": {
+      "word": "ways",
+      "pos": "noun",
+      "definition_zh": "方式；方法",
+      "gloss": "methods or manners of doing something",
+      "example": "There are several ways to solve it.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "expressing": {
+      "word": "expressing",
+      "pos": "verb",
+      "definition_zh": "表達",
+      "gloss": "showing an idea, feeling, or meaning",
+      "example": "She is expressing her opinion.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "depending": {
+      "word": "depending",
+      "pos": "verb",
+      "definition_zh": "取決於",
+      "gloss": "being decided by something else",
+      "example": "It depends on the situation.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "want": {
+      "word": "want",
+      "pos": "verb",
+      "definition_zh": "想要",
+      "gloss": "to desire or wish for something",
+      "example": "I want to improve my English.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "welcome": {
+      "word": "welcome",
+      "pos": "verb/adjective",
+      "definition_zh": "歡迎",
+      "gloss": "to greet someone gladly; greeting",
+      "example": "Welcome to the class.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "real": {
+      "word": "real",
+      "pos": "adjective",
+      "definition_zh": "真正的；真實的",
+      "gloss": "actual or genuine",
+      "example": "This is a real example.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "easy": {
+      "word": "easy",
+      "pos": "adjective",
+      "definition_zh": "容易的",
+      "gloss": "not difficult",
+      "example": "The exercise is easy.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "learning": {
+      "word": "learning",
+      "pos": "noun/verb",
+      "definition_zh": "學習",
+      "gloss": "the process of gaining knowledge or skill",
+      "example": "Learning takes time.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "today": {
+      "word": "today",
+      "pos": "adverb/noun",
+      "definition_zh": "今天",
+      "gloss": "on this day",
+      "example": "We are studying today.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "talking": {
+      "word": "talking",
+      "pos": "verb/noun",
+      "definition_zh": "談話",
+      "gloss": "speaking with someone",
+      "example": "They are talking about travel.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "food": {
+      "word": "food",
+      "pos": "noun",
+      "definition_zh": "食物",
+      "gloss": "things people eat",
+      "example": "The food was delicious.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "particular": {
+      "word": "particular",
+      "pos": "adjective",
+      "definition_zh": "特定的；特別的",
+      "gloss": "specific or special",
+      "example": "Is there a particular reason?",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "passive": {
+      "word": "passive",
+      "pos": "adjective/noun",
+      "definition_zh": "被動的；被動語態",
+      "gloss": "a grammatical form in which the receiver of the action is foregrounded",
+      "example": "The sentence is in the passive voice.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "voice": {
+      "word": "voice",
+      "pos": "noun",
+      "definition_zh": "語態；聲音",
+      "gloss": "in grammar, the relationship between a verb and its subject",
+      "example": "Active and passive voice are different.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "changes": {
+      "word": "changes",
+      "pos": "verb/noun",
+      "definition_zh": "改變；變化",
+      "gloss": "becomes different",
+      "example": "Small changes can help.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "focus": {
+      "word": "focus",
+      "pos": "noun/verb",
+      "definition_zh": "焦點；專注",
+      "gloss": "the main attention or purpose",
+      "example": "The focus is on clarity.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "sentence": {
+      "word": "sentence",
+      "pos": "noun",
+      "definition_zh": "句子",
+      "gloss": "a group of words forming a complete statement, question, or command",
+      "example": "Write one complete sentence.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "lots": {
+      "word": "lots",
+      "pos": "noun",
+      "definition_zh": "很多",
+      "gloss": "a large amount or number",
+      "example": "There are lots of examples.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "synonyms": {
+      "word": "synonyms",
+      "pos": "noun",
+      "definition_zh": "同義詞",
+      "gloss": "words with similar meanings",
+      "example": "Big and large are synonyms.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "choose": {
+      "word": "choose",
+      "pos": "verb",
+      "definition_zh": "選擇",
+      "gloss": "to decide between options",
+      "example": "Choose the best answer.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "context": {
+      "word": "context",
+      "pos": "noun",
+      "definition_zh": "語境",
+      "gloss": "the situation or words around something that help explain meaning",
+      "example": "Context changes meaning.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "often": {
+      "word": "often",
+      "pos": "adverb",
+      "definition_zh": "經常",
+      "gloss": "frequently",
+      "example": "I often review vocabulary.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "choosing": {
+      "word": "choosing",
+      "pos": "verb",
+      "definition_zh": "選擇",
+      "gloss": "selecting among options",
+      "example": "Choosing the right word takes practice.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "right": {
+      "word": "right",
+      "pos": "adjective/adverb",
+      "definition_zh": "正確的；右邊的",
+      "gloss": "correct; on or toward the right side",
+      "example": "That is the right answer.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "word": {
+      "word": "word",
+      "pos": "noun",
+      "definition_zh": "單字；詞",
+      "gloss": "a unit of language",
+      "example": "Look up the new word.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "words": {
+      "word": "words",
+      "pos": "noun",
+      "definition_zh": "單字；詞",
+      "gloss": "plural of word",
+      "example": "New words become easier with context.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "think": {
+      "word": "think",
+      "pos": "verb",
+      "definition_zh": "思考；認為",
+      "gloss": "to use the mind to consider something",
+      "example": "Think about the meaning.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "three": {
+      "word": "three",
+      "pos": "number",
+      "definition_zh": "三",
+      "gloss": "the number 3",
+      "example": "Three examples are enough.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "start": {
+      "word": "start",
+      "pos": "verb/noun",
+      "definition_zh": "開始",
+      "gloss": "to begin",
+      "example": "Let's start the lesson.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "sound": {
+      "word": "sound",
+      "pos": "noun/verb",
+      "definition_zh": "聲音；聽起來",
+      "gloss": "something heard; to appear or seem by hearing",
+      "example": "That word has a /θ/ sound.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "learn": {
+      "word": "learn",
+      "pos": "verb",
+      "definition_zh": "學習",
+      "gloss": "to gain knowledge or skill",
+      "example": "We learn from practice.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "pronounce": {
+      "word": "pronounce",
+      "pos": "verb",
+      "definition_zh": "發音",
+      "gloss": "to say a word correctly",
+      "example": "How do you pronounce this word?",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "properly": {
+      "word": "properly",
+      "pos": "adverb",
+      "definition_zh": "正確地；適當地",
+      "gloss": "correctly or appropriately",
+      "example": "Say the word properly.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "families": {
+      "word": "families",
+      "pos": "noun",
+      "definition_zh": "家庭；家族",
+      "gloss": "groups of related people",
+      "example": "Many families live nearby.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "compare": {
+      "word": "compare",
+      "pos": "verb",
+      "definition_zh": "比較",
+      "gloss": "to examine similarities and differences",
+      "example": "Compare the two sentences.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "bathroom": {
+      "word": "bathroom",
+      "pos": "noun",
+      "definition_zh": "浴室；洗手間",
+      "gloss": "a room for bathing or using the toilet",
+      "example": "The bathroom is upstairs.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "london": {
+      "word": "london",
+      "pos": "proper noun",
+      "definition_zh": "倫敦",
+      "gloss": "the capital city of the United Kingdom",
+      "example": "London is a historic city.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "edinburgh": {
+      "word": "edinburgh",
+      "pos": "proper noun",
+      "definition_zh": "愛丁堡",
+      "gloss": "the capital city of Scotland",
+      "example": "Edinburgh is in Scotland.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "challenge": {
+      "word": "challenge",
+      "pos": "noun/verb",
+      "definition_zh": "挑戰",
+      "gloss": "a difficult task or situation",
+      "example": "The challenge is manageable.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "looking": {
+      "word": "looking",
+      "pos": "verb",
+      "definition_zh": "看；尋找",
+      "gloss": "using the eyes to observe",
+      "example": "We are looking at the example.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "bond": {
+      "word": "bond",
+      "pos": "noun",
+      "definition_zh": "連結；情感紐帶",
+      "gloss": "a strong connection between people or things",
+      "example": "The sisters share a strong bond.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "between": {
+      "word": "between",
+      "pos": "preposition",
+      "definition_zh": "在兩者之間",
+      "gloss": "in the space or relationship separating two things",
+      "example": "The difference between them is clear.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "sisters": {
+      "word": "sisters",
+      "pos": "noun",
+      "definition_zh": "姊妹",
+      "gloss": "female siblings",
+      "example": "The sisters work together.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "ever": {
+      "word": "ever",
+      "pos": "adverb",
+      "definition_zh": "曾經",
+      "gloss": "at any time",
+      "example": "Have you ever tried it?",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "used": {
+      "word": "used",
+      "pos": "verb/adjective",
+      "definition_zh": "使用；用過的",
+      "gloss": "past form of use; accustomed to in some structures",
+      "example": "Have you ever used this app?",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    },
+    "language": {
+      "word": "language",
+      "pos": "noun",
+      "definition_zh": "語言",
+      "gloss": "a system of communication using words or signs",
+      "example": "English is a global language.",
+      "phonetic_us": "",
+      "phonetic_uk": ""
+    }
+  }
+}

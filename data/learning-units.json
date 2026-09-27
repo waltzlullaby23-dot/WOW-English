@@ -1,33 +1,38 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "generatedAt": "2026-09-27T03:22:05.738618+00:00",
   "units": {
     "0Nv-zlhdb7Y": {
       "vocabulary": [
         {
           "word": "order",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "命令；訂單",
+          "example": "The waiter took our order.",
+          "pos": "noun"
         },
         {
           "word": "request",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "請求；要求",
+          "example": "Could I make a request?",
+          "pos": "noun/verb"
         },
         {
           "word": "questions",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "問題；疑問句",
+          "example": "She asked two questions.",
+          "pos": "noun"
         },
         {
           "word": "politer",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "更有禮貌的",
+          "example": "This form sounds politer.",
+          "pos": "adjective"
         },
         {
           "word": "imperatives",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "祈使句",
+          "example": "Open the door is an imperative.",
+          "pos": "noun"
         }
       ],
       "phrases": [],
@@ -95,51 +100,71 @@
       "vocabulary": [
         {
           "word": "polite",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "有禮貌的",
+          "example": "She is always polite.",
+          "pos": "adjective"
         },
         {
           "word": "politeness",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "禮貌",
+          "example": "Politeness matters in the workplace.",
+          "pos": "noun"
         },
         {
           "word": "important",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "重要的",
+          "example": "This point is important.",
+          "pos": "adjective"
         },
         {
           "word": "english",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "英語；英文的",
+          "example": "English is widely used internationally.",
+          "pos": "noun/adjective"
         },
         {
           "word": "different",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "不同的",
+          "example": "We have different opinions.",
+          "pos": "adjective"
         },
         {
           "word": "ways",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "方式；方法",
+          "example": "There are several ways to solve it.",
+          "pos": "noun"
         },
         {
           "word": "expressing",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "表達",
+          "example": "She is expressing her opinion.",
+          "pos": "verb"
         },
         {
           "word": "depending",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "取決於",
+          "example": "It depends on the situation.",
+          "pos": "verb"
         },
         {
           "word": "want",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "想要",
+          "example": "I want to improve my English.",
+          "pos": "verb"
         }
       ],
-      "phrases": [],
+      "phrases": [
+        {
+          "phrase": "be polite in English",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Be polite in English."
+        },
+        {
+          "phrase": "different ways of expressing",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Different ways of expressing."
+        }
+      ],
       "grammar": [],
       "questions": [
         {
@@ -176,48 +201,57 @@
       "vocabulary": [
         {
           "word": "english",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "英語；英文的",
+          "example": "English is widely used internationally.",
+          "pos": "noun/adjective"
         },
         {
           "word": "welcome",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "歡迎",
+          "example": "Welcome to the class.",
+          "pos": "verb/adjective"
         },
         {
           "word": "real",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "真正的；真實的",
+          "example": "This is a real example.",
+          "pos": "adjective"
         },
         {
           "word": "easy",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "容易的",
+          "example": "The exercise is easy.",
+          "pos": "adjective"
         },
         {
           "word": "learning",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "學習",
+          "example": "Learning takes time.",
+          "pos": "noun/verb"
         },
         {
           "word": "today",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "今天",
+          "example": "We are studying today.",
+          "pos": "adverb/noun"
         },
         {
           "word": "talking",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "談話",
+          "example": "They are talking about travel.",
+          "pos": "verb/noun"
         },
         {
           "word": "food",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "食物",
+          "example": "The food was delicious.",
+          "pos": "noun"
         },
         {
           "word": "particular",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "特定的；特別的",
+          "example": "Is there a particular reason?",
+          "pos": "adjective"
         },
         {
           "word": "we'll",
@@ -225,7 +259,13 @@
           "example": ""
         }
       ],
-      "phrases": [],
+      "phrases": [
+        {
+          "phrase": "how often we eat",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "How often we eat."
+        }
+      ],
       "grammar": [],
       "questions": [
         {
@@ -273,8 +313,9 @@
       "vocabulary": [
         {
           "word": "passive",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "被動的；被動語態",
+          "example": "The sentence is in the passive voice.",
+          "pos": "adjective/noun"
         },
         {
           "word": "what's",
@@ -283,8 +324,9 @@
         },
         {
           "word": "voice",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "語態；聲音",
+          "example": "Active and passive voice are different.",
+          "pos": "noun"
         },
         {
           "word": "let's",
@@ -298,21 +340,35 @@
         },
         {
           "word": "changes",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "改變；變化",
+          "example": "Small changes can help.",
+          "pos": "verb/noun"
         },
         {
           "word": "focus",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "焦點；專注",
+          "example": "The focus is on clarity.",
+          "pos": "noun/verb"
         },
         {
           "word": "sentence",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "句子",
+          "example": "Write one complete sentence.",
+          "pos": "noun"
         }
       ],
-      "phrases": [],
+      "phrases": [
+        {
+          "phrase": "passive voice",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Passive voice."
+        },
+        {
+          "phrase": "changes the focus",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Changes the focus."
+        }
+      ],
       "grammar": [
         {
           "topic": "passive",
@@ -358,51 +414,66 @@
       "vocabulary": [
         {
           "word": "lots",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "很多",
+          "example": "There are lots of examples.",
+          "pos": "noun"
         },
         {
           "word": "synonyms",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "同義詞",
+          "example": "Big and large are synonyms.",
+          "pos": "noun"
         },
         {
           "word": "english",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "英語；英文的",
+          "example": "English is widely used internationally.",
+          "pos": "noun/adjective"
         },
         {
           "word": "choose",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "選擇",
+          "example": "Choose the best answer.",
+          "pos": "verb"
         },
         {
           "word": "context",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "語境",
+          "example": "Context changes meaning.",
+          "pos": "noun"
         },
         {
           "word": "often",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "經常",
+          "example": "I often review vocabulary.",
+          "pos": "adverb"
         },
         {
           "word": "choosing",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "選擇",
+          "example": "Choosing the right word takes practice.",
+          "pos": "verb"
         },
         {
           "word": "right",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "正確的；右邊的",
+          "example": "That is the right answer.",
+          "pos": "adjective/adverb"
         },
         {
           "word": "word",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "單字；詞",
+          "example": "Look up the new word.",
+          "pos": "noun"
         }
       ],
-      "phrases": [],
+      "phrases": [
+        {
+          "phrase": "choosing the right word",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Choosing the right word."
+        }
+      ],
       "grammar": [],
       "questions": [
         {
@@ -439,33 +510,39 @@
       "vocabulary": [
         {
           "word": "english",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "英語；英文的",
+          "example": "English is widely used internationally.",
+          "pos": "noun/adjective"
         },
         {
           "word": "words",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "單字；詞",
+          "example": "New words become easier with context.",
+          "pos": "noun"
         },
         {
           "word": "think",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "思考；認為",
+          "example": "Think about the meaning.",
+          "pos": "verb"
         },
         {
           "word": "three",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "三",
+          "example": "Three examples are enough.",
+          "pos": "number"
         },
         {
           "word": "start",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "開始",
+          "example": "Let's start the lesson.",
+          "pos": "verb/noun"
         },
         {
           "word": "sound",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "聲音；聽起來",
+          "example": "That word has a /θ/ sound.",
+          "pos": "noun/verb"
         },
         {
           "word": "let's",
@@ -474,21 +551,30 @@
         },
         {
           "word": "learn",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "學習",
+          "example": "We learn from practice.",
+          "pos": "verb"
         },
         {
           "word": "pronounce",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "發音",
+          "example": "How do you pronounce this word?",
+          "pos": "verb"
         },
         {
           "word": "properly",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "正確地；適當地",
+          "example": "Say the word properly.",
+          "pos": "adverb"
         }
       ],
-      "phrases": [],
+      "phrases": [
+        {
+          "phrase": "learn how to pronounce",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Learn how to pronounce."
+        }
+      ],
       "grammar": [],
       "questions": [
         {
@@ -525,33 +611,39 @@
       "vocabulary": [
         {
           "word": "english",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "英語；英文的",
+          "example": "English is widely used internationally.",
+          "pos": "noun/adjective"
         },
         {
           "word": "welcome",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "歡迎",
+          "example": "Welcome to the class.",
+          "pos": "verb/adjective"
         },
         {
           "word": "real",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "真正的；真實的",
+          "example": "This is a real example.",
+          "pos": "adjective"
         },
         {
           "word": "easy",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "容易的",
+          "example": "The exercise is easy.",
+          "pos": "adjective"
         },
         {
           "word": "learning",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "學習",
+          "example": "Learning takes time.",
+          "pos": "noun/verb"
         },
         {
           "word": "today",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "今天",
+          "example": "We are studying today.",
+          "pos": "adverb/noun"
         },
         {
           "word": "we're",
@@ -560,18 +652,21 @@
         },
         {
           "word": "talking",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "談話",
+          "example": "They are talking about travel.",
+          "pos": "verb/noun"
         },
         {
           "word": "families",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "家庭；家族",
+          "example": "Many families live nearby.",
+          "pos": "noun"
         },
         {
           "word": "compare",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "比較",
+          "example": "Compare the two sentences.",
+          "pos": "verb"
         }
       ],
       "phrases": [],
@@ -616,28 +711,33 @@
         },
         {
           "word": "learn",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "學習",
+          "example": "We learn from practice.",
+          "pos": "verb"
         },
         {
           "word": "easy",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "容易的",
+          "example": "The exercise is easy.",
+          "pos": "adjective"
         },
         {
           "word": "english",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "英語；英文的",
+          "example": "English is widely used internationally.",
+          "pos": "noun/adjective"
         },
         {
           "word": "words",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "單字；詞",
+          "example": "New words become easier with context.",
+          "pos": "noun"
         },
         {
           "word": "bathroom",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "浴室；洗手間",
+          "example": "The bathroom is upstairs.",
+          "pos": "noun"
         }
       ],
       "phrases": [],
@@ -666,23 +766,27 @@
       "vocabulary": [
         {
           "word": "welcome",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "歡迎",
+          "example": "Welcome to the class.",
+          "pos": "verb/adjective"
         },
         {
           "word": "london",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "倫敦",
+          "example": "London is a historic city.",
+          "pos": "proper noun"
         },
         {
           "word": "edinburgh",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "愛丁堡",
+          "example": "Edinburgh is in Scotland.",
+          "pos": "proper noun"
         },
         {
           "word": "challenge",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "挑戰",
+          "example": "The challenge is manageable.",
+          "pos": "noun/verb"
         }
       ],
       "phrases": [],
@@ -711,8 +815,9 @@
       "vocabulary": [
         {
           "word": "today",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "今天",
+          "example": "We are studying today.",
+          "pos": "adverb/noun"
         },
         {
           "word": "we're",
@@ -721,26 +826,36 @@
         },
         {
           "word": "looking",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "看；尋找",
+          "example": "We are looking at the example.",
+          "pos": "verb"
         },
         {
           "word": "bond",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "連結；情感紐帶",
+          "example": "The sisters share a strong bond.",
+          "pos": "noun"
         },
         {
           "word": "between",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "在兩者之間",
+          "example": "The difference between them is clear.",
+          "pos": "preposition"
         },
         {
           "word": "sisters",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "姊妹",
+          "example": "The sisters work together.",
+          "pos": "noun"
         }
       ],
-      "phrases": [],
+      "phrases": [
+        {
+          "phrase": "looking at the bond",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Looking at the bond."
+        }
+      ],
       "grammar": [],
       "questions": [
         {
@@ -766,26 +881,36 @@
       "vocabulary": [
         {
           "word": "ever",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "曾經",
+          "example": "Have you ever tried it?",
+          "pos": "adverb"
         },
         {
           "word": "used",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "使用；用過的",
+          "example": "Have you ever used this app?",
+          "pos": "verb/adjective"
         },
         {
           "word": "language",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "語言",
+          "example": "English is a global language.",
+          "pos": "noun"
         },
         {
           "word": "learning",
-          "definition_zh": "待 AI 解釋",
-          "example": ""
+          "definition_zh": "學習",
+          "example": "Learning takes time.",
+          "pos": "noun/verb"
         }
       ],
-      "phrases": [],
+      "phrases": [
+        {
+          "phrase": "language-learning app",
+          "meaning_zh": "從影片語境學習的實用片語",
+          "example": "Language-learning app."
+        }
+      ],
       "grammar": [
         {
           "topic": "present perfect",

@@ -1,0 +1,1071 @@
+{
+  "schemaVersion": 2,
+  "scaleNote": "自製分級練習，不代表正式 TOEIC 換算分數。",
+  "bands": {
+    "under400": {
+      "label": "400 分以下",
+      "description": "基礎字彙、be/do/have、時間地點介系詞與簡單句型",
+      "questions": [
+        {
+          "q": "She ___ busy today.",
+          "a": [
+            "are",
+            "be",
+            "am",
+            "is"
+          ],
+          "c": 3,
+          "e": "題型：基礎文法。",
+          "skill": "be 動詞",
+          "band": "under400"
+        },
+        {
+          "q": "They ___ students.",
+          "a": [
+            "is",
+            "am",
+            "be",
+            "are"
+          ],
+          "c": 3,
+          "e": "題型：基礎文法。",
+          "skill": "be 動詞",
+          "band": "under400"
+        },
+        {
+          "q": "I ___ coffee every morning.",
+          "a": [
+            "drink",
+            "drinks",
+            "drank",
+            "drinking"
+          ],
+          "c": 0,
+          "e": "題型：基礎文法。",
+          "skill": "現在簡單式",
+          "band": "under400"
+        },
+        {
+          "q": "He ___ to work by bus.",
+          "a": [
+            "going",
+            "went",
+            "goes",
+            "go"
+          ],
+          "c": 2,
+          "e": "題型：基礎文法。",
+          "skill": "現在簡單式",
+          "band": "under400"
+        },
+        {
+          "q": "The meeting starts ___ nine.",
+          "a": [
+            "in",
+            "by",
+            "at",
+            "on"
+          ],
+          "c": 2,
+          "e": "題型：基礎介系詞。",
+          "skill": "時間介系詞",
+          "band": "under400"
+        },
+        {
+          "q": "We meet ___ Monday.",
+          "a": [
+            "at",
+            "in",
+            "by",
+            "on"
+          ],
+          "c": 3,
+          "e": "題型：基礎介系詞。",
+          "skill": "時間介系詞",
+          "band": "under400"
+        },
+        {
+          "q": "The books are ___ the desk.",
+          "a": [
+            "at",
+            "in",
+            "by",
+            "on"
+          ],
+          "c": 3,
+          "e": "題型：基礎介系詞。",
+          "skill": "地點介系詞",
+          "band": "under400"
+        },
+        {
+          "q": "She lives ___ Taipei.",
+          "a": [
+            "by",
+            "in",
+            "at",
+            "on"
+          ],
+          "c": 1,
+          "e": "題型：基礎介系詞。",
+          "skill": "地點介系詞",
+          "band": "under400"
+        },
+        {
+          "q": "There ___ two chairs here.",
+          "a": [
+            "is",
+            "be",
+            "was",
+            "are"
+          ],
+          "c": 3,
+          "e": "題型：基礎文法。",
+          "skill": "There is/are",
+          "band": "under400"
+        },
+        {
+          "q": "There ___ a problem.",
+          "a": [
+            "be",
+            "were",
+            "is",
+            "are"
+          ],
+          "c": 2,
+          "e": "題型：基礎文法。",
+          "skill": "There is/are",
+          "band": "under400"
+        },
+        {
+          "q": "He ___ like tea.",
+          "a": [
+            "not",
+            "doesn't",
+            "don't",
+            "isn't"
+          ],
+          "c": 1,
+          "e": "題型：否定句。",
+          "skill": "do-support",
+          "band": "under400"
+        },
+        {
+          "q": "They ___ work on Sundays.",
+          "a": [
+            "aren't",
+            "not",
+            "don't",
+            "doesn't"
+          ],
+          "c": 2,
+          "e": "題型：否定句。",
+          "skill": "do-support",
+          "band": "under400"
+        },
+        {
+          "q": "Please ___ the door.",
+          "a": [
+            "closes",
+            "closed",
+            "closing",
+            "close"
+          ],
+          "c": 3,
+          "e": "題型：句型。",
+          "skill": "祈使句",
+          "band": "under400"
+        },
+        {
+          "q": "Please ___ the form.",
+          "a": [
+            "complete",
+            "completed",
+            "completes",
+            "completing"
+          ],
+          "c": 0,
+          "e": "題型：句型。",
+          "skill": "祈使句",
+          "band": "under400"
+        },
+        {
+          "q": "I have ___ apple.",
+          "a": [
+            "some",
+            "an",
+            "a",
+            "the"
+          ],
+          "c": 1,
+          "e": "題型：名詞冠詞。",
+          "skill": "冠詞",
+          "band": "under400"
+        },
+        {
+          "q": "She bought ___ book.",
+          "a": [
+            "an",
+            "the",
+            "some",
+            "a"
+          ],
+          "c": 3,
+          "e": "題型：名詞冠詞。",
+          "skill": "冠詞",
+          "band": "under400"
+        },
+        {
+          "q": "How ___ are you?",
+          "a": [
+            "oldest",
+            "old",
+            "age",
+            "older"
+          ],
+          "c": 1,
+          "e": "題型：基礎疑問句。",
+          "skill": "疑問句",
+          "band": "under400"
+        },
+        {
+          "q": "Where ___ you live?",
+          "a": [
+            "does",
+            "are",
+            "is",
+            "do"
+          ],
+          "c": 3,
+          "e": "題型：基礎疑問句。",
+          "skill": "疑問句",
+          "band": "under400"
+        },
+        {
+          "q": "This bag is ___ than that one.",
+          "a": [
+            "cheap",
+            "cheapest",
+            "more cheap",
+            "cheaper"
+          ],
+          "c": 3,
+          "e": "題型：比較。",
+          "skill": "比較級",
+          "band": "under400"
+        },
+        {
+          "q": "He can ___ English.",
+          "a": [
+            "speak",
+            "speaks",
+            "speaking",
+            "spoke"
+          ],
+          "c": 0,
+          "e": "題型：基礎文法。",
+          "skill": "情態動詞",
+          "band": "under400"
+        }
+      ]
+    },
+    "400-600": {
+      "label": "400–600",
+      "description": "常見時態、職場搭配、被動與基本從句",
+      "questions": [
+        {
+          "q": "She has worked here ___ 2022.",
+          "a": [
+            "during",
+            "from",
+            "since",
+            "for"
+          ],
+          "c": 2,
+          "e": "題型：時態。",
+          "skill": "現在完成式+since",
+          "band": "400-600"
+        },
+        {
+          "q": "We have lived here ___ five years.",
+          "a": [
+            "since",
+            "during",
+            "at",
+            "for"
+          ],
+          "c": 3,
+          "e": "題型：時態。",
+          "skill": "現在完成式+for",
+          "band": "400-600"
+        },
+        {
+          "q": "The report ___ yesterday.",
+          "a": [
+            "was completing",
+            "has complete",
+            "was completed",
+            "completed"
+          ],
+          "c": 2,
+          "e": "題型：被動。",
+          "skill": "被動語態",
+          "band": "400-600"
+        },
+        {
+          "q": "The package will arrive ___ Monday.",
+          "a": [
+            "at",
+            "on",
+            "in",
+            "by"
+          ],
+          "c": 3,
+          "e": "題型：介系詞。",
+          "skill": "截止時間",
+          "band": "400-600"
+        },
+        {
+          "q": "Please let me know if anything ___.",
+          "a": [
+            "changed",
+            "changing",
+            "changes",
+            "change"
+          ],
+          "c": 2,
+          "e": "題型：條件。",
+          "skill": "if 子句",
+          "band": "400-600"
+        },
+        {
+          "q": "The company plans ___ a new branch.",
+          "a": [
+            "opening",
+            "opened",
+            "to open",
+            "open"
+          ],
+          "c": 2,
+          "e": "題型：不定詞。",
+          "skill": "不定詞",
+          "band": "400-600"
+        },
+        {
+          "q": "She is responsible ___ customer accounts.",
+          "a": [
+            "for",
+            "to",
+            "at",
+            "with"
+          ],
+          "c": 0,
+          "e": "題型：職場搭配。",
+          "skill": "搭配",
+          "band": "400-600"
+        },
+        {
+          "q": "The meeting was canceled ___ the speaker was ill.",
+          "a": [
+            "because",
+            "despite",
+            "unless",
+            "while"
+          ],
+          "c": 0,
+          "e": "題型：連接詞。",
+          "skill": "因果連接",
+          "band": "400-600"
+        },
+        {
+          "q": "I have not received the package ___.",
+          "a": [
+            "during",
+            "yet",
+            "already",
+            "ever"
+          ],
+          "c": 1,
+          "e": "題型：完成式。",
+          "skill": "yet",
+          "band": "400-600"
+        },
+        {
+          "q": "Could you please ___ the file?",
+          "a": [
+            "review",
+            "reviewed",
+            "reviewing",
+            "reviews"
+          ],
+          "c": 0,
+          "e": "題型：職場。",
+          "skill": "禮貌請求",
+          "band": "400-600"
+        },
+        {
+          "q": "The manager asked us ___ earlier.",
+          "a": [
+            "arriving",
+            "arrived",
+            "to arrive",
+            "arrive"
+          ],
+          "c": 2,
+          "e": "題型：句型。",
+          "skill": "ask + O + to V",
+          "band": "400-600"
+        },
+        {
+          "q": "She is interested in ___ English.",
+          "a": [
+            "learn",
+            "to learn",
+            "learned",
+            "learning"
+          ],
+          "c": 3,
+          "e": "題型：動名詞。",
+          "skill": "介系詞+V-ing",
+          "band": "400-600"
+        },
+        {
+          "q": "The office will remain closed ___ further notice.",
+          "a": [
+            "at",
+            "by",
+            "until",
+            "during"
+          ],
+          "c": 2,
+          "e": "題型：時間。",
+          "skill": "until",
+          "band": "400-600"
+        },
+        {
+          "q": "He apologized ___ the delay.",
+          "a": [
+            "on",
+            "for",
+            "to",
+            "at"
+          ],
+          "c": 1,
+          "e": "題型：職場搭配。",
+          "skill": "搭配",
+          "band": "400-600"
+        },
+        {
+          "q": "We are looking forward to ___ you.",
+          "a": [
+            "meet",
+            "met",
+            "to meet",
+            "meeting"
+          ],
+          "c": 3,
+          "e": "題型：搭配。",
+          "skill": "look forward to + V-ing",
+          "band": "400-600"
+        },
+        {
+          "q": "The new system is easier ___ use.",
+          "a": [
+            "with",
+            "to",
+            "for",
+            "at"
+          ],
+          "c": 1,
+          "e": "題型：文法。",
+          "skill": "不定詞",
+          "band": "400-600"
+        },
+        {
+          "q": "She ___ dinner when I called.",
+          "a": [
+            "was cooking",
+            "cooks",
+            "has cooked",
+            "is cook"
+          ],
+          "c": 0,
+          "e": "題型：時態。",
+          "skill": "過去進行式",
+          "band": "400-600"
+        },
+        {
+          "q": "If it rains, we ___ home.",
+          "a": [
+            "stay",
+            "would stayed",
+            "will stay",
+            "stayed"
+          ],
+          "c": 2,
+          "e": "題型：條件。",
+          "skill": "第一條件句",
+          "band": "400-600"
+        },
+        {
+          "q": "He suggested ___ the meeting.",
+          "a": [
+            "postponed",
+            "postponing",
+            "postpone",
+            "to postpone"
+          ],
+          "c": 1,
+          "e": "題型：動名詞。",
+          "skill": "suggest + V-ing",
+          "band": "400-600"
+        },
+        {
+          "q": "The email was sent ___ all staff.",
+          "a": [
+            "in",
+            "to",
+            "at",
+            "on"
+          ],
+          "c": 1,
+          "e": "題型：職場。",
+          "skill": "介系詞",
+          "band": "400-600"
+        }
+      ]
+    },
+    "600-800": {
+      "label": "600–800",
+      "description": "較長句、商務語境、子句、連接與語意",
+      "questions": [
+        {
+          "q": "The proposal, ___ was submitted last week, needs review.",
+          "a": [
+            "who",
+            "what",
+            "where",
+            "which"
+          ],
+          "c": 3,
+          "e": "題型：關係子句。",
+          "skill": "非限定關係子句",
+          "band": "600-800"
+        },
+        {
+          "q": "Had we known earlier, we ___ the schedule.",
+          "a": [
+            "would have changed",
+            "will change",
+            "would change",
+            "changed"
+          ],
+          "c": 0,
+          "e": "題型：條件句。",
+          "skill": "第三條件句倒裝",
+          "band": "600-800"
+        },
+        {
+          "q": "The CEO requested that the report ___ revised.",
+          "a": [
+            "be",
+            "is",
+            "was",
+            "being"
+          ],
+          "c": 0,
+          "e": "題型：高階文法。",
+          "skill": "mandative subjunctive",
+          "band": "600-800"
+        },
+        {
+          "q": "Customers were advised ___ their passwords regularly.",
+          "a": [
+            "changing",
+            "changed",
+            "to change",
+            "change"
+          ],
+          "c": 2,
+          "e": "題型：被動。",
+          "skill": "被動+不定詞",
+          "band": "600-800"
+        },
+        {
+          "q": "The project was delayed; ___, the team met the deadline.",
+          "a": [
+            "nevertheless",
+            "therefore",
+            "because",
+            "unless"
+          ],
+          "c": 0,
+          "e": "題型：篇章。",
+          "skill": "轉折連接",
+          "band": "600-800"
+        },
+        {
+          "q": "The manager asked whether the figures ___ accurate.",
+          "a": [
+            "being",
+            "were",
+            "are",
+            "be"
+          ],
+          "c": 1,
+          "e": "題型：名詞子句。",
+          "skill": "間接問句",
+          "band": "600-800"
+        },
+        {
+          "q": "The device is designed to operate efficiently ___ low temperatures.",
+          "a": [
+            "in",
+            "on",
+            "for",
+            "at"
+          ],
+          "c": 3,
+          "e": "題型：搭配。",
+          "skill": "固定介系詞",
+          "band": "600-800"
+        },
+        {
+          "q": "___ the high cost, the company decided to proceed.",
+          "a": [
+            "Because",
+            "Although",
+            "Unless",
+            "Despite"
+          ],
+          "c": 3,
+          "e": "題型：連接。",
+          "skill": "讓步介系詞",
+          "band": "600-800"
+        },
+        {
+          "q": "The report contains several findings that ___ further research.",
+          "a": [
+            "requiring",
+            "required",
+            "require",
+            "requires"
+          ],
+          "c": 2,
+          "e": "題型：關係子句。",
+          "skill": "關係子句+一致",
+          "band": "600-800"
+        },
+        {
+          "q": "The company adopted a policy aimed at ___ costs.",
+          "a": [
+            "reducing",
+            "reduce",
+            "reduced",
+            "to reduce"
+          ],
+          "c": 0,
+          "e": "題型：動名詞。",
+          "skill": "介系詞+V-ing",
+          "band": "600-800"
+        },
+        {
+          "q": "The committee is considering whether the plan ___ feasible.",
+          "a": [
+            "be",
+            "was",
+            "being",
+            "is"
+          ],
+          "c": 3,
+          "e": "題型：名詞子句。",
+          "skill": "whether 子句",
+          "band": "600-800"
+        },
+        {
+          "q": "The team completed the task without ___ the deadline.",
+          "a": [
+            "missing",
+            "miss",
+            "to miss",
+            "missed"
+          ],
+          "c": 0,
+          "e": "題型：動名詞。",
+          "skill": "without + V-ing",
+          "band": "600-800"
+        },
+        {
+          "q": "The revised estimate is slightly lower than ___ was expected.",
+          "a": [
+            "which",
+            "that",
+            "where",
+            "what"
+          ],
+          "c": 3,
+          "e": "題型：名詞子句。",
+          "skill": "what 子句",
+          "band": "600-800"
+        },
+        {
+          "q": "Although the data ___ incomplete, the trend is clear.",
+          "a": [
+            "are",
+            "is",
+            "be",
+            "was"
+          ],
+          "c": 0,
+          "e": "題型：副詞子句。",
+          "skill": "Although 子句",
+          "band": "600-800"
+        },
+        {
+          "q": "The speaker emphasized the importance of ___ evidence.",
+          "a": [
+            "rely",
+            "reliance",
+            "reliable",
+            "reliably"
+          ],
+          "c": 2,
+          "e": "題型：詞性。",
+          "skill": "形容詞修飾名詞",
+          "band": "600-800"
+        },
+        {
+          "q": "The contract will take effect once both parties ___ it.",
+          "a": [
+            "signing",
+            "sign",
+            "signed",
+            "will sign"
+          ],
+          "c": 1,
+          "e": "題型：副詞子句。",
+          "skill": "時間子句",
+          "band": "600-800"
+        },
+        {
+          "q": "The findings are consistent with the hypothesis, ___ further validation is required.",
+          "a": [
+            "although",
+            "because",
+            "therefore",
+            "unless"
+          ],
+          "c": 0,
+          "e": "題型：篇章。",
+          "skill": "讓步連接詞",
+          "band": "600-800"
+        },
+        {
+          "q": "The company is expected ___ its services.",
+          "a": [
+            "expanding",
+            "expanded",
+            "to expand",
+            "expand"
+          ],
+          "c": 2,
+          "e": "題型：被動。",
+          "skill": "被動+不定詞",
+          "band": "600-800"
+        },
+        {
+          "q": "The manager denied ___ the report.",
+          "a": [
+            "to change",
+            "changed",
+            "changing",
+            "change"
+          ],
+          "c": 2,
+          "e": "題型：動名詞。",
+          "skill": "deny + V-ing",
+          "band": "600-800"
+        },
+        {
+          "q": "The issue appears to have been ___ by a misunderstanding.",
+          "a": [
+            "to cause",
+            "caused",
+            "cause",
+            "causing"
+          ],
+          "c": 1,
+          "e": "題型：被動。",
+          "skill": "完美不定詞/被動",
+          "band": "600-800"
+        }
+      ]
+    },
+    "800-990": {
+      "label": "800–990",
+      "description": "正式語域、倒裝、名詞化、精細語意與文體控制",
+      "questions": [
+        {
+          "q": "The board's decision was ___ on the assumption that demand would remain stable.",
+          "a": [
+            "based",
+            "basis",
+            "basing",
+            "base"
+          ],
+          "c": 0,
+          "e": "題型：高階詞性。",
+          "skill": "正式被動與詞性",
+          "band": "800-990"
+        },
+        {
+          "q": "Not only ___ the deadline, but she also exceeded the target.",
+          "a": [
+            "did she meet",
+            "she met",
+            "met she",
+            "she meets"
+          ],
+          "c": 0,
+          "e": "題型：倒裝。",
+          "skill": "Not only 倒裝",
+          "band": "800-990"
+        },
+        {
+          "q": "The new policy is intended to reduce costs without ___ service quality.",
+          "a": [
+            "to compromise",
+            "compromising",
+            "compromise",
+            "compromised"
+          ],
+          "c": 1,
+          "e": "題型：高階搭配。",
+          "skill": "without + V-ing",
+          "band": "800-990"
+        },
+        {
+          "q": "The findings are compelling, ___ further validation is required.",
+          "a": [
+            "although",
+            "therefore",
+            "because",
+            "unless"
+          ],
+          "c": 0,
+          "e": "題型：篇章。",
+          "skill": "讓步連接",
+          "band": "800-990"
+        },
+        {
+          "q": "The report recommends that senior management ___ the proposal carefully.",
+          "a": [
+            "reviewed",
+            "reviewing",
+            "review",
+            "reviews"
+          ],
+          "c": 2,
+          "e": "題型：subjunctive。",
+          "skill": "正式建議句",
+          "band": "800-990"
+        },
+        {
+          "q": "Only after the audit ___ the scale of the discrepancy become apparent.",
+          "a": [
+            "does",
+            "was",
+            "has",
+            "did"
+          ],
+          "c": 3,
+          "e": "題型：倒裝。",
+          "skill": "Only + inversion",
+          "band": "800-990"
+        },
+        {
+          "q": "The contract was renewed, ___ several minor concerns raised during negotiation.",
+          "a": [
+            "therefore",
+            "whereas",
+            "notwithstanding",
+            "because"
+          ],
+          "c": 2,
+          "e": "題型：正式語域。",
+          "skill": "正式讓步介詞",
+          "band": "800-990"
+        },
+        {
+          "q": "The revised process is both more efficient and more ___.",
+          "a": [
+            "transparence",
+            "transparent",
+            "transparently",
+            "transparency"
+          ],
+          "c": 1,
+          "e": "題型：平行結構。",
+          "skill": "parallel adjective",
+          "band": "800-990"
+        },
+        {
+          "q": "The recommendation rests on assumptions that may not be entirely ___.",
+          "a": [
+            "validate",
+            "validly",
+            "valid",
+            "validity"
+          ],
+          "c": 2,
+          "e": "題型：高階詞性。",
+          "skill": "詞性",
+          "band": "800-990"
+        },
+        {
+          "q": "The policy seeks to improve efficiency while ___ unintended consequences.",
+          "a": [
+            "to minimize",
+            "minimizing",
+            "minimize",
+            "minimized"
+          ],
+          "c": 1,
+          "e": "題型：分詞。",
+          "skill": "while + V-ing",
+          "band": "800-990"
+        },
+        {
+          "q": "Rarely ___ such a comprehensive review been conducted.",
+          "a": [
+            "have",
+            "did",
+            "was",
+            "has"
+          ],
+          "c": 3,
+          "e": "題型：倒裝。",
+          "skill": "Rarely inversion",
+          "band": "800-990"
+        },
+        {
+          "q": "The author avoids categorical claims, instead ___ that the results may be provisional.",
+          "a": [
+            "suggesting",
+            "suggest",
+            "suggested",
+            "to suggest"
+          ],
+          "c": 0,
+          "e": "題型：篇章。",
+          "skill": "分詞連接",
+          "band": "800-990"
+        },
+        {
+          "q": "The evidence is compelling enough to warrant further ___.",
+          "a": [
+            "investigating",
+            "investigative",
+            "investigation",
+            "investigate"
+          ],
+          "c": 2,
+          "e": "題型：詞性。",
+          "skill": "noun after warrant",
+          "band": "800-990"
+        },
+        {
+          "q": "The committee found the revised wording more precise and less ___.",
+          "a": [
+            "ambiguousness",
+            "ambiguous",
+            "ambiguously",
+            "ambiguity"
+          ],
+          "c": 1,
+          "e": "題型：平行結構。",
+          "skill": "parallel adjective",
+          "band": "800-990"
+        },
+        {
+          "q": "The decision was made only after all alternatives had been ___.",
+          "a": [
+            "evaluate carefully",
+            "carefully evaluate",
+            "carefully evaluated",
+            "careful evaluating"
+          ],
+          "c": 2,
+          "e": "題型：被動。",
+          "skill": "完成被動",
+          "band": "800-990"
+        },
+        {
+          "q": "The report is unlikely to be useful unless its assumptions are made ___.",
+          "a": [
+            "explicit",
+            "explicitly",
+            "explication",
+            "explicate"
+          ],
+          "c": 0,
+          "e": "題型：詞性。",
+          "skill": "補語形容詞",
+          "band": "800-990"
+        },
+        {
+          "q": "It is essential that the results ___ interpreted cautiously.",
+          "a": [
+            "were",
+            "being",
+            "be",
+            "are"
+          ],
+          "c": 2,
+          "e": "題型：正式文體。",
+          "skill": "formal subjunctive",
+          "band": "800-990"
+        },
+        {
+          "q": "The proposal, if implemented, could ___ substantial savings.",
+          "a": [
+            "yields",
+            "yielding",
+            "yielded",
+            "yield"
+          ],
+          "c": 3,
+          "e": "題型：條件。",
+          "skill": "條件分詞片語",
+          "band": "800-990"
+        },
+        {
+          "q": "The report's methodology is, to some extent, ___.",
+          "a": [
+            "flawlessly",
+            "flawed",
+            "flaw",
+            "flawing"
+          ],
+          "c": 1,
+          "e": "題型：高階詞性。",
+          "skill": "hedging + adjective",
+          "band": "800-990"
+        },
+        {
+          "q": "The study provides evidence that is broadly consistent with the theory, albeit not entirely ___.",
+          "a": [
+            "conclusively",
+            "conclusion",
+            "conclusive",
+            "conclude"
+          ],
+          "c": 2,
+          "e": "題型：學術語域。",
+          "skill": "高階語意",
+          "band": "800-990"
+        }
+      ]
+    }
+  },
+  "questionPolicy": "每個分數帶均有 20 題獨立題庫；選擇目標帶後，20 題全部來自該分數帶，並以成績作為文法與影片難度診斷參考。"
+}

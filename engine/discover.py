@@ -53,19 +53,25 @@ def youtube_details(key: str, ids: list[str]) -> list[dict[str, Any]]:
 
 
 def search_queries(taxonomy: dict[str, Any], max_queries: int, offset: int) -> list[str]:
+    # Prefer English search hints over Chinese UI labels. This dramatically improves
+    # candidate recall while the later language gate remains the quality filter.
     templates = [
-        'English conversation {sub}', 'English explained {sub}', 'learn English {sub}',
-        'English podcast {sub}', 'documentary {sub} English', 'interview {sub} English',
-        'English speaking {sub}', 'English vocabulary {sub}', 'English lesson {sub}',
-        'interesting {sub} explained in English',
+        '{term}',
+        '{term} English',
+        '{term} documentary',
+        '{term} interview',
+        '{term} explained',
     ]
-    choices = []
+    choices: list[str] = []
     for cat in taxonomy.get('categories', []):
-        for sub in cat.get('subs', []):
-            for tpl in templates[:4]:
-                choices.append(tpl.format(sub=sub))
+        hints = cat.get('searchTerms') or []
+        for term in hints:
+            for tpl in templates:
+                choices.append(tpl.format(term=term))
     if not choices:
         return []
+    # Remove duplicates while preserving deterministic order.
+    choices = list(dict.fromkeys(choices))
     offset %= len(choices)
     rotated = choices[offset:] + choices[:offset]
     return rotated[:max_queries]

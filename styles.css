@@ -66,3 +66,28 @@ main{background:transparent}.hero-main{background:linear-gradient(135deg,#ffffff
 .word-row,.inline-word{color:#53766b}.inline-word{border-color:#a5ccb8}.micro-btn{background:#f8faf8;border-color:#dbe4dd;color:#5d756d}.micro-btn span{background:#e9f0ea;color:#678078}.micro-btn.done{background:#edf6f0;border-color:#b6d6c5;color:#2d7868}.vocab-card{background:#fff;border-color:#dbe4dd}.result-score{color:#2d7868}
 .side-footer{background:#fff;border-color:#dbe4dd;color:#71827a}
 @media(max-width:900px){.sidebar{background:#f7f9f5;border-bottom-color:#dbe4dd}.sidebar-primary{background:transparent}}
+
+
+/* 三木Eng logo and upgraded learning interactions */
+.brand{display:flex;align-items:center;text-decoration:none;padding:3px 0}
+.brand-logo{width:190px;height:auto;display:block}
+.brand-logo{object-fit:contain;object-position:left center}
+.topbar{min-height:72px}
+.subtitle-settings{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 2px 4px;color:#587269;font-size:11px}
+.subtitle-settings label{font-weight:700;min-width:78px}.subtitle-settings input{width:160px;accent-color:#2d7868}.subtitle-settings small{flex:1;min-width:220px;color:#819089;line-height:1.45}
+.word-row{border-radius:8px;padding:7px 8px!important}.word-row:hover{background:#edf6f0}
+.inline-word{border:0!important;border-bottom:1px dashed rgba(45,120,104,.38)!important;background:transparent;color:#377c6e;padding:0 2px;cursor:pointer;font:inherit}
+.inline-word.known{font-weight:700;color:#23695b}
+.word-modal{width:min(560px,calc(100vw - 28px));max-height:min(720px,calc(100vh - 28px));overflow:auto;background:#fff;border:1px solid #d4e0d7;border-radius:22px;box-shadow:0 28px 70px rgba(25,61,48,.25);padding:22px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(25,45,37,.34);display:grid;place-items:center;z-index:9999;padding:14px}
+.word-modal-head{display:flex;justify-content:space-between;align-items:flex-start}.word-modal-word{font-size:36px;font-weight:800;letter-spacing:-.03em;color:#1f4a40}.word-modal-pos{margin-top:4px;color:#8a9992;font-size:12px}.close-btn{width:36px;height:36px;border-radius:12px;background:#eef3ee;border:1px solid #dbe4dd;color:#4a665d;font-size:22px}
+.word-phonics{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;padding:12px;border-radius:14px;background:#f5f8f4;color:#637770;font-size:11px}.pronounce{border:1px solid #c9ddd1;background:#fff;color:#2d7868;border-radius:9px;padding:6px 8px;cursor:pointer;font-size:10px}.pronounce:hover{background:#edf6f0}
+.word-section{padding:12px 0;border-top:1px solid #edf1ec}.word-section label{display:block;font-size:10px;letter-spacing:.08em;color:#87958e;margin-bottom:6px}.word-section p{margin:0;font-size:14px;line-height:1.65;color:#36584f}.word-actions{display:flex;gap:8px;margin-top:10px}
+.unit-list{display:grid;gap:3px}.phrase-row{padding:5px 0;color:#60766f;font-size:11px;line-height:1.5}
+.quick-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:13px;color:#587269}.tool-separator{width:1px;height:22px;background:#dbe4dd;margin:0 4px}
+.lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lesson-panel{min-height:150px}.lesson-explain{font-size:14px;line-height:1.8;color:#45645c}.formula{padding:16px;border-radius:14px;background:#f3f7f3;border:1px dashed #cddbd1;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#2d6357;font-size:14px}.example-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #edf1ec;font-size:13px;color:#3f5b54}.example-row:last-child{border-bottom:0}.error-note{color:#8a605b;line-height:1.6}.practice-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #edf1ec;color:#546b63}.practice-row span{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#edf4ef;color:#2d7868;font-weight:700;font-size:10px;flex:0 0 22px}.mastery-tip{margin-top:14px;padding:11px 13px;border-radius:12px;background:#f6faf6;border:1px solid #dce8df;color:#688079;font-size:11px;line-height:1.6}.lesson-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.band-selector{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 14px}.band-card{padding:12px;text-align:left;border:1px solid #dbe4dd;border-radius:13px;background:#fff;color:#557067;cursor:pointer}.band-card b{display:block;font-size:13px;color:#2d5d53}.band-card small{display:block;margin-top:4px;color:#7c8b84;line-height:1.4;font-size:9px}.band-card.active{border-color:#9dc7b2;background:#edf6f0;box-shadow:0 8px 20px rgba(45,120,104,.08)}
+.quiz-explain{padding:11px 13px;border-radius:12px;background:#f4f8f4;color:#6b7f77;line-height:1.6}.vocab-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:1100px){.lesson-grid{grid-template-columns:1fr}.band-selector{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.brand-logo{width:155px}.subtitle-settings small{flex-basis:100%}}
+@media(max-width:600px){.brand-logo{width:135px}.band-selector{grid-template-columns:1fr}.lesson-actions .tool{flex:1}.word-modal-word{font-size:30px}}

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "generatedAt": "2026-09-27T03:22:06.299977+00:00",
   "source": "bootstrap-seed",
   "videos": [
@@ -44,7 +44,16 @@
           "en": "Can or could?",
           "zh": "要用 can 還是 could？"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "3NM72kTE2oQ",
@@ -81,7 +90,16 @@
           "en": "There are different ways of expressing it, depending on how polite you want to be.",
           "zh": "根據你想要的禮貌程度，有不同的表達方式。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "4C4wlOAscvY",
@@ -89,8 +107,8 @@
       "channel": "BBC Learning English",
       "duration": "05:28",
       "published": "2026-03-14",
-      "category": "leisure-travel",
-      "subcategory": "美食",
+      "category": "english-learning",
+      "subcategory": "字彙",
       "cefr": "A2",
       "englishScore": 0.99,
       "multilingualScore": 0.0,
@@ -124,7 +142,16 @@
           "en": "In particular, we'll talk about our favourite foods and how often we eat them.",
           "zh": "特別會談到我們最喜歡的食物，以及我們多久吃一次。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "SMIgI-qDNCA",
@@ -161,7 +188,16 @@
           "en": "Let's look at how the passive changes the focus of a sentence.",
           "zh": "我們看看被動語態如何改變句子的焦點。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "uz2C3bQot6o",
@@ -198,7 +234,16 @@
           "en": "Context is often the key to choosing the right word.",
           "zh": "語境通常是選擇正確單字的關鍵。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "x6Pdp8GBwTM",
@@ -235,7 +280,16 @@
           "en": "Let's learn how to pronounce them properly.",
           "zh": "一起學習正確的發音方式。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "x72gP4HrU58",
@@ -243,8 +297,8 @@
       "channel": "BBC Learning English",
       "duration": "05:28",
       "published": "2026-07-31",
-      "category": "leisure-travel",
-      "subcategory": "生活",
+      "category": "english-learning",
+      "subcategory": "口說",
       "cefr": "A2",
       "englishScore": 0.98,
       "multilingualScore": 0.0,
@@ -272,7 +326,16 @@
           "en": "Today we're talking about families and how we compare things.",
           "zh": "今天我們要談談家庭，以及如何比較事物。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "z5V0d1nBCX8",
@@ -280,8 +343,8 @@
       "channel": "BBC Learning English",
       "duration": "06:10",
       "published": "2026-06-12",
-      "category": "leisure-travel",
-      "subcategory": "生活",
+      "category": "english-learning",
+      "subcategory": "字彙",
       "cefr": "A1",
       "englishScore": 0.98,
       "multilingualScore": 0.0,
@@ -303,7 +366,16 @@
           "en": "Let's learn ten easy English words you can use in the bathroom.",
           "zh": "一起學習十個你在浴室裡會用到的簡單英文單字。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "O43nLSRMqHU",
@@ -312,7 +384,7 @@
       "duration": "05:35",
       "published": "2026-05-20",
       "category": "leisure-travel",
-      "subcategory": "城市",
+      "subcategory": "旅遊",
       "cefr": "A2",
       "englishScore": 0.98,
       "multilingualScore": 0.0,
@@ -334,7 +406,16 @@
           "en": "Welcome to the London to Edinburgh Challenge.",
           "zh": "歡迎來到倫敦到愛丁堡挑戰。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "KFajmtdj-J0",
@@ -365,7 +446,16 @@
           "en": "Today we're looking at the bond between sisters.",
           "zh": "今天我們要探討姊妹之間的情感連結。"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     },
     {
       "id": "-XcALxwXJVY",
@@ -396,7 +486,16 @@
           "en": "Have you ever used a language-learning app?",
           "zh": "你曾經使用過語言學習 App 嗎？"
         }
-      ]
+      ],
+      "subtitleLanguages": [
+        "en",
+        "zh-TW"
+      ],
+      "spokenLanguageEvidence": {
+        "language": "en",
+        "method": "verified-seed-transcript",
+        "confidence": 0.95
+      }
     }
   ],
   "stats": {
@@ -405,12 +504,26 @@
     "review": 0,
     "processed": 11
   },
-  "translationPipeline": "batch>sentence retry>contextual fallback",
+  "translationPipeline": "normalized VTT/SRT/JSON -> batch -> sentence retry -> contextual fallback",
   "translationStats": {
     "full": 11,
     "partial": 0,
     "pending": 0,
     "sentences": 20,
     "translated": 20
+  },
+  "uiRequirements": {
+    "subtitleModes": [
+      "english",
+      "bilingual",
+      "chinese"
+    ],
+    "subtitleResizable": true,
+    "wordClickable": true,
+    "pronunciation": [
+      "en-GB",
+      "en-US"
+    ],
+    "adPolicy": "youtube-embed-cannot-guarantee-ad-free"
   }
 }

@@ -1,13 +1,4399 @@
 {
-  "cefr":"A1-C2",
-  "chapters":[
-    [1,"Sentence Foundations","句子基礎","A1-A2"],[2,"Be / Have / Do","三大核心動詞","A1-B1"],[3,"Nouns","名詞","A1-B2"],[4,"Articles","冠詞","A1-C1"],[5,"Pronouns","代名詞","A1-B2"],
-    [6,"Present Tenses","現在時態","A1-B2"],[7,"Past Tenses","過去時態","A1-B2"],[8,"Perfect Tenses","完成時態","A2-C1"],[9,"Perfect Continuous","完成進行式","B1-C1"],[10,"Future","未來表達","A2-C1"],
-    [11,"Modal Verbs","情態動詞","A2-C1"],[12,"Questions","疑問句","A1-B2"],[13,"Negatives","否定句","A1-C1"],[14,"Adjectives","形容詞","A1-B2"],[15,"Adverbs","副詞","A1-C1"],
-    [16,"Comparison","比較級與最高級","A1-B2"],[17,"Prepositions","介系詞","A1-C1"],[18,"Gerunds & Infinitives","動名詞與不定詞","A2-C1"],[19,"Passive Voice","被動語態","A2-C1"],[20,"Relative Clauses","關係子句","A2-C1"],
-    [21,"Noun Clauses","名詞子句","B1-C1"],[22,"Adverb Clauses","副詞子句","A2-C1"],[23,"Conditionals","條件句","A2-C1"],[24,"Reported Speech","間接引語","A2-C1"],[25,"Conjunctions & Linking","連接詞與篇章銜接","A2-C1"],
-    [26,"Participles & Reduced Clauses","分詞與簡化子句","B2-C1"],[27,"Causative & Special Verbs","使役與特殊動詞","B1-C1"],[28,"Emphasis & Inversion","強調與倒裝","B2-C2"],[29,"Advanced Grammar & Style","高階文法與語體","B2-C2"],[30,"Common Errors & Confusing Grammar","易錯與混淆文法","A2-C2"]
+  "schemaVersion": 2,
+  "cefr": "A1-C2",
+  "chapters": [
+    [
+      1,
+      "Sentence Foundations",
+      "句子基礎",
+      "A1-A2"
+    ],
+    [
+      2,
+      "Be / Have / Do",
+      "三大核心動詞",
+      "A1-B1"
+    ],
+    [
+      3,
+      "Nouns",
+      "名詞",
+      "A1-B2"
+    ],
+    [
+      4,
+      "Articles",
+      "冠詞",
+      "A1-C1"
+    ],
+    [
+      5,
+      "Pronouns",
+      "代名詞",
+      "A1-B2"
+    ],
+    [
+      6,
+      "Present Tenses",
+      "現在時態",
+      "A1-B2"
+    ],
+    [
+      7,
+      "Past Tenses",
+      "過去時態",
+      "A1-B2"
+    ],
+    [
+      8,
+      "Perfect Tenses",
+      "完成時態",
+      "A2-C1"
+    ],
+    [
+      9,
+      "Perfect Continuous",
+      "完成進行式",
+      "B1-C1"
+    ],
+    [
+      10,
+      "Future",
+      "未來表達",
+      "A2-C1"
+    ],
+    [
+      11,
+      "Modal Verbs",
+      "情態動詞",
+      "A2-C1"
+    ],
+    [
+      12,
+      "Questions",
+      "疑問句",
+      "A1-B2"
+    ],
+    [
+      13,
+      "Negatives",
+      "否定句",
+      "A1-C1"
+    ],
+    [
+      14,
+      "Adjectives",
+      "形容詞",
+      "A1-B2"
+    ],
+    [
+      15,
+      "Adverbs",
+      "副詞",
+      "A1-C1"
+    ],
+    [
+      16,
+      "Comparison",
+      "比較級與最高級",
+      "A1-B2"
+    ],
+    [
+      17,
+      "Prepositions",
+      "介系詞",
+      "A1-C1"
+    ],
+    [
+      18,
+      "Gerunds & Infinitives",
+      "動名詞與不定詞",
+      "A2-C1"
+    ],
+    [
+      19,
+      "Passive Voice",
+      "被動語態",
+      "A2-C1"
+    ],
+    [
+      20,
+      "Relative Clauses",
+      "關係子句",
+      "A2-C1"
+    ],
+    [
+      21,
+      "Noun Clauses",
+      "名詞子句",
+      "B1-C1"
+    ],
+    [
+      22,
+      "Adverb Clauses",
+      "副詞子句",
+      "A2-C1"
+    ],
+    [
+      23,
+      "Conditionals",
+      "條件句",
+      "A2-C1"
+    ],
+    [
+      24,
+      "Reported Speech",
+      "間接引語",
+      "A2-C1"
+    ],
+    [
+      25,
+      "Conjunctions & Linking",
+      "連接詞與篇章銜接",
+      "A2-C1"
+    ],
+    [
+      26,
+      "Participles & Reduced Clauses",
+      "分詞與簡化子句",
+      "B2-C1"
+    ],
+    [
+      27,
+      "Causative & Special Verbs",
+      "使役與特殊動詞",
+      "B1-C1"
+    ],
+    [
+      28,
+      "Emphasis & Inversion",
+      "強調與倒裝",
+      "B2-C2"
+    ],
+    [
+      29,
+      "Advanced Grammar & Style",
+      "高階文法與語體",
+      "B2-C2"
+    ],
+    [
+      30,
+      "Common Errors & Confusing Grammar",
+      "易錯與混淆文法",
+      "A2-C2"
+    ]
   ],
-  "lessonsPerChapter":5,
-  "design":{"formMeaningUseContrastError":true,"practicePerLesson":"5-10","chapterQuiz":20}
+  "lessonsPerChapter": 5,
+  "microLessons": [
+    {
+      "lesson_id": "G01-01",
+      "chapter_id": 1,
+      "title_en": "Subject + Verb",
+      "title_zh": "Subject + Verb",
+      "cefr": "A1-A2",
+      "learning_objectives": [
+        "能辨識「Subject + Verb」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Subject + Verb」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "S + V",
+      "examples": [
+        "Birds fly.",
+        "Use this pattern naturally: S + V."
+      ],
+      "common_errors": [
+        "把「Subject + Verb」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Subject + Verb」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G01-02",
+      "chapter_id": 1,
+      "title_en": "Subject, Object & Complement",
+      "title_zh": "Subject, Object & Complement",
+      "cefr": "A1-A2",
+      "learning_objectives": [
+        "能辨識「Subject, Object & Complement」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Subject, Object & Complement」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "S + V + O / C",
+      "examples": [
+        "She opened the door.",
+        "Use this pattern naturally: S + V + O / C."
+      ],
+      "common_errors": [
+        "把「Subject, Object & Complement」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Subject, Object & Complement」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G01-03",
+      "chapter_id": 1,
+      "title_en": "Five Basic Sentence Patterns",
+      "title_zh": "Five Basic Sentence Patterns",
+      "cefr": "A1-A2",
+      "learning_objectives": [
+        "能辨識「Five Basic Sentence Patterns」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Five Basic Sentence Patterns」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "SV / SVC / SVO / SVOO / SVOC",
+      "examples": [
+        "They elected him president.",
+        "Use this pattern naturally: SV / SVC / SVO / SVOO / SVOC."
+      ],
+      "common_errors": [
+        "把「Five Basic Sentence Patterns」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Five Basic Sentence Patterns」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G01-04",
+      "chapter_id": 1,
+      "title_en": "Modifiers",
+      "title_zh": "Modifiers",
+      "cefr": "A1-A2",
+      "learning_objectives": [
+        "能辨識「Modifiers」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Modifiers」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "Core sentence + modifier",
+      "examples": [
+        "She spoke clearly at the meeting.",
+        "Use this pattern naturally: Core sentence + modifier."
+      ],
+      "common_errors": [
+        "把「Modifiers」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Modifiers」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G01-05",
+      "chapter_id": 1,
+      "title_en": "Fragments & Run-ons",
+      "title_zh": "Fragments & Run-ons",
+      "cefr": "A1-A2",
+      "learning_objectives": [
+        "能辨識「Fragments & Run-ons」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Fragments & Run-ons」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "Independent clause + connector + independent clause",
+      "examples": [
+        "I was tired, so I went home.",
+        "Use this pattern naturally: Independent clause + connector + independent clause."
+      ],
+      "common_errors": [
+        "把「Fragments & Run-ons」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Fragments & Run-ons」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G02-01",
+      "chapter_id": 2,
+      "title_en": "Be as a main verb",
+      "title_zh": "Be as a main verb",
+      "cefr": "A1-B1",
+      "learning_objectives": [
+        "能辨識「Be as a main verb」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Be as a main verb」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "am/is/are + complement",
+      "examples": [
+        "She is busy.",
+        "Use this pattern naturally: am/is/are + complement."
+      ],
+      "common_errors": [
+        "把「Be as a main verb」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Be as a main verb」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G02-02",
+      "chapter_id": 2,
+      "title_en": "Have and possession",
+      "title_zh": "Have and possession",
+      "cefr": "A1-B1",
+      "learning_objectives": [
+        "能辨識「Have and possession」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Have and possession」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "have/has + noun",
+      "examples": [
+        "I have a car.",
+        "Use this pattern naturally: have/has + noun."
+      ],
+      "common_errors": [
+        "把「Have and possession」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Have and possession」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G02-03",
+      "chapter_id": 2,
+      "title_en": "Do-support",
+      "title_zh": "Do-support",
+      "cefr": "A1-B1",
+      "learning_objectives": [
+        "能辨識「Do-support」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Do-support」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "do/does/did + base verb",
+      "examples": [
+        "Do you like coffee?",
+        "Use this pattern naturally: do/does/did + base verb."
+      ],
+      "common_errors": [
+        "把「Do-support」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Do-support」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G02-04",
+      "chapter_id": 2,
+      "title_en": "Negatives & contractions",
+      "title_zh": "Negatives & contractions",
+      "cefr": "A1-B1",
+      "learning_objectives": [
+        "能辨識「Negatives & contractions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Negatives & contractions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "auxiliary + not",
+      "examples": [
+        "He is not ready.",
+        "Use this pattern naturally: auxiliary + not."
+      ],
+      "common_errors": [
+        "把「Negatives & contractions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Negatives & contractions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G02-05",
+      "chapter_id": 2,
+      "title_en": "Emphatic do",
+      "title_zh": "Emphatic do",
+      "cefr": "A1-B1",
+      "learning_objectives": [
+        "能辨識「Emphatic do」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Emphatic do」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "do/does/did + base verb for emphasis",
+      "examples": [
+        "I do want to help.",
+        "Use this pattern naturally: do/does/did + base verb for emphasis."
+      ],
+      "common_errors": [
+        "把「Emphatic do」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Emphatic do」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G03-01",
+      "chapter_id": 3,
+      "title_en": "Count & non-count nouns",
+      "title_zh": "Count & non-count nouns",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Count & non-count nouns」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Count & non-count nouns」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "a/an + singular count noun",
+      "examples": [
+        "I bought a book.",
+        "Use this pattern naturally: a/an + singular count noun."
+      ],
+      "common_errors": [
+        "把「Count & non-count nouns」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Count & non-count nouns」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G03-02",
+      "chapter_id": 3,
+      "title_en": "Plural forms",
+      "title_zh": "Plural forms",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Plural forms」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Plural forms」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "plural noun forms",
+      "examples": [
+        "Two books are on the desk.",
+        "Use this pattern naturally: plural noun forms."
+      ],
+      "common_errors": [
+        "把「Plural forms」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Plural forms」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G03-03",
+      "chapter_id": 3,
+      "title_en": "Possessives",
+      "title_zh": "Possessives",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Possessives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Possessives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "noun + 's / of + noun",
+      "examples": [
+        "John's phone is new.",
+        "Use this pattern naturally: noun + 's / of + noun."
+      ],
+      "common_errors": [
+        "把「Possessives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Possessives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G03-04",
+      "chapter_id": 3,
+      "title_en": "Compound nouns",
+      "title_zh": "Compound nouns",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Compound nouns」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Compound nouns」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "noun + noun",
+      "examples": [
+        "Bus stop is nearby.",
+        "Use this pattern naturally: noun + noun."
+      ],
+      "common_errors": [
+        "把「Compound nouns」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Compound nouns」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G03-05",
+      "chapter_id": 3,
+      "title_en": "Noun forms & nominalization",
+      "title_zh": "Noun forms & nominalization",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Noun forms & nominalization」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Noun forms & nominalization」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "verb/adjective + noun form",
+      "examples": [
+        "Decision-making takes practice.",
+        "Use this pattern naturally: verb/adjective + noun form."
+      ],
+      "common_errors": [
+        "把「Noun forms & nominalization」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Noun forms & nominalization」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G04-01",
+      "chapter_id": 4,
+      "title_en": "A / an",
+      "title_zh": "A / an",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「A / an」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「A / an」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "a/an + singular count noun",
+      "examples": [
+        "I saw a dog.",
+        "Use this pattern naturally: a/an + singular count noun."
+      ],
+      "common_errors": [
+        "把「A / an」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「A / an」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G04-02",
+      "chapter_id": 4,
+      "title_en": "The",
+      "title_zh": "The",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「The」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「The」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "the + specific noun",
+      "examples": [
+        "The dog was friendly.",
+        "Use this pattern naturally: the + specific noun."
+      ],
+      "common_errors": [
+        "把「The」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「The」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G04-03",
+      "chapter_id": 4,
+      "title_en": "Zero article",
+      "title_zh": "Zero article",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Zero article」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Zero article」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "Ø + plural/non-count generic noun",
+      "examples": [
+        "Dogs are popular pets.",
+        "Use this pattern naturally: Ø + plural/non-count generic noun."
+      ],
+      "common_errors": [
+        "把「Zero article」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Zero article」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G04-04",
+      "chapter_id": 4,
+      "title_en": "Specific vs generic reference",
+      "title_zh": "Specific vs generic reference",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Specific vs generic reference」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Specific vs generic reference」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "the + known/specified referent",
+      "examples": [
+        "The answer is on the page.",
+        "Use this pattern naturally: the + known/specified referent."
+      ],
+      "common_errors": [
+        "把「Specific vs generic reference」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Specific vs generic reference」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G04-05",
+      "chapter_id": 4,
+      "title_en": "Institutions & geography",
+      "title_zh": "Institutions & geography",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Institutions & geography」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Institutions & geography」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "the + institution/place names",
+      "examples": [
+        "School starts at eight.",
+        "Use this pattern naturally: the + institution/place names."
+      ],
+      "common_errors": [
+        "把「Institutions & geography」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Institutions & geography」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G05-01",
+      "chapter_id": 5,
+      "title_en": "Subject & object pronouns",
+      "title_zh": "Subject & object pronouns",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Subject & object pronouns」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Subject & object pronouns」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "I/me, he/him, they/them",
+      "examples": [
+        "She called me.",
+        "Use this pattern naturally: I/me, he/him, they/them."
+      ],
+      "common_errors": [
+        "把「Subject & object pronouns」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Subject & object pronouns」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G05-02",
+      "chapter_id": 5,
+      "title_en": "Possessive forms",
+      "title_zh": "Possessive forms",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Possessive forms」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Possessive forms」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "my/mine, their/theirs",
+      "examples": [
+        "That book is mine.",
+        "Use this pattern naturally: my/mine, their/theirs."
+      ],
+      "common_errors": [
+        "把「Possessive forms」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Possessive forms」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G05-03",
+      "chapter_id": 5,
+      "title_en": "Reflexive pronouns",
+      "title_zh": "Reflexive pronouns",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Reflexive pronouns」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reflexive pronouns」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "myself/yourself/themselves",
+      "examples": [
+        "He hurt himself.",
+        "Use this pattern naturally: myself/yourself/themselves."
+      ],
+      "common_errors": [
+        "把「Reflexive pronouns」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reflexive pronouns」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G05-04",
+      "chapter_id": 5,
+      "title_en": "Demonstratives",
+      "title_zh": "Demonstratives",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Demonstratives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Demonstratives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "this/that/these/those",
+      "examples": [
+        "These are useful.",
+        "Use this pattern naturally: this/that/these/those."
+      ],
+      "common_errors": [
+        "把「Demonstratives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Demonstratives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G05-05",
+      "chapter_id": 5,
+      "title_en": "Indefinite & relative pronouns",
+      "title_zh": "Indefinite & relative pronouns",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Indefinite & relative pronouns」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Indefinite & relative pronouns」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "someone/which/that",
+      "examples": [
+        "Someone left a message.",
+        "Use this pattern naturally: someone/which/that."
+      ],
+      "common_errors": [
+        "把「Indefinite & relative pronouns」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Indefinite & relative pronouns」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G06-01",
+      "chapter_id": 6,
+      "title_en": "Present simple",
+      "title_zh": "Present simple",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Present simple」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Present simple」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "S + base/s",
+      "examples": [
+        "She works here.",
+        "Use this pattern naturally: S + base/s."
+      ],
+      "common_errors": [
+        "把「Present simple」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Present simple」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G06-02",
+      "chapter_id": 6,
+      "title_en": "Present continuous",
+      "title_zh": "Present continuous",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Present continuous」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Present continuous」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "be + V-ing",
+      "examples": [
+        "She is working now.",
+        "Use this pattern naturally: be + V-ing."
+      ],
+      "common_errors": [
+        "把「Present continuous」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Present continuous」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G06-03",
+      "chapter_id": 6,
+      "title_en": "Stative verbs",
+      "title_zh": "Stative verbs",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Stative verbs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Stative verbs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "stative verb + simple form",
+      "examples": [
+        "I know the answer.",
+        "Use this pattern naturally: stative verb + simple form."
+      ],
+      "common_errors": [
+        "把「Stative verbs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Stative verbs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G06-04",
+      "chapter_id": 6,
+      "title_en": "Habits & frequency",
+      "title_zh": "Habits & frequency",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Habits & frequency」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Habits & frequency」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "usually/often + present",
+      "examples": [
+        "He usually walks.",
+        "Use this pattern naturally: usually/often + present."
+      ],
+      "common_errors": [
+        "把「Habits & frequency」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Habits & frequency」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G06-05",
+      "chapter_id": 6,
+      "title_en": "Schedules & future meaning",
+      "title_zh": "Schedules & future meaning",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Schedules & future meaning」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Schedules & future meaning」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "present simple/continuous for schedules",
+      "examples": [
+        "The train leaves at six.",
+        "Use this pattern naturally: present simple/continuous for schedules."
+      ],
+      "common_errors": [
+        "把「Schedules & future meaning」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Schedules & future meaning」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G07-01",
+      "chapter_id": 7,
+      "title_en": "Past simple",
+      "title_zh": "Past simple",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Past simple」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Past simple」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "V-ed / irregular past",
+      "examples": [
+        "I visited London.",
+        "Use this pattern naturally: V-ed / irregular past."
+      ],
+      "common_errors": [
+        "把「Past simple」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Past simple」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G07-02",
+      "chapter_id": 7,
+      "title_en": "Past continuous",
+      "title_zh": "Past continuous",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Past continuous」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Past continuous」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "was/were + V-ing",
+      "examples": [
+        "I was reading when she called.",
+        "Use this pattern naturally: was/were + V-ing."
+      ],
+      "common_errors": [
+        "把「Past continuous」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Past continuous」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G07-03",
+      "chapter_id": 7,
+      "title_en": "Used to & would",
+      "title_zh": "Used to & would",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Used to & would」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Used to & would」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "used to / would + V",
+      "examples": [
+        "I used to live there.",
+        "Use this pattern naturally: used to / would + V."
+      ],
+      "common_errors": [
+        "把「Used to & would」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Used to & would」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G07-04",
+      "chapter_id": 7,
+      "title_en": "Past time sequence",
+      "title_zh": "Past time sequence",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Past time sequence」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Past time sequence」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "after/before + past events",
+      "examples": [
+        "After he arrived, we ate.",
+        "Use this pattern naturally: after/before + past events."
+      ],
+      "common_errors": [
+        "把「Past time sequence」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Past time sequence」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G07-05",
+      "chapter_id": 7,
+      "title_en": "Time markers",
+      "title_zh": "Time markers",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Time markers」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Time markers」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "yesterday/last/ago",
+      "examples": [
+        "We met last year.",
+        "Use this pattern naturally: yesterday/last/ago."
+      ],
+      "common_errors": [
+        "把「Time markers」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Time markers」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G08-01",
+      "chapter_id": 8,
+      "title_en": "Present perfect",
+      "title_zh": "Present perfect",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Present perfect」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Present perfect」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "have/has + p.p.",
+      "examples": [
+        "I have finished.",
+        "Use this pattern naturally: have/has + p.p.."
+      ],
+      "common_errors": [
+        "把「Present perfect」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Present perfect」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G08-02",
+      "chapter_id": 8,
+      "title_en": "Since / for",
+      "title_zh": "Since / for",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Since / for」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Since / for」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "have/has + p.p. + since/for",
+      "examples": [
+        "I have lived here since 2019.",
+        "Use this pattern naturally: have/has + p.p. + since/for."
+      ],
+      "common_errors": [
+        "把「Since / for」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Since / for」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G08-03",
+      "chapter_id": 8,
+      "title_en": "Already / yet / just",
+      "title_zh": "Already / yet / just",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Already / yet / just」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Already / yet / just」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "have/has + already/yet/just + p.p.",
+      "examples": [
+        "She hasn't arrived yet.",
+        "Use this pattern naturally: have/has + already/yet/just + p.p.."
+      ],
+      "common_errors": [
+        "把「Already / yet / just」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Already / yet / just」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G08-04",
+      "chapter_id": 8,
+      "title_en": "Past perfect",
+      "title_zh": "Past perfect",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Past perfect」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Past perfect」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "had + p.p.",
+      "examples": [
+        "They had left before noon.",
+        "Use this pattern naturally: had + p.p.."
+      ],
+      "common_errors": [
+        "把「Past perfect」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Past perfect」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G08-05",
+      "chapter_id": 8,
+      "title_en": "Future perfect",
+      "title_zh": "Future perfect",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Future perfect」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Future perfect」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "will have + p.p.",
+      "examples": [
+        "We will have finished by Friday.",
+        "Use this pattern naturally: will have + p.p.."
+      ],
+      "common_errors": [
+        "把「Future perfect」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Future perfect」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G09-01",
+      "chapter_id": 9,
+      "title_en": "Present perfect continuous",
+      "title_zh": "Present perfect continuous",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Present perfect continuous」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Present perfect continuous」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "have/has been + V-ing",
+      "examples": [
+        "I have been studying for two hours.",
+        "Use this pattern naturally: have/has been + V-ing."
+      ],
+      "common_errors": [
+        "把「Present perfect continuous」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Present perfect continuous」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G09-02",
+      "chapter_id": 9,
+      "title_en": "Past perfect continuous",
+      "title_zh": "Past perfect continuous",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Past perfect continuous」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Past perfect continuous」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "had been + V-ing",
+      "examples": [
+        "He had been waiting.",
+        "Use this pattern naturally: had been + V-ing."
+      ],
+      "common_errors": [
+        "把「Past perfect continuous」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Past perfect continuous」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G09-03",
+      "chapter_id": 9,
+      "title_en": "Future perfect continuous",
+      "title_zh": "Future perfect continuous",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Future perfect continuous」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Future perfect continuous」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "will have been + V-ing",
+      "examples": [
+        "By June, she will have been teaching for a year.",
+        "Use this pattern naturally: will have been + V-ing."
+      ],
+      "common_errors": [
+        "把「Future perfect continuous」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Future perfect continuous」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G09-04",
+      "chapter_id": 9,
+      "title_en": "Perfect vs perfect continuous",
+      "title_zh": "Perfect vs perfect continuous",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Perfect vs perfect continuous」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Perfect vs perfect continuous」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "perfect vs perfect continuous",
+      "examples": [
+        "I have read the book.",
+        "Use this pattern naturally: perfect vs perfect continuous."
+      ],
+      "common_errors": [
+        "把「Perfect vs perfect continuous」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Perfect vs perfect continuous」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G09-05",
+      "chapter_id": 9,
+      "title_en": "Duration & evidence",
+      "title_zh": "Duration & evidence",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Duration & evidence」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Duration & evidence」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "duration + evidence/result",
+      "examples": [
+        "Her eyes were red because she had been crying.",
+        "Use this pattern naturally: duration + evidence/result."
+      ],
+      "common_errors": [
+        "把「Duration & evidence」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Duration & evidence」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G10-01",
+      "chapter_id": 10,
+      "title_en": "Will",
+      "title_zh": "Will",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Will」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Will」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "will + V",
+      "examples": [
+        "I will call you.",
+        "Use this pattern naturally: will + V."
+      ],
+      "common_errors": [
+        "把「Will」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Will」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G10-02",
+      "chapter_id": 10,
+      "title_en": "Be going to",
+      "title_zh": "Be going to",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Be going to」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Be going to」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "be going to + V",
+      "examples": [
+        "We are going to travel.",
+        "Use this pattern naturally: be going to + V."
+      ],
+      "common_errors": [
+        "把「Be going to」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Be going to」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G10-03",
+      "chapter_id": 10,
+      "title_en": "Present continuous for future",
+      "title_zh": "Present continuous for future",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Present continuous for future」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Present continuous for future」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "be + V-ing for arrangement",
+      "examples": [
+        "We are meeting tomorrow.",
+        "Use this pattern naturally: be + V-ing for arrangement."
+      ],
+      "common_errors": [
+        "把「Present continuous for future」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Present continuous for future」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G10-04",
+      "chapter_id": 10,
+      "title_en": "Future continuous",
+      "title_zh": "Future continuous",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Future continuous」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Future continuous」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "will be + V-ing",
+      "examples": [
+        "I will be working at eight.",
+        "Use this pattern naturally: will be + V-ing."
+      ],
+      "common_errors": [
+        "把「Future continuous」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Future continuous」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G10-05",
+      "chapter_id": 10,
+      "title_en": "Future in the past",
+      "title_zh": "Future in the past",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Future in the past」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Future in the past」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "was/were going to + V",
+      "examples": [
+        "He was going to call.",
+        "Use this pattern naturally: was/were going to + V."
+      ],
+      "common_errors": [
+        "把「Future in the past」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Future in the past」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G11-01",
+      "chapter_id": 11,
+      "title_en": "Can / could",
+      "title_zh": "Can / could",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Can / could」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Can / could」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "can/could + V",
+      "examples": [
+        "Could you help me?",
+        "Use this pattern naturally: can/could + V."
+      ],
+      "common_errors": [
+        "把「Can / could」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Can / could」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G11-02",
+      "chapter_id": 11,
+      "title_en": "May / might",
+      "title_zh": "May / might",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「May / might」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「May / might」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "may/might + V",
+      "examples": [
+        "It might rain.",
+        "Use this pattern naturally: may/might + V."
+      ],
+      "common_errors": [
+        "把「May / might」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「May / might」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G11-03",
+      "chapter_id": 11,
+      "title_en": "Must / have to",
+      "title_zh": "Must / have to",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Must / have to」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Must / have to」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "must + V / have to + V",
+      "examples": [
+        "You must wear a helmet.",
+        "Use this pattern naturally: must + V / have to + V."
+      ],
+      "common_errors": [
+        "把「Must / have to」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Must / have to」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G11-04",
+      "chapter_id": 11,
+      "title_en": "Should / ought to / had better",
+      "title_zh": "Should / ought to / had better",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Should / ought to / had better」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Should / ought to / had better」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "should/ought/had better + V",
+      "examples": [
+        "You should rest.",
+        "Use this pattern naturally: should/ought/had better + V."
+      ],
+      "common_errors": [
+        "把「Should / ought to / had better」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Should / ought to / had better」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G11-05",
+      "chapter_id": 11,
+      "title_en": "Modal perfect",
+      "title_zh": "Modal perfect",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Modal perfect」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Modal perfect」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "modal + have + p.p.",
+      "examples": [
+        "She should have called.",
+        "Use this pattern naturally: modal + have + p.p.."
+      ],
+      "common_errors": [
+        "把「Modal perfect」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Modal perfect」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G12-01",
+      "chapter_id": 12,
+      "title_en": "Yes / no questions",
+      "title_zh": "Yes / no questions",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Yes / no questions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Yes / no questions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "Do/Does/Did + S + V?",
+      "examples": [
+        "Do you work here?",
+        "Use this pattern naturally: Do/Does/Did + S + V?."
+      ],
+      "common_errors": [
+        "把「Yes / no questions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Yes / no questions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G12-02",
+      "chapter_id": 12,
+      "title_en": "Wh-questions",
+      "title_zh": "Wh-questions",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Wh-questions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Wh-questions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "Wh-word + auxiliary + S + V?",
+      "examples": [
+        "Where do you live?",
+        "Use this pattern naturally: Wh-word + auxiliary + S + V?."
+      ],
+      "common_errors": [
+        "把「Wh-questions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Wh-questions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G12-03",
+      "chapter_id": 12,
+      "title_en": "Indirect questions",
+      "title_zh": "Indirect questions",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Indirect questions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Indirect questions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "Wh-word + clause word order",
+      "examples": [
+        "Could you tell me where he is?",
+        "Use this pattern naturally: Wh-word + clause word order."
+      ],
+      "common_errors": [
+        "把「Indirect questions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Indirect questions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G12-04",
+      "chapter_id": 12,
+      "title_en": "Question tags",
+      "title_zh": "Question tags",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Question tags」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Question tags」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "statement + tag",
+      "examples": [
+        "You're coming, aren't you?",
+        "Use this pattern naturally: statement + tag."
+      ],
+      "common_errors": [
+        "把「Question tags」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Question tags」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G12-05",
+      "chapter_id": 12,
+      "title_en": "Negative questions",
+      "title_zh": "Negative questions",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Negative questions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Negative questions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "Why don't/doesn't + S + V?",
+      "examples": [
+        "Why don't we start?",
+        "Use this pattern naturally: Why don't/doesn't + S + V?."
+      ],
+      "common_errors": [
+        "把「Negative questions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Negative questions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G13-01",
+      "chapter_id": 13,
+      "title_en": "Not with auxiliaries",
+      "title_zh": "Not with auxiliaries",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Not with auxiliaries」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Not with auxiliaries」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "auxiliary + not + V",
+      "examples": [
+        "I do not know.",
+        "Use this pattern naturally: auxiliary + not + V."
+      ],
+      "common_errors": [
+        "把「Not with auxiliaries」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Not with auxiliaries」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G13-02",
+      "chapter_id": 13,
+      "title_en": "No / none / nobody",
+      "title_zh": "No / none / nobody",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「No / none / nobody」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「No / none / nobody」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "no + noun / none / nobody",
+      "examples": [
+        "Nobody called.",
+        "Use this pattern naturally: no + noun / none / nobody."
+      ],
+      "common_errors": [
+        "把「No / none / nobody」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「No / none / nobody」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G13-03",
+      "chapter_id": 13,
+      "title_en": "Never / hardly / rarely",
+      "title_zh": "Never / hardly / rarely",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Never / hardly / rarely」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Never / hardly / rarely」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "never/hardly/rarely + verb",
+      "examples": [
+        "She rarely complains.",
+        "Use this pattern naturally: never/hardly/rarely + verb."
+      ],
+      "common_errors": [
+        "把「Never / hardly / rarely」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Never / hardly / rarely」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G13-04",
+      "chapter_id": 13,
+      "title_en": "Partial negation",
+      "title_zh": "Partial negation",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Partial negation」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Partial negation」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "not all / not always",
+      "examples": [
+        "Not all students agree.",
+        "Use this pattern naturally: not all / not always."
+      ],
+      "common_errors": [
+        "把「Partial negation」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Partial negation」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G13-05",
+      "chapter_id": 13,
+      "title_en": "Negative inversion",
+      "title_zh": "Negative inversion",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Negative inversion」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Negative inversion」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "never + auxiliary + S + V",
+      "examples": [
+        "Never have I seen that before.",
+        "Use this pattern naturally: never + auxiliary + S + V."
+      ],
+      "common_errors": [
+        "把「Negative inversion」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Negative inversion」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G14-01",
+      "chapter_id": 14,
+      "title_en": "Adjective position",
+      "title_zh": "Adjective position",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Adjective position」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Adjective position」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "adjective + noun / be + adjective",
+      "examples": [
+        "a small house",
+        "Use this pattern naturally: adjective + noun / be + adjective."
+      ],
+      "common_errors": [
+        "把「Adjective position」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Adjective position」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G14-02",
+      "chapter_id": 14,
+      "title_en": "Order of adjectives",
+      "title_zh": "Order of adjectives",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Order of adjectives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Order of adjectives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "size + age + color + noun",
+      "examples": [
+        "a beautiful old car",
+        "Use this pattern naturally: size + age + color + noun."
+      ],
+      "common_errors": [
+        "把「Order of adjectives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Order of adjectives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G14-03",
+      "chapter_id": 14,
+      "title_en": "-ed vs -ing adjectives",
+      "title_zh": "-ed vs -ing adjectives",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「-ed vs -ing adjectives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「-ed vs -ing adjectives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "-ed describes state; -ing causes",
+      "examples": [
+        "I am bored.",
+        "Use this pattern naturally: -ed describes state; -ing causes."
+      ],
+      "common_errors": [
+        "把「-ed vs -ing adjectives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「-ed vs -ing adjectives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G14-04",
+      "chapter_id": 14,
+      "title_en": "Gradable vs non-gradable",
+      "title_zh": "Gradable vs non-gradable",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Gradable vs non-gradable」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Gradable vs non-gradable」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "very/really + adjective",
+      "examples": [
+        "This movie is boring.",
+        "Use this pattern naturally: very/really + adjective."
+      ],
+      "common_errors": [
+        "把「Gradable vs non-gradable」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Gradable vs non-gradable」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G14-05",
+      "chapter_id": 14,
+      "title_en": "Adjective complements",
+      "title_zh": "Adjective complements",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Adjective complements」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Adjective complements」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "adjective + infinitive / that-clause",
+      "examples": [
+        "She is ready to leave.",
+        "Use this pattern naturally: adjective + infinitive / that-clause."
+      ],
+      "common_errors": [
+        "把「Adjective complements」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Adjective complements」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G15-01",
+      "chapter_id": 15,
+      "title_en": "Manner adverbs",
+      "title_zh": "Manner adverbs",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Manner adverbs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Manner adverbs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "V + adverb",
+      "examples": [
+        "He spoke clearly.",
+        "Use this pattern naturally: V + adverb."
+      ],
+      "common_errors": [
+        "把「Manner adverbs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Manner adverbs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G15-02",
+      "chapter_id": 15,
+      "title_en": "Frequency adverbs",
+      "title_zh": "Frequency adverbs",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Frequency adverbs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Frequency adverbs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "usually/often/never + verb",
+      "examples": [
+        "She usually arrives early.",
+        "Use this pattern naturally: usually/often/never + verb."
+      ],
+      "common_errors": [
+        "把「Frequency adverbs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Frequency adverbs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G15-03",
+      "chapter_id": 15,
+      "title_en": "Place & time adverbs",
+      "title_zh": "Place & time adverbs",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Place & time adverbs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Place & time adverbs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "adverb of place/time",
+      "examples": [
+        "Come here now.",
+        "Use this pattern naturally: adverb of place/time."
+      ],
+      "common_errors": [
+        "把「Place & time adverbs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Place & time adverbs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G15-04",
+      "chapter_id": 15,
+      "title_en": "Focus adverbs",
+      "title_zh": "Focus adverbs",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Focus adverbs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Focus adverbs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "only/even/just + focus",
+      "examples": [
+        "I only need five minutes.",
+        "Use this pattern naturally: only/even/just + focus."
+      ],
+      "common_errors": [
+        "把「Focus adverbs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Focus adverbs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G15-05",
+      "chapter_id": 15,
+      "title_en": "Adverb position",
+      "title_zh": "Adverb position",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Adverb position」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Adverb position」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "mid-position / end-position",
+      "examples": [
+        "She often works from home.",
+        "Use this pattern naturally: mid-position / end-position."
+      ],
+      "common_errors": [
+        "把「Adverb position」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Adverb position」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G16-01",
+      "chapter_id": 16,
+      "title_en": "Comparatives",
+      "title_zh": "Comparatives",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Comparatives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Comparatives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "-er / more + adjective",
+      "examples": [
+        "This is easier.",
+        "Use this pattern naturally: -er / more + adjective."
+      ],
+      "common_errors": [
+        "把「Comparatives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Comparatives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G16-02",
+      "chapter_id": 16,
+      "title_en": "Superlatives",
+      "title_zh": "Superlatives",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Superlatives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Superlatives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "the -est / most + adjective",
+      "examples": [
+        "It is the most useful.",
+        "Use this pattern naturally: the -est / most + adjective."
+      ],
+      "common_errors": [
+        "把「Superlatives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Superlatives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G16-03",
+      "chapter_id": 16,
+      "title_en": "As…as",
+      "title_zh": "As…as",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「As…as」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「As…as」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "as + adjective + as",
+      "examples": [
+        "It is as good as before.",
+        "Use this pattern naturally: as + adjective + as."
+      ],
+      "common_errors": [
+        "把「As…as」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「As…as」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G16-04",
+      "chapter_id": 16,
+      "title_en": "Less / fewer",
+      "title_zh": "Less / fewer",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Less / fewer」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Less / fewer」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "less/fewer + noun",
+      "examples": [
+        "We need fewer mistakes.",
+        "Use this pattern naturally: less/fewer + noun."
+      ],
+      "common_errors": [
+        "把「Less / fewer」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Less / fewer」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G16-05",
+      "chapter_id": 16,
+      "title_en": "Comparison modifiers",
+      "title_zh": "Comparison modifiers",
+      "cefr": "A1-B2",
+      "learning_objectives": [
+        "能辨識「Comparison modifiers」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Comparison modifiers」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "much/far/a little + comparative",
+      "examples": [
+        "Much better results followed.",
+        "Use this pattern naturally: much/far/a little + comparative."
+      ],
+      "common_errors": [
+        "把「Comparison modifiers」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Comparison modifiers」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G17-01",
+      "chapter_id": 17,
+      "title_en": "Time prepositions",
+      "title_zh": "Time prepositions",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Time prepositions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Time prepositions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "at/on/in + time",
+      "examples": [
+        "at noon",
+        "Use this pattern naturally: at/on/in + time."
+      ],
+      "common_errors": [
+        "把「Time prepositions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Time prepositions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G17-02",
+      "chapter_id": 17,
+      "title_en": "Place prepositions",
+      "title_zh": "Place prepositions",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Place prepositions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Place prepositions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "at/on/in + place",
+      "examples": [
+        "on Monday",
+        "Use this pattern naturally: at/on/in + place."
+      ],
+      "common_errors": [
+        "把「Place prepositions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Place prepositions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G17-03",
+      "chapter_id": 17,
+      "title_en": "Movement",
+      "title_zh": "Movement",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Movement」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Movement」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "to/into/onto/through",
+      "examples": [
+        "in Taipei",
+        "Use this pattern naturally: to/into/onto/through."
+      ],
+      "common_errors": [
+        "把「Movement」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Movement」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G17-04",
+      "chapter_id": 17,
+      "title_en": "Prepositional collocations",
+      "title_zh": "Prepositional collocations",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Prepositional collocations」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Prepositional collocations」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "verb + preposition",
+      "examples": [
+        "walk through the park",
+        "Use this pattern naturally: verb + preposition."
+      ],
+      "common_errors": [
+        "把「Prepositional collocations」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Prepositional collocations」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G17-05",
+      "chapter_id": 17,
+      "title_en": "Preposition + gerund",
+      "title_zh": "Preposition + gerund",
+      "cefr": "A1-C1",
+      "learning_objectives": [
+        "能辨識「Preposition + gerund」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Preposition + gerund」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "preposition + V-ing",
+      "examples": [
+        "by working harder",
+        "Use this pattern naturally: preposition + V-ing."
+      ],
+      "common_errors": [
+        "把「Preposition + gerund」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Preposition + gerund」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G18-01",
+      "chapter_id": 18,
+      "title_en": "Gerund as noun",
+      "title_zh": "Gerund as noun",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Gerund as noun」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Gerund as noun」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "V-ing as subject/object",
+      "examples": [
+        "Swimming is good exercise.",
+        "Use this pattern naturally: V-ing as subject/object."
+      ],
+      "common_errors": [
+        "把「Gerund as noun」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Gerund as noun」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G18-02",
+      "chapter_id": 18,
+      "title_en": "To-infinitive",
+      "title_zh": "To-infinitive",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「To-infinitive」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「To-infinitive」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "to + base verb",
+      "examples": [
+        "She decided to leave.",
+        "Use this pattern naturally: to + base verb."
+      ],
+      "common_errors": [
+        "把「To-infinitive」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「To-infinitive」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G18-03",
+      "chapter_id": 18,
+      "title_en": "Verb + gerund vs infinitive",
+      "title_zh": "Verb + gerund vs infinitive",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Verb + gerund vs infinitive」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Verb + gerund vs infinitive」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "enjoy doing / decide to do",
+      "examples": [
+        "I enjoy reading.",
+        "Use this pattern naturally: enjoy doing / decide to do."
+      ],
+      "common_errors": [
+        "把「Verb + gerund vs infinitive」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Verb + gerund vs infinitive」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G18-04",
+      "chapter_id": 18,
+      "title_en": "Stop / remember / try",
+      "title_zh": "Stop / remember / try",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Stop / remember / try」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Stop / remember / try」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "stop doing / stop to do",
+      "examples": [
+        "Stop talking.",
+        "Use this pattern naturally: stop doing / stop to do."
+      ],
+      "common_errors": [
+        "把「Stop / remember / try」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Stop / remember / try」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G18-05",
+      "chapter_id": 18,
+      "title_en": "Bare infinitive",
+      "title_zh": "Bare infinitive",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Bare infinitive」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Bare infinitive」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "let/make + O + V",
+      "examples": [
+        "Let him go.",
+        "Use this pattern naturally: let/make + O + V."
+      ],
+      "common_errors": [
+        "把「Bare infinitive」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Bare infinitive」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G19-01",
+      "chapter_id": 19,
+      "title_en": "Basic passive",
+      "title_zh": "Basic passive",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Basic passive」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Basic passive」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "be + past participle",
+      "examples": [
+        "The window was broken.",
+        "Use this pattern naturally: be + past participle."
+      ],
+      "common_errors": [
+        "把「Basic passive」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Basic passive」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G19-02",
+      "chapter_id": 19,
+      "title_en": "Passive across tenses",
+      "title_zh": "Passive across tenses",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Passive across tenses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Passive across tenses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "be + p.p. in different tenses",
+      "examples": [
+        "The work is being reviewed.",
+        "Use this pattern naturally: be + p.p. in different tenses."
+      ],
+      "common_errors": [
+        "把「Passive across tenses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Passive across tenses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G19-03",
+      "chapter_id": 19,
+      "title_en": "Modal passive",
+      "title_zh": "Modal passive",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Modal passive」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Modal passive」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "modal + be + p.p.",
+      "examples": [
+        "It must be finished today.",
+        "Use this pattern naturally: modal + be + p.p.."
+      ],
+      "common_errors": [
+        "把「Modal passive」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Modal passive」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G19-04",
+      "chapter_id": 19,
+      "title_en": "Get-passive",
+      "title_zh": "Get-passive",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Get-passive」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Get-passive」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "get + p.p.",
+      "examples": [
+        "He got promoted.",
+        "Use this pattern naturally: get + p.p.."
+      ],
+      "common_errors": [
+        "把「Get-passive」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Get-passive」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G19-05",
+      "chapter_id": 19,
+      "title_en": "Reporting & passive infinitives",
+      "title_zh": "Reporting & passive infinitives",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Reporting & passive infinitives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reporting & passive infinitives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "be + p.p. + to-infinitive/reporting verb",
+      "examples": [
+        "She was asked to speak.",
+        "Use this pattern naturally: be + p.p. + to-infinitive/reporting verb."
+      ],
+      "common_errors": [
+        "把「Reporting & passive infinitives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reporting & passive infinitives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G20-01",
+      "chapter_id": 20,
+      "title_en": "Defining relative clauses",
+      "title_zh": "Defining relative clauses",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Defining relative clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Defining relative clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "who/which/that + clause",
+      "examples": [
+        "The person who called is here.",
+        "Use this pattern naturally: who/which/that + clause."
+      ],
+      "common_errors": [
+        "把「Defining relative clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Defining relative clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G20-02",
+      "chapter_id": 20,
+      "title_en": "Non-defining clauses",
+      "title_zh": "Non-defining clauses",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Non-defining clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Non-defining clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "noun, which/who + clause",
+      "examples": [
+        "My car, which is old, still works.",
+        "Use this pattern naturally: noun, which/who + clause."
+      ],
+      "common_errors": [
+        "把「Non-defining clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Non-defining clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G20-03",
+      "chapter_id": 20,
+      "title_en": "Relative pronouns",
+      "title_zh": "Relative pronouns",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Relative pronouns」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Relative pronouns」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "who/which/whose/that",
+      "examples": [
+        "The man whose car was stolen called.",
+        "Use this pattern naturally: who/which/whose/that."
+      ],
+      "common_errors": [
+        "把「Relative pronouns」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Relative pronouns」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G20-04",
+      "chapter_id": 20,
+      "title_en": "Reduced relative clauses",
+      "title_zh": "Reduced relative clauses",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Reduced relative clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reduced relative clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "noun + V-ing/V-ed",
+      "examples": [
+        "The book written by her won.",
+        "Use this pattern naturally: noun + V-ing/V-ed."
+      ],
+      "common_errors": [
+        "把「Reduced relative clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reduced relative clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G20-05",
+      "chapter_id": 20,
+      "title_en": "Preposition + relative",
+      "title_zh": "Preposition + relative",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Preposition + relative」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Preposition + relative」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "preposition + which/whom",
+      "examples": [
+        "The person to whom I spoke agreed.",
+        "Use this pattern naturally: preposition + which/whom."
+      ],
+      "common_errors": [
+        "把「Preposition + relative」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Preposition + relative」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G21-01",
+      "chapter_id": 21,
+      "title_en": "That-clauses",
+      "title_zh": "That-clauses",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「That-clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「That-clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "S + be + that-clause",
+      "examples": [
+        "The fact that he left surprised me.",
+        "Use this pattern naturally: S + be + that-clause."
+      ],
+      "common_errors": [
+        "把「That-clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「That-clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G21-02",
+      "chapter_id": 21,
+      "title_en": "Wh-noun clauses",
+      "title_zh": "Wh-noun clauses",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Wh-noun clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Wh-noun clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "what/why/how + clause",
+      "examples": [
+        "I know what she wants.",
+        "Use this pattern naturally: what/why/how + clause."
+      ],
+      "common_errors": [
+        "把「Wh-noun clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Wh-noun clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G21-03",
+      "chapter_id": 21,
+      "title_en": "Whether / if clauses",
+      "title_zh": "Whether / if clauses",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Whether / if clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Whether / if clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "whether/if + clause",
+      "examples": [
+        "I don't know whether he will come.",
+        "Use this pattern naturally: whether/if + clause."
+      ],
+      "common_errors": [
+        "把「Whether / if clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Whether / if clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G21-04",
+      "chapter_id": 21,
+      "title_en": "Subject & object clauses",
+      "title_zh": "Subject & object clauses",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Subject & object clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Subject & object clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "clause as subject/object",
+      "examples": [
+        "What he said was true.",
+        "Use this pattern naturally: clause as subject/object."
+      ],
+      "common_errors": [
+        "把「Subject & object clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Subject & object clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G21-05",
+      "chapter_id": 21,
+      "title_en": "Embedded questions",
+      "title_zh": "Embedded questions",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Embedded questions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Embedded questions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "indirect question clause",
+      "examples": [
+        "Tell me where you live.",
+        "Use this pattern naturally: indirect question clause."
+      ],
+      "common_errors": [
+        "把「Embedded questions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Embedded questions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G22-01",
+      "chapter_id": 22,
+      "title_en": "Time clauses",
+      "title_zh": "Time clauses",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Time clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Time clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "when/while/before/after + clause",
+      "examples": [
+        "Call me when you arrive.",
+        "Use this pattern naturally: when/while/before/after + clause."
+      ],
+      "common_errors": [
+        "把「Time clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Time clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G22-02",
+      "chapter_id": 22,
+      "title_en": "Reason / cause",
+      "title_zh": "Reason / cause",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Reason / cause」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reason / cause」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "because/as/since + clause",
+      "examples": [
+        "She stayed home because she was sick.",
+        "Use this pattern naturally: because/as/since + clause."
+      ],
+      "common_errors": [
+        "把「Reason / cause」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reason / cause」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G22-03",
+      "chapter_id": 22,
+      "title_en": "Contrast / concession",
+      "title_zh": "Contrast / concession",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Contrast / concession」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Contrast / concession」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "although/even though + clause",
+      "examples": [
+        "Although it rained, we went out.",
+        "Use this pattern naturally: although/even though + clause."
+      ],
+      "common_errors": [
+        "把「Contrast / concession」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Contrast / concession」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G22-04",
+      "chapter_id": 22,
+      "title_en": "Purpose / result",
+      "title_zh": "Purpose / result",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Purpose / result」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Purpose / result」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "so that/such that",
+      "examples": [
+        "He left early so that he could rest.",
+        "Use this pattern naturally: so that/such that."
+      ],
+      "common_errors": [
+        "把「Purpose / result」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Purpose / result」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G22-05",
+      "chapter_id": 22,
+      "title_en": "Reduced adverb clauses",
+      "title_zh": "Reduced adverb clauses",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Reduced adverb clauses」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reduced adverb clauses」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "V-ing / p.p. reduced clause",
+      "examples": [
+        "After finishing work, she went home.",
+        "Use this pattern naturally: V-ing / p.p. reduced clause."
+      ],
+      "common_errors": [
+        "把「Reduced adverb clauses」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reduced adverb clauses」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G23-01",
+      "chapter_id": 23,
+      "title_en": "Zero conditional",
+      "title_zh": "Zero conditional",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Zero conditional」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Zero conditional」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "If + present, present",
+      "examples": [
+        "If you heat ice, it melts.",
+        "Use this pattern naturally: If + present, present."
+      ],
+      "common_errors": [
+        "把「Zero conditional」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Zero conditional」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G23-02",
+      "chapter_id": 23,
+      "title_en": "First conditional",
+      "title_zh": "First conditional",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「First conditional」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「First conditional」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "If + present, will + V",
+      "examples": [
+        "If it rains, we'll stay home.",
+        "Use this pattern naturally: If + present, will + V."
+      ],
+      "common_errors": [
+        "把「First conditional」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「First conditional」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G23-03",
+      "chapter_id": 23,
+      "title_en": "Second conditional",
+      "title_zh": "Second conditional",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Second conditional」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Second conditional」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "If + past, would + V",
+      "examples": [
+        "If I had time, I would travel.",
+        "Use this pattern naturally: If + past, would + V."
+      ],
+      "common_errors": [
+        "把「Second conditional」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Second conditional」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G23-04",
+      "chapter_id": 23,
+      "title_en": "Third conditional",
+      "title_zh": "Third conditional",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Third conditional」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Third conditional」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "If + had p.p., would have p.p.",
+      "examples": [
+        "If I had known, I would have called.",
+        "Use this pattern naturally: If + had p.p., would have p.p.."
+      ],
+      "common_errors": [
+        "把「Third conditional」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Third conditional」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G23-05",
+      "chapter_id": 23,
+      "title_en": "Mixed conditionals",
+      "title_zh": "Mixed conditionals",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Mixed conditionals」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Mixed conditionals」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "If + mixed time, mixed result",
+      "examples": [
+        "If I were you, I would reconsider.",
+        "Use this pattern naturally: If + mixed time, mixed result."
+      ],
+      "common_errors": [
+        "把「Mixed conditionals」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Mixed conditionals」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G24-01",
+      "chapter_id": 24,
+      "title_en": "Reported statements",
+      "title_zh": "Reported statements",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Reported statements」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reported statements」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "say/tell + reported statement",
+      "examples": [
+        "She said that she was tired.",
+        "Use this pattern naturally: say/tell + reported statement."
+      ],
+      "common_errors": [
+        "把「Reported statements」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reported statements」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G24-02",
+      "chapter_id": 24,
+      "title_en": "Backshift of tense",
+      "title_zh": "Backshift of tense",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Backshift of tense」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Backshift of tense」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "backshift of tense",
+      "examples": [
+        "He said he had finished.",
+        "Use this pattern naturally: backshift of tense."
+      ],
+      "common_errors": [
+        "把「Backshift of tense」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Backshift of tense」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G24-03",
+      "chapter_id": 24,
+      "title_en": "Reported questions",
+      "title_zh": "Reported questions",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Reported questions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reported questions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "asked + if/wh-clause",
+      "examples": [
+        "She asked where I lived.",
+        "Use this pattern naturally: asked + if/wh-clause."
+      ],
+      "common_errors": [
+        "把「Reported questions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reported questions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G24-04",
+      "chapter_id": 24,
+      "title_en": "Commands & requests",
+      "title_zh": "Commands & requests",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Commands & requests」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Commands & requests」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "told/asked + object + to V",
+      "examples": [
+        "He told me to wait.",
+        "Use this pattern naturally: told/asked + object + to V."
+      ],
+      "common_errors": [
+        "把「Commands & requests」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Commands & requests」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G24-05",
+      "chapter_id": 24,
+      "title_en": "Reporting verbs",
+      "title_zh": "Reporting verbs",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Reporting verbs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reporting verbs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "advised/denied/promised + complement",
+      "examples": [
+        "She promised to help.",
+        "Use this pattern naturally: advised/denied/promised + complement."
+      ],
+      "common_errors": [
+        "把「Reporting verbs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reporting verbs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G25-01",
+      "chapter_id": 25,
+      "title_en": "Coordinating conjunctions",
+      "title_zh": "Coordinating conjunctions",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Coordinating conjunctions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Coordinating conjunctions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "and/but/or/so",
+      "examples": [
+        "I called, but he was busy.",
+        "Use this pattern naturally: and/but/or/so."
+      ],
+      "common_errors": [
+        "把「Coordinating conjunctions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Coordinating conjunctions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G25-02",
+      "chapter_id": 25,
+      "title_en": "Subordinating conjunctions",
+      "title_zh": "Subordinating conjunctions",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Subordinating conjunctions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Subordinating conjunctions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "because/although/while",
+      "examples": [
+        "Because it rained, we stayed home.",
+        "Use this pattern naturally: because/although/while."
+      ],
+      "common_errors": [
+        "把「Subordinating conjunctions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Subordinating conjunctions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G25-03",
+      "chapter_id": 25,
+      "title_en": "Correlative conjunctions",
+      "title_zh": "Correlative conjunctions",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Correlative conjunctions」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Correlative conjunctions」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "both…and / either…or",
+      "examples": [
+        "Either call or text me.",
+        "Use this pattern naturally: both…and / either…or."
+      ],
+      "common_errors": [
+        "把「Correlative conjunctions」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Correlative conjunctions」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G25-04",
+      "chapter_id": 25,
+      "title_en": "Discourse linkers",
+      "title_zh": "Discourse linkers",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Discourse linkers」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Discourse linkers」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "however/therefore/in addition",
+      "examples": [
+        "However, we continued.",
+        "Use this pattern naturally: however/therefore/in addition."
+      ],
+      "common_errors": [
+        "把「Discourse linkers」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Discourse linkers」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G25-05",
+      "chapter_id": 25,
+      "title_en": "Punctuation & linking",
+      "title_zh": "Punctuation & linking",
+      "cefr": "A2-C1",
+      "learning_objectives": [
+        "能辨識「Punctuation & linking」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Punctuation & linking」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "comma/semicolon + linker",
+      "examples": [
+        "The road was closed; therefore, we turned back.",
+        "Use this pattern naturally: comma/semicolon + linker."
+      ],
+      "common_errors": [
+        "把「Punctuation & linking」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Punctuation & linking」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G26-01",
+      "chapter_id": 26,
+      "title_en": "Present participles",
+      "title_zh": "Present participles",
+      "cefr": "B2-C1",
+      "learning_objectives": [
+        "能辨識「Present participles」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Present participles」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "V-ing phrase",
+      "examples": [
+        "Walking home, I saw him.",
+        "Use this pattern naturally: V-ing phrase."
+      ],
+      "common_errors": [
+        "把「Present participles」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Present participles」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G26-02",
+      "chapter_id": 26,
+      "title_en": "Past participles",
+      "title_zh": "Past participles",
+      "cefr": "B2-C1",
+      "learning_objectives": [
+        "能辨識「Past participles」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Past participles」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "V-ed phrase",
+      "examples": [
+        "Broken by the storm, the tree fell.",
+        "Use this pattern naturally: V-ed phrase."
+      ],
+      "common_errors": [
+        "把「Past participles」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Past participles」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G26-03",
+      "chapter_id": 26,
+      "title_en": "Reduced relatives",
+      "title_zh": "Reduced relatives",
+      "cefr": "B2-C1",
+      "learning_objectives": [
+        "能辨識「Reduced relatives」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Reduced relatives」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "reduced relative clause",
+      "examples": [
+        "The man standing there is my teacher.",
+        "Use this pattern naturally: reduced relative clause."
+      ],
+      "common_errors": [
+        "把「Reduced relatives」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Reduced relatives」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G26-04",
+      "chapter_id": 26,
+      "title_en": "Participial phrases",
+      "title_zh": "Participial phrases",
+      "cefr": "B2-C1",
+      "learning_objectives": [
+        "能辨識「Participial phrases」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Participial phrases」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "introductory participial phrase",
+      "examples": [
+        "Looking around, she smiled.",
+        "Use this pattern naturally: introductory participial phrase."
+      ],
+      "common_errors": [
+        "把「Participial phrases」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Participial phrases」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G26-05",
+      "chapter_id": 26,
+      "title_en": "Dangling modifiers",
+      "title_zh": "Dangling modifiers",
+      "cefr": "B2-C1",
+      "learning_objectives": [
+        "能辨識「Dangling modifiers」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Dangling modifiers」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "modifier must have clear subject",
+      "examples": [
+        "Running late, she took a taxi.",
+        "Use this pattern naturally: modifier must have clear subject."
+      ],
+      "common_errors": [
+        "把「Dangling modifiers」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Dangling modifiers」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G27-01",
+      "chapter_id": 27,
+      "title_en": "Have something done",
+      "title_zh": "Have something done",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Have something done」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Have something done」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "have + object + p.p.",
+      "examples": [
+        "I had my car repaired.",
+        "Use this pattern naturally: have + object + p.p.."
+      ],
+      "common_errors": [
+        "把「Have something done」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Have something done」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G27-02",
+      "chapter_id": 27,
+      "title_en": "Get something done",
+      "title_zh": "Get something done",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Get something done」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Get something done」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "get + object + p.p.",
+      "examples": [
+        "She got her hair cut.",
+        "Use this pattern naturally: get + object + p.p.."
+      ],
+      "common_errors": [
+        "把「Get something done」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Get something done」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G27-03",
+      "chapter_id": 27,
+      "title_en": "Make / let / help",
+      "title_zh": "Make / let / help",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Make / let / help」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Make / let / help」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "make/let/help + object + verb",
+      "examples": [
+        "The teacher made us repeat it.",
+        "Use this pattern naturally: make/let/help + object + verb."
+      ],
+      "common_errors": [
+        "把「Make / let / help」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Make / let / help」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G27-04",
+      "chapter_id": 27,
+      "title_en": "Perception verbs",
+      "title_zh": "Perception verbs",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Perception verbs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Perception verbs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "see/hear + object + V/V-ing",
+      "examples": [
+        "I heard him sing.",
+        "Use this pattern naturally: see/hear + object + V/V-ing."
+      ],
+      "common_errors": [
+        "把「Perception verbs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Perception verbs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G27-05",
+      "chapter_id": 27,
+      "title_en": "Allow / require / have someone do",
+      "title_zh": "Allow / require / have someone do",
+      "cefr": "B1-C1",
+      "learning_objectives": [
+        "能辨識「Allow / require / have someone do」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Allow / require / have someone do」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "allow/require + object + to V",
+      "examples": [
+        "The rule requires everyone to register.",
+        "Use this pattern naturally: allow/require + object + to V."
+      ],
+      "common_errors": [
+        "把「Allow / require / have someone do」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Allow / require / have someone do」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G28-01",
+      "chapter_id": 28,
+      "title_en": "Emphatic do",
+      "title_zh": "Emphatic do",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Emphatic do」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Emphatic do」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "do/does/did + V for emphasis",
+      "examples": [
+        "I do understand.",
+        "Use this pattern naturally: do/does/did + V for emphasis."
+      ],
+      "common_errors": [
+        "把「Emphatic do」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Emphatic do」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G28-02",
+      "chapter_id": 28,
+      "title_en": "Cleft sentences",
+      "title_zh": "Cleft sentences",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Cleft sentences」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Cleft sentences」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "It is/was … that/who",
+      "examples": [
+        "It was John who called.",
+        "Use this pattern naturally: It is/was … that/who."
+      ],
+      "common_errors": [
+        "把「Cleft sentences」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Cleft sentences」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G28-03",
+      "chapter_id": 28,
+      "title_en": "Negative inversion",
+      "title_zh": "Negative inversion",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Negative inversion」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Negative inversion」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "never/rarely + auxiliary + S + V",
+      "examples": [
+        "Never have I seen this.",
+        "Use this pattern naturally: never/rarely + auxiliary + S + V."
+      ],
+      "common_errors": [
+        "把「Negative inversion」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Negative inversion」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G28-04",
+      "chapter_id": 28,
+      "title_en": "Only / rarely inversion",
+      "title_zh": "Only / rarely inversion",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Only / rarely inversion」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Only / rarely inversion」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "only then/only after + auxiliary + S + V",
+      "examples": [
+        "Only then did I understand.",
+        "Use this pattern naturally: only then/only after + auxiliary + S + V."
+      ],
+      "common_errors": [
+        "把「Only / rarely inversion」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Only / rarely inversion」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G28-05",
+      "chapter_id": 28,
+      "title_en": "Fronting",
+      "title_zh": "Fronting",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Fronting」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Fronting」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "fronted object/adverb + inversion when required",
+      "examples": [
+        "This book I really like.",
+        "Use this pattern naturally: fronted object/adverb + inversion when required."
+      ],
+      "common_errors": [
+        "把「Fronting」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Fronting」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G29-01",
+      "chapter_id": 29,
+      "title_en": "Hedging",
+      "title_zh": "Hedging",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Hedging」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Hedging」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "may/might/could + hedge",
+      "examples": [
+        "It may be helpful to wait.",
+        "Use this pattern naturally: may/might/could + hedge."
+      ],
+      "common_errors": [
+        "把「Hedging」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Hedging」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G29-02",
+      "chapter_id": 29,
+      "title_en": "Nominalization",
+      "title_zh": "Nominalization",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Nominalization」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Nominalization」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "noun phrase + nominalization",
+      "examples": [
+        "The implementation of the plan took time.",
+        "Use this pattern naturally: noun phrase + nominalization."
+      ],
+      "common_errors": [
+        "把「Nominalization」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Nominalization」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G29-03",
+      "chapter_id": 29,
+      "title_en": "Register",
+      "title_zh": "Register",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Register」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Register」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "formal/informal register choices",
+      "examples": [
+        "Please consider / I would appreciate your consideration.",
+        "Use this pattern naturally: formal/informal register choices."
+      ],
+      "common_errors": [
+        "把「Register」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Register」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G29-04",
+      "chapter_id": 29,
+      "title_en": "Parallelism",
+      "title_zh": "Parallelism",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Parallelism」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Parallelism」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "balanced parallel structures",
+      "examples": [
+        "She likes reading, swimming, and cycling.",
+        "Use this pattern naturally: balanced parallel structures."
+      ],
+      "common_errors": [
+        "把「Parallelism」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Parallelism」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G29-05",
+      "chapter_id": 29,
+      "title_en": "Sentence variety",
+      "title_zh": "Sentence variety",
+      "cefr": "B2-C2",
+      "learning_objectives": [
+        "能辨識「Sentence variety」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Sentence variety」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "short/long sentence mix",
+      "examples": [
+        "Mix short sentences with longer ones.",
+        "Use this pattern naturally: short/long sentence mix."
+      ],
+      "common_errors": [
+        "把「Sentence variety」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Sentence variety」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G30-01",
+      "chapter_id": 30,
+      "title_en": "Tense confusion",
+      "title_zh": "Tense confusion",
+      "cefr": "A2-C2",
+      "learning_objectives": [
+        "能辨識「Tense confusion」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Tense confusion」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "choose tense by reference time",
+      "examples": [
+        "I have lived here for five years.",
+        "Use this pattern naturally: choose tense by reference time."
+      ],
+      "common_errors": [
+        "把「Tense confusion」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Tense confusion」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G30-02",
+      "chapter_id": 30,
+      "title_en": "Preposition errors",
+      "title_zh": "Preposition errors",
+      "cefr": "A2-C2",
+      "learning_objectives": [
+        "能辨識「Preposition errors」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Preposition errors」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "preposition by collocation",
+      "examples": [
+        "It depends on the situation.",
+        "Use this pattern naturally: preposition by collocation."
+      ],
+      "common_errors": [
+        "把「Preposition errors」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Preposition errors」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G30-03",
+      "chapter_id": 30,
+      "title_en": "Article errors",
+      "title_zh": "Article errors",
+      "cefr": "A2-C2",
+      "learning_objectives": [
+        "能辨識「Article errors」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Article errors」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "article by specificity",
+      "examples": [
+        "I bought a new car.",
+        "Use this pattern naturally: article by specificity."
+      ],
+      "common_errors": [
+        "把「Article errors」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Article errors」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G30-04",
+      "chapter_id": 30,
+      "title_en": "Confusing word pairs",
+      "title_zh": "Confusing word pairs",
+      "cefr": "A2-C2",
+      "learning_objectives": [
+        "能辨識「Confusing word pairs」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Confusing word pairs」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "say/tell/borrow/lend etc.",
+      "examples": [
+        "She said it was fine.",
+        "Use this pattern naturally: say/tell/borrow/lend etc.."
+      ],
+      "common_errors": [
+        "把「Confusing word pairs」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Confusing word pairs」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    },
+    {
+      "lesson_id": "G30-05",
+      "chapter_id": 30,
+      "title_en": "Common L1 interference",
+      "title_zh": "Common L1 interference",
+      "cefr": "A2-C2",
+      "learning_objectives": [
+        "能辨識「Common L1 interference」的形式與功能",
+        "能在生活、工作與考試情境中正確使用"
+      ],
+      "explanation": "本微課聚焦「Common L1 interference」。先掌握形式，再從語境判斷使用時機，並比較容易混淆的結構。",
+      "pattern": "avoid literal translation / L1 transfer",
+      "examples": [
+        "Use a natural collocation rather than a literal translation.",
+        "Use this pattern naturally: avoid literal translation / L1 transfer."
+      ],
+      "common_errors": [
+        "把「Common L1 interference」只當成中文規則背誦，而忽略句中真正的功能與語境。"
+      ],
+      "contrast": [
+        "比較相近形式：判斷時間、語意焦點、搭配與正式程度後再選擇。"
+      ],
+      "practice": [
+        "請用「Common L1 interference」造 2 句；其中 1 句放入工作或生活情境。",
+        "找出一個常見錯誤並改寫成正確英文。"
+      ],
+      "mastery_tip": "完成本微課後，再做本章章末題；連續兩次錯同類型時，系統應推薦回到本微課。"
+    }
+  ],
+  "design": {
+    "formMeaningUseContrastError": true,
+    "practicePerLesson": "5-10",
+    "chapterQuiz": 20,
+    "aiFeedback": [
+      "Grammar",
+      "Meaning",
+      "Naturalness"
+    ]
+  }
 }

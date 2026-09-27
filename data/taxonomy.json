@@ -1,17 +1,318 @@
 {
+  "version": 3,
   "categories": [
-    {"id":"english-learning","name":"英文學習","subs":["文法","字彙","發音","口說","聽力","閱讀"]},
-    {"id":"history-geography","name":"歷史地理","subs":["世界史","人物","文明","地理","考古","地緣"]},
-    {"id":"religion","name":"宗教","subs":["基督宗教","佛教","伊斯蘭教","猶太教","宗教比較","神話信仰"]},
-    {"id":"film-tv","name":"電影影劇","subs":["電影","影集","演員","導演","劇本","影評"]},
-    {"id":"business-finance","name":"商業財經","subs":["職場","管理","金融","經濟","行銷","創業"]},
-    {"id":"technology","name":"科技","subs":["AI","軟體","網路","資安","科技史","未來科技"]},
-    {"id":"medical-health","name":"醫學保健","subs":["醫學","疾病科普","營養","心理健康","健康生活","醫療科技"]},
-    {"id":"leisure-travel","name":"休閒旅遊","subs":["旅遊","城市","美食","生活","興趣","自然景點"]},
-    {"id":"sports","name":"運動","subs":["籃球","足球","棒球","網球","健身","運動科學"]},
-    {"id":"speeches-lectures","name":"演說演講","subs":["TED演講","大學講座","專題演說","領導演說","公開演講","訪談演講"]},
-    {"id":"news-documentary","name":"新聞紀實","subs":["國際","社會","科技新聞","財經新聞","環境","紀錄片"]},
-    {"id":"anime-cartoons","name":"動漫卡通","subs":["動畫","卡通","日本動漫","角色","配音","動畫製作"]},
-    {"id":"philosophy","name":"哲學","subs":["西方哲學","東方哲學","倫理","邏輯","存在","思辨"]}
-  ]
+    {
+      "id": "english-learning",
+      "name": "英文學習",
+      "subs": [
+        "文法",
+        "發音",
+        "字彙",
+        "口說",
+        "聽力",
+        "閱讀",
+        "片語",
+        "職場英文"
+      ],
+      "searchTerms": [
+        "learn English",
+        "English listening",
+        "English speaking",
+        "English grammar",
+        "English vocabulary",
+        "ESL pronunciation",
+        "English phrases",
+        "business English"
+      ]
+    },
+    {
+      "id": "history-geography",
+      "name": "歷史地理",
+      "subs": [
+        "世界史",
+        "人物",
+        "古文明",
+        "地理",
+        "國家城市",
+        "考古",
+        "文化史",
+        "自然地理"
+      ],
+      "searchTerms": [
+        "world history documentary",
+        "ancient civilization documentary",
+        "history explained",
+        "geography explained",
+        "world geography",
+        "historical figures",
+        "archaeology documentary",
+        "culture history"
+      ]
+    },
+    {
+      "id": "religion",
+      "name": "宗教",
+      "subs": [
+        "基督宗教",
+        "佛教",
+        "伊斯蘭教",
+        "猶太教",
+        "宗教史",
+        "宗教哲學",
+        "經典導讀",
+        "比較宗教"
+      ],
+      "searchTerms": [
+        "Christianity explained",
+        "Bible study",
+        "Buddhism lecture",
+        "Islam explained",
+        "Judaism lecture",
+        "religion history",
+        "religious philosophy",
+        "comparative religion"
+      ]
+    },
+    {
+      "id": "film-tv",
+      "name": "電影影劇",
+      "subs": [
+        "電影",
+        "影集",
+        "幕後製作",
+        "演員訪談",
+        "導演",
+        "劇本",
+        "影評",
+        "流行文化"
+      ],
+      "searchTerms": [
+        "film interview English",
+        "movie behind the scenes",
+        "actor interview English",
+        "director interview",
+        "screenwriting lesson",
+        "film analysis",
+        "TV interview English",
+        "cinema documentary"
+      ]
+    },
+    {
+      "id": "business-finance",
+      "name": "商業財經",
+      "subs": [
+        "商業",
+        "金融",
+        "投資",
+        "經濟",
+        "管理",
+        "行銷",
+        "創業",
+        "職場"
+      ],
+      "searchTerms": [
+        "business English interview",
+        "finance explained",
+        "investing explained",
+        "economics documentary",
+        "management lecture",
+        "marketing strategy",
+        "startup interview",
+        "workplace English"
+      ]
+    },
+    {
+      "id": "technology",
+      "name": "科技",
+      "subs": [
+        "AI",
+        "軟體",
+        "網路",
+        "資安",
+        "機器人",
+        "消費科技",
+        "未來科技",
+        "科學計算"
+      ],
+      "searchTerms": [
+        "AI explained",
+        "technology documentary",
+        "software engineering talk",
+        "cybersecurity explained",
+        "robotics lecture",
+        "consumer technology review",
+        "future technology",
+        "computer science lecture"
+      ]
+    },
+    {
+      "id": "medical-health",
+      "name": "醫學保健",
+      "subs": [
+        "醫學科普",
+        "健康",
+        "營養",
+        "心理健康",
+        "疾病",
+        "醫療科技",
+        "人體",
+        "公共衛生"
+      ],
+      "searchTerms": [
+        "medical science explained",
+        "health documentary",
+        "nutrition science",
+        "mental health lecture",
+        "disease explained",
+        "medical technology",
+        "human body science",
+        "public health lecture"
+      ]
+    },
+    {
+      "id": "leisure-travel",
+      "name": "休閒旅遊",
+      "subs": [
+        "旅遊",
+        "城市",
+        "自然景點",
+        "美食",
+        "飯店",
+        "交通",
+        "生活風格",
+        "戶外活動"
+      ],
+      "searchTerms": [
+        "travel documentary English",
+        "city guide English",
+        "nature documentary",
+        "food documentary English",
+        "hotel review English",
+        "airport English",
+        "lifestyle documentary",
+        "outdoor adventure English"
+      ]
+    },
+    {
+      "id": "sports",
+      "name": "運動",
+      "subs": [
+        "籃球",
+        "足球",
+        "棒球",
+        "網球",
+        "健身",
+        "跑步",
+        "運動科學",
+        "運動員訪談"
+      ],
+      "searchTerms": [
+        "basketball interview English",
+        "football analysis English",
+        "baseball documentary",
+        "tennis interview English",
+        "fitness science",
+        "running science",
+        "sports science lecture",
+        "athlete interview English"
+      ]
+    },
+    {
+      "id": "speeches-lectures",
+      "name": "演說演講",
+      "subs": [
+        "TED演講",
+        "公開演說",
+        "學術演講",
+        "企業演講",
+        "領導力",
+        "溝通",
+        "畢業演講",
+        "會議演講"
+      ],
+      "searchTerms": [
+        "TED talk English",
+        "keynote speech English",
+        "academic lecture English",
+        "business keynote",
+        "leadership talk",
+        "communication lecture",
+        "graduation speech",
+        "conference talk English"
+      ]
+    },
+    {
+      "id": "news-documentary",
+      "name": "新聞紀實",
+      "subs": [
+        "國際新聞",
+        "社會",
+        "氣候",
+        "科學新聞",
+        "調查報導",
+        "政治社會",
+        "紀錄片",
+        "公共議題"
+      ],
+      "searchTerms": [
+        "BBC news documentary",
+        "VOA news English",
+        "international news documentary",
+        "climate news documentary",
+        "science news English",
+        "investigative documentary",
+        "social issues documentary",
+        "public affairs English"
+      ]
+    },
+    {
+      "id": "anime-cartoons",
+      "name": "動漫卡通",
+      "subs": [
+        "動畫",
+        "卡通",
+        "角色對話",
+        "兒童英語",
+        "動畫評論",
+        "動漫文化",
+        "配音",
+        "圖像故事"
+      ],
+      "searchTerms": [
+        "cartoon English dialogue",
+        "animation English",
+        "kids English cartoon",
+        "animated short English",
+        "animation commentary",
+        "anime culture English",
+        "voice acting English",
+        "animated story English"
+      ]
+    },
+    {
+      "id": "philosophy",
+      "name": "哲學",
+      "subs": [
+        "哲學導論",
+        "倫理學",
+        "邏輯",
+        "存在主義",
+        "形上學",
+        "政治哲學",
+        "心靈哲學",
+        "思想史"
+      ],
+      "searchTerms": [
+        "philosophy lecture English",
+        "ethics lecture",
+        "logic explained",
+        "existentialism lecture",
+        "metaphysics explained",
+        "political philosophy lecture",
+        "philosophy of mind",
+        "history of ideas lecture"
+      ]
+    }
+  ],
+  "totalSubcategories": 104
 }
