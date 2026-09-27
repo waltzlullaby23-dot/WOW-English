@@ -1,36 +1,22 @@
-# 三木Eng V6.2 — Free / Scroll & Subtitle Fix
+# 三木Eng V7 — 真正零付費修正版
 
-這一版針對目前實際網站的三個問題重做：
+## 這一版修什麼
+1. 移除頂部「探索引擎」按鈕。影片探索引擎只留在 GitHub Actions 後台，不佔網站 UI。
+2. 移除左上角重複的漢堡／收合按鈕，只保留側欄內的「« / »」收合控制。
+3. watch 頁完全取消 sticky sidebar、sticky topbar、內嵌字幕滾輪，改成單一瀏覽器主滾動。
+4. YouTube IFrame API ready 後才建立 player，字幕同步依 currentTime 對應完整 transcript。
+5. 字幕模式固定為 英文／中英／中文。
+6. 字幕大小固定 75 / 100 / 125 / 150 / 200%。
+7. GitHub Actions 改成完全不需要 OPENAI_API_KEY、YOUTUBE_API_KEY。
+8. 使用 yt-dlp 搜尋候選影片、youtube-transcript-api 取得英文字幕、Argos Translate 補中文。
+9. 既有 11 部影片先做 full-transcript repair，再新增影片。
+10. 正式庫只接受 >=20 subtitle segments 且 coverage >=90% 的影片；其餘進 review。
 
-1. **頁面滾動卡住**：取消 topbar/sidebar sticky 與字幕區內嵌 scroll，watch 頁只保留瀏覽器整頁滾動。
-2. **字幕同步**：YouTube IFrame API 改成等待 API ready 後初始化；逐句 active 與手動滾動暫停機制保留。
-3. **影片沒有增加 / 翻譯沒有增加**：加入正式 GitHub Actions pipeline；只將完整英文字幕 + 完整中文翻譯通過的影片放入 accepted。
+## 套用
+把本資料夾放進 WOW-English repo 根目錄，執行：
 
-## 零付費架構
-- GitHub Pages
-- GitHub Actions
-- yt-dlp / youtube-transcript-api
-- Argos Translate（開源）
-- OpenCC / wordfreq
-- 不需要 OpenAI API
-- 不需要本機 AI
+python APPLY_V7.py
 
-## 安裝
-把 ZIP 內容解壓到 `WOW-English` 根目錄並覆蓋同名檔案。
+然後把 .github/workflows/content-pipeline.yml 與 engine/ 下四個 free_*.py 上傳到 GitHub。
 
-執行：
-
-```bash
-python apply_v6_free.py
-```
-
-然後把變更上傳 GitHub `main`。最後在 Actions 執行 `三木Eng Free Video Discovery` 的 `workflow_dispatch`。
-
-## 驗收
-首次 workflow 必須在 log 顯示：
-- `ARGOS_EN_ZH_READY`
-- `TEST_FREE_PIPELINE_OK`
-- `FREE_RELEASE_OK accepted=...`
-- growth report 顯示 `newAccepted`。
-
-若 `newAccepted=0`，log 會保留 candidates / processed / review 數字，方便定位到底是 YouTube 搜尋、字幕完整度、翻譯或去重造成 0 新增。
+GitHub Actions 第一次請手動 Run workflow。工作流需要 repository 的 Actions workflow permission 允許 Contents: write，才能把更新後的 catalog.json commit 回 main。

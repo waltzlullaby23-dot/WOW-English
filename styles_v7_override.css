@@ -1,0 +1,28 @@
+/* SANMUENG V7 FINAL SCROLL RESET */
+html,body,#app,.app{height:auto!important;min-height:0!important;overflow-x:hidden!important;overflow-y:auto!important}
+html{scroll-behavior:auto!important}
+body{overscroll-behavior:none!important}
+.topbar{position:relative!important;top:auto!important;z-index:100!important}
+.layout{display:grid!important;grid-template-columns:286px minmax(0,1fr)!important;align-items:start!important;min-height:0!important;height:auto!important}
+.sidebar,.sidebar-collapsed .sidebar{position:relative!important;top:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;align-self:start!important}
+main{height:auto!important;min-height:0!important;overflow:visible!important;padding-bottom:120px!important}
+.watch-page,.player-card,.subtitle-panel,.learning-row{height:auto!important;min-height:0!important;overflow:visible!important;contain:none!important}
+.subtitle-list{height:auto!important;max-height:none!important;overflow:visible!important;overscroll-behavior:auto!important;scroll-behavior:auto!important}
+.segment{scroll-margin-top:90px!important;scroll-margin-bottom:90px!important}
+.player{position:relative!important;aspect-ratio:16/9!important}
+.player iframe{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+.menu-btn{display:none!important}
+.top-actions{margin-left:auto!important}
+.top-actions button{display:none!important}
+.subtitle-empty{padding:24px;text-align:center;color:#7c8c85;background:#f7faf8;border-radius:12px}
+.player-status{margin-top:8px;padding:7px 10px;border-radius:8px;background:#f4f8f5;color:#5f746a;font-size:12px}
+.scale-control{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+.subtitle-scale-btn{border:1px solid #cfddd5;background:#fff;color:#4b7064;border-radius:9px;padding:7px 11px;font-size:13px;cursor:pointer}
+.subtitle-scale-btn.active{background:#dff0e7;border-color:#8dbfa6;color:#215a49;font-weight:700}
+.scale-control small{font-size:12px;color:#7d8b85;margin-left:4px}
+.segment.active{box-shadow:inset 5px 0 0 var(--brand2)!important;background:#e3f2e9!important}
+@media(max-width:900px){
+  .layout,.sidebar-collapsed .layout{display:block!important}
+  .sidebar,.sidebar-collapsed .sidebar{position:relative!important;top:auto!important;height:auto!important;overflow:visible!important}
+  main{overflow:visible!important}
+}
