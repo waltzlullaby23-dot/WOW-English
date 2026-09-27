@@ -147,6 +147,13 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
   if(!info.definition_zh||!info.gloss) enrichWord(word);
 }
 function closeWord(){state.word=null;render();}
+function playGoogleTTS(value,target){
+  try{
+    const src='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value);
+    const audio=new Audio(src); audio.preload='auto'; audio.play().catch(()=>{});
+  }catch{}
+}
+
 function speak(text,locale){
   const value=String(text||'').trim();
   if(!value)return;
@@ -164,16 +171,15 @@ function speak(text,locale){
       const any=voices.find(v=>String(v.lang||'').toLowerCase().startsWith('en'));
       const u=new SpeechSynthesisUtterance(value);
       u.lang=target; u.voice=exact||family||any||null; u.rate=.9; u.pitch=1; u.volume=1;
+      let finished=false;
+      u.onend=()=>{finished=true;};
+      u.onerror=()=>{ if(!finished) playGoogleTTS(value,target); };
       synth.speak(u);
       if((exact||family||any)||voices.length===0)return;
     }catch{}
   }
-  // Final no-key fallback. This is Google Translate's public TTS endpoint;
-  // if the browser blocks it, the Web Speech API above remains the primary path.
-  try{
-    const src='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value);
-    const audio=new Audio(src); audio.preload='auto'; audio.play().catch(()=>{});
-  }catch{}
+  // Final no-key fallback.
+  playGoogleTTS(value,target);
 }
 
 
@@ -337,8 +343,13 @@ function syncSubtitle(t){
   }
   if(idx<0&&adjusted>=Number(seg[seg.length-1]?.start||0))idx=seg.length-1;
   nodes.forEach((el,i)=>el.classList.toggle('active',i===idx));
+  if(idx!==lastSubtitleIndex && idx>=0){
+    const active=nodes[idx];
+    active?.scrollIntoView?.({behavior:'smooth',block:'center'});
+    lastSubtitleIndex=idx;
+  }
 }
-function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null;}try{ytPlayer?.destroy?.();}catch{}ytPlayer=null;}
+function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null;}try{ytPlayer?.destroy?.();}catch{}ytPlayer=null;lastSubtitleIndex=-1;}
 function seek(sec){if(ytPlayer?.seekTo){try{ytPlayer.seekTo(Number(sec),true);ytPlayer.playVideo?.();}catch{}}}
 function setSpeed(s){state.speed=Number(s)||1;if(ytPlayer?.setPlaybackRate){try{ytPlayer.setPlaybackRate(state.speed);}catch{}}document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===state.speed));}
 function setSubtitleSize(s){const allowed=[75,100,125,150,200];const n=Number(s)||100;state.subtitleSize=allowed.includes(n)?n:100;const list=$('.subtitle-list');if(list)list.dataset.scale=String(state.subtitleSize);document.querySelectorAll('.subtitle-scale-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.scale)===state.subtitleSize));}
