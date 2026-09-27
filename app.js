@@ -28,7 +28,7 @@ function categoryCount(id){return catalog.videos.filter(v=>v.category===id).leng
 function shell(main){const d=daily(), collapsed=state.sidebarCollapsed;return `<div class="app ${collapsed?'sidebar-collapsed':''}">
 <header class="topbar"><a class="brand" href="#learning"><img src="assets/logo.png" alt="三木Eng"></a><div class="search"><input value="${esc(state.search)}" oninput="updateSearch(this.value)" placeholder="搜尋影片、主題、單字、頻道…"></div><div class="top-actions"><button onclick="go('learning')">影片學習</button></div></header>
 <div class="layout"><aside class="sidebar">
-<div class="brand-mini"><span>三木</span></div>
+<div class="brand-mini"><span>三木</span><button class="sidebar-toggle" onclick="toggleSidebar()">${collapsed?'»':'«'}</button></div>
 <button class="side-main ${['learning','watch'].includes(state.route)?'active':''}" onclick="go('learning')"><span class="side-icon">▶</span><span><b>影片學習</b><small>影片・字幕・單字</small></span></button>
 <button class="side-main ${['grammar','lesson'].includes(state.route)?'active':''}" onclick="go('grammar')"><span class="side-icon">文</span><span><b>英文文法</b><small>30 章 · 150 微課</small></span></button>
 <button class="side-main ${state.route==='quiz'?'active':''}" onclick="go('quiz')"><span class="side-icon">測</span><span><b>多益練習</b><small>4 級距 · 20 題</small></span></button>
