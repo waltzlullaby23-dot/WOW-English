@@ -3,14 +3,14 @@ const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':
 const pct=(n)=>Math.round((Number(n)||0)*100)+'%';
 const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-const state={route:'learning',selectedVideo:null,selectedLesson:null,search:'',category:'all',subcategory:'all',level:'all',caption:'all',transcriptTab:'bilingual',subtitleSize:100,speed:1,subtitleOffset:0,word:null,sidebarCollapsed:false,quizBand:'400-600',quizIndex:0,quizAnswers:{}};
+const state={route:'learning',selectedVideo:null,selectedLesson:null,search:'',category:'all',subcategory:'all',level:'all',caption:'all',transcriptTab:'bilingual',subtitleSize:100,speed:1,subtitleOffset:0,subtitleRate:1,word:null,sidebarCollapsed:false,quizBand:'400-600',quizIndex:0,quizAnswers:{}};
 let catalog={videos:[]},taxonomy={categories:[]},lessons={chapters:[],microLessons:[]},toeic={bands:{}},wordBank={words:{}},learningUnits={units:{}};
 let ytPlayer=null,ytTimer=null,categoryModalOpen=false;
 
 async function boot(){
   const files=await Promise.all(['catalog','taxonomy','lessons','toeic','word-bank','learning-units'].map(x=>fetch('data/'+x+'.json',{cache:'no-store'}).then(r=>r.json())));
   [catalog,taxonomy,lessons,toeic,wordBank,learningUnits]=files;
-  state.sidebarCollapsed=load('evl-sidebar-collapsed',false);state.subtitleOffset=Number(load('sanmu-subtitle-offset',0))||0;
+  state.sidebarCollapsed=load('evl-sidebar-collapsed',false);state.subtitleOffset=Number(load('sanmu-subtitle-offset',0))||0;state.subtitleRate=Number(load('sanmu-subtitle-rate',1))||1;
   parseHash();
 }
 function parseHash(){const p=location.hash.slice(1).split('/');state.route=p[0]||'learning';state.selectedVideo=state.route==='watch'?decodeURIComponent(p[1]||''):null;state.selectedLesson=state.route==='lesson'?decodeURIComponent(p[1]||''):null;if(state.route==='watch'&&!['english','bilingual','chinese'].includes(state.transcriptTab))state.transcriptTab='bilingual';if(history.scrollRestoration)history.scrollRestoration='manual';requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));render();}
@@ -114,6 +114,7 @@ const TITLE_ZH={
 };
 function titleZh(v){return v?.titleZh||TITLE_ZH[v?.id]||'中文標題翻譯待補';}
 function setSubtitleOffset(sec){state.subtitleOffset=Number(sec)||0;save('sanmu-subtitle-offset',state.subtitleOffset);document.querySelectorAll('.subtitle-offset-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.offset)===state.subtitleOffset));}
+function setSubtitleRate(rate){state.subtitleRate=Number(rate)||1;save('sanmu-subtitle-rate',state.subtitleRate);document.querySelectorAll('.subtitle-rate-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.rate)===state.subtitleRate));}
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;}
 function fmt(s){s=Number(s)||0;return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');}
 function clickableSentence(text,videoId){return esc(text).replace(/[A-Za-z]+(?:'[A-Za-z]+)?/g,w=>{const k=w.toLowerCase();const info=wordBank.words?.[k];if(['a','an','the','and','or','but','if','to','of','in','on','at','for','from','by','with','as','is','are','was','were','be','been','being','am','do','does','did','have','has','had','can','could','will','would','should','may','might','must','this','that','these','those','it','its','they','them','their','we','our','you','your','i','he','she','his','her','what','which','who','when','where','why','how'].includes(k))return w;return `<button class="word-token ${info?'known':''}" onclick='event.stopPropagation();openWord(${JSON.stringify(k)},${JSON.stringify(videoId)},${JSON.stringify(text)})'>${w}</button>`;});}
@@ -295,7 +296,7 @@ function watch(){
       <div class="player-tools">
         <div class="tool-group"><span class="tool-label">語速</span><button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button><button data-speed="1" class="active" onclick="setSpeed(1)">1×</button><button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button><button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button></div>
         <div class="tool-group"><span class="tool-label">字幕同步</span><button class="subtitle-offset-btn ${offset===-2?'active':''}" data-offset="-2" onclick="setSubtitleOffset(-2)">-2s</button><button class="subtitle-offset-btn ${offset===-1?'active':''}" data-offset="-1" onclick="setSubtitleOffset(-1)">-1s</button><button class="subtitle-offset-btn ${offset===0?'active':''}" data-offset="0" onclick="setSubtitleOffset(0)">0</button><button class="subtitle-offset-btn ${offset===1?'active':''}" data-offset="1" onclick="setSubtitleOffset(1)">+1s</button><button class="subtitle-offset-btn ${offset===2?'active':''}" data-offset="2" onclick="setSubtitleOffset(2)">+2s</button></div>
-        <span></span><button onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏'}</button>
+        <div class="tool-group"><span class="tool-label">字幕速度</span><button class="subtitle-rate-btn" data-rate="0.9" onclick="setSubtitleRate(.9)">0.9×</button><button class="subtitle-rate-btn" data-rate="0.95" onclick="setSubtitleRate(.95)">0.95×</button><button class="subtitle-rate-btn active" data-rate="1" onclick="setSubtitleRate(1)">1×</button><button class="subtitle-rate-btn" data-rate="1.05" onclick="setSubtitleRate(1.05)">1.05×</button><button class="subtitle-rate-btn" data-rate="1.1" onclick="setSubtitleRate(1.1)">1.1×</button></div><span></span><button onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏'}</button>
       </div>
 
       <div class="subtitle-control scale-control"><label>字幕大小</label><button class="subtitle-scale-btn ${scale===75?'active':''}" onclick="setSubtitleSize(75)">75%</button><button class="subtitle-scale-btn ${scale===100?'active':''}" onclick="setSubtitleSize(100)">100%</button><button class="subtitle-scale-btn ${scale===125?'active':''}" onclick="setSubtitleSize(125)">125%</button><button class="subtitle-scale-btn ${scale===150?'active':''}" onclick="setSubtitleSize(150)">150%</button><button class="subtitle-scale-btn ${scale===200?'active':''}" onclick="setSubtitleSize(200)">200%</button></div>
