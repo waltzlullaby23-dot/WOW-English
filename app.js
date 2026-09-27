@@ -147,41 +147,58 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
   if(!info.definition_zh||!info.gloss) enrichWord(word);
 }
 function closeWord(){state.word=null;render();}
+let speechAudio=null;
 function playGoogleTTS(value,target){
   try{
-    const src='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value);
-    const audio=new Audio(src); audio.preload='auto'; audio.play().catch(()=>{});
+    if(speechAudio){speechAudio.pause();speechAudio.src='';}
+    const src='https://translate.googleapis.com/translate_a/tts?client=gtx&ie=UTF-8&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value);
+    speechAudio=new Audio(src);
+    speechAudio.preload='auto';
+    const p=speechAudio.play();
+    if(p?.catch)p.catch(()=>{});
   }catch{}
 }
-
+function pickEnglishVoice(target){
+  const voices=window.speechSynthesis?.getVoices?.()||[];
+  const wanted=target.toLowerCase();
+  const exact=voices.find(v=>String(v.lang||'').toLowerCase()===wanted);
+  if(exact)return exact;
+  if(target==='en-GB'){
+    return voices.find(v=>/^en-gb/i.test(v.lang||'')) || voices.find(v=>/british|uk|daniel|george|hazel|serena|kate/i.test(v.name||'')) || voices.find(v=>/^en/i.test(v.lang||''));
+  }
+  return voices.find(v=>/^en-us/i.test(v.lang||'')) || voices.find(v=>/american|us|alex|samantha|aria|jenny/i.test(v.name||'')) || voices.find(v=>/^en/i.test(v.lang||''));
+}
 function speak(text,locale){
   const value=String(text||'').trim();
   if(!value)return;
-  const lang=String(locale||'en-US').toLowerCase();
-  const target=lang.startsWith('en-gb')?'en-GB':'en-US';
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
   const synth=window.speechSynthesis;
   if(synth){
     try{
       synth.cancel();
-      const voices=synth.getVoices();
-      const exact=voices.find(v=>String(v.lang||'').toLowerCase()===target.toLowerCase());
-      const family=voices.find(v=>String(v.lang||'').toLowerCase().startsWith(target.slice(0,2).toLowerCase()) &&
-        (target==='en-GB' ? /uk|brit|daniel|george|hazel|serena|kate/i.test(v.name||'') :
-                             /us|american|alex|samantha|aria|jenny/i.test(v.name||'')));
-      const any=voices.find(v=>String(v.lang||'').toLowerCase().startsWith('en'));
       const u=new SpeechSynthesisUtterance(value);
-      u.lang=target; u.voice=exact||family||any||null; u.rate=.9; u.pitch=1; u.volume=1;
+      u.lang=target;
+      u.voice=pickEnglishVoice(target)||null;
+      u.rate=.82; u.pitch=1; u.volume=1;
       let finished=false;
       u.onend=()=>{finished=true;};
-      u.onerror=()=>{ if(!finished) playGoogleTTS(value,target); };
+      u.onerror=()=>{if(!finished)playGoogleTTS(value,target);};
       synth.speak(u);
-      if((exact||family||any)||voices.length===0)return;
+      setTimeout(()=>{
+        const voices=synth.getVoices?.()||[];
+        if(voices.length && !u.voice){u.voice=pickEnglishVoice(target);}
+      },50);
+      // If the browser has no usable English voice, use Google TTS immediately.
+      if(!u.voice && voicesUnavailableLongEnough(synth))playGoogleTTS(value,target);
+      return;
     }catch{}
   }
-  // Final no-key fallback.
   playGoogleTTS(value,target);
 }
-
+function voicesUnavailableLongEnough(synth){
+  const voices=synth?.getVoices?.()||[];
+  return voices.length===0;
+}
 
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
