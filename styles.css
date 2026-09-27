@@ -95,3 +95,41 @@ main{min-width:0!important;height:auto!important;overflow:visible!important}
   .sidebar,.sidebar-collapsed .sidebar{position:static!important;overflow:visible!important;height:auto!important;max-height:none!important}
   main{overflow:visible!important}
 }
+
+
+/* ======================= V7 FINAL UX ======================= */
+/* One document owns vertical scrolling. Sticky/nested scroll traps are disabled. */
+html,body,#app,.app{height:auto!important;min-height:100%!important}
+html,body{overflow-x:hidden!important;overflow-y:auto!important;scroll-behavior:auto!important}
+body{overscroll-behavior:auto!important}
+.topbar{position:sticky!important;top:0!important;z-index:2000}
+.layout{height:auto!important;min-height:0!important;align-items:start!important}
+.sidebar,.sidebar-collapsed .sidebar{position:static!important;top:auto!important;height:auto!important;max-height:none!important;overflow:visible!important}
+main{height:auto!important;min-height:0!important;overflow:visible!important}
+.watch-page,.player-card,.subtitle-panel,.learning-row{height:auto!important;overflow:visible!important;contain:none!important}
+.subtitle-list{height:auto!important;max-height:none!important;overflow:visible!important;overscroll-behavior:auto!important}
+.subtitle-list .segment{scroll-margin-top:100px;scroll-margin-bottom:100px}
+
+/* Never let a subtitle container become a second wheel. */
+.subtitle-list{--scale:1}
+.subtitle-list[data-scale="75"]{--scale:.75}
+.subtitle-list[data-scale="100"]{--scale:1}
+.subtitle-list[data-scale="125"]{--scale:1.25}
+.subtitle-list[data-scale="150"]{--scale:1.5}
+.subtitle-list[data-scale="200"]{--scale:2}
+.subtitle-list .en{font-size:calc(20px * var(--scale))!important;line-height:1.65!important}
+.subtitle-list .zh{font-size:calc(18px * var(--scale))!important;line-height:1.6!important}
+.subtitle-scale{display:flex;gap:7px;flex-wrap:wrap}
+.subtitle-scale-btn{border:1px solid #cfddd5;background:#fff;color:#4b7064;border-radius:9px;padding:8px 12px;font-size:13px;cursor:pointer}
+.subtitle-scale-btn.active{background:#dff0e7;border-color:#8dbfa6;color:#215a49}
+
+/* Remove the obsolete engine control even if cached markup exists. */
+.top-actions button:first-child{display:none!important}
+
+/* Desktop sidebar remains in normal flow; no sticky side scrollbar. */
+@media(min-width:681px){.sidebar{align-self:start!important}}
+@media(max-width:680px){
+  .layout{display:block!important}
+  .sidebar{position:static!important;overflow:visible!important}
+  .subtitle-scale{width:100%}
+}
