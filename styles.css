@@ -37,3 +37,32 @@ main{padding:30px 34px 70px;max-width:1500px;width:100%;margin:0 auto}.hero{disp
 .word-row{display:block;width:100%;border:0;background:transparent;color:#8c9bb0;text-align:left;padding:3px 0}.word-row:hover{color:var(--accent)}.inline-word{border:0;border-bottom:1px dashed rgba(121,225,194,.5);background:transparent;color:#a7dccb;padding:0 1px;cursor:pointer}.vocab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.vocab-card{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px;border:1px solid var(--line);background:#0e1624;border-radius:14px}.vocab-card b{font-size:15px}.vocab-card p{margin:5px 0 0;color:#7c8b9f;font-size:11px}.result-card{text-align:center}.result-score{font-size:60px;font-weight:800;letter-spacing:-.05em;color:var(--accent)}
 @media(max-width:900px){.vocab-grid{grid-template-columns:1fr 1fr}.side-hero,.side-feature,.side-tool{min-width:210px}.sidebar-primary{flex-direction:row;overflow:auto}.sidebar-primary .side-feature{min-width:220px}.grammar-progress-card{min-width:210px}}
 @media(max-width:600px){.vocab-grid{grid-template-columns:1fr}.side-hero,.side-feature,.side-tool{min-width:190px}}
+
+
+/* 三木Eng — bright learning theme */
+:root{
+  --bg:#f4f6ef;--panel:#ffffff;--panel2:#f8faf6;--card:#ffffff;--line:#dbe3d9;--text:#21433b;--muted:#78857e;
+  --accent:#2d7868;--accent2:#89a8c8;--warn:#a86f21;--danger:#b84a53;--white:#fff;
+  --radius:18px;--shadow:0 18px 45px rgba(37,66,57,.10)
+}
+html,body,#app{background:var(--bg);color:var(--text)}
+body{background:radial-gradient(circle at 82% -10%,rgba(137,168,200,.20),transparent 32%),radial-gradient(circle at 4% 5%,rgba(181,211,182,.25),transparent 30%),linear-gradient(180deg,#f8f9f3,#eef3eb)}
+.topbar{background:rgba(250,251,247,.92);border-bottom:1px solid rgba(47,77,67,.12);box-shadow:0 8px 24px rgba(39,69,60,.04)}
+.brand{color:#23473e}.brand-mark{background:linear-gradient(135deg,#c4dbc9,#89aac4);color:#1f5145;box-shadow:none}
+.search input{background:#fff;border-color:#d3ded4;color:#27483f}.search input::placeholder{color:#95a098}
+.nav-btn{background:#fff;color:#44645b;border-color:#d3ded4}.nav-btn.active{background:#edf5f0;color:#2d7868;border-color:#b7d0c3}
+.layout{background:transparent}.sidebar{background:rgba(247,249,244,.88);border-right:1px solid rgba(47,77,67,.10)}
+.side-item{color:#49665e}.side-item:hover,.side-item.active{background:#eaf2ec;color:#21483e}.side-item .count{color:#7d8e86}
+.side-hero{background:linear-gradient(135deg,#3f7b69,#326655);color:#fff;border-color:#4f8d79}.side-hero.active{background:linear-gradient(135deg,#2e7160,#275b50)}
+.side-feature,.side-tool{color:#46635b}.side-hero:hover,.side-feature:hover,.side-tool:hover,.side-hero.active,.side-feature.active,.side-tool.active{background:#edf3ee;color:#21483e;border-color:#d2dfd6}
+.side-feature small,.side-tool small{color:#829189}.side-hero small{color:#d9ece5}.side-icon{background:#eef2ec;color:#2f665a}.mini-icon{background:#fff!important;border-color:#e2e9e3!important;color:#2f665a!important}
+.grammar-progress-card{background:#fff;border-color:#d8e2da;box-shadow:0 10px 25px rgba(47,77,67,.05)}.gp-title{color:#7a8982}.gp-count{color:#214a40}.gp-bar{background:#e5ece5}.gp-bar i{background:linear-gradient(90deg,#9cc7ae,#b8cc9d)}
+main{background:transparent}.hero-main{background:linear-gradient(135deg,#ffffff 0%,#eef5ef 72%);border-color:#d9e5dc;box-shadow:var(--shadow)}.hero-main:after{border-color:rgba(45,120,104,.14)}.hero p{color:#71817a}.hero-stat{background:rgba(255,255,255,.86);border-color:#dbe4dc}.stat-label,.section-sub{color:#798780}.stat-box{background:#f7faf7;border-color:#dfe7e0}.stat-box span{color:#7b8a83}
+.eyebrow{color:#2f7967}.pill{background:#fff;border-color:#dbe4dd;color:#5e766e}.pill.green{border-color:#b9d4c7;color:#2c7867}.pill.blue{border-color:#c6d7e8;color:#5d7d9c}
+.section-title{color:#234940}.video-card,.learning-card,.chapter,.quiz-card,.panel,.player-card,.cat{background:#fff;border-color:#dbe4dd;box-shadow:0 8px 24px rgba(40,73,63,.05)}.video-card:hover{border-color:#b8cdc1;box-shadow:0 15px 32px rgba(40,73,63,.10)}.channel,.section-sub,.results-meta,.muted{color:#7a8982}.mini{background:#f5f8f5;border-color:#dce6df;color:#698078}.mini.ok{color:#2f7b69;border-color:#bad7c7}
+.filterbar{background:#fff;border-color:#dbe4dd}.filterbar select,.filterbar input{background:#fbfcfa;border-color:#d3ded6;color:#49655d}.category-grid .cat{background:#fff}.cat:hover{border-color:#b9cec2}
+.watch-shell .player-card,.watch-shell .panel{background:#fff}.player-tools{border-color:#dbe4dd}.tool{background:#f7faf8;color:#416159;border-color:#d3dfd7}.tool.active{border-color:#9fc8b5;color:#2d7868;background:#edf6f0}.watch-meta{color:#78877f}.panel-header{border-color:#dbe4dd}.subtab{background:#eef3ee;color:#6b8179}.subtab.active{background:#e8f3ec;color:#2d7868}.segment:hover{background:#f2f6f2}.time{color:#82918a}.en{color:#20463d}.zh{color:#6d7f77}.progressbar{background:#e2eae3}.progressbar i{background:linear-gradient(90deg,#65a991,#8fa8ca)}
+.engine .stage,.log,.empty{background:#fff;border-color:#dbe4dd}.log{color:#61776e}.empty{color:#7b8b83}.toast{background:#fff;color:#37584f;border-color:#c7dbcf;box-shadow:0 12px 28px rgba(38,70,59,.12)}
+.word-row,.inline-word{color:#53766b}.inline-word{border-color:#a5ccb8}.micro-btn{background:#f8faf8;border-color:#dbe4dd;color:#5d756d}.micro-btn span{background:#e9f0ea;color:#678078}.micro-btn.done{background:#edf6f0;border-color:#b6d6c5;color:#2d7868}.vocab-card{background:#fff;border-color:#dbe4dd}.result-score{color:#2d7868}
+.side-footer{background:#fff;border-color:#dbe4dd;color:#71827a}
+@media(max-width:900px){.sidebar{background:#f7f9f5;border-bottom-color:#dbe4dd}.sidebar-primary{background:transparent}}

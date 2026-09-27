@@ -62,7 +62,7 @@ def search_queries(taxonomy: dict[str, Any], max_queries: int, offset: int) -> l
     choices = []
     for cat in taxonomy.get('categories', []):
         for sub in cat.get('subs', []):
-            for tpl in templates[:2]:
+            for tpl in templates[:4]:
                 choices.append(tpl.format(sub=sub))
     if not choices:
         return []
@@ -214,18 +214,19 @@ def ai_content_profile(title: str, description: str, transcript: str, taxonomy: 
 def heuristic_profile(title: str, transcript: str, taxonomy: dict[str, Any]) -> dict[str, Any]:
     text=(title+' '+transcript).lower()
     patterns={
-        'learning':['grammar','vocabulary','pronunciation','english','speaking','learn','passive voice','tense','synonym'],
-        'daily':['family','food','home','shopping','daily','bathroom','emotion'],
-        'business':['business','finance','office','manager','marketing','startup','workplace'],
-        'technology':['ai','app','software','technology','internet','cyber','computer'],
-        'science':['science','space','physics','biology','medical','environment','engineering'],
-        'news':['news','politics','climate','economy','society','international'],
-        'entertainment':['movie','film','actor','series','celebrity','comedy','game'],
-        'music':['music','song','lyrics','instrument','album','concert'],
-        'travel':['travel','city','hotel','airport','train','tourism','flight'],
-        'sports':['basketball','football','soccer','baseball','fitness','running'],
-        'history':['history','historical','culture','philosophy','art','civilization'],
-        'growth':['habit','productivity','communication','leadership','mindset','self-improvement'],
+        'english-learning':['grammar','vocabulary','pronunciation','english','speaking','learn','passive voice','tense','synonym'],
+        'history-geography':['history','historical','geography','civilization','archaeology','empire','culture','ancient'],
+        'religion':['religion','bible','christian','christianity','buddhism','islam','muslim','jewish','judaism','faith'],
+        'film-tv':['movie','film','actor','series','celebrity','comedy','director','screenplay','tv'],
+        'business-finance':['business','finance','office','manager','marketing','startup','workplace','economy','investment'],
+        'technology':['ai','app','software','technology','internet','cyber','computer','robot','machine learning'],
+        'medical-health':['science','medical','medicine','health','disease','nutrition','mental health','doctor','hospital'],
+        'leisure-travel':['travel','city','hotel','airport','train','tourism','flight','food','cooking','hobby','lifestyle'],
+        'sports':['basketball','football','soccer','baseball','tennis','fitness','running','sport','athlete'],
+        'speeches-lectures':['ted','lecture','speech','keynote','presentation','leadership','talk','conference'],
+        'news-documentary':['news','climate','economy','society','international','documentary','investigation','report'],
+        'anime-cartoons':['anime','cartoon','animation','manga','character','voice acting'],
+        'philosophy':['philosophy','philosophical','ethics','logic','existence','epistemology','metaphysics'],
     }
     cat=max(patterns,key=lambda k:sum(text.count(t) for t in patterns[k]))
     subs=next(c['subs'] for c in taxonomy['categories'] if c['id']==cat)

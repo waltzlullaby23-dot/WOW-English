@@ -63,3 +63,6 @@ The front-end now includes the complete learning utility set requested from the 
 - 文法微課進度：0/150-style progress is calculated from actual micro-lesson completion state rather than chapter percentages.
 
 All of these are stored locally first with `localStorage` / `sessionStorage`, so the UI remains usable without a backend. They can later be moved to account-backed cloud sync without changing the feature model.
+
+## 播放器與廣告說明
+網站已改用 YouTube Privacy-Enhanced Mode (`youtube-nocookie.com`)、`rel=0`、`hl=zh-TW`，並保留標準 YouTube 播放器。YouTube 官方規定第三方嵌入網站不能直接關閉嵌入影片廣告；廣告由 YouTube / 影片所有者的營利設定控制。因此「完全無廣告」若要保證，必須改用有授權的自有/第三方影片檔案與非 YouTube 播放來源，不能透過嵌入參數繞過 YouTube 廣告。
