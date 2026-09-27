@@ -1,6 +1,7 @@
 name: 三木Eng Free Video Discovery
 # timeout-hardened runner
 # repair legacy videos before accepting new candidates
+# rerun after pipeline syntax fix
 
 on:
   push:
