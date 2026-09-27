@@ -128,18 +128,37 @@ def fetch_english_transcript(video_id: str):
     return None,[]
 
 def fetch_english_via_ytdlp(video_url: str):
+    # YouTube periodically changes which player clients expose caption tracks.
+    # Try several documented yt-dlp clients instead of relying on a single default.
+    client_args=[
+        'youtube:player-client=web_embedded,web,ios',
+        'youtube:player-client=web_embedded,ios,web',
+        'youtube:player-client=default',
+    ]
     with tempfile.TemporaryDirectory() as td:
         out=str(Path(td)/'%(id)s.%(language)s.%(ext)s')
-        cmd=['yt-dlp','--skip-download','--write-subs','--write-auto-subs','--sub-format','vtt/srt/best','--sub-langs','en.*','-o',out,video_url]
-        for attempt in range(2):
-            try:
-                p=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=180)
-                files=sorted(Path(td).glob('*.vtt'))+sorted(Path(td).glob('*.srt'))
-                if p.returncode==0 and files:
-                    return files[0],parse_vtt(files[0])
-            except Exception:
-                pass
-            time.sleep(2*(attempt+1))
+        for client in client_args:
+            cmd=['yt-dlp','--skip-download','--write-subs','--write-auto-subs',
+                 '--sub-format','vtt/srt/best','--sub-langs','en.*','-o',out,
+                 '--extractor-args',client,video_url]
+            for attempt in range(2):
+                try:
+                    p=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=180)
+                    files=sorted(Path(td).glob('*.vtt'))+sorted(Path(td).glob('*.srt'))
+                    usable=[]
+                    for fp in files:
+                        try:
+                            rows=parse_vtt(fp)
+                            if len(rows)>=CONFIG['minSegments'] and len(' '.join(x['en'] for x in rows))>=180:
+                                usable.append((fp,rows))
+                        except Exception:
+                            pass
+                    if p.returncode==0 and usable:
+                        usable.sort(key=lambda x:len(x[1]),reverse=True)
+                        return usable[0]
+                except Exception:
+                    pass
+                time.sleep(2*(attempt+1))
     return None,[]
 
 def translation_codes(tr):
@@ -314,6 +333,51 @@ def ydl_info(video_id):
             }
     return {}
  
+def process_video(video_id, meta, existing, idx=0):
+    info=ydl_info(video_id)
+    title=clean_text(info.get('title') or meta.get('title') or '')
+    if not title:return None,{'id':video_id,'title':'','status':'review','reason':'missing-title'}
+    duration=float(info.get('duration') or 0)
+    tr,segs=fetch_english_transcript(video_id)
+    if not segs:
+        tr,segs=fetch_english_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
+    if not segs:
+        return None,{'id':video_id,'title':title,'status':'review','reason':'no-english-transcript'}
+    ratio=language_ratios(' '.join(x['en'] for x in segs))
+    spoken,spoken_source,spoken_conf=infer_language(info,ratio)
+    valid,coverage,reason=validate_transcript(segs,duration)
+    if not valid or spoken!='en' or ratio['nonEnglish']>0.18:
+        return None,{'id':video_id,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken}
+    zh,zh_source=translate_from_youtube(tr,segs)
+    if zh is None:
+        zh,zh_source=translate_with_argos(segs)
+    if zh is None:
+        return None,{'id':video_id,'title':title,'status':'review','reason':zh_source,'coverage':round(coverage,3)}
+    transcript=[{'start':s['start'],'end':s['end'],'en':s['en'],'zh':clean_text(z)} for s,z in zip(segs,zh)]
+    category=meta['category']
+    sub=classify(category,meta.get('query',''),title,' '.join(x['en'] for x in transcript),idx)
+    level,score=cefr_estimate(' '.join(x['en'] for x in transcript))
+    tf=title_fingerprint(title);fp=text_fingerprint(' '.join(x['en'] for x in transcript))
+    for old_id,old in existing.items():
+        if old_id==video_id:continue
+        if old.get('fingerprint')==fp or (old.get('titleFingerprint')==tf and lexical_similarity(old.get('title',''),title)>.9):
+            return None,{'id':video_id,'title':title,'status':'review','reason':'duplicate'}
+    title_zh=translate_one(title) or ''
+    rec={
+      'id':video_id,'title':title,'titleZh':clean_text(title_zh),
+      'channel':clean_text(info.get('channel') or info.get('uploader') or ''),
+      'duration':pretty_duration(duration),'published':str(info.get('upload_date') or '')[:10],
+      'category':category['id'],'subcategory':sub,'cefr':level,'cefrScore':score,
+      'englishScore':round(ratio['english'],3),'multilingualScore':round(ratio['nonEnglish'],3),
+      'spokenLanguage':'en','spokenEvidence':{'method':spoken_source,'confidence':spoken_conf},
+      'captionLanguage':'en','captionQuality':'verified','subtitleCoverage':round(coverage,3),
+      'captionSource':'youtube-transcript-api' if tr else 'yt-dlp','translation':'available',
+      'translationSource':zh_source,'status':'accepted','sourceUrl':f'https://www.youtube.com/watch?v={video_id}',
+      'captions':'available','discoveryQuery':meta.get('query',''),'tags':[],
+      'fingerprint':fp,'titleFingerprint':tf,'transcript':transcript,
+    }
+    return rec,None
+
 def main():
     cfg=load_json(ROOT/'engine/config.json',{})
     for k,v in cfg.items():
@@ -321,13 +385,30 @@ def main():
     tax=load_json(TAX,{'categories':[]})
     data=load_json(CAT,{'schemaVersion':5,'videos':[]})
     existing={v.get('id'):v for v in data.get('videos',[]) if v.get('id')}
-    # Move legacy incomplete accepted records out of the formal library.
-    for v in list(existing.values()):
+
+    # Legacy records are repaired in-place. Previously we only marked them review,
+    # which made the library permanently stuck at the original seed set.
+    repair_candidates=[]
+    for vid,v in list(existing.items()):
         seg=v.get('transcript') or []
-        if v.get('status')=='accepted' and (len(seg)<CONFIG['minSegments'] or not all(clean_text(s.get('zh','')) for s in seg)):
-            v['status']='review'
-            v['reviewReason']='legacy-incomplete-caption-or-translation'
-            v['captionQuality']='incomplete'
+        if v.get('status')!='accepted' or v.get('captionQuality')!='verified' or len(seg)<CONFIG['minSegments'] or not all(clean_text(x.get('zh','')) for x in seg):
+            repair_candidates.append((vid,{
+                'query':v.get('discoveryQuery','English learning'),
+                'category':next((x for x in tax.get('categories',[]) if x.get('id')==v.get('category')),{'id':v.get('category','english-learning'),'subs':[v.get('subcategory','其他')]}),
+                'term':v.get('subcategory',''),
+                'title':v.get('title','')
+            }))
+    repair_candidates=repair_candidates[:int(CONFIG['maxProcess'])]
+
+    new=[];review=[]
+    repaired=0
+    for idx,(vid,meta) in enumerate(repair_candidates):
+        rec,err=process_video(vid,meta,existing,idx)
+        if rec:
+            existing[vid]=rec;new.append(rec);repaired+=1
+        elif err and err.get('reason')!='duplicate':
+            review.append(err)
+
     cursor=load_json(CURSOR,{'offset':0})
     jobs=search_queries(tax,int(cursor.get('offset',0)),int(CONFIG['queriesPerRun']))
     cand={}
@@ -338,67 +419,33 @@ def main():
                 cand.setdefault(vid,{'query':q,'category':cat,'term':term,'title':clean_text(row.get('title',''))})
         time.sleep(float(CONFIG['queryCooldown']))
     candidates=list(cand.items())[:int(CONFIG['maxCandidates'])]
-    new=[];review=[]
+    processed=0
     for idx,(vid,meta) in enumerate(candidates[:int(CONFIG['maxProcess'])]):
-        info=ydl_info(vid)
-        title=clean_text(info.get('title') or meta.get('title') or '')
-        if not title:continue
-        duration=float(info.get('duration') or 0)
-        tr,segs=fetch_english_transcript(vid)
-        if not segs:
-            tmp,segs=fetch_english_via_ytdlp(f'https://www.youtube.com/watch?v={vid}')
-            tr=None
-        if not segs:
-            review.append({'id':vid,'title':title,'status':'review','reason':'no-english-transcript'})
-            continue
-        ratio=language_ratios(' '.join(x['en'] for x in segs))
-        spoken,spoken_source,spoken_conf=infer_language(info,ratio)
-        valid,coverage,reason=validate_transcript(segs,duration)
-        if not valid or spoken!='en' or ratio['nonEnglish']>0.18:
-            review.append({'id':vid,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken})
-            continue
-        zh,zh_source=translate_from_youtube(tr,segs)
-        if zh is None:
-            zh,zh_source=translate_with_argos(segs)
-        if zh is None:
-            review.append({'id':vid,'title':title,'status':'review','reason':zh_source,'coverage':round(coverage,3)})
-            continue
-        transcript=[]
-        for s,z in zip(segs,zh):
-            transcript.append({'start':s['start'],'end':s['end'],'en':s['en'],'zh':clean_text(z)})
-        category=meta['category']; sub=classify(category,meta['query'],title,' '.join(x['en'] for x in transcript),idx)
-        level,score=cefr_estimate(' '.join(x['en'] for x in transcript))
-        tf=title_fingerprint(title);fp=text_fingerprint(' '.join(x['en'] for x in transcript))
-        dup=False
-        for old in existing.values():
-            if old.get('fingerprint')==fp or (old.get('titleFingerprint')==tf and lexical_similarity(old.get('title',''),title)>.9):dup=True;break
-        if dup:continue
-        rec={
-            'id':vid,'title':title,'channel':clean_text(info.get('channel') or info.get('uploader') or ''),
-            'duration':pretty_duration(duration),'published':str(info.get('upload_date') or '')[:10],
-            'category':category['id'],'subcategory':sub,'cefr':level,'cefrScore':score,
-            'englishScore':round(ratio['english'],3),'multilingualScore':round(ratio['nonEnglish'],3),
-            'spokenLanguage':'en','spokenEvidence':{'method':spoken_source,'confidence':spoken_conf},
-            'captionLanguage':'en','captionQuality':'verified','subtitleCoverage':round(coverage,3),
-            'captionSource':'youtube-transcript-api' if tr else 'yt-dlp','translation':'available',
-            'translationSource':zh_source,'status':'accepted','sourceUrl':f'https://www.youtube.com/watch?v={vid}',
-            'captions':'available','discoveryQuery':meta['query'],'tags':[],'fingerprint':fp,'titleFingerprint':tf,
-            'transcript':transcript,
-        }
-        existing[vid]=rec;new.append(rec)
-    cursor['offset']=(int(cursor.get('offset',0))+len(jobs))
+        rec,err=process_video(vid,meta,existing,idx)
+        processed+=1
+        if rec:
+            existing[vid]=rec;new.append(rec)
+        elif err and err.get('reason')!='duplicate':
+            review.append(err)
+
+    cursor['offset']=int(cursor.get('offset',0))+len(jobs)
     dump_json(CURSOR,cursor)
     data['schemaVersion']=5
-    data['generatedAt']=now_iso();data['source']='continuous-free-youtube-discovery';data['videos']=list(existing.values())
-    accepted=[v for v in data['videos'] if v.get('status')=='accepted' and v.get('captionQuality')=='verified' and v.get('translation')=='available']
-    data['stats']={'accepted':len(accepted),'totalRecords':len(data['videos']),'newAccepted':len(new),'processed':min(len(candidates),int(CONFIG['maxProcess'])),'candidates':len(cand),'queries':len(jobs),'lastRun':now_iso()}
+    data['generatedAt']=now_iso()
+    data['source']='continuous-free-youtube-discovery'
+    data['videos']=list(existing.values())
+    accepted=[v for v in data['videos'] if v.get('status')=='accepted' and v.get('captionQuality')=='verified' and v.get('translation')=='available' and all(clean_text(x.get('zh','')) for x in v.get('transcript',[]))]
+    data['stats']={'accepted':len(accepted),'totalRecords':len(data['videos']),'newAccepted':len(new),'repaired':repaired,'processed':processed,'repairCandidates':len(repair_candidates),'candidates':len(cand),'queries':len(jobs),'lastRun':now_iso()}
     dump_json(CAT,data)
     health=load_json(HEALTH,{'consecutiveZeroRuns':0,'totalNewAccepted':0})
     if new:health['consecutiveZeroRuns']=0
     else:health['consecutiveZeroRuns']=int(health.get('consecutiveZeroRuns',0))+1
-    health['totalNewAccepted']=int(health.get('totalNewAccepted',0))+len(new);health['lastRun']=now_iso();health['lastNewAccepted']=len(new)
+    health['totalNewAccepted']=int(health.get('totalNewAccepted',0))+len(new)
+    health['lastRun']=now_iso();health['lastNewAccepted']=len(new);health['lastRepaired']=repaired
     dump_json(HEALTH,health)
     dump_json(REVIEW,{'generatedAt':now_iso(),'videos':review,'count':len(review)})
-    print(json.dumps({'accepted':len(accepted),'newAccepted':len(new),'review':len(review),'candidates':len(cand),'queries':len(jobs)},ensure_ascii=False))
+    print(json.dumps({'accepted':len(accepted),'newAccepted':len(new),'repaired':repaired,'review':len(review),'candidates':len(cand),'queries':len(jobs)},ensure_ascii=False))
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    main()
+
