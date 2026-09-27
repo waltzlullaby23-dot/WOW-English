@@ -3,14 +3,14 @@ const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':
 const pct=(n)=>Math.round((Number(n)||0)*100)+'%';
 const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-const state={route:'learning',selectedVideo:null,selectedLesson:null,search:'',category:'all',subcategory:'all',level:'all',caption:'all',transcriptTab:'bilingual',subtitleSize:100,speed:1,word:null,sidebarCollapsed:false,quizBand:'400-600',quizIndex:0,quizAnswers:{}};
+const state={route:'learning',selectedVideo:null,selectedLesson:null,search:'',category:'all',subcategory:'all',level:'all',caption:'all',transcriptTab:'bilingual',subtitleSize:100,speed:1,subtitleOffset:0,word:null,sidebarCollapsed:false,quizBand:'400-600',quizIndex:0,quizAnswers:{}};
 let catalog={videos:[]},taxonomy={categories:[]},lessons={chapters:[],microLessons:[]},toeic={bands:{}},wordBank={words:{}},learningUnits={units:{}};
 let ytPlayer=null,ytTimer=null,categoryModalOpen=false;
 
 async function boot(){
   const files=await Promise.all(['catalog','taxonomy','lessons','toeic','word-bank','learning-units'].map(x=>fetch('data/'+x+'.json',{cache:'no-store'}).then(r=>r.json())));
   [catalog,taxonomy,lessons,toeic,wordBank,learningUnits]=files;
-  state.sidebarCollapsed=load('evl-sidebar-collapsed',false);
+  state.sidebarCollapsed=load('evl-sidebar-collapsed',false);state.subtitleOffset=Number(load('sanmu-subtitle-offset',0))||0;
   parseHash();
 }
 function parseHash(){const p=location.hash.slice(1).split('/');state.route=p[0]||'learning';state.selectedVideo=state.route==='watch'?decodeURIComponent(p[1]||''):null;state.selectedLesson=state.route==='lesson'?decodeURIComponent(p[1]||''):null;if(state.route==='watch'&&!['english','bilingual','chinese'].includes(state.transcriptTab))state.transcriptTab='bilingual';if(history.scrollRestoration)history.scrollRestoration='manual';requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));render();}
@@ -99,89 +99,24 @@ function explore(){
     <div class="video-grid">${vs.map(videoCard).join('')||'<div class="empty">目前沒有符合條件的影片。</div>'}</div>
   </section>`;
 }
+const TITLE_ZH={
+  '0Nv-zlhdb7Y':'如何用英語表達禮貌',
+  '3NM72kTE2oQ':'如何用英語表達禮貌：BBC Learning English 問答',
+  '4C4wlOAscvY':'聊聊食物——Real Easy English',
+  'SMIgI-qDNCA':'什麼是被動語態？BBC Learning English 問答',
+  'uz2C3bQot6o':'同義詞：我怎麼知道該選哪一個？',
+  'x6Pdp8GBwTM':'「th」音要怎麼發音？',
+  'x72gP4HrU58':'聊聊家庭：Real Easy English',
+  'z5V0d1nBCX8':'10 個簡單英文單字：浴室篇',
+  'O43nLSRMqHU':'倫敦到愛丁堡挑戰——第 1 集',
+  '-XcALxwXJVY':'App 能教你學語言嗎？——6 Minute English',
+  'KFajmtdj-J0':'姊妹之間的情感連結——6 Minute English'
+};
+function titleZh(v){return v?.titleZh||TITLE_ZH[v?.id]||'中文標題翻譯待補';}
+function setSubtitleOffset(sec){state.subtitleOffset=Number(sec)||0;save('sanmu-subtitle-offset',state.subtitleOffset);document.querySelectorAll('.subtitle-offset-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.offset)===state.subtitleOffset));}
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;}
-function initPlayer(){
-  if(state.route!=='watch')return;
-  const iframe=$('#yt'); if(!iframe)return;
-  const mount=()=>{
-    try{
-      if(!window.YT||!YT.Player)return;
-      if(ytPlayer&&typeof ytPlayer.getCurrentTime==='function')return;
-      ytPlayer=new YT.Player('yt',{events:{
-        onReady:()=>{startSubtitleSync();syncSubtitle(0);}
-      }});
-    }catch(e){setTimeout(initPlayer,500);}
-  };
-  if(window.YT&&YT.Player) mount();
-  else if(!window.__ytWaiter){
-    window.__ytWaiter=true;
-    window.addEventListener('ytapiready',()=>{window.__ytWaiter=false;mount()},{once:true});
-    const started=Date.now();
-    const poll=()=>{if(state.route!=='watch'||Date.now()-started>10000)return;if(window.YT&&YT.Player)mount();else setTimeout(poll,250);};
-    poll();
-  }
-}
-function startSubtitleSync(){if(ytTimer)clearInterval(ytTimer);ytTimer=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;let t=0;try{t=ytPlayer.getCurrentTime()}catch{return}syncSubtitle(t);},180);}
-function syncSubtitle(t){
-  const v=catalog.videos.find(x=>x.id===state.selectedVideo); if(!v)return;
-  const seg=v.transcript||[]; let idx=-1;
-  for(let i=0;i<seg.length;i++){
-    const a=Number(seg[i].start)||0;
-    const b=Number(seg[i].end)||((Number(seg[i+1]?.start)||a+6));
-    if(t>=a&&t<b){idx=i;break}
-  }
-  if(idx<0 && seg.length && t>=Number(seg[seg.length-1].start||0)) idx=seg.length-1;
-  const nodes=document.querySelectorAll('.segment');
-  nodes.forEach((el,i)=>el.classList.toggle('active',i===idx));
-  const active=idx>=0?nodes[idx]:null;
-  const list=$('.subtitle-list');
-  if(active && list && !window.__userScrollingSubtitle){
-    const top=active.offsetTop-list.clientHeight/2+active.offsetHeight/2;
-    list.scrollTo({top:Math.max(0,top),behavior:'smooth'});
-  }
-}
-function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null}try{ytPlayer?.destroy?.()}catch{}ytPlayer=null;}
-function seek(t){if(ytPlayer?.seekTo){ytPlayer.seekTo(Number(t),true);ytPlayer.playVideo?.();}}
-function setSpeed(s){state.speed=s;if(ytPlayer?.setPlaybackRate)try{ytPlayer.setPlaybackRate(s)}catch{}document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===s));}
-function setSubtitleSize(s){
-  const allowed=[75,100,125,150,200]; const n=Number(s)||100;
-  const scale=allowed.includes(n)?n:100; state.subtitleSize=scale;
-  const list=$('.subtitle-list');
-  if(list){list.dataset.scale=String(scale);}
-  document.querySelectorAll('.subtitle-scale-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.scale)===scale));
-}
-function setTab(t){state.transcriptTab=t;const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(catalog.videos.find(v=>v.id===state.selectedVideo));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
-function subtitleHTML(v){return (v?.transcript||[]).map((s,i)=>`<div class="segment" onclick="seek(${Number(s.start)||0})"><div class="time">${fmt(s.start)} · sentence ${i+1}</div>${state.transcriptTab!=='chinese'?`<div class="en">${clickableSentence(s.en,v.id)}</div>`:''}${state.transcriptTab!=='english'?`<div class="zh">${esc(s.zh||'翻譯待補')}</div>`:''}</div>`).join('');}
 function fmt(s){s=Number(s)||0;return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');}
 function clickableSentence(text,videoId){return esc(text).replace(/[A-Za-z]+(?:'[A-Za-z]+)?/g,w=>{const k=w.toLowerCase();const info=wordBank.words?.[k];if(['a','an','the','and','or','but','if','to','of','in','on','at','for','from','by','with','as','is','are','was','were','be','been','being','am','do','does','did','have','has','had','can','could','will','would','should','may','might','must','this','that','these','those','it','its','they','them','their','we','our','you','your','i','he','she','his','her','what','which','who','when','where','why','how'].includes(k))return w;return `<button class="word-token ${info?'known':''}" onclick='event.stopPropagation();openWord(${JSON.stringify(k)},${JSON.stringify(videoId)},${JSON.stringify(text)})'>${w}</button>`;});}
-function watch(){
-  const v=catalog.videos.find(x=>x.id===state.selectedVideo)||catalog.videos[0];
-  if(!v)return '<div class="empty">尚無影片。</div>';
-  markHistory(v);
-  const unit=learningUnits.units?.[v.id]||{};
-  return `<div class="watch-page">
-    <div class="player-card">
-      <div class="player"><iframe id="yt" src="${ytEmbed(v.id)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
-      <div class="player-tools">
-        <button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button><button data-speed="1" class="active" onclick="setSpeed(1)">1×</button><button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button><button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button><span></span><button onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏'}</button>
-      </div>
-      <div class="subtitle-control"><label>字幕大小</label>
-        <div class="subtitle-scale"><button class="subtitle-scale-btn" data-scale="75" onclick="setSubtitleSize(75)">75%</button><button class="subtitle-scale-btn active" data-scale="100" onclick="setSubtitleSize(100)">100%</button><button class="subtitle-scale-btn" data-scale="125" onclick="setSubtitleSize(125)">125%</button><button class="subtitle-scale-btn" data-scale="150" onclick="setSubtitleSize(150)">150%</button><button class="subtitle-scale-btn" data-scale="200" onclick="setSubtitleSize(200)">200%</button></div>
-      </div>
-      <h1>${esc(v.title)}</h1><p class="watch-meta">${esc(v.channel)} ・ ${esc(v.duration)} ・ CEFR ${esc(v.cefr)} ・ English ${pct(v.englishScore)}</p>
-    </div>
-    <div class="panel subtitle-panel">
-      <div class="panel-head"><div><h2>字幕工作區</h2><p>字幕會依影片時間逐句高亮；點擊句子可跳轉。頁面只有一個滑鼠滾動區。</p></div><span class="pill green">${v.translation==='available'?'逐句翻譯已備妥':'中文翻譯待補'}</span></div>
-      <div class="tabs"><button class="${state.transcriptTab==='english'?'active':''}" onclick="setTab('english')">英文</button><button class="${state.transcriptTab==='bilingual'?'active':''}" onclick="setTab('bilingual')">中英</button><button class="${state.transcriptTab==='chinese'?'active':''}" onclick="setTab('chinese')">中文</button></div>
-      <div class="subtitle-list" data-scale="${state.subtitleSize||100}">${subtitleHTML(v)}</div>
-    </div>
-    <div class="learning-row">
-      <div class="panel"><div class="panel-head"><h2>單字</h2><span>${(unit.vocabulary||[]).length}</span></div><div class="unit-list">${(unit.vocabulary||[]).slice(0,10).map(x=>`<button onclick='openWord(${JSON.stringify(x.word||'')},${JSON.stringify(v.id)},${JSON.stringify(x.example||'')})'><b>${esc(x.word||'')}</b>${x.definition_zh?' · '+esc(x.definition_zh):''}</button>`).join('')||'尚未生成'}</div></div>
-      <div class="panel"><div class="panel-head"><h2>片語</h2><span>${(unit.phrases||[]).length}</span></div><div class="unit-list">${(unit.phrases||[]).slice(0,8).map(x=>`<div><b>${esc(x.phrase||'')}</b>${x.meaning_zh?' · '+esc(x.meaning_zh):''}</div>`).join('')||'尚未生成'}</div></div>
-      <div class="panel"><div class="panel-head"><h2>文法</h2><span>${(unit.grammar||[]).length}</span></div><div class="unit-list">${(unit.grammar||[]).slice(0,6).map(x=>`<div><b>${esc(x.topic||'')}</b>${x.explanation_zh?' · '+esc(x.explanation_zh):''}</div>`).join('')||'尚未生成'}</div></div>
-    </div>
-  </div>`;
-}
 function markHistory(v){let h=history(),i=h.findIndex(x=>x.id===v.id);const item={id:v.id,title:v.title,updatedAt:new Date().toISOString()};if(i>=0)h[i]={...h[i],...item};else h.unshift(item);save('sanmu-history',h.slice(0,200));let d=daily();d.minutes+=1;d.sessions+=1;save('sanmu-daily',d);}
 function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];save('sanmu-favs',f);render();}
 function openWord(word,sourceVideoId='',sourceSentence=''){const info=wordBank.words?.[String(word).toLowerCase()]||{};state.word={word,sourceVideoId,sourceSentence,...info};render();}
@@ -302,112 +237,91 @@ function initPlayer(){
   if(state.route!=='watch')return;
   const iframe=document.getElementById('yt'); if(!iframe)return;
   const mount=()=>{
+    if(!window.YT||!YT.Player)return;
     try{
-      if(!window.YT||!YT.Player)return;
-      if(ytPlayer&&typeof ytPlayer.destroy==='function'){try{ytPlayer.destroy();}catch{}}
-      ytPlayer=new YT.Player('yt',{events:{onReady:function(){setSpeed(state.speed||1);syncSubtitle(0);startSubtitleSync();}}});
+      if(ytPlayer&&typeof ytPlayer.destroy==='function')ytPlayer.destroy();
+      ytPlayer=new YT.Player('yt',{events:{onReady:()=>{setSpeed(state.speed||1);syncSubtitle(0);startSubtitleSync();}}});
     }catch(e){setTimeout(initPlayer,300);}
   };
   if(window.YT&&YT.Player){mount();return;}
   if(window.__ytWaiterFinal)return;
   window.__ytWaiterFinal=true;
-  const onReady=()=>{window.__ytWaiterFinal=false;mount();};
-  window.addEventListener('ytapiready',onReady,{once:true});
+  const ready=()=>{window.__ytWaiterFinal=false;mount();};
+  window.addEventListener('ytapiready',ready,{once:true});
   const started=Date.now();
   const poll=()=>{if(state.route!=='watch'||Date.now()-started>12000)return;if(window.YT&&YT.Player)mount();else setTimeout(poll,250);};
   poll();
 }
-
 function startSubtitleSync(){
   if(ytTimer)clearInterval(ytTimer);
-  ytTimer=setInterval(()=>{
-    if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;
-    let t=0; try{t=Number(ytPlayer.getCurrentTime())||0;}catch{return}
-    syncSubtitle(t);
-  },180);
+  ytTimer=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;let t=0;try{t=Number(ytPlayer.getCurrentTime())||0}catch{return}syncSubtitle(t);},180);
 }
-
 function syncSubtitle(t){
   const v=selectedVideo(); const seg=v?.transcript||[]; const nodes=document.querySelectorAll('.segment');
   if(!seg.length||!nodes.length)return;
+  // Apply a constant user-controlled caption offset. Positive means captions are delayed.
+  const adjusted=t-(Number(state.subtitleOffset)||0);
   let idx=-1;
   for(let i=0;i<seg.length;i++){
-    const a=Number(seg[i].start)||0; const b=Number(seg[i].end); const end=Number.isFinite(b)&&b>a?b:(Number(seg[i+1]?.start)||a+6);
-    if(t>=a&&t<end){idx=i;break;}
+    const a=Number(seg[i].start)||0;
+    const b=Number(seg[i].end);
+    const end=Number.isFinite(b)&&b>a?b:(Number(seg[i+1]?.start)||a+6);
+    if(adjusted>=a&&adjusted<end){idx=i;break;}
   }
-  if(idx<0&&t>=Number(seg[seg.length-1]?.start||0))idx=seg.length-1;
+  if(idx<0&&adjusted>=Number(seg[seg.length-1]?.start||0))idx=seg.length-1;
   nodes.forEach((el,i)=>el.classList.toggle('active',i===idx));
 }
-
-function enableSubtitleWheelGuard(){
-  if(window.__subtitleWheelGuardInstalled)return;
-  window.__subtitleWheelGuardInstalled=true;
-  window.addEventListener('wheel',()=>{window.__subtitleUserScrollUntil=Date.now()+3500;},{passive:true});
-  window.addEventListener('touchmove',()=>{window.__subtitleUserScrollUntil=Date.now()+3500;},{passive:true});
-}
-
 function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null;}try{ytPlayer?.destroy?.();}catch{}ytPlayer=null;}
-function seek(sec){const t=Number(sec)||0;if(ytPlayer?.seekTo){try{ytPlayer.seekTo(t,true);ytPlayer.playVideo?.();}catch{}}}
+function seek(sec){if(ytPlayer?.seekTo){try{ytPlayer.seekTo(Number(sec),true);ytPlayer.playVideo?.();}catch{}}}
 function setSpeed(s){state.speed=Number(s)||1;if(ytPlayer?.setPlaybackRate){try{ytPlayer.setPlaybackRate(state.speed);}catch{}}document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===state.speed));}
-
+function setSubtitleSize(s){const allowed=[75,100,125,150,200];const n=Number(s)||100;state.subtitleSize=allowed.includes(n)?n:100;const list=$('.subtitle-list');if(list)list.dataset.scale=String(state.subtitleSize);document.querySelectorAll('.subtitle-scale-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.scale)===state.subtitleSize));}
+function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
 function subtitleHTML(v){
   const segs=v?.transcript||[];
   if(!segs.length)return '<div class="empty"><b>目前沒有逐句字幕資料</b><p>完整字幕會在內容引擎取得並驗證後加入。</p></div>';
   return segs.map((x,i)=>`<div class="segment" data-index="${i}" onclick="seek(${Number(x.start)||0})"><div class="time">${fmt(x.start)} · sentence ${i+1}</div>${state.transcriptTab!=='chinese'?'<div class="en">'+clickableSentence(x.en||'',v.id)+'</div>':''}${state.transcriptTab!=='english'?'<div class="zh">'+esc(x.zh||'翻譯待補')+'</div>':''}</div>`).join('');
 }
-
-function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
-
-function render(){destroyPlayer();document.querySelector('#app').innerHTML=shell(content());if(state.route==='watch'){window.scrollTo({top:0,left:0,behavior:'auto'});setTimeout(()=>{enableSubtitleWheelGuard();initPlayer();},80);}}
-function renderMain(){const m=$('main');if(m){destroyPlayer();m.innerHTML=content();if(state.route==='watch'){window.scrollTo({top:0,left:0,behavior:'auto'});setTimeout(()=>{enableSubtitleWheelGuard();initPlayer();},80);}}}
-function shell(main){
-  const d=daily(), collapsed=state.sidebarCollapsed;
-  const done=Object.values(prog()).filter(Boolean).length;
-  return `<div class="app ${collapsed?'sidebar-collapsed':''}">
-  <header class="topbar">
-    <a class="brand" href="#learning"><img src="assets/logo.png" alt="三木Eng"></a>
-    <div class="search"><input value="${esc(state.search)}" oninput="updateSearch(this.value)" onkeydown="handleSearchKey(event,this.value)" placeholder="搜尋影片、主題、單字、頻道… 或貼上 YouTube 網址"></div>
-    <div class="top-actions"><button onclick="go('learning')">影片學習</button></div>
-  </header>
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="brand-mini"><span>三木</span><button class="sidebar-toggle" onclick="toggleSidebar()">${collapsed?'»':'«'}</button></div>
-      <button class="side-main ${['learning','watch'].includes(state.route)?'active':''}" onclick="go('learning')"><span class="side-icon">▶</span><span><b>影片學習</b><small>影片・字幕・單字</small></span></button>
-      <button class="side-main ${['grammar','lesson'].includes(state.route)?'active':''}" onclick="go('grammar')"><span class="side-icon">文</span><span><b>英文文法</b><small>30 章 · 150 微課</small></span></button>
-      <button class="side-main ${state.route==='quiz'?'active':''}" onclick="go('quiz')"><span class="side-icon">測</span><span><b>多益練習</b><small>4 級距 · 20 題</small></span></button>
-      <div class="side-label">影片工具</div>
-      <button class="side-tool" onclick="go('history')"><span>▤</span><span><b>觀看紀錄</b><small>${history().length} 部</small></span></button>
-      <button class="side-tool" onclick="go('favorites')"><span>♡</span><span><b>收藏影片</b><small>${favs().length} 部</small></span></button>
-      <button class="side-tool" onclick="go('vocabulary')"><span>Aa</span><span><b>我的單字庫</b><small>${Object.keys(vocab()).length} 字</small></span></button>
-      <div class="side-label">分類</div>
-      <button class="category-launch" onclick="openCategoryModal()"><span>▦</span><span><b>選擇分類</b><small>${state.category==='all'?'全部 13 大類':esc((taxonomy.categories.find(c=>c.id===state.category)||{}).name||'')}</small></span></button>
-      <div class="side-bottom"><div class="progress-card"><small>文法微課進度</small><strong>${done} / 150 課</strong><div><i style="width:${Math.min(100,done/1.5)}%"></i></div></div><div class="daily">今日學習 <b>${d.minutes}</b> 分鐘・<b>${d.sessions}</b> 次</div></div>
-    </aside>
-    <main>${main}</main>
-  </div>
-  ${categoryModalOpen?categoryModal():''}${state.word?wordModal():''}</div>`;
-}
-
 function watch(){
-  const v=selectedVideo(); if(!v)return '<div class="empty">找不到影片。</div>';
-  markHistory(v); const unit=learningUnits.units?.[v.id]||{}; const scale=state.subtitleSize||100;
+  const v=selectedVideo();
+  if(!v)return '<div class="empty">找不到影片。</div>';
+  markHistory(v);
+  const unit=learningUnits.units?.[v.id]||{};
+  const scale=state.subtitleSize||100;
+  const offset=Number(state.subtitleOffset)||0;
   return `<div class="watch-page">
     <div class="player-card">
       <div class="player"><iframe id="yt" src="${ytEmbed(v.id)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
-      <div class="player-tools"><button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button><button data-speed="1" class="active" onclick="setSpeed(1)">1×</button><button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button><button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button><span></span><button onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏'}</button></div>
+
+      <div class="player-tools">
+        <div class="tool-group"><span class="tool-label">語速</span><button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button><button data-speed="1" class="active" onclick="setSpeed(1)">1×</button><button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button><button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button></div>
+        <div class="tool-group"><span class="tool-label">字幕同步</span><button class="subtitle-offset-btn ${offset===-2?'active':''}" data-offset="-2" onclick="setSubtitleOffset(-2)">-2s</button><button class="subtitle-offset-btn ${offset===-1?'active':''}" data-offset="-1" onclick="setSubtitleOffset(-1)">-1s</button><button class="subtitle-offset-btn ${offset===0?'active':''}" data-offset="0" onclick="setSubtitleOffset(0)">0</button><button class="subtitle-offset-btn ${offset===1?'active':''}" data-offset="1" onclick="setSubtitleOffset(1)">+1s</button><button class="subtitle-offset-btn ${offset===2?'active':''}" data-offset="2" onclick="setSubtitleOffset(2)">+2s</button></div>
+        <span></span><button onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏'}</button>
+      </div>
+
       <div class="subtitle-control scale-control"><label>字幕大小</label><button class="subtitle-scale-btn ${scale===75?'active':''}" onclick="setSubtitleSize(75)">75%</button><button class="subtitle-scale-btn ${scale===100?'active':''}" onclick="setSubtitleSize(100)">100%</button><button class="subtitle-scale-btn ${scale===125?'active':''}" onclick="setSubtitleSize(125)">125%</button><button class="subtitle-scale-btn ${scale===150?'active':''}" onclick="setSubtitleSize(150)">150%</button><button class="subtitle-scale-btn ${scale===200?'active':''}" onclick="setSubtitleSize(200)">200%</button></div>
-      <h1>${esc(v.title)}</h1><p class="watch-meta">${esc(v.channel)} ・ ${esc(v.duration)} ・ CEFR ${esc(v.cefr||'—')}</p>
+
+      <div class="panel subtitle-panel">
+        <div class="panel-head"><div><h2>字幕工作區</h2><p>英文 / 中英 / 中文逐句翻譯；字幕會跟著影片時間高亮。</p></div><span class="pill green">${(v.transcript||[]).length?'逐句字幕':'字幕待取得'}</span></div>
+        <div class="tabs"><button class="${state.transcriptTab==='english'?'active':''}" onclick="setTab('english')">英文</button><button class="${state.transcriptTab==='bilingual'?'active':''}" onclick="setTab('bilingual')">中英</button><button class="${state.transcriptTab==='chinese'?'active':''}" onclick="setTab('chinese')">中文</button></div>
+        <div class="subtitle-list" data-scale="${scale}">${subtitleHTML(v)}</div>
+      </div>
+
+      <div class="title-block">
+        <h1>${esc(v.title)}</h1>
+        <p class="title-zh">${esc(titleZh(v))}</p>
+        <p class="watch-meta">${esc(v.channel)} ・ ${esc(v.duration||'')} ・ 难易度 ${esc(difficultyLabel(v.cefr))}</p>
+      </div>
     </div>
-    <div class="panel subtitle-panel">
-      <div class="panel-head"><div><h2>字幕工作區</h2><p>播放時逐句高亮；你手動滾動後不會被字幕機制搶回頁面。</p></div><span class="pill green">${(v.transcript||[]).length?'逐句字幕':'字幕待取得'}</span></div>
-      <div class="tabs"><button class="${state.transcriptTab==='english'?'active':''}" onclick="setTab('english')">英文</button><button class="${state.transcriptTab==='bilingual'?'active':''}" onclick="setTab('bilingual')">中英</button><button class="${state.transcriptTab==='chinese'?'active':''}" onclick="setTab('chinese')">中文</button></div>
-      <div class="subtitle-list" data-scale="${scale}">${subtitleHTML(v)}</div>
+
+    <div class="learning-row">
+      <div class="panel"><div class="panel-head"><h2>單字</h2><span>${(unit.vocabulary||[]).length}</span></div><div class="unit-list">${(unit.vocabulary||[]).slice(0,10).map(x=>`<button onclick='openWord(${JSON.stringify(x.word||'')},${JSON.stringify(v.id)},${JSON.stringify(x.example||'')})'><b>${esc(x.word||'')}</b>${x.definition_zh?' · '+esc(x.definition_zh):''}</button>`).join('')||'尚未生成'}</div></div>
+      <div class="panel"><div class="panel-head"><h2>片語</h2><span>${(unit.phrases||[]).length}</span></div><div class="unit-list">${(unit.phrases||[]).slice(0,8).map(x=>`<div><b>${esc(x.phrase||'')}</b>${x.meaning_zh?' · '+esc(x.meaning_zh):''}</div>`).join('')||'尚未生成'}</div></div>
+      <div class="panel"><div class="panel-head"><h2>文法</h2><span>${(unit.grammar||[]).length}</span></div><div class="unit-list">${(unit.grammar||[]).slice(0,6).map(x=>`<div><b>${esc(x.topic||'')}</b>${x.explanation_zh?' · '+esc(x.explanation_zh):''}</div>`).join('')||'尚未生成'}</div></div>
     </div>
-    <div class="learning-row"><div class="panel"><div class="panel-head"><h2>單字</h2><span>${(unit.vocabulary||[]).length}</span></div><div class="unit-list">${(unit.vocabulary||[]).slice(0,10).map(x=>`<button onclick='openWord(${JSON.stringify(x.word||'')},${JSON.stringify(v.id)},${JSON.stringify(x.example||'')})'><b>${esc(x.word||'')}</b>${x.definition_zh?' · '+esc(x.definition_zh):''}</button>`).join('')||'尚未生成'}</div></div><div class="panel"><div class="panel-head"><h2>片語</h2><span>${(unit.phrases||[]).length}</span></div><div class="unit-list">${(unit.phrases||[]).slice(0,8).map(x=>`<div><b>${esc(x.phrase||'')}</b>${x.meaning_zh?' · '+esc(x.meaning_zh):''}</div>`).join('')||'尚未生成'}</div></div><div class="panel"><div class="panel-head"><h2>文法</h2><span>${(unit.grammar||[]).length}</span></div><div class="unit-list">${(unit.grammar||[]).slice(0,6).map(x=>`<div><b>${esc(x.topic||'')}</b>${x.explanation_zh?' · '+esc(x.explanation_zh):''}</div>`).join('')||'尚未生成'}</div></div></div>
   </div>`;
 }
-
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`}
+
 function grammar(){
   const done=Object.values(prog()).filter(Boolean).length;
   return `<div class="section-head"><div><h2>英文文法 · 30 章 / 150 微課</h2><p>以主流英文文法教材常見的由基礎到進階 progression 重組：句型 → 時態 → 冠詞 → 從句 → 高階文法。每課都有示範句型、例句與練習。</p></div><span class="count-pill">${done}/150</span></div>
