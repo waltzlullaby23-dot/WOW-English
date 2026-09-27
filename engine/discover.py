@@ -18,7 +18,8 @@ def queries(tax,maxq,offset):
     arr=[]
     for c in tax['categories']:
         for t in c.get('searchTerms',[]):
-            for s in ('{}','{} English','{} documentary','{} interview','{} explained'):arr.append(s.format(t))
+            for s in ('{}','{} English','{} documentary','{} interview','{} explained','{} lecture','{} podcast','{} discussion'):
+                arr.append(s.format(t))
     arr=list(dict.fromkeys(arr));offset%=len(arr);return (arr[offset:]+arr[:offset])[:maxq]
 def fetch_subs(url,td):
     outtmpl=str(Path(td)/'%(id)s.%(ext)s');cmd=['yt-dlp','--skip-download','--no-warnings','--write-subs','--write-auto-subs','--sub-format','vtt','--sub-langs','en,en-US,en-GB','-o',outtmpl,url];p=subprocess.run(cmd,cwd=ROOT,capture_output=True,text=True,timeout=180);return list(Path(td).glob('*.vtt'))

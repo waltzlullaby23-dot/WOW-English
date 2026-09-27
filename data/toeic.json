@@ -1,181 +1,41 @@
 {
-  "version": 4,
+  "schemaVersion": 4,
+  "source": "original_items_aligned_to_ETS_skill_descriptors",
   "bands": {
     "under400": {
       "label": "400 分以下",
-      "description": "基礎字彙、be/do/have、時間地點與簡單句型",
+      "description": "基礎句型、常見字彙、時間地點、be/do/have 與簡單職場情境",
       "questions": [
         {
-          "id": "under400-01",
-          "prompt": "She has worked here ___ 2022.",
+          "prompt": "The customer ___ the order by phone yesterday.",
           "options": [
-            "during",
-            "from",
-            "since",
-            "for"
+            "place",
+            "places",
+            "placed",
+            "placing"
           ],
           "answer": 2,
-          "explanation": "since + a starting point such as 2022."
+          "explanation": "“Yesterday” calls for the simple past: placed.",
+          "part": "Part 5",
+          "skill": "verb tense",
+          "difficulty": "400-"
         },
         {
-          "id": "under400-02",
-          "prompt": "Please send the report ___ Friday.",
-          "options": [
-            "by",
-            "at",
-            "on",
-            "since"
-          ],
-          "answer": 0,
-          "explanation": "by expresses a deadline."
-        },
-        {
-          "id": "under400-03",
-          "prompt": "The meeting ___ at 9 a.m. yesterday.",
-          "options": [
-            "start",
-            "started",
-            "has started",
-            "will start"
-          ],
-          "answer": 1,
-          "explanation": "A finished event in the past uses the past simple."
-        },
-        {
-          "id": "under400-04",
-          "prompt": "If you have questions, please ___ me know.",
-          "options": [
-            "make",
-            "let",
-            "take",
-            "give"
-          ],
-          "answer": 1,
-          "explanation": "The fixed phrase is let me know."
-        },
-        {
-          "id": "under400-05",
-          "prompt": "The documents ___ by the manager yesterday.",
-          "options": [
-            "review",
-            "reviewed",
-            "were reviewed",
-            "have review"
-          ],
-          "answer": 2,
-          "explanation": "Past passive = were + past participle."
-        },
-        {
-          "id": "under400-06",
-          "prompt": "Our sales have ___ significantly this year.",
-          "options": [
-            "increase",
-            "increased",
-            "increasing",
-            "increases"
-          ],
-          "answer": 1,
-          "explanation": "Present perfect uses have/has + past participle."
-        },
-        {
-          "id": "under400-07",
-          "prompt": "Could you ___ the invoice again?",
-          "options": [
-            "send",
-            "sent",
-            "sending",
-            "to send"
-          ],
-          "answer": 0,
-          "explanation": "Could you + base verb is a polite request."
-        },
-        {
-          "id": "under400-08",
-          "prompt": "The new policy will take effect ___ Monday.",
-          "options": [
-            "in",
-            "on",
-            "at",
-            "from"
-          ],
-          "answer": 1,
-          "explanation": "Use on with a specific day."
-        },
-        {
-          "id": "under400-09",
-          "prompt": "We need to discuss the issue before we ___ a decision.",
-          "options": [
-            "make",
-            "made",
-            "will make",
-            "making"
-          ],
-          "answer": 0,
-          "explanation": "make a decision is the standard collocation."
-        },
-        {
-          "id": "under400-10",
-          "prompt": "The company is looking for someone ___ can lead the project.",
-          "options": [
-            "which",
-            "who",
-            "what",
-            "where"
-          ],
-          "answer": 1,
-          "explanation": "who refers to a person in a relative clause."
-        },
-        {
-          "id": "under400-11",
-          "prompt": "The office closes ___ 6 p.m.",
+          "prompt": "Please arrive ___ 8:30 a.m. for the staff meeting.",
           "options": [
             "at",
             "on",
             "in",
-            "since"
-          ],
-          "answer": 0,
-          "explanation": "Use at with clock times."
-        },
-        {
-          "id": "under400-12",
-          "prompt": "We are interested ___ your proposal.",
-          "options": [
-            "at",
-            "in",
-            "on",
-            "for"
-          ],
-          "answer": 1,
-          "explanation": "interested in is a fixed preposition pattern."
-        },
-        {
-          "id": "under400-13",
-          "prompt": "I would appreciate it if you ___ reply soon.",
-          "options": [
-            "could",
-            "can",
-            "will",
-            "are"
-          ],
-          "answer": 0,
-          "explanation": "A formal request often uses would appreciate it if you could…"
-        },
-        {
-          "id": "under400-14",
-          "prompt": "The project was completed ___ time.",
-          "options": [
-            "in",
-            "on",
-            "at",
             "by"
           ],
-          "answer": 1,
-          "explanation": "on time means at the planned time."
+          "answer": 0,
+          "explanation": "A specific clock time takes the preposition “at.”",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-"
         },
         {
-          "id": "under400-15",
-          "prompt": "She is responsible ___ customer relations.",
+          "prompt": "Ms. Chen is responsible ___ checking the inventory.",
           "options": [
             "to",
             "for",
@@ -183,805 +43,1106 @@
             "at"
           ],
           "answer": 1,
-          "explanation": "responsible for is the standard phrase."
+          "explanation": "The fixed pattern is “be responsible for + -ing/noun.”",
+          "part": "Part 5",
+          "skill": "collocation",
+          "difficulty": "400-"
         },
         {
-          "id": "under400-16",
-          "prompt": "The manager asked whether the shipment ___.",
+          "prompt": "The office is closed ___ Sundays.",
           "options": [
-            "arrived",
-            "arrives",
-            "arrive",
-            "arriving"
+            "at",
+            "by",
+            "on",
+            "from"
+          ],
+          "answer": 2,
+          "explanation": "Days of the week take “on.”",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "We need ___ copies of the new brochure.",
+          "options": [
+            "much",
+            "a little",
+            "a few",
+            "little"
+          ],
+          "answer": 2,
+          "explanation": "“Copies” is countable plural, so “a few” fits.",
+          "part": "Part 5",
+          "skill": "determiners",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "The train leaves at 9:10, so please be ___ the station by 9:00.",
+          "options": [
+            "at",
+            "on",
+            "to",
+            "from"
           ],
           "answer": 0,
-          "explanation": "Reported questions about a completed event use arrived."
+          "explanation": "“Be at + place” is the natural location pattern.",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-"
         },
         {
-          "id": "under400-17",
-          "prompt": "The product is ___ than the previous version.",
+          "prompt": "Mr. Lee ___ the report every Friday.",
           "options": [
-            "efficient",
-            "more efficient",
-            "most efficient",
-            "efficiency"
+            "send",
+            "sends",
+            "sending",
+            "sent"
           ],
           "answer": 1,
-          "explanation": "more + adjective for comparison."
+          "explanation": "A regular habit with a singular subject takes present simple “sends.”",
+          "part": "Part 5",
+          "skill": "subject-verb agreement",
+          "difficulty": "400-"
         },
         {
-          "id": "under400-18",
-          "prompt": "The report needs to ___ before noon.",
+          "prompt": "The receptionist asked visitors to ___ their names.",
           "options": [
-            "finish",
-            "be finished",
-            "finished",
-            "finishing"
+            "write",
+            "writing",
+            "wrote",
+            "written"
+          ],
+          "answer": 0,
+          "explanation": "“Ask someone to + base verb” is correct.",
+          "part": "Part 5",
+          "skill": "infinitives",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "The meeting room is ___ the second floor.",
+          "options": [
+            "at",
+            "on",
+            "to",
+            "by"
           ],
           "answer": 1,
-          "explanation": "Need to be + past participle is passive."
+          "explanation": "Floors use “on”: on the second floor.",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-"
         },
         {
-          "id": "under400-19",
-          "prompt": "We had already left when the call ___.",
+          "prompt": "Please ___ the attached form before noon.",
           "options": [
-            "came",
-            "comes",
-            "has come",
-            "coming"
+            "complete",
+            "completed",
+            "completing",
+            "completion"
           ],
           "answer": 0,
-          "explanation": "Past perfect + past simple shows an earlier past event."
+          "explanation": "After “please,” use the base verb “complete.”",
+          "part": "Part 5",
+          "skill": "verb forms",
+          "difficulty": "400-"
         },
         {
-          "id": "under400-20",
-          "prompt": "Please contact us if anything ___.",
+          "prompt": "We have two printers, but ___ is out of order.",
           "options": [
-            "changes",
-            "change",
-            "changed",
-            "changing"
+            "one",
+            "much",
+            "any",
+            "every"
           ],
           "answer": 0,
-          "explanation": "Present simple is used in an if-clause for a real future condition."
+          "explanation": "“One” refers to one of two known printers.",
+          "part": "Part 5",
+          "skill": "pronouns",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "The manager will call you ___ the afternoon.",
+          "options": [
+            "on",
+            "at",
+            "in",
+            "by"
+          ],
+          "answer": 2,
+          "explanation": "Parts of the day use “in”: in the afternoon.",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "Our store opens ___ 10 a.m. every weekday.",
+          "options": [
+            "at",
+            "on",
+            "in",
+            "from"
+          ],
+          "answer": 0,
+          "explanation": "A specific time uses “at.”",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "The package was delivered ___ Monday.",
+          "options": [
+            "at",
+            "on",
+            "in",
+            "for"
+          ],
+          "answer": 1,
+          "explanation": "Specific days use “on.”",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "The new employee is very ___ with customers.",
+          "options": [
+            "help",
+            "helpful",
+            "helpfully",
+            "helped"
+          ],
+          "answer": 1,
+          "explanation": "An adjective is needed after “is very.”",
+          "part": "Part 5",
+          "skill": "parts of speech",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "There ___ three chairs in the waiting area.",
+          "options": [
+            "is",
+            "are",
+            "was",
+            "be"
+          ],
+          "answer": 1,
+          "explanation": "“Three chairs” is plural, so use “are.”",
+          "part": "Part 5",
+          "skill": "agreement",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "We need to finish the work ___ Friday.",
+          "options": [
+            "by",
+            "at",
+            "on",
+            "since"
+          ],
+          "answer": 0,
+          "explanation": "“By Friday” means no later than Friday.",
+          "part": "Part 5",
+          "skill": "time expressions",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "Mr. Park is ___ engineer at the company.",
+          "options": [
+            "a",
+            "an",
+            "the",
+            "some"
+          ],
+          "answer": 1,
+          "explanation": "“Engineer” begins with a vowel sound, so use “an.”",
+          "part": "Part 5",
+          "skill": "articles",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "The receptionist gave the visitor a ___ pass.",
+          "options": [
+            "temporary",
+            "temporarily",
+            "temporaryly",
+            "temporaries"
+          ],
+          "answer": 0,
+          "explanation": "An adjective is needed before the noun “pass.”",
+          "part": "Part 5",
+          "skill": "parts of speech",
+          "difficulty": "400-"
+        },
+        {
+          "prompt": "The store closes at six, ___ customers usually leave earlier.",
+          "options": [
+            "but",
+            "because",
+            "so",
+            "than"
+          ],
+          "answer": 0,
+          "explanation": "“But” introduces a contrast with the first clause.",
+          "part": "Part 5",
+          "skill": "conjunctions",
+          "difficulty": "400-"
         }
       ]
     },
     "400-600": {
       "label": "400–600",
-      "description": "常見時態、職場搭配、被動與基本從句",
+      "description": "常見時態、被動、職場搭配、基本從句與條件句",
       "questions": [
         {
-          "id": "400-600-01",
-          "prompt": "She has worked here ___ 2022.",
+          "prompt": "Because the shipment arrived late, the warehouse team ___ the delivery schedule.",
           "options": [
+            "revised",
+            "revise",
+            "revising",
+            "will revise"
+          ],
+          "answer": 0,
+          "explanation": "The sentence describes a completed response to a past event, so “revised” fits.",
+          "part": "Part 5",
+          "skill": "verb tense",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "All employees must submit their travel receipts ___ ten days of returning.",
+          "options": [
+            "within",
             "during",
-            "from",
+            "among",
+            "between"
+          ],
+          "answer": 0,
+          "explanation": "“Within ten days” means no later than ten days after return.",
+          "part": "Part 5",
+          "skill": "prepositions",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "The new software was ___ last Monday and is now available to all staff.",
+          "options": [
+            "install",
+            "installed",
+            "installing",
+            "installation"
+          ],
+          "answer": 1,
+          "explanation": "The passive form is “was installed.”",
+          "part": "Part 5",
+          "skill": "passive voice",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "Ms. Gomez has worked at the branch ___ 2019.",
+          "options": [
+            "for",
             "since",
-            "for"
-          ],
-          "answer": 2,
-          "explanation": "since + a starting point such as 2022."
-        },
-        {
-          "id": "400-600-02",
-          "prompt": "Please send the report ___ Friday.",
-          "options": [
-            "by",
-            "at",
-            "on",
-            "since"
-          ],
-          "answer": 0,
-          "explanation": "by expresses a deadline."
-        },
-        {
-          "id": "400-600-03",
-          "prompt": "The meeting ___ at 9 a.m. yesterday.",
-          "options": [
-            "start",
-            "started",
-            "has started",
-            "will start"
-          ],
-          "answer": 1,
-          "explanation": "A finished event in the past uses the past simple."
-        },
-        {
-          "id": "400-600-04",
-          "prompt": "If you have questions, please ___ me know.",
-          "options": [
-            "make",
-            "let",
-            "take",
-            "give"
-          ],
-          "answer": 1,
-          "explanation": "The fixed phrase is let me know."
-        },
-        {
-          "id": "400-600-05",
-          "prompt": "The documents ___ by the manager yesterday.",
-          "options": [
-            "review",
-            "reviewed",
-            "were reviewed",
-            "have review"
-          ],
-          "answer": 2,
-          "explanation": "Past passive = were + past participle."
-        },
-        {
-          "id": "400-600-06",
-          "prompt": "Our sales have ___ significantly this year.",
-          "options": [
-            "increase",
-            "increased",
-            "increasing",
-            "increases"
-          ],
-          "answer": 1,
-          "explanation": "Present perfect uses have/has + past participle."
-        },
-        {
-          "id": "400-600-07",
-          "prompt": "Could you ___ the invoice again?",
-          "options": [
-            "send",
-            "sent",
-            "sending",
-            "to send"
-          ],
-          "answer": 0,
-          "explanation": "Could you + base verb is a polite request."
-        },
-        {
-          "id": "400-600-08",
-          "prompt": "The new policy will take effect ___ Monday.",
-          "options": [
-            "in",
-            "on",
-            "at",
+            "during",
             "from"
           ],
           "answer": 1,
-          "explanation": "Use on with a specific day."
+          "explanation": "“Since” is used with a starting point in time.",
+          "part": "Part 5",
+          "skill": "present perfect",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-09",
-          "prompt": "We need to discuss the issue before we ___ a decision.",
+          "prompt": "The director asked whether the conference room ___ available.",
           "options": [
-            "make",
-            "made",
-            "will make",
-            "making"
+            "was",
+            "were",
+            "be",
+            "being"
           ],
           "answer": 0,
-          "explanation": "make a decision is the standard collocation."
+          "explanation": "After “asked whether,” the past form “was” fits the reported context.",
+          "part": "Part 5",
+          "skill": "reported questions",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-10",
-          "prompt": "The company is looking for someone ___ can lead the project.",
+          "prompt": "Please make sure that every invoice ___ correctly before payment.",
           "options": [
-            "which",
+            "has entered",
+            "is entered",
+            "entering",
+            "to enter"
+          ],
+          "answer": 1,
+          "explanation": "A passive form is required because invoices receive the action.",
+          "part": "Part 5",
+          "skill": "passive voice",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "The sales team is looking forward to ___ the new clients next week.",
+          "options": [
+            "meet",
+            "meeting",
+            "met",
+            "be met"
+          ],
+          "answer": 1,
+          "explanation": "“Look forward to” is followed by a gerund.",
+          "part": "Part 5",
+          "skill": "gerunds",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "The company delayed the launch ___ several parts were not ready.",
+          "options": [
+            "although",
+            "because",
+            "unless",
+            "while"
+          ],
+          "answer": 1,
+          "explanation": "“Because” explains the reason for the delay.",
+          "part": "Part 5",
+          "skill": "conjunctions",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "The technician will replace the battery if the test ___ a defect.",
+          "options": [
+            "detects",
+            "detected",
+            "will detect",
+            "is detecting"
+          ],
+          "answer": 0,
+          "explanation": "In a first conditional, the if-clause uses present simple.",
+          "part": "Part 5",
+          "skill": "conditionals",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "The training session, ___ was originally scheduled for Tuesday, has been moved to Friday.",
+          "options": [
             "who",
+            "which",
             "what",
             "where"
           ],
           "answer": 1,
-          "explanation": "who refers to a person in a relative clause."
+          "explanation": "“Which” introduces a nonrestrictive relative clause referring to the session.",
+          "part": "Part 6",
+          "skill": "relative clauses",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-11",
-          "prompt": "The office closes ___ 6 p.m.",
+          "prompt": "Our supplier offered a discount ___ we ordered more than 500 units.",
           "options": [
-            "at",
-            "on",
-            "in",
-            "since"
+            "if",
+            "than",
+            "despite",
+            "so"
           ],
           "answer": 0,
-          "explanation": "Use at with clock times."
+          "explanation": "“If” introduces the condition for receiving the discount.",
+          "part": "Part 5",
+          "skill": "conditionals",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-12",
-          "prompt": "We are interested ___ your proposal.",
+          "prompt": "The manager reminded staff ___ their passwords every 90 days.",
           "options": [
-            "at",
-            "in",
-            "on",
-            "for"
+            "change",
+            "to change",
+            "changing",
+            "changed"
           ],
           "answer": 1,
-          "explanation": "interested in is a fixed preposition pattern."
+          "explanation": "“Remind someone to do something” is the correct pattern.",
+          "part": "Part 5",
+          "skill": "infinitives",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-13",
-          "prompt": "I would appreciate it if you ___ reply soon.",
+          "prompt": "By the time the guests arrived, the staff ___ all the tables.",
           "options": [
-            "could",
-            "can",
-            "will",
-            "are"
+            "set",
+            "have set",
+            "had set",
+            "are setting"
           ],
-          "answer": 0,
-          "explanation": "A formal request often uses would appreciate it if you could…"
+          "answer": 2,
+          "explanation": "The earlier past action takes past perfect: “had set.”",
+          "part": "Part 5",
+          "skill": "past perfect",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-14",
-          "prompt": "The project was completed ___ time.",
+          "prompt": "The marketing report provides useful information ___ customer preferences.",
           "options": [
-            "in",
-            "on",
-            "at",
-            "by"
-          ],
-          "answer": 1,
-          "explanation": "on time means at the planned time."
-        },
-        {
-          "id": "400-600-15",
-          "prompt": "She is responsible ___ customer relations.",
-          "options": [
-            "to",
-            "for",
+            "about",
+            "into",
             "with",
             "at"
           ],
-          "answer": 1,
-          "explanation": "responsible for is the standard phrase."
-        },
-        {
-          "id": "400-600-16",
-          "prompt": "The manager asked whether the shipment ___.",
-          "options": [
-            "arrived",
-            "arrives",
-            "arrive",
-            "arriving"
-          ],
           "answer": 0,
-          "explanation": "Reported questions about a completed event use arrived."
+          "explanation": "“Information about” is the standard collocation.",
+          "part": "Part 5",
+          "skill": "collocation",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-17",
-          "prompt": "The product is ___ than the previous version.",
+          "prompt": "We cannot issue the refund until the returned item ___.",
           "options": [
-            "efficient",
-            "more efficient",
-            "most efficient",
-            "efficiency"
+            "inspects",
+            "is inspected",
+            "inspected",
+            "will inspect"
           ],
           "answer": 1,
-          "explanation": "more + adjective for comparison."
+          "explanation": "The item receives the inspection, so passive is needed.",
+          "part": "Part 5",
+          "skill": "passive voice",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-18",
-          "prompt": "The report needs to ___ before noon.",
+          "prompt": "The applicant has experience ___ international clients.",
           "options": [
-            "finish",
-            "be finished",
-            "finished",
-            "finishing"
+            "to serve",
+            "serving",
+            "served",
+            "serve"
           ],
           "answer": 1,
-          "explanation": "Need to be + past participle is passive."
+          "explanation": "“Experience + -ing” is natural in this context.",
+          "part": "Part 5",
+          "skill": "gerunds",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-19",
-          "prompt": "We had already left when the call ___.",
+          "prompt": "The memo explains ___ employees should follow the new procedure.",
           "options": [
-            "came",
-            "comes",
-            "has come",
-            "coming"
+            "what",
+            "how",
+            "which",
+            "whether"
           ],
-          "answer": 0,
-          "explanation": "Past perfect + past simple shows an earlier past event."
+          "answer": 1,
+          "explanation": "“Explains how employees should…” introduces the manner/procedure.",
+          "part": "Part 6",
+          "skill": "noun clauses",
+          "difficulty": "400-600"
         },
         {
-          "id": "400-600-20",
-          "prompt": "Please contact us if anything ___.",
+          "prompt": "If you have any questions, please ___ the customer service desk.",
           "options": [
-            "changes",
-            "change",
-            "changed",
-            "changing"
+            "contact",
+            "contacts",
+            "contacted",
+            "contacting"
           ],
           "answer": 0,
-          "explanation": "Present simple is used in an if-clause for a real future condition."
+          "explanation": "After “please,” use the base verb.",
+          "part": "Part 5",
+          "skill": "verb forms",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "The company has reduced costs ___ switching to digital invoices.",
+          "options": [
+            "by",
+            "at",
+            "on",
+            "from"
+          ],
+          "answer": 0,
+          "explanation": "“By + -ing” expresses the method used to achieve a result.",
+          "part": "Part 5",
+          "skill": "gerunds",
+          "difficulty": "400-600"
+        },
+        {
+          "prompt": "The office will remain closed ___ the electrical inspection is complete.",
+          "options": [
+            "until",
+            "during",
+            "since",
+            "than"
+          ],
+          "answer": 0,
+          "explanation": "“Until” identifies the point when the office will reopen.",
+          "part": "Part 5",
+          "skill": "conjunctions",
+          "difficulty": "400-600"
         }
       ]
     },
     "600-800": {
       "label": "600–800",
-      "description": "較長句型、商務語境、子句與連接語意",
+      "description": "較長句型、職場語境、子句、連接語意、推論與高階文法控制",
       "questions": [
         {
-          "id": "600-800-01",
-          "prompt": "She has worked here ___ 2022.",
+          "prompt": "The revised policy takes effect next month, at which point all regional offices ___ the same reporting procedure.",
           "options": [
-            "during",
-            "from",
-            "since",
-            "for"
+            "will adopt",
+            "adopted",
+            "have adopted",
+            "had adopted"
+          ],
+          "answer": 0,
+          "explanation": "The future reference “next month” requires future “will adopt.”",
+          "part": "Part 5",
+          "skill": "future tense",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "The consultant recommended that the company ___ its vendor approval process.",
+          "options": [
+            "streamlines",
+            "streamlined",
+            "streamline",
+            "will streamline"
           ],
           "answer": 2,
-          "explanation": "since + a starting point such as 2022."
+          "explanation": "After a formal recommendation, the mandative subjunctive uses the base form “streamline.”",
+          "part": "Part 5",
+          "skill": "subjunctive",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-02",
-          "prompt": "Please send the report ___ Friday.",
+          "prompt": "The proposal was rejected, not because it was too expensive, ___ because its timetable was unrealistic.",
           "options": [
-            "by",
-            "at",
-            "on",
-            "since"
+            "but",
+            "and",
+            "or",
+            "so"
           ],
           "answer": 0,
-          "explanation": "by expresses a deadline."
+          "explanation": "The correlative structure is “not because…, but because…”.",
+          "part": "Part 5",
+          "skill": "parallel structure",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-03",
-          "prompt": "The meeting ___ at 9 a.m. yesterday.",
+          "prompt": "The board approved the expansion plan, ___ several directors had raised concerns about staffing.",
           "options": [
-            "start",
-            "started",
-            "has started",
-            "will start"
-          ],
-          "answer": 1,
-          "explanation": "A finished event in the past uses the past simple."
-        },
-        {
-          "id": "600-800-04",
-          "prompt": "If you have questions, please ___ me know.",
-          "options": [
-            "make",
-            "let",
-            "take",
-            "give"
-          ],
-          "answer": 1,
-          "explanation": "The fixed phrase is let me know."
-        },
-        {
-          "id": "600-800-05",
-          "prompt": "The documents ___ by the manager yesterday.",
-          "options": [
-            "review",
-            "reviewed",
-            "were reviewed",
-            "have review"
-          ],
-          "answer": 2,
-          "explanation": "Past passive = were + past participle."
-        },
-        {
-          "id": "600-800-06",
-          "prompt": "Our sales have ___ significantly this year.",
-          "options": [
-            "increase",
-            "increased",
-            "increasing",
-            "increases"
-          ],
-          "answer": 1,
-          "explanation": "Present perfect uses have/has + past participle."
-        },
-        {
-          "id": "600-800-07",
-          "prompt": "Could you ___ the invoice again?",
-          "options": [
-            "send",
-            "sent",
-            "sending",
-            "to send"
+            "even though",
+            "so that",
+            "as soon as",
+            "in order that"
           ],
           "answer": 0,
-          "explanation": "Could you + base verb is a polite request."
+          "explanation": "“Even though” expresses contrast with the approval.",
+          "part": "Part 6",
+          "skill": "conjunctions",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-08",
-          "prompt": "The new policy will take effect ___ Monday.",
+          "prompt": "The report is intended to provide managers with data ___ they can use when allocating resources.",
           "options": [
-            "in",
-            "on",
-            "at",
-            "from"
-          ],
-          "answer": 1,
-          "explanation": "Use on with a specific day."
-        },
-        {
-          "id": "600-800-09",
-          "prompt": "We need to discuss the issue before we ___ a decision.",
-          "options": [
-            "make",
-            "made",
-            "will make",
-            "making"
-          ],
-          "answer": 0,
-          "explanation": "make a decision is the standard collocation."
-        },
-        {
-          "id": "600-800-10",
-          "prompt": "The company is looking for someone ___ can lead the project.",
-          "options": [
-            "which",
-            "who",
             "what",
+            "that",
+            "whose",
+            "whom"
+          ],
+          "answer": 1,
+          "explanation": "“That” introduces a relative clause modifying “data.”",
+          "part": "Part 6",
+          "skill": "relative clauses",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "Only after the final audit ___ the accounting team release the figures.",
+          "options": [
+            "did",
+            "does",
+            "has",
+            "had"
+          ],
+          "answer": 0,
+          "explanation": "After fronted negative/restrictive adverbials, subject–auxiliary inversion is required.",
+          "part": "Part 5",
+          "skill": "inversion",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "The conference was postponed because the keynote speaker was delayed, ___ left organizers with little time to revise the program.",
+          "options": [
+            "that",
+            "what",
+            "which",
             "where"
           ],
-          "answer": 1,
-          "explanation": "who refers to a person in a relative clause."
+          "answer": 2,
+          "explanation": "“Which” refers to the preceding situation.",
+          "part": "Part 6",
+          "skill": "relative clauses",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-11",
-          "prompt": "The office closes ___ 6 p.m.",
+          "prompt": "The merger could generate significant savings, provided that the two companies ___ their procurement systems.",
           "options": [
-            "at",
-            "on",
-            "in",
-            "since"
+            "integrate",
+            "integrated",
+            "will integrate",
+            "had integrated"
           ],
           "answer": 0,
-          "explanation": "Use at with clock times."
+          "explanation": "“Provided that” takes a present form for a future condition.",
+          "part": "Part 5",
+          "skill": "conditionals",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-12",
-          "prompt": "We are interested ___ your proposal.",
+          "prompt": "The analyst noted that the decline in sales was less severe than ___ initially anticipated.",
           "options": [
-            "at",
-            "in",
-            "on",
-            "for"
-          ],
-          "answer": 1,
-          "explanation": "interested in is a fixed preposition pattern."
-        },
-        {
-          "id": "600-800-13",
-          "prompt": "I would appreciate it if you ___ reply soon.",
-          "options": [
-            "could",
-            "can",
-            "will",
-            "are"
+            "what",
+            "that",
+            "which",
+            "where"
           ],
           "answer": 0,
-          "explanation": "A formal request often uses would appreciate it if you could…"
+          "explanation": "“Than what was initially anticipated” uses a noun clause as the comparison object.",
+          "part": "Part 5",
+          "skill": "noun clauses",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-14",
-          "prompt": "The project was completed ___ time.",
+          "prompt": "The memo says the new platform is easier to use, but several employees report that it is no more intuitive than the one it ___.",
           "options": [
-            "in",
-            "on",
-            "at",
-            "by"
-          ],
-          "answer": 1,
-          "explanation": "on time means at the planned time."
-        },
-        {
-          "id": "600-800-15",
-          "prompt": "She is responsible ___ customer relations.",
-          "options": [
-            "to",
-            "for",
-            "with",
-            "at"
-          ],
-          "answer": 1,
-          "explanation": "responsible for is the standard phrase."
-        },
-        {
-          "id": "600-800-16",
-          "prompt": "The manager asked whether the shipment ___.",
-          "options": [
-            "arrived",
-            "arrives",
-            "arrive",
-            "arriving"
+            "replaces",
+            "replaced",
+            "replacing",
+            "has replaced"
           ],
           "answer": 0,
-          "explanation": "Reported questions about a completed event use arrived."
+          "explanation": "The relative clause refers to the current platform’s replacement relation; present simple fits a general fact.",
+          "part": "Part 6",
+          "skill": "relative clauses",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-17",
-          "prompt": "The product is ___ than the previous version.",
+          "prompt": "Had the supplier notified us earlier, we ___ able to arrange an alternative shipment.",
           "options": [
-            "efficient",
-            "more efficient",
-            "most efficient",
-            "efficiency"
+            "would be",
+            "would have been",
+            "will have been",
+            "were"
           ],
           "answer": 1,
-          "explanation": "more + adjective for comparison."
+          "explanation": "This is a third conditional inversion: “Had + past participle…, would have + participle.”",
+          "part": "Part 5",
+          "skill": "conditionals",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-18",
-          "prompt": "The report needs to ___ before noon.",
+          "prompt": "The training materials should be concise enough for new hires to understand them without ___ assistance.",
           "options": [
-            "finish",
-            "be finished",
-            "finished",
-            "finishing"
+            "additional",
+            "additionally",
+            "addition",
+            "adding"
+          ],
+          "answer": 0,
+          "explanation": "An adjective modifying “assistance” is required.",
+          "part": "Part 5",
+          "skill": "parts of speech",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "The committee will publish the findings once the legal team ___ the wording.",
+          "options": [
+            "reviews",
+            "reviewed",
+            "will review",
+            "has review"
+          ],
+          "answer": 0,
+          "explanation": "After “once” for a future event, use present simple.",
+          "part": "Part 5",
+          "skill": "time clauses",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "Applicants whose references cannot be verified may be asked ___ additional documentation.",
+          "options": [
+            "provide",
+            "to provide",
+            "providing",
+            "provided"
           ],
           "answer": 1,
-          "explanation": "Need to be + past participle is passive."
+          "explanation": "“Ask someone to do something” requires the infinitive.",
+          "part": "Part 5",
+          "skill": "infinitives",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-19",
-          "prompt": "We had already left when the call ___.",
+          "prompt": "The software upgrade is expected to improve security without ___ system performance.",
           "options": [
-            "came",
-            "comes",
-            "has come",
-            "coming"
+            "compromise",
+            "compromising",
+            "compromised",
+            "to compromise"
           ],
-          "answer": 0,
-          "explanation": "Past perfect + past simple shows an earlier past event."
+          "answer": 1,
+          "explanation": "After the preposition “without,” use the gerund.",
+          "part": "Part 5",
+          "skill": "gerunds",
+          "difficulty": "600-800"
         },
         {
-          "id": "600-800-20",
-          "prompt": "Please contact us if anything ___.",
+          "prompt": "The report highlights three areas in which the company could improve, the first of ___ is staff training.",
           "options": [
-            "changes",
-            "change",
-            "changed",
-            "changing"
+            "that",
+            "which",
+            "what",
+            "them"
+          ],
+          "answer": 1,
+          "explanation": "“The first of which” is the standard relative construction.",
+          "part": "Part 6",
+          "skill": "relative clauses",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "The manager was reluctant to approve the purchase until she had confirmed that the equipment met all regulatory ___.",
+          "options": [
+            "requirements",
+            "requiring",
+            "required",
+            "require"
           ],
           "answer": 0,
-          "explanation": "Present simple is used in an if-clause for a real future condition."
+          "explanation": "“Regulatory requirements” is the correct noun phrase.",
+          "part": "Part 6",
+          "skill": "vocabulary/collocation",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "The hotel has introduced a digital check-in service, thereby ___ waiting times for guests.",
+          "options": [
+            "reducing",
+            "reduced",
+            "reduce",
+            "to reduce"
+          ],
+          "answer": 0,
+          "explanation": "“Thereby + -ing” expresses the resulting method/action.",
+          "part": "Part 5",
+          "skill": "participles",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "The author argues that productivity depends less on the number of hours worked than on how effectively those hours ___.",
+          "options": [
+            "use",
+            "are used",
+            "used",
+            "using"
+          ],
+          "answer": 1,
+          "explanation": "The hours receive the action, so passive “are used” is needed.",
+          "part": "Part 6",
+          "skill": "passive voice",
+          "difficulty": "600-800"
+        },
+        {
+          "prompt": "The committee requested that all proposals ___ submitted in both digital and printed form.",
+          "options": [
+            "are",
+            "be",
+            "were",
+            "will be"
+          ],
+          "answer": 1,
+          "explanation": "After “requested that,” the formal mandative subjunctive uses “be.”",
+          "part": "Part 5",
+          "skill": "subjunctive",
+          "difficulty": "600-800"
         }
       ]
     },
     "800-990": {
       "label": "800–990",
-      "description": "正式語域、倒裝、精細語意與高階搭配",
+      "description": "正式語域、倒裝、精準搭配、複雜從句、推論與高階語法控制",
       "questions": [
         {
-          "id": "800-990-01",
-          "prompt": "She has worked here ___ 2022.",
+          "prompt": "Rarely ___ a supplier respond so quickly to a complex compliance request.",
           "options": [
-            "during",
-            "from",
-            "since",
-            "for"
+            "we see",
+            "do we see",
+            "we have seen",
+            "have we see"
           ],
-          "answer": 2,
-          "explanation": "since + a starting point such as 2022."
+          "answer": 1,
+          "explanation": "Fronted negative adverb “rarely” triggers inversion: “do we see.”",
+          "part": "Part 5",
+          "skill": "inversion",
+          "difficulty": "800-990"
         },
         {
-          "id": "800-990-02",
-          "prompt": "Please send the report ___ Friday.",
+          "prompt": "The legal department advised that the contract be amended to avoid any ambiguity ___ the termination clause.",
           "options": [
-            "by",
-            "at",
-            "on",
-            "since"
+            "concerning",
+            "concerned",
+            "concern",
+            "concerns"
           ],
           "answer": 0,
-          "explanation": "by expresses a deadline."
+          "explanation": "“Concerning” functions as a preposition meaning “about.”",
+          "part": "Part 5",
+          "skill": "advanced prepositions",
+          "difficulty": "800-990"
         },
         {
-          "id": "800-990-03",
-          "prompt": "The meeting ___ at 9 a.m. yesterday.",
+          "prompt": "The acquisition would be viable only if projected savings were realized and integration costs ___ within budget.",
           "options": [
-            "start",
-            "started",
-            "has started",
-            "will start"
-          ],
-          "answer": 1,
-          "explanation": "A finished event in the past uses the past simple."
-        },
-        {
-          "id": "800-990-04",
-          "prompt": "If you have questions, please ___ me know.",
-          "options": [
-            "make",
-            "let",
-            "take",
-            "give"
-          ],
-          "answer": 1,
-          "explanation": "The fixed phrase is let me know."
-        },
-        {
-          "id": "800-990-05",
-          "prompt": "The documents ___ by the manager yesterday.",
-          "options": [
-            "review",
-            "reviewed",
-            "were reviewed",
-            "have review"
-          ],
-          "answer": 2,
-          "explanation": "Past passive = were + past participle."
-        },
-        {
-          "id": "800-990-06",
-          "prompt": "Our sales have ___ significantly this year.",
-          "options": [
-            "increase",
-            "increased",
-            "increasing",
-            "increases"
-          ],
-          "answer": 1,
-          "explanation": "Present perfect uses have/has + past participle."
-        },
-        {
-          "id": "800-990-07",
-          "prompt": "Could you ___ the invoice again?",
-          "options": [
-            "send",
-            "sent",
-            "sending",
-            "to send"
+            "remained",
+            "remain",
+            "would remain",
+            "had remained"
           ],
           "answer": 0,
-          "explanation": "Could you + base verb is a polite request."
+          "explanation": "A parallel second condition in the hypothetical frame takes simple past “remained.”",
+          "part": "Part 5",
+          "skill": "conditionals",
+          "difficulty": "800-990"
         },
         {
-          "id": "800-990-08",
-          "prompt": "The new policy will take effect ___ Monday.",
+          "prompt": "The report is worth reading in full, particularly the section ___ the assumptions underlying the forecast.",
           "options": [
-            "in",
-            "on",
-            "at",
-            "from"
+            "on which",
+            "in which",
+            "wherein",
+            "concerning"
           ],
-          "answer": 1,
-          "explanation": "Use on with a specific day."
+          "answer": 3,
+          "explanation": "“The section concerning…” is the most concise grammatical noun phrase.",
+          "part": "Part 5",
+          "skill": "syntax/precision",
+          "difficulty": "800-990"
         },
         {
-          "id": "800-990-09",
-          "prompt": "We need to discuss the issue before we ___ a decision.",
+          "prompt": "What the committee found most troubling ___ not the delay itself but the lack of communication that followed.",
           "options": [
-            "make",
-            "made",
-            "will make",
-            "making"
-          ],
-          "answer": 0,
-          "explanation": "make a decision is the standard collocation."
-        },
-        {
-          "id": "800-990-10",
-          "prompt": "The company is looking for someone ___ can lead the project.",
-          "options": [
-            "which",
-            "who",
-            "what",
-            "where"
-          ],
-          "answer": 1,
-          "explanation": "who refers to a person in a relative clause."
-        },
-        {
-          "id": "800-990-11",
-          "prompt": "The office closes ___ 6 p.m.",
-          "options": [
-            "at",
-            "on",
-            "in",
-            "since"
-          ],
-          "answer": 0,
-          "explanation": "Use at with clock times."
-        },
-        {
-          "id": "800-990-12",
-          "prompt": "We are interested ___ your proposal.",
-          "options": [
-            "at",
-            "in",
-            "on",
-            "for"
-          ],
-          "answer": 1,
-          "explanation": "interested in is a fixed preposition pattern."
-        },
-        {
-          "id": "800-990-13",
-          "prompt": "I would appreciate it if you ___ reply soon.",
-          "options": [
-            "could",
-            "can",
-            "will",
+            "were",
+            "have been",
+            "was",
             "are"
           ],
-          "answer": 0,
-          "explanation": "A formal request often uses would appreciate it if you could…"
+          "answer": 2,
+          "explanation": "The subject is the singular noun clause “What the committee found most troubling.”",
+          "part": "Part 5",
+          "skill": "subject-verb agreement",
+          "difficulty": "800-990"
         },
         {
-          "id": "800-990-14",
-          "prompt": "The project was completed ___ time.",
+          "prompt": "The director denied that the figures had been deliberately understated, a claim that was later ___ by the audit findings.",
           "options": [
-            "in",
-            "on",
-            "at",
-            "by"
-          ],
-          "answer": 1,
-          "explanation": "on time means at the planned time."
-        },
-        {
-          "id": "800-990-15",
-          "prompt": "She is responsible ___ customer relations.",
-          "options": [
-            "to",
-            "for",
-            "with",
-            "at"
-          ],
-          "answer": 1,
-          "explanation": "responsible for is the standard phrase."
-        },
-        {
-          "id": "800-990-16",
-          "prompt": "The manager asked whether the shipment ___.",
-          "options": [
-            "arrived",
-            "arrives",
-            "arrive",
-            "arriving"
+            "borne out",
+            "put off",
+            "taken in",
+            "called for"
           ],
           "answer": 0,
-          "explanation": "Reported questions about a completed event use arrived."
+          "explanation": "“Bear out” means confirm or support with evidence.",
+          "part": "Part 6",
+          "skill": "phrasal verbs",
+          "difficulty": "800-990"
         },
         {
-          "id": "800-990-17",
-          "prompt": "The product is ___ than the previous version.",
+          "prompt": "The revised forecast assumes that demand will remain stable; ___, however, it would be prudent to retain sufficient capacity for a surge.",
           "options": [
-            "efficient",
-            "more efficient",
-            "most efficient",
-            "efficiency"
-          ],
-          "answer": 1,
-          "explanation": "more + adjective for comparison."
-        },
-        {
-          "id": "800-990-18",
-          "prompt": "The report needs to ___ before noon.",
-          "options": [
-            "finish",
-            "be finished",
-            "finished",
-            "finishing"
-          ],
-          "answer": 1,
-          "explanation": "Need to be + past participle is passive."
-        },
-        {
-          "id": "800-990-19",
-          "prompt": "We had already left when the call ___.",
-          "options": [
-            "came",
-            "comes",
-            "has come",
-            "coming"
+            "nevertheless",
+            "similarly",
+            "therefore",
+            "otherwise"
           ],
           "answer": 0,
-          "explanation": "Past perfect + past simple shows an earlier past event."
+          "explanation": "“Nevertheless” signals a contrast with the assumption.",
+          "part": "Part 6",
+          "skill": "discourse markers",
+          "difficulty": "800-990"
         },
         {
-          "id": "800-990-20",
-          "prompt": "Please contact us if anything ___.",
+          "prompt": "No sooner ___ the announcement been made than investors began asking about the financing arrangement.",
           "options": [
-            "changes",
-            "change",
-            "changed",
-            "changing"
+            "had",
+            "has",
+            "did",
+            "was"
           ],
           "answer": 0,
-          "explanation": "Present simple is used in an if-clause for a real future condition."
+          "explanation": "“No sooner had … than …” uses past perfect inversion.",
+          "part": "Part 5",
+          "skill": "inversion",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The consultant's recommendation was more nuanced than the summary initially made ___.",
+          "options": [
+            "it appear",
+            "them appear",
+            "that appearing",
+            "to appear"
+          ],
+          "answer": 0,
+          "explanation": "Causative “make + object + bare infinitive” gives “made it appear.”",
+          "part": "Part 5",
+          "skill": "causative structures",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "Were the regulator to reject the application, the company ___ required to resubmit the entire package.",
+          "options": [
+            "is",
+            "would be",
+            "will be",
+            "has been"
+          ],
+          "answer": 1,
+          "explanation": "Formal second conditional inversion: “Were …, would …”.",
+          "part": "Part 5",
+          "skill": "formal conditionals",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The CEO's remarks were carefully worded so as to avoid ___ the impression that the merger was imminent.",
+          "options": [
+            "create",
+            "creating",
+            "to create",
+            "created"
+          ],
+          "answer": 1,
+          "explanation": "“Avoid” is followed by a gerund: avoiding creating.",
+          "part": "Part 5",
+          "skill": "gerunds",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The policy applies to all contractors, regardless of where they are based or ___ long they have worked with the company.",
+          "options": [
+            "how",
+            "what",
+            "which",
+            "that"
+          ],
+          "answer": 0,
+          "explanation": "The fixed phrase is “how long.”",
+          "part": "Part 6",
+          "skill": "noun/adverb clauses",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The figures are consistent with the hypothesis, but they are by no means ___ evidence of causation.",
+          "options": [
+            "conclusive",
+            "conclusively",
+            "conclude",
+            "conclusion"
+          ],
+          "answer": 0,
+          "explanation": "An adjective is needed before “evidence”: conclusive evidence.",
+          "part": "Part 5",
+          "skill": "parts of speech",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "Under no circumstances ___ confidential client records be shared with external parties without authorization.",
+          "options": [
+            "can",
+            "should",
+            "do",
+            "have"
+          ],
+          "answer": 1,
+          "explanation": "“Under no circumstances” triggers inversion; “should … be shared” expresses prohibition/policy.",
+          "part": "Part 5",
+          "skill": "inversion/modals",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The report distinguishes between what the market appears to be doing and what analysts believe it ___.",
+          "options": [
+            "will do",
+            "does",
+            "doing",
+            "has done"
+          ],
+          "answer": 0,
+          "explanation": "Future-oriented “will do” completes the contrast.",
+          "part": "Part 6",
+          "skill": "reported perspective",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The new framework is designed to be flexible enough to accommodate changes that could not reasonably ___ when the original policy was drafted.",
+          "options": [
+            "have been foreseen",
+            "be foreseen",
+            "foresee",
+            "have foreseen"
+          ],
+          "answer": 0,
+          "explanation": "A modal perfect passive is required for an unrealized past possibility.",
+          "part": "Part 5",
+          "skill": "modal perfect passive",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "Far from ___ the issue, the announcement raised a new set of questions about implementation.",
+          "options": [
+            "resolve",
+            "resolving",
+            "resolved",
+            "to resolve"
+          ],
+          "answer": 1,
+          "explanation": "“Far from + -ing” introduces a contrastive result.",
+          "part": "Part 5",
+          "skill": "participial constructions",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The auditor's findings call into question the extent to ___ management's estimates can be relied.",
+          "options": [
+            "which",
+            "what",
+            "that",
+            "where"
+          ],
+          "answer": 0,
+          "explanation": "The fixed construction is “the extent to which.”",
+          "part": "Part 5",
+          "skill": "relative structures",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "It is essential that the final figures ___ independently verified before publication.",
+          "options": [
+            "are",
+            "be",
+            "were",
+            "have"
+          ],
+          "answer": 1,
+          "explanation": "Formal mandative subjunctive uses the bare form “be.”",
+          "part": "Part 5",
+          "skill": "subjunctive",
+          "difficulty": "800-990"
+        },
+        {
+          "prompt": "The policy, though broadly supported, leaves unresolved the question of ___ liability should be assigned when data are breached.",
+          "options": [
+            "whose",
+            "who",
+            "which",
+            "what"
+          ],
+          "answer": 0,
+          "explanation": "“Whose liability” correctly asks about ownership/responsibility.",
+          "part": "Part 6",
+          "skill": "embedded questions",
+          "difficulty": "800-990"
         }
       ]
     }

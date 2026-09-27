@@ -33,3 +33,10 @@ Settings → Pages → Source = GitHub Actions。
 ## 注意
 
 YouTube 嵌入播放器的廣告由 YouTube 控制，網站不能可靠保證所有 YouTube embed 無廣告。若產品最終需要完全無廣告，需改用有授權的自有/託管影片來源。
+
+
+## V5 content quality policy
+
+- TOEIC practice uses original questions aligned to the public TOEIC Listening & Reading format and ETS score-descriptor capability themes; it does not reproduce ETS copyrighted sample questions.
+- Grammar progression is newly written, informed by the topic sequence used in mainstream references such as Cambridge's *English Grammar in Use* / *Essential Grammar in Use*, without copying their exercises or wording.
+- Pasted YouTube URLs play immediately. Custom three-mode bilingual subtitles require the video to be processed by the content pipeline; YouTube native captions are the fallback for unprocessed external URLs.

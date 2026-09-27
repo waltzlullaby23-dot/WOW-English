@@ -77,4 +77,359 @@ function listPage(title,items){return `<div class="section-head"><div><h2>${titl
 function vocabularyPage(){const items=Object.values(vocab());return `<div class="section-head"><div><h2>我的單字庫</h2><p>從字幕點擊單字後可收藏；支援英式 / 美式發音。</p></div><span class="count-pill">${items.length} 字</span></div><div class="vocab-grid">${items.map(w=>`<div class="vocab-card"><div><strong>${esc(w.word)}</strong><small>${esc(w.pos||'')}</small></div><p>${esc(w.definition_zh||'')}</p><button onclick='openWord(${JSON.stringify(w.word)},${JSON.stringify(w.sourceVideoId||'')},${JSON.stringify(w.sourceSentence||'')})'>查看</button></div>`).join('')||'<div class="empty">尚未收藏單字。</div>'}</div>`;}
 function engine(){const s=catalog.stats||{};return `<div class="section-head"><div><h2>影片探索引擎</h2><p>候選搜尋 → 語言辨識 → 字幕 A/B/C → AI CEFR / 分類 → 去重 → 翻譯 → 學習單元。</p></div><span class="count-pill">13 類・${taxonomy.totalSubcategories} 子類</span></div><div class="engine-grid"><div class="panel pipeline"><h3>Continuous Discovery</h3><div>${[['大量搜尋','每次 32 個 query、雙頁候選'],['語言閘門','English / Multilingual / confidence'],['字幕','A → B → C fallback'],['分類','AI 13 大類 / 子類'],['難度','A1–C2 CEFR'],['去重','ID / fingerprint / embedding'],['翻譯','batch → sentence → context'],['學習單元','Vocabulary / Phrases / Grammar / Questions']].map((x,i)=>`<div class="stage"><b>${i+1}. ${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div></div><div class="panel"><h3>目前資料</h3><div class="metric-grid"><div><b>${s.accepted||catalog.videos.length}</b><small>收錄</small></div><div><b>${s.candidates||0}</b><small>候選</small></div><div><b>${s.review||0}</b><small>待審</small></div><div><b>${catalog.translationStats?.translated||0}</b><small>已翻句</small></div></div><p class="engine-note">真正大量增加影片需要 GitHub Actions 取得 YOUTUBE_API_KEY 與 OPENAI_API_KEY 後自動執行。</p></div></div>`;}
 window.toggleSidebar=toggleSidebar;window.openCategoryModal=openCategoryModal;window.closeCategoryModal=closeCategoryModal;window.chooseCategory=chooseCategory;window.go=go;window.updateSearch=updateSearch;window.renderMain=renderMain;window.setSpeed=setSpeed;window.setSubtitleSize=setSubtitleSize;window.setTab=setTab;window.seek=seek;window.toggleFav=toggleFav;window.openWord=openWord;window.closeWord=closeWord;window.speak=speak;window.addWord=addWord;window.answerQuiz=answerQuiz;window.nextQuiz=nextQuiz;window.toggleLesson=toggleLesson;
+
+
+/* =========================================================
+   三木Eng V5
+   - robust page scroll / collapsible sidebar
+   - YouTube URL input
+   - 75/100/125/150/200% subtitle scale
+   - live sentence sync using YouTube IFrame API
+   - subtitle workspace below video
+   - grammar practice
+   - TOEIC band-specific UI
+   ========================================================= */
+
+function extractYouTubeId(value){
+  const s=String(value||'').trim();
+  if(!s) return null;
+  const direct=s.match(/^[A-Za-z0-9_-]{11}$/);
+  if(direct) return direct[0];
+  try{
+    const u=new URL(s);
+    const host=u.hostname.replace(/^www\./,'').toLowerCase();
+    if(host==='youtu.be'){
+      const id=u.pathname.split('/').filter(Boolean)[0];
+      return id&&/^[A-Za-z0-9_-]{11}$/.test(id)?id:null;
+    }
+    if(host==='youtube.com' || host==='m.youtube.com' || host==='music.youtube.com'){
+      if(u.pathname==='/watch'){
+        const id=u.searchParams.get('v');
+        return id&&/^[A-Za-z0-9_-]{11}$/.test(id)?id:null;
+      }
+      const m=u.pathname.match(/^\/(?:shorts|embed|live)\/([A-Za-z0-9_-]{11})/);
+      return m?m[1]:null;
+    }
+  }catch{}
+  return null;
+}
+
+function selectedVideo(){
+  const id=decodeURIComponent(state.selectedVideo||'');
+  const found=catalog.videos.find(v=>v.id===id);
+  if(found) return found;
+  const yid=extractYouTubeId(id);
+  if(yid) return {
+    id:yid,
+    title:'YouTube 影片',
+    channel:'YouTube',
+    duration:'',
+    cefr:'—',
+    englishScore:0,
+    category:'',
+    subcategory:'',
+    captions:'external',
+    translation:'pending',
+    transcript:[],
+    sourceUrl:`https://www.youtube.com/watch?v=${yid}`,
+    external:true
+  };
+  return null;
+}
+
+function handleSearchKey(e,value){
+  if(e.key!=='Enter') return;
+  const id=extractYouTubeId(value);
+  if(id){
+    state.search='';
+    go('watch',id);
+  }
+}
+
+function setSubtitleScale(scale){
+  const n=Number(scale)||1;
+  state.subtitleScale=Math.max(.75,Math.min(2,n));
+  save('sanmu-subtitle-scale',state.subtitleScale);
+  const list=document.querySelector('.subtitle-list');
+  if(list) applySubtitleScaleToList(list);
+  document.querySelectorAll('.subtitle-scale-btn').forEach(b=>{
+    b.classList.toggle('active',Number(b.dataset.scale)===state.subtitleScale);
+  });
+}
+function applySubtitleScaleToList(list){
+  const base=20*state.subtitleScale;
+  list.style.setProperty('--en-size',base+'px');
+  list.style.setProperty('--zh-size',Math.max(14,base*.88)+'px');
+}
+function setSubtitleSize(s){ setSubtitleScale((Number(s)||100)/100); }
+function getPracticeAnswers(id){return load('sanmu-practice-'+id,{});}
+function answerMicroPractice(lessonId,index,choice){
+  const p=getPracticeAnswers(lessonId);
+  p[index]=choice;
+  save('sanmu-practice-'+lessonId,p);
+  renderMain();
+}
+function practiceResultHtml(lessonId,index,item){
+  const p=getPracticeAnswers(lessonId), a=p[index];
+  if(a===undefined) return '';
+  const ok=a===item.answer;
+  return `<div class="practice-result ${ok?'ok':'bad'}"><b>${ok?'答對':'再檢查一次'}</b><p>${esc(item.explanation||'')}</p></div>`;
+}
+
+function initPlayer(){
+  if(state.route!=='watch') return;
+  const iframe=document.getElementById('yt');
+  if(!iframe) return;
+  if(window.YT && window.YT.Player){
+    try{
+      if(ytPlayer && typeof ytPlayer.destroy==='function') ytPlayer.destroy();
+    }catch{}
+    ytPlayer=new YT.Player('yt',{
+      events:{
+        onReady:function(){ startSubtitleSync(); setSpeed(state.speed||1); }
+      }
+    });
+    return;
+  }
+  if(window.__ytApiReady){
+    setTimeout(initPlayer,100);
+    return;
+  }
+  if(!window.__ytWaiterV5){
+    window.__ytWaiterV5=true;
+    window.addEventListener('ytapiready',function(){
+      window.__ytWaiterV5=false;
+      setTimeout(initPlayer,50);
+    },{once:true});
+  }
+}
+function startSubtitleSync(){
+  if(ytTimer) clearInterval(ytTimer);
+  ytTimer=setInterval(function(){
+    if(!ytPlayer || typeof ytPlayer.getCurrentTime!=='function') return;
+    let t=0;
+    try{t=Number(ytPlayer.getCurrentTime())||0}catch{return}
+    syncSubtitle(t);
+  },120);
+}
+function syncSubtitle(t){
+  const v=selectedVideo();
+  const segs=v?.transcript||[];
+  if(!segs.length) return;
+  let idx=-1;
+  for(let i=0;i<segs.length;i++){
+    const a=Number(segs[i].start)||0;
+    const b=Number(segs[i].end);
+    const end=Number.isFinite(b)&&b>a?b:a+8;
+    if(t>=a && t<end){idx=i;break;}
+  }
+  if(idx<0){
+    for(let i=segs.length-1;i>=0;i--){
+      if(t>=(Number(segs[i].start)||0)){idx=i;break;}
+    }
+  }
+  const list=document.querySelector('.subtitle-list');
+  if(!list) return;
+  list.querySelectorAll('.segment').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  const active=list.querySelector('.segment.active');
+  if(active && idx>=0){
+    const r=active.getBoundingClientRect();
+    const lr=list.getBoundingClientRect();
+    if(r.top<lr.top+18 || r.bottom>lr.bottom-18){
+      active.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  }
+}
+function destroyPlayer(){
+  if(ytTimer){clearInterval(ytTimer);ytTimer=null;}
+  try{if(ytPlayer&&typeof ytPlayer.destroy==='function')ytPlayer.destroy();}catch{}
+  ytPlayer=null;
+}
+function seek(sec){
+  const t=Number(sec)||0;
+  if(ytPlayer && typeof ytPlayer.seekTo==='function'){
+    try{ytPlayer.seekTo(t,true); if(typeof ytPlayer.playVideo==='function')ytPlayer.playVideo();return;}catch{}
+  }
+}
+function setSpeed(s){
+  state.speed=Number(s)||1;
+  if(ytPlayer&&typeof ytPlayer.setPlaybackRate==='function'){
+    try{ytPlayer.setPlaybackRate(state.speed);}catch{}
+  }
+  document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===state.speed));
+}
+function subtitleHTML(v){
+  const segs=v?.transcript||[];
+  if(!segs.length) return '';
+  return segs.map(function(s,i){
+    return `<div class="segment" data-index="${i}" onclick="seek(${Number(s.start)||0})">
+      <div class="time">${fmt(s.start)} · sentence ${i+1}</div>
+      ${state.transcriptTab!=='chinese'?`<div class="en">${clickableSentence(s.en||'',v.id)}</div>`:''}
+      ${state.transcriptTab!=='english'?`<div class="zh">${esc(s.zh||'翻譯待補')}</div>`:''}
+    </div>`;
+  }).join('');
+}
+function setTab(t){
+  state.transcriptTab=t;
+  const v=selectedVideo();
+  const list=document.querySelector('.subtitle-list');
+  if(list){
+    list.innerHTML=subtitleHTML(v);
+    applySubtitleScaleToList(list);
+  }
+}
+function render(){
+  destroyPlayer();
+  document.querySelector('#app').innerHTML=shell(content());
+  if(state.route==='watch') setTimeout(initPlayer,80);
+}
+function renderMain(){
+  const m=document.querySelector('main');
+  if(m){
+    destroyPlayer();
+    m.innerHTML=content();
+    if(state.route==='watch') setTimeout(initPlayer,80);
+  }
+}
+
+function shell(main){
+  const d=daily(), collapsed=state.sidebarCollapsed;
+  const done=Object.values(prog()).filter(Boolean).length;
+  return `<div class="app ${collapsed?'sidebar-collapsed':''}">
+  <header class="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="收合側欄">☰</button>
+    <a class="brand" href="#learning"><img src="assets/logo.png" alt="三木Eng"></a>
+    <div class="search"><input value="${esc(state.search)}" oninput="updateSearch(this.value)" onkeydown="handleSearchKey(event,this.value)" placeholder="搜尋影片、主題、單字、頻道… 或貼上 YouTube 網址"></div>
+    <div class="top-actions"><button onclick="go('engine')">探索引擎</button><button onclick="go('learning')">影片學習</button></div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand-mini"><span>三木</span><button onclick="toggleSidebar()">${collapsed?'»':'«'}</button></div>
+      <button class="side-main ${['learning','watch'].includes(state.route)?'active':''}" onclick="go('learning')"><span class="side-icon">▶</span><span><b>影片學習</b><small>影片・字幕・單字</small></span></button>
+      <button class="side-main ${['grammar','lesson'].includes(state.route)?'active':''}" onclick="go('grammar')"><span class="side-icon">文</span><span><b>英文文法</b><small>30 章 · 150 微課</small></span></button>
+      <button class="side-main ${state.route==='quiz'?'active':''}" onclick="go('quiz')"><span class="side-icon">測</span><span><b>多益練習</b><small>4 級距 · 20 題</small></span></button>
+      <div class="side-label">影片工具</div>
+      <button class="side-tool" onclick="go('history')"><span>▤</span><span><b>觀看紀錄</b><small>${history().length} 部</small></span></button>
+      <button class="side-tool" onclick="go('favorites')"><span>♡</span><span><b>收藏影片</b><small>${favs().length} 部</small></span></button>
+      <button class="side-tool" onclick="go('vocabulary')"><span>Aa</span><span><b>我的單字庫</b><small>${Object.keys(vocab()).length} 字</small></span></button>
+      <div class="side-label">分類</div>
+      <button class="category-launch" onclick="openCategoryModal()"><span>▦</span><span><b>選擇分類</b><small>${state.category==='all'?'全部 13 大類':esc((taxonomy.categories.find(c=>c.id===state.category)||{}).name||'')}</small></span></button>
+      <div class="side-bottom"><div class="progress-card"><small>文法微課進度</small><strong>${done} / 150 課</strong><div><i style="width:${Math.min(100,done/1.5)}%"></i></div></div><div class="daily">今日學習 <b>${d.minutes}</b> 分鐘・<b>${d.sessions}</b> 次</div></div>
+    </aside>
+    <main>${main}</main>
+  </div>
+  ${categoryModalOpen?categoryModal():''}${state.word?wordModal():''}</div>`;
+}
+
+function watch(){
+  const v=selectedVideo();
+  if(!v)return '<div class="empty">找不到影片。</div>';
+  markHistory(v);
+  const unit=learningUnits.units?.[v.id]||{};
+  const external=!!v.external;
+  const hasTranscript=(v.transcript||[]).length>0;
+  const translationReady=hasTranscript && v.transcript.every(s=>String(s.zh||'').trim());
+  const scale=state.subtitleScale||1;
+  const nativeCc=external ? '&cc_load_policy=1&cc_lang_pref=zh-TW' : '';
+  return `<div class="watch-page">
+    <div class="player-card">
+      <div class="player"><iframe id="yt" src="${ytEmbed(v.id)+nativeCc}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="player-tools">
+        <button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button>
+        <button data-speed="1" onclick="setSpeed(1)">1×</button>
+        <button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button>
+        <button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button>
+        <span></span>
+        <button onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏'}</button>
+      </div>
+      <div class="subtitle-control scale-control">
+        <label>字幕大小</label>
+        ${[[.75,'75%'],[1,'100%'],[1.25,'125%'],[1.5,'150%'],[2,'200%']].map(x=>`<button class="subtitle-scale-btn ${scale===x[0]?'active':''}" data-scale="${x[0]}" onclick="setSubtitleScale(${x[0]})">${x[1]}</button>`).join('')}
+        <small>英文 ${Math.round(20*scale)}px · 中文字幕 ${Math.round(Math.max(14,17.5*scale))}px</small>
+      </div>
+      <h1>${esc(v.title)}</h1>
+      <p class="watch-meta">${esc(v.channel)} ${v.duration?'・ '+esc(v.duration):''} ${v.cefr&&v.cefr!=='—'?'・ CEFR '+esc(v.cefr):''}</p>
+    </div>
+
+    <div class="panel subtitle-panel">
+      <div class="panel-head"><div><h2>字幕工作區</h2><p>${external?'這部影片尚未進入三木Eng字幕/翻譯資料庫；播放器保留 YouTube 原生字幕作為 fallback。':'播放時依影片時間自動逐句同步、高亮與自動捲動；點任何一句即可跳轉。'}</p></div><span class="pill ${translationReady?'green':''}">${external?'等待內容引擎處理':translationReady?'逐句翻譯已備妥':'中文翻譯待補'}</span></div>
+      <div class="tabs"><button class="${state.transcriptTab==='english'?'active':''}" onclick="setTab('english')">英文</button><button class="${state.transcriptTab==='bilingual'?'active':''}" onclick="setTab('bilingual')">中英</button><button class="${state.transcriptTab==='chinese'?'active':''}" onclick="setTab('chinese')">中文</button></div>
+      <div class="subtitle-list" style="--en-size:${20*scale}px;--zh-size:${Math.max(14,17.5*scale)}px">${hasTranscript?subtitleHTML(v):`<div class="empty"><b>尚無三木Eng逐句翻譯資料</b><p>直接貼 YouTube 網址可以播放；要進入三木Eng的逐句英文/中文學習工作區，影片需要先經內容探索引擎取得字幕並完成翻譯。</p><p>若影片本身有 YouTube CC，播放器已開啟原生字幕 fallback。</p></div>`}</div>
+    </div>
+
+    ${external?'':`<div class="learning-row">
+      <div class="panel"><div class="panel-head"><h2>單字</h2><span>${(unit.vocabulary||[]).length}</span></div><div class="unit-list">${(unit.vocabulary||[]).slice(0,10).map(x=>`<button onclick='openWord(${JSON.stringify(x.word||'')},${JSON.stringify(v.id)},${JSON.stringify(x.example||'')})'><b>${esc(x.word||'')}</b>${x.definition_zh?' · '+esc(x.definition_zh):''}</button>`).join('')||'尚未生成'}</div></div>
+      <div class="panel"><div class="panel-head"><h2>片語</h2><span>${(unit.phrases||[]).length}</span></div><div class="unit-list">${(unit.phrases||[]).slice(0,8).map(x=>`<div><b>${esc(x.phrase||'')}</b>${x.meaning_zh?' · '+esc(x.meaning_zh):''}</div>`).join('')||'尚未生成'}</div></div>
+      <div class="panel"><div class="panel-head"><h2>文法</h2><span>${(unit.grammar||[]).length}</span></div><div class="unit-list">${(unit.grammar||[]).slice(0,6).map(x=>`<div><b>${esc(x.topic||'')}</b>${x.explanation_zh?' · '+esc(x.explanation_zh):''}</div>`).join('')||'尚未生成'}</div></div>
+    </div>`}
+  </div>`;
+}
+
+function ytEmbed(id){
+  const origin=encodeURIComponent(location.origin);
+  return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${origin}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;
+}
+
+function grammar(){
+  const done=Object.values(prog()).filter(Boolean).length;
+  return `<div class="section-head"><div><h2>英文文法 · 30 章 / 150 微課</h2><p>以主流英文文法教材常見的由基礎到進階 progression 重組：句型 → 時態 → 冠詞 → 從句 → 高階文法。每課都有示範句型、例句與練習。</p></div><span class="count-pill">${done}/150</span></div>
+  <div class="overview-progress"><strong>${done} / 150 課</strong><div><i style="width:${Math.min(100,done/1.5)}%"></i></div></div>
+  <div class="chapter-grid">${lessons.chapters.map(c=>{
+    const ms=lessons.microLessons.filter(m=>m.chapter_id===c.id);
+    return `<article class="chapter"><div class="chapter-head"><h3>${c.id}. ${esc(c.title_zh)}</h3><span>${esc(c.cefr)}</span></div><p>${esc(c.title_en)} · ${esc(c.chapter_note||'')}</p><div class="micro-list">${ms.map(m=>`<button class="micro-btn ${prog()[m.lesson_id]?'done':''}" onclick="go('lesson','${m.lesson_id}')"><span>${m.lesson_id.split('-')[1]}</span>${esc(m.title_zh)}<i>→</i></button>`).join('')}</div><div class="chapter-practice-note">${esc(c.chapter_practice||'')}</div></article>`;
+  }).join('')}</div>`;
+}
+
+function lesson(){
+  const l=lessons.microLessons.find(x=>x.lesson_id===state.selectedLesson);
+  if(!l)return '<div class="empty">找不到微課。</div>';
+  const done=!!prog()[l.lesson_id];
+  const answers=getPracticeAnswers(l.lesson_id);
+  return `<div class="lesson-page">
+    <div class="section-head"><div><div class="eyebrow">MICRO LESSON ${esc(l.lesson_id)}</div><h2>${esc(l.title_zh)}</h2><p>${esc(l.cefr)} ・ ${esc(l.title_en)}</p></div><span class="count-pill">${done?'已完成':'未完成'}</span></div>
+    <div class="lesson-grid">
+      <div class="panel big-copy"><h3>① 觀念</h3><p>${esc(l.explanation)}</p></div>
+      <div class="panel big-copy"><h3>② 示範句型</h3><div class="formula">${esc(l.pattern)}</div><div class="example-set">${l.examples.map(e=>`<p class="example">${esc(e)} <button onclick="speak(${JSON.stringify(e)},'en-US')">🔊</button></p>`).join('')}</div></div>
+      <div class="panel big-copy"><h3>③ 常見錯誤</h3>${l.common_errors.map(e=>`<p>⚠ ${esc(e)}</p>`).join('')}</div>
+      <div class="panel big-copy"><h3>④ Contrast</h3>${l.contrast.map(e=>`<p>${esc(e)}</p>`).join('')}</div>
+      <div class="panel big-copy"><h3>⑤ 微練習</h3>${l.practice.map((e,i)=>`<p>${i+1}. ${esc(e)}</p>`).join('')}</div>
+      <div class="panel big-copy"><h3>⑥ 互動題</h3>${(l.practice_items||[]).map((item,i)=>`<div class="micro-practice"><b>${i+1}. ${esc(item.prompt)}</b><div class="practice-options">${item.options.map((o,j)=>`<button class="${answers[i]!==undefined?(j===item.answer?'correct':answers[i]===j?'wrong':'') : ''}" onclick="answerMicroPractice('${l.lesson_id}',${i},${j})">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join('')}</div>${practiceResultHtml(l.lesson_id,i,item)}</div>`).join('')}</div>
+    </div>
+    <div class="lesson-actions"><button onclick="go('grammar')">← 回到 30 章</button><button class="primary" onclick="toggleLesson('${l.lesson_id}')">${done?'取消完成':'完成本微課'}</button><button onclick="go('quiz')">做分級測驗 →</button></div>
+    </div>`;
+}
+
+function quiz(){
+  const bands=Object.keys(toeic.bands||{});
+  const band=toeic.bands[state.quizBand]||toeic.bands['400-600'];
+  const questions=band.questions||[];
+  const idx=Math.min(state.quizIndex,Math.max(0,questions.length-1));
+  const q=questions[idx]||{};
+  const answered=state.quizAnswers[state.quizBand]?.[idx]!==undefined;
+  const score=Object.values(state.quizAnswers[state.quizBand]||{}).filter((a,i)=>a===questions[i]?.answer).length;
+  return `<div class="quiz-page">
+    <div class="section-head"><div><h2>多益分級練習 · 20 題</h2><p>題目為三木Eng原創練習，依 ETS 公開 TOEIC 題型與能力描述設計；這些級距是訓練分級，不是官方分數換算。</p></div><span class="count-pill">${idx+1} / ${questions.length} ・ ${score} 分</span></div>
+    <div class="band-grid">${bands.map(b=>`<button class="band-card ${state.quizBand===b?'active':''}" onclick="state.quizBand='${b}';state.quizIndex=0;renderMain()"><strong>${esc(toeic.bands[b].label)}</strong><small>${esc(toeic.bands[b].description)}</small></button>`).join('')}</div>
+    <div class="quiz-card">
+      <div class="quiz-meta"><span>${esc(q.part||'Part 5')}</span><span>${esc(q.skill||'')}</span><span>${esc(q.difficulty||'')}</span></div>
+      <h3>${esc(q.prompt||'')}</h3>
+      <div class="answers">${(q.options||[]).map((o,i)=>`<button class="answer ${answered&&i===q.answer?'correct':''} ${answered&&state.quizAnswers[state.quizBand][idx]===i&&i!==q.answer?'wrong':''}" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div>
+      ${answered?`<div class="quiz-explain"><strong>${state.quizAnswers[state.quizBand][idx]===q.answer?'答對':'需要訂正'}</strong><p>${esc(q.explanation||'')}</p><button class="primary" onclick="nextQuiz()">${idx===questions.length-1?'重新開始':'下一題'}</button></div>`:''}
+    </div>
+  </div>`;
+}
+
+function practiceReleaseCheck(){
+  const errors=[];
+  if((lessons.chapters||[]).length!==30) errors.push('grammar chapters');
+  if((lessons.microLessons||[]).length!==150) errors.push('micro lessons');
+  for(const [id,b] of Object.entries(toeic.bands||{})) if((b.questions||[]).length!==20) errors.push(`TOEIC ${id}`);
+  return errors;
+}
+
+/* override URL-aware shell and the input handlers */
+window.handleSearchKey=handleSearchKey;
+window.setSubtitleScale=setSubtitleScale;
+window.answerMicroPractice=answerMicroPractice;
+
 boot();
