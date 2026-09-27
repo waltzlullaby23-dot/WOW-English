@@ -184,30 +184,67 @@ def fetch_english_via_timedtext(video_id: str):
             pass
     return None,[]
 
-def fetch_english_via_ytdlp(video_url: str):
-    client_args=['youtube:player-client=web_embedded,ios','youtube:player-client=ios,web_embedded']
+def align_translation_segments(en_rows, zh_rows):
+    if not en_rows or not zh_rows: return None
+    out=[]
+    for en in en_rows:
+        best=min(zh_rows,key=lambda z:abs(float(z.get('start',0))-float(en.get('start',0))))
+        if abs(float(best.get('start',0))-float(en.get('start',0)))<=3.5:
+            out.append(clean_text(best.get('en','')))
+        else:
+            out.append('')
+    if not all(out): return None
+    return out
+
+def fetch_subtitle_bundle_via_ytdlp(video_url: str):
+    # Fetch the original English caption plus YouTube's own machine-translated
+    # Chinese caption track. This mirrors the translation path used by YouTube's player.
+    client_args=[
+        'youtube:player_client=web_embedded,web,ios',
+        'youtube:player_client=web,ios',
+        'youtube:player_client=tv,web',
+        'youtube:player_client=default',
+    ]
     with tempfile.TemporaryDirectory() as td:
         out=str(Path(td)/'%(id)s.%(language)s.%(ext)s')
         for client in client_args:
-            cmd=['yt-dlp','--skip-download','--write-subs','--write-auto-subs','--sub-format','vtt/srt/best','--sub-langs','en.*','-o',out,'--extractor-args',client,video_url]
+            cmd=[
+                'yt-dlp','--skip-download',
+                '--write-subs','--write-auto-subs',
+                '--sub-format','vtt',
+                '--sub-langs','en.*,zh.*',
+                '--extractor-args',client,
+                '--no-warnings','-o',out,video_url
+            ]
             try:
-                p=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=70)
-                files=sorted(Path(td).glob('*.vtt'))+sorted(Path(td).glob('*.srt'))
-                usable=[]
-                for fp in files:
-                    try:
-                        rows=parse_vtt(fp)
-                        if len(rows)>=CONFIG['minSegments'] and len(' '.join(x['en'] for x in rows))>=180:
-                            usable.append((fp,rows))
-                    except Exception:
-                        pass
-                if p.returncode==0 and usable:
-                    usable.sort(key=lambda x:len(x[1]),reverse=True)
-                    return usable[0]
+                subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=120)
             except Exception:
-                pass
-    return None,[]
+                continue
+            files=sorted(Path(td).glob('*.vtt'))+sorted(Path(td).glob('*.srt'))
+            en_options=[]; zh_options=[]
+            for fp in files:
+                try:
+                    rows=parse_vtt(fp)
+                    if len(rows)<CONFIG['minSegments'] or len(' '.join(x['en'] for x in rows))<180: continue
+                    parts=fp.name.split('.')
+                    lang=parts[-2] if len(parts)>=3 else ''
+                    if str(lang).lower().startswith('en'): en_options.append((fp,rows,lang))
+                    elif str(lang).lower().startswith('zh'): zh_options.append((fp,rows,lang))
+                except Exception:
+                    continue
+            if en_options:
+                en_options.sort(key=lambda x:len(x[1]),reverse=True)
+                en_rows=en_options[0][1]
+                zh_rows=[]
+                if zh_options:
+                    zh_options.sort(key=lambda x:(0 if str(x[2]).lower() in {'zh-tw','zh-hant','zh-hant-tw'} else 1,-len(x[1])))
+                    zh_rows=zh_options[0][1]
+                return en_rows,zh_rows
+    return [],[]
 
+def fetch_english_via_ytdlp(video_url: str):
+    en,_,=fetch_subtitle_bundle_via_ytdlp(video_url)
+    return (True if en else None),en
 def translation_codes(tr):
     out=[]
     for x in getattr(tr,'translation_languages',[]) or []:
@@ -402,7 +439,12 @@ def process_video(video_id, meta, existing, idx=0):
     valid,coverage,reason=validate_transcript(segs,duration)
     if not valid or spoken!='en' or ratio['nonEnglish']>0.18:
         return None,{'id':video_id,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken}
-    zh,zh_source=translate_from_youtube(tr,segs)
+    zh=None; zh_source='none'
+    if youtube_zh:
+        zh=align_translation_segments(segs,youtube_zh)
+        if zh and all(clean_text(x) for x in zh): zh_source='youtube-auto-translate'
+    if zh is None:
+        zh,zh_source=translate_from_youtube(tr,segs)
     if zh is None:
         zh,zh_source=translate_with_argos(segs)
     if zh is None:
