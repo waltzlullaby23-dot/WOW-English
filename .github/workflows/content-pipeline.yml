@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: sanmu-free-discovery
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   discover:
