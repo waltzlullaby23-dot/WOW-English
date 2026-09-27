@@ -13,7 +13,7 @@ async function boot(){
   state.sidebarCollapsed=load('evl-sidebar-collapsed',false);
   parseHash();
 }
-function parseHash(){const p=location.hash.slice(1).split('/');state.route=p[0]||'learning';state.selectedVideo=state.route==='watch'?decodeURIComponent(p[1]||''):null;state.selectedLesson=state.route==='lesson'?decodeURIComponent(p[1]||''):null;if(state.route==='watch'&&!['english','bilingual','chinese'].includes(state.transcriptTab))state.transcriptTab='bilingual';render();}
+function parseHash(){const p=location.hash.slice(1).split('/');state.route=p[0]||'learning';state.selectedVideo=state.route==='watch'?decodeURIComponent(p[1]||''):null;state.selectedLesson=state.route==='lesson'?decodeURIComponent(p[1]||''):null;if(state.route==='watch'&&!['english','bilingual','chinese'].includes(state.transcriptTab))state.transcriptTab='bilingual';window.scrollTo({top:0,left:0,behavior:'auto'});requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));render();}
 function go(route,id=''){location.hash=id?route+'/'+encodeURIComponent(id):route;}
 window.addEventListener('hashchange',parseHash);
 function favs(){return load('sanmu-favs',[])} function vocab(){return load('sanmu-vocab',{})} function history(){return load('sanmu-history',[])} function prog(){return load('sanmu-lessons',{})}
@@ -50,7 +50,7 @@ function explore(){const vs=filteredVideos(), subs=[...new Set(vs.map(v=>v.subca
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;}
 function initPlayer(){if(state.route!=='watch')return;const iframe=$('#yt');if(!iframe)return;if(window.YT&&YT.Player){ytPlayer=new YT.Player('yt',{events:{onReady:()=>startSubtitleSync()}});}else if(!window.__ytWaiter){window.__ytWaiter=true;window.addEventListener('ytapiready',()=>{window.__ytWaiter=false;initPlayer()},{once:true});}}
 function startSubtitleSync(){if(ytTimer)clearInterval(ytTimer);ytTimer=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;let t=0;try{t=ytPlayer.getCurrentTime()}catch{return}syncSubtitle(t);},180);}
-function syncSubtitle(t){const v=catalog.videos.find(x=>x.id===state.selectedVideo);if(!v)return;const seg=v.transcript||[];let idx=-1;for(let i=0;i<seg.length;i++){const a=Number(seg[i].start)||0,b=Number(seg[i].end)||a+8;if(t>=a&&t<b){idx=i;break}}if(idx<0){for(let i=seg.length-1;i>=0;i--){if(t>=Number(seg[i].start||0)){idx=i;break}}}document.querySelectorAll('.segment').forEach((el,i)=>el.classList.toggle('active',i===idx));const active=document.querySelector('.segment.active'),box=$('.subtitle-list');if(active&&box){const top=active.offsetTop,bottom=top+active.offsetHeight;if(top<box.scrollTop+20||bottom>box.scrollTop+box.clientHeight-20)active.scrollIntoView({behavior:'smooth',block:'center'});}}
+function syncSubtitle(t){const v=catalog.videos.find(x=>x.id===state.selectedVideo);if(!v)return;const seg=v.transcript||[];let idx=-1;for(let i=0;i<seg.length;i++){const a=Number(seg[i].start)||0,b=Number(seg[i].end)||a+8;if(t>=a&&t<b){idx=i;break}}if(idx<0){for(let i=seg.length-1;i>=0;i--){if(t>=Number(seg[i].start||0)){idx=i;break}}}document.querySelectorAll('.segment').forEach((el,i)=>el.classList.toggle('active',i===idx));const active=document.querySelector('.segment.active'),box=$('.subtitle-list');if(active&&box){const top=active.offsetTop,bottom=top+active.offsetHeight;if(top<box.scrollTop+20||bottom>box.scrollTop+box.clientHeight-20)active.scrollIntoView({behavior:'smooth',block:'nearest'});}}
 function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null}try{ytPlayer?.destroy?.()}catch{}ytPlayer=null;}
 function seek(t){if(ytPlayer?.seekTo){ytPlayer.seekTo(Number(t),true);ytPlayer.playVideo?.();}}
 function setSpeed(s){state.speed=s;if(ytPlayer?.setPlaybackRate)try{ytPlayer.setPlaybackRate(s)}catch{}document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===s));}
@@ -236,7 +236,7 @@ function syncSubtitle(t){
     const r=active.getBoundingClientRect();
     const lr=list.getBoundingClientRect();
     if(r.top<lr.top+18 || r.bottom>lr.bottom-18){
-      active.scrollIntoView({behavior:'smooth',block:'center'});
+      active.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
   }
 }

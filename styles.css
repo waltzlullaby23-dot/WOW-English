@@ -73,3 +73,25 @@ main{min-width:0!important;overflow:visible!important;padding-bottom:100px!impor
   .quiz-card h3{font-size:24px!important}
   .answer{font-size:18px!important}
 }
+
+
+/* ======================= V5.1 SCROLL FIX =======================
+/* The watch route must use one primary page scroll. Nested sidebar/subtitle
+   scroll containers were creating a mouse-wheel trap. */
+html,body,#app,.app{min-height:100%;height:auto!important}
+html,body{overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior-y:auto!important}
+body{scrollbar-gutter:stable}
+.layout{display:grid!important;align-items:start!important;min-height:calc(100vh - 78px)!important;height:auto!important}
+.sidebar,.sidebar-collapsed .sidebar{position:sticky!important;top:78px!important;height:auto!important;max-height:none!important;overflow:visible!important;align-self:start!important}
+main{min-width:0!important;height:auto!important;overflow:visible!important}
+.watch-page{height:auto!important;overflow:visible!important}
+.watch-page,.player-card,.subtitle-panel,.learning-row{contain:none!important}
+/* Subtitle area grows with content instead of becoming a second scroll wheel. */
+.subtitle-list{max-height:none!important;height:auto!important;overflow:visible!important;overscroll-behavior:auto!important}
+.subtitle-list .segment{scroll-margin-top:96px;scroll-margin-bottom:96px}
+/* Long subtitle sets remain easy to scan without trapping the mouse wheel. */
+@media(max-width:680px){
+  .layout,.sidebar-collapsed .layout{display:block!important}
+  .sidebar,.sidebar-collapsed .sidebar{position:static!important;overflow:visible!important;height:auto!important;max-height:none!important}
+  main{overflow:visible!important}
+}
