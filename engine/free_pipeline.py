@@ -163,26 +163,46 @@ def fetch_english_transcript(video_id: str):
             continue
     return None,[]
 
-def fetch_english_via_timedtext(video_id: str):
+def fetch_timedtext(video_id: str, lang='en', kind=None, tlang=None):
     import requests
-    urls=[
-      f'https://www.youtube.com/api/timedtext?v={video_id}&lang=en&fmt=vtt',
-      f'https://www.youtube.com/api/timedtext?v={video_id}&lang=en&kind=asr&fmt=vtt',
-      f'https://www.youtube.com/api/timedtext?v={video_id}&lang=en-US&kind=asr&fmt=vtt',
-    ]
-    for url in urls:
-        try:
-            r=requests.get(url,timeout=20,headers={'User-Agent':'Mozilla/5.0'})
-            if r.ok and 'WEBVTT' in r.text[:100]:
-                from tempfile import NamedTemporaryFile
-                with NamedTemporaryFile('w+',suffix='.vtt',encoding='utf-8') as f:
-                    f.write(r.text);f.flush()
-                    rows=parse_vtt(Path(f.name))
-                if len(rows)>=CONFIG['minSegments'] and len(' '.join(x['en'] for x in rows))>=180:
-                    return Path(f.name),rows
-        except Exception:
-            pass
+    qs=f'v={video_id}&lang={lang}&fmt=vtt'
+    if kind: qs += f'&kind={kind}'
+    if tlang: qs += f'&tlang={tlang}'
+    url='https://www.youtube.com/api/timedtext?'+qs
+    try:
+        r=requests.get(url,timeout=20,headers={'User-Agent':'Mozilla/5.0'})
+        if r.ok and 'WEBVTT' in r.text[:100]:
+            from tempfile import NamedTemporaryFile
+            with NamedTemporaryFile('w+',suffix='.vtt',encoding='utf-8') as f:
+                f.write(r.text);f.flush()
+                rows=parse_vtt(Path(f.name))
+            if len(rows)>=CONFIG['minSegments']:
+                return rows
+    except Exception:
+        pass
+    return []
+
+def fetch_english_via_timedtext(video_id: str):
+    for kind in (None,'asr'):
+        for lang in ('en','en-US'):
+            rows=fetch_timedtext(video_id,lang,kind)
+            if rows and len(' '.join(x['en'] for x in rows))>=180:
+                return True,rows
     return None,[]
+
+def fetch_youtube_timedtext_translation(video_id: str, en_segments):
+    # Ask YouTube's own timedtext service for its player translation.
+    for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
+        for kind in (None,'asr'):
+            rows=fetch_timedtext(video_id,'en',kind,tlang)
+            if not rows: continue
+            out=[]
+            for en in en_segments:
+                best=min(rows,key=lambda z:abs(float(z['start'])-float(en['start']))) if rows else None
+                out.append(best['en'] if best and abs(float(best['start'])-float(en['start']))<=3.5 else '')
+            if all(clean_text(x) for x in out):
+                return out,tlang
+    return None,'youtube-timedtext-translation-failed'
 
 def align_translation_segments(en_rows, zh_rows):
     if not en_rows or not zh_rows: return None
@@ -440,9 +460,7 @@ def process_video(video_id, meta, existing, idx=0):
     if not valid or spoken!='en' or ratio['nonEnglish']>0.18:
         return None,{'id':video_id,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken}
     zh=None; zh_source='none'
-    if youtube_zh:
-        zh=align_translation_segments(segs,youtube_zh)
-        if zh and all(clean_text(x) for x in zh): zh_source='youtube-auto-translate'
+    zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
     if zh is None:
         zh,zh_source=translate_from_youtube(tr,segs)
     if zh is None:
