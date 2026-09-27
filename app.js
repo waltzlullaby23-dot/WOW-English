@@ -176,45 +176,60 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
 }
 function closeWord(){state.word=null;render();}
 let speechAudio=null;
-async function playAudioUrl(url,fallbackText,target){
-  try{
-    if(url){
-      if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}
-      speechAudio=new Audio(url); speechAudio.preload='auto'; speechAudio.volume=1;
-      await speechAudio.play(); return;
-    }
-  }catch{}
-  playGoogleTTS(fallbackText,target);
+let speechVoices=[];
+function refreshSpeechVoices(){try{speechVoices=window.speechSynthesis?.getVoices?.()||[];}catch{speechVoices=[];}}
+try{if(window.speechSynthesis){refreshSpeechVoices();window.speechSynthesis.onvoiceschanged=refreshSpeechVoices;}}catch{}
+function accentVoice(locale){
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  const voices=speechVoices.length?speechVoices:(window.speechSynthesis?.getVoices?.()||[]);
+  if(target==='en-GB')return voices.find(v=>/^en-GB/i.test(v.lang||''))||voices.find(v=>/hazel|george|daniel|serena|kate|british|uk/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
+  return voices.find(v=>/^en-US/i.test(v.lang||''))||voices.find(v=>/david|mark|zira|samantha|alex|aria|jenny|american|us/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
 }
-async function playGoogleTTS(value,target){
-  const text=String(value||'').trim(); if(!text)return;
-  try{
-    if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}
-    const url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(text);
-    speechAudio=new Audio(url); speechAudio.preload='auto'; speechAudio.volume=1; await speechAudio.play();
-  }catch{}
+function stopSpeechAudio(){
+  try{window.speechSynthesis?.cancel?.();}catch{}
+  try{if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}}catch{}
+  speechAudio=null;
+}
+function youdaoPronunciationUrl(word,locale){
+  const type=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'1':'2';
+  return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;
 }
 function speak(text,locale){
-  const value=String(text||'').trim(); if(!value)return;
+  const value=String(text||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const synth=window.speechSynthesis;
-  if(synth){
-    try{
-      synth.cancel();
-      const voices=synth.getVoices?.()||[];
-      const voice=target==='en-GB'
-        ? (voices.find(v=>/^en-gb/i.test(v.lang||''))||voices.find(v=>/british|uk|daniel|george|hazel|serena|kate/i.test(v.name||'')))
-        : (voices.find(v=>/^en-us/i.test(v.lang||''))||voices.find(v=>/american|us|alex|samantha|aria|jenny/i.test(v.name||'')));
-      const u=new SpeechSynthesisUtterance(value);
-      u.lang=target; u.voice=voice||null; u.rate=.88; u.volume=1;
-      u.onerror=()=>playGoogleTTS(value,target);
-      synth.speak(u);
-      if(!voice)setTimeout(()=>{if((synth.getVoices?.()||[]).length===0)playGoogleTTS(value,target);},500);
-      return;
-    }catch{}
-  }
-  playGoogleTTS(value,target);
+  try{
+    const synth=window.speechSynthesis;if(!synth)return false;
+    synth.cancel();refreshSpeechVoices();
+    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target);u.rate=.88;u.pitch=1;u.volume=1;
+    synth.speak(u);return true;
+  }catch{return false;}
 }
+function playPronunciation(word,locale){
+  const value=String(word||'').trim();if(!value)return;
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  stopSpeechAudio();
+  const url=youdaoPronunciationUrl(value,target);
+  try{
+    const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.volume=1;
+    audio.onended=()=>{if(speechAudio===audio)speechAudio=null;};
+    audio.onerror=()=>{if(speechAudio!==audio)return;speechAudio=null;if(!speak(value,target))playGoogleTTS(value,target);};
+    audio.src=url;
+    const p=audio.play();
+    if(p&&typeof p.catch==='function')p.catch(()=>{if(speechAudio===audio){speechAudio=null;if(!speak(value,target))playGoogleTTS(value,target);}});
+  }catch{if(!speak(value,target))playGoogleTTS(value,target);}
+}
+async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
+async function playGoogleTTS(value,target){
+  const text=String(value||'').trim();if(!text)return false;
+  try{
+    stopSpeechAudio();
+    const url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(text);
+    const audio=new Audio(url);speechAudio=audio;audio.preload='auto';audio.volume=1;
+    audio.onended=()=>{if(speechAudio===audio)speechAudio=null;};
+    await audio.play();return true;
+  }catch{return false;}
+}
+
 
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
@@ -223,9 +238,9 @@ function wordModal(){
     <div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div>${esc(w.pos||'')}</div></div><button onclick="closeWord()">×</button></div>
     <div class="pron-row">
       <span>英式 ${esc(w.phonetic_uk||'')}</span>
-      <button onclick="playAudioUrl(${JSON.stringify(w.audio_uk||'')},${JSON.stringify(w.word)},'en-GB')">🔊 英式發音</button>
+      <button onclick="playPronunciation(${JSON.stringify(w.word)},'en-GB')">🔊 英式發音</button>
       <span>美式 ${esc(w.phonetic_us||'')}</span>
-      <button onclick="playAudioUrl(${JSON.stringify(w.audio_us||'')},${JSON.stringify(w.word)},'en-US')">🔊 美式發音</button>
+      <button onclick="playPronunciation(${JSON.stringify(w.word)},'en-US')">🔊 美式發音</button>
     </div>
     <section><label>中文解釋</label><p>${esc(w.definition_zh||'正在取得中文解釋…')}</p></section>
     <section><label>English meaning</label><p>${esc(w.gloss||'正在取得英文解釋…')}</p></section>
