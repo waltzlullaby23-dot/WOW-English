@@ -510,12 +510,17 @@ def ydl_info(video_id):
  
 def best_english_transcript(video_id: str, duration: float):
     candidates=[]
+    # Fastest free route first: public transcript mirrors that preserve the
+    # original YouTube caption timestamps. This also prevents expensive
+    # yt-dlp retries from delaying every seed repair.
+    try:
+        segs=fetch_english_via_public_transcript(video_id)
+        if segs:candidates.append(('public-transcript',None,segs,[]))
+    except Exception:pass
     try:
         en,zh,source,lang=fetch_caption_tracks_from_player(video_id)
-        if en:
-            candidates.append(('youtube-player-track',None,en,zh))
-    except Exception:
-        pass
+        if en:candidates.append(('youtube-player-track',None,en,zh))
+    except Exception:pass
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
@@ -527,10 +532,6 @@ def best_english_transcript(video_id: str, duration: float):
     try:
         en,zh=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
         if en:candidates.append(('yt-dlp',None,en,zh))
-    except Exception:pass
-    try:
-        segs=fetch_english_via_public_transcript(video_id)
-        if segs:candidates.append(('public-transcript',None,segs,[]))
     except Exception:pass
 
     valid=[]
