@@ -386,6 +386,46 @@ function toggleSentenceLoop(){
 function setSpeed(s){state.speed=Number(s)||1;if(ytPlayer?.setPlaybackRate){try{ytPlayer.setPlaybackRate(state.speed);}catch{}}document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===state.speed));}
 function setSubtitleSize(s){const allowed=[75,100,125,150,200];const n=Number(s)||100;state.subtitleSize=allowed.includes(n)?n:100;const list=$('.subtitle-list');if(list)list.dataset.scale=String(state.subtitleSize);document.querySelectorAll('.subtitle-scale-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.scale)===state.subtitleSize));}
 function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
+const subtitleTranslationJobs={};
+function subtitleTranslationCache(videoId){
+  try{return JSON.parse(localStorage.getItem('sanmu-zh-subtitles-'+videoId)||'{}')||{};}catch{return {};}
+}
+function saveSubtitleTranslationCache(videoId,cache){
+  try{localStorage.setItem('sanmu-zh-subtitles-'+videoId,JSON.stringify(cache));}catch{}
+}
+async function translateSubtitleLine(text){
+  const q=String(text||'').trim(); if(!q)return '';
+  try{
+    const r=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(q));
+    if(r.ok){
+      const data=await r.json();
+      return (data?.[0]||[]).map(x=>x?.[0]||'').join('').trim();
+    }
+  }catch{}
+  return '';
+}
+async function translateMissingSubtitles(v){
+  if(!v?.id||!Array.isArray(v.transcript)||!v.transcript.length)return;
+  if(subtitleTranslationJobs[v.id])return subtitleTranslationJobs[v.id];
+  subtitleTranslationJobs[v.id]=(async()=>{
+    const cache=subtitleTranslationCache(v.id);
+    let changed=false;
+    for(let i=0;i<v.transcript.length;i++){
+      const seg=v.transcript[i], en=String(seg.en||'').trim();
+      if(!en)continue;
+      if(!String(seg.zh||'').trim() && cache[i]){seg.zh=cache[i];changed=true;continue;}
+      if(String(seg.zh||'').trim())continue;
+      const zh=await translateSubtitleLine(en);
+      if(zh){seg.zh=zh;cache[i]=zh;changed=true;
+        const node=document.querySelector('.subtitle-list .segment[data-index="'+i+'"] .zh');
+        if(node)node.textContent=zh;
+      }
+    }
+    if(changed)saveSubtitleTranslationCache(v.id,cache);
+  })().finally(()=>{delete subtitleTranslationJobs[v.id];});
+  return subtitleTranslationJobs[v.id];
+}
+
 function subtitleHTML(v){
   const segs=v?.transcript||[];
   if(!segs.length)return '<div class="empty"><b>這部影片的完整字幕正在整理中</b><p>系統會先取得完整英文字幕，再逐句建立中文翻譯；沒有完整字幕的影片不列入正式學習庫。</p></div>';
@@ -395,6 +435,7 @@ function watch(){
   const v=selectedVideo();
   if(!v)return '<div class="empty">找不到影片。</div>';
   markHistory(v);
+  setTimeout(()=>translateMissingSubtitles(v),60);
   const scale=state.subtitleSize||100;
   const offset=Number(state.subtitleOffset)||0;
   const rate=Number(state.subtitleRate)||1;
