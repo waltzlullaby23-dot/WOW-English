@@ -160,3 +160,29 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
 .watch-page .subtitle-list .segment{display:flex!important;flex-direction:column!important}
 .word-modal button{cursor:pointer}
 .pron-row button{cursor:pointer}
+
+/* V6 video watch layout: controls -> title -> subtitles */
+.watch-page .player-card{overflow:visible!important}
+.watch-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;border-top:1px solid var(--line,#dce7df);background:#fff}
+.watch-toolbar-main{justify-content:space-between}
+.toolbar-segment{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.toolbar-segment .tool-label{font-weight:700;margin-right:10px}
+.watch-toolbar button{min-height:42px;padding:8px 15px;border:1px solid #cbdcd2;background:#fff;color:#24544a;border-radius:0;font-size:16px}
+.watch-toolbar button:first-of-type{border-radius:12px 0 0 12px}
+.watch-toolbar button:last-of-type{border-radius:0 12px 12px 0}
+.watch-toolbar button.active{background:#dcefe5;border-color:#9bc8b3;font-weight:700}
+.toolbar-favorite{border-radius:12px!important}
+.video-title-strip{padding:18px 22px 20px;background:#fff;border-top:1px solid var(--line,#dce7df);border-bottom:1px solid var(--line,#dce7df)}
+.video-title-strip h1{font-size:clamp(24px,2.5vw,34px)!important;line-height:1.25!important;margin:0 0 7px!important;font-weight:700!important}
+.video-title-strip .title-zh{font-size:20px!important;line-height:1.5;margin:0 0 7px;color:#476b63}
+.video-title-strip .watch-meta{font-size:15px!important;color:#71827d;margin:0}
+.watch-toolbar-subtitle{border-top:0;gap:10px}
+.subtitle-workarea{margin-top:10px;border-top:1px solid var(--line,#dce7df);background:#fff}
+.subtitle-workarea .subtitle-list{max-height:none!important;overflow:visible!important}
+@media(max-width:900px){
+  .watch-toolbar{align-items:flex-start}
+  .watch-toolbar-main{justify-content:flex-start}
+  .toolbar-segment{width:100%}
+  .video-title-strip h1{font-size:25px!important}
+  .video-title-strip .title-zh{font-size:18px!important}
+}
