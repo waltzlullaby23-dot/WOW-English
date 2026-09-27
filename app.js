@@ -363,36 +363,73 @@ function watch(){
   const v=selectedVideo();
   if(!v)return '<div class="empty">找不到影片。</div>';
   markHistory(v);
-  const unit=learningUnits.units?.[v.id]||{};
   const scale=state.subtitleSize||100;
   const offset=Number(state.subtitleOffset)||0;
+  const rate=Number(state.subtitleRate)||1;
   return `<div class="watch-page">
     <div class="player-card">
       <div class="player"><iframe id="yt" src="${ytEmbed(v.id)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
 
-      <div class="player-tools">
-        <div class="tool-group"><span class="tool-label">語速</span><button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button><button data-speed="1" class="active" onclick="setSpeed(1)">1×</button><button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button><button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button></div>
-        <div class="tool-group"><span class="tool-label">字幕同步</span><button class="subtitle-offset-btn ${offset===-2?'active':''}" data-offset="-2" onclick="setSubtitleOffset(-2)">-2s</button><button class="subtitle-offset-btn ${offset===-1?'active':''}" data-offset="-1" onclick="setSubtitleOffset(-1)">-1s</button><button class="subtitle-offset-btn ${offset===0?'active':''}" data-offset="0" onclick="setSubtitleOffset(0)">0</button><button class="subtitle-offset-btn ${offset===1?'active':''}" data-offset="1" onclick="setSubtitleOffset(1)">+1s</button><button class="subtitle-offset-btn ${offset===2?'active':''}" data-offset="2" onclick="setSubtitleOffset(2)">+2s</button></div>
-        <div class="tool-group"><span class="tool-label">字幕速度</span><button class="subtitle-rate-btn" data-rate="0.9" onclick="setSubtitleRate(.9)">0.9×</button><button class="subtitle-rate-btn" data-rate="0.95" onclick="setSubtitleRate(.95)">0.95×</button><button class="subtitle-rate-btn active" data-rate="1" onclick="setSubtitleRate(1)">1×</button><button class="subtitle-rate-btn" data-rate="1.05" onclick="setSubtitleRate(1.05)">1.05×</button><button class="subtitle-rate-btn" data-rate="1.1" onclick="setSubtitleRate(1.1)">1.1×</button></div><span></span><button onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏'}</button>
+      <!-- 第一層：影片播放控制 -->
+      <div class="watch-toolbar watch-toolbar-main">
+        <div class="toolbar-segment">
+          <span class="tool-label">語速</span>
+          <button data-speed="0.75" onclick="setSpeed(.75)">0.75×</button>
+          <button data-speed="1" class="active" onclick="setSpeed(1)">1×</button>
+          <button data-speed="1.25" onclick="setSpeed(1.25)">1.25×</button>
+          <button data-speed="1.5" onclick="setSpeed(1.5)">1.5×</button>
+        </div>
+        <button class="toolbar-favorite" onclick="toggleFav('${v.id}')">${favs().includes(v.id)?'♥ 已收藏':'♡ 收藏影片'}</button>
       </div>
 
-      <div class="subtitle-control scale-control"><label>字幕大小</label><button class="subtitle-scale-btn ${scale===75?'active':''}" onclick="setSubtitleSize(75)">75%</button><button class="subtitle-scale-btn ${scale===100?'active':''}" onclick="setSubtitleSize(100)">100%</button><button class="subtitle-scale-btn ${scale===125?'active':''}" onclick="setSubtitleSize(125)">125%</button><button class="subtitle-scale-btn ${scale===150?'active':''}" onclick="setSubtitleSize(150)">150%</button><button class="subtitle-scale-btn ${scale===200?'active':''}" onclick="setSubtitleSize(200)">200%</button></div>
-
-      <div class="subtitle-workarea">
-        <div class="tabs"><button class="${state.transcriptTab==='english'?'active':''}" onclick="setTab('english')">英文</button><button class="${state.transcriptTab==='bilingual'?'active':''}" onclick="setTab('bilingual')">中英</button><button class="${state.transcriptTab==='chinese'?'active':''}" onclick="setTab('chinese')">中文</button></div>
-        <div class="subtitle-list" data-scale="${scale}">${subtitleHTML(v)}</div>
-      </div>
-
-      <div class="title-block">
+      <!-- 標題獨立於字幕區，位於語速列正下方 -->
+      <div class="video-title-strip">
         <h1>${esc(v.title)}</h1>
         <p class="title-zh">${esc(titleZh(v))}</p>
         <p class="watch-meta">${esc(v.channel)} ・ ${esc(v.duration||'')} ・ 难易度 ${esc(difficultyLabel(v.cefr))}</p>
       </div>
+
+      <!-- 第二層：字幕控制，與影片標題清楚分隔 -->
+      <div class="watch-toolbar watch-toolbar-subtitle">
+        <div class="toolbar-segment">
+          <span class="tool-label">字幕顯示</span>
+          <button class="${state.transcriptTab==='bilingual'?'active':''}" onclick="setTab('bilingual')">中英</button>
+          <button class="${state.transcriptTab==='english'?'active':''}" onclick="setTab('english')">英文</button>
+          <button class="${state.transcriptTab==='chinese'?'active':''}" onclick="setTab('chinese')">中文</button>
+        </div>
+        <div class="toolbar-segment">
+          <span class="tool-label">字幕同步</span>
+          <button class="subtitle-offset-btn ${offset===-2?'active':''}" data-offset="-2" onclick="setSubtitleOffset(-2)">提前2秒</button>
+          <button class="subtitle-offset-btn ${offset===-1?'active':''}" data-offset="-1" onclick="setSubtitleOffset(-1)">提前1秒</button>
+          <button class="subtitle-offset-btn ${offset===0?'active':''}" data-offset="0" onclick="setSubtitleOffset(0)">預設</button>
+          <button class="subtitle-offset-btn ${offset===1?'active':''}" data-offset="1" onclick="setSubtitleOffset(1)">延後1秒</button>
+          <button class="subtitle-offset-btn ${offset===2?'active':''}" data-offset="2" onclick="setSubtitleOffset(2)">延後2秒</button>
+        </div>
+        <div class="toolbar-segment">
+          <span class="tool-label">字幕速度</span>
+          <button class="subtitle-rate-btn ${rate===0.9?'active':''}" data-rate="0.9" onclick="setSubtitleRate(.9)">0.9×</button>
+          <button class="subtitle-rate-btn ${rate===0.95?'active':''}" data-rate="0.95" onclick="setSubtitleRate(.95)">0.95×</button>
+          <button class="subtitle-rate-btn ${rate===1?'active':''}" data-rate="1" onclick="setSubtitleRate(1)">1×</button>
+          <button class="subtitle-rate-btn ${rate===1.05?'active':''}" data-rate="1.05" onclick="setSubtitleRate(1.05)">1.05×</button>
+          <button class="subtitle-rate-btn ${rate===1.1?'active':''}" data-rate="1.1" onclick="setSubtitleRate(1.1)">1.1×</button>
+        </div>
+        <div class="toolbar-segment">
+          <span class="tool-label">字幕大小</span>
+          <button class="subtitle-scale-btn ${scale===75?'active':''}" onclick="setSubtitleSize(75)">75%</button>
+          <button class="subtitle-scale-btn ${scale===100?'active':''}" onclick="setSubtitleSize(100)">100%</button>
+          <button class="subtitle-scale-btn ${scale===125?'active':''}" onclick="setSubtitleSize(125)">125%</button>
+          <button class="subtitle-scale-btn ${scale===150?'active':''}" onclick="setSubtitleSize(150)">150%</button>
+          <button class="subtitle-scale-btn ${scale===200?'active':''}" onclick="setSubtitleSize(200)">200%</button>
+        </div>
+      </div>
+
+      <div class="subtitle-workarea">
+        <div class="subtitle-list" data-scale="${scale}">${subtitleHTML(v)}</div>
+      </div>
     </div>
-
-
   </div>`;
 }
+
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`}
 
 function grammar(){
