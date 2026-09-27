@@ -1,0 +1,18 @@
+/* 三木Eng V6 scroll hardening */
+html{scroll-behavior:auto!important}
+html,body{overflow-x:hidden!important;overflow-y:auto!important;height:auto!important;min-height:100%!important;overscroll-behavior-y:auto!important}
+body{scrollbar-gutter:stable}
+#app,.app{height:auto!important;min-height:100%!important}
+.layout{display:grid!important;align-items:start!important;height:auto!important;min-height:0!important}
+.sidebar,.sidebar-collapsed .sidebar{position:sticky!important;top:78px!important;height:auto!important;max-height:none!important;overflow:visible!important;align-self:start!important}
+main{height:auto!important;min-height:0!important;overflow:visible!important;padding-bottom:140px!important}
+.watch-page{height:auto!important;min-height:0!important;overflow:visible!important}
+.player-card,.subtitle-panel,.learning-row{contain:none!important;overflow:visible!important}
+.subtitle-list{max-height:none!important;height:auto!important;overflow:visible!important;overscroll-behavior:auto!important;padding-right:0!important;scroll-behavior:auto!important}
+.subtitle-list .segment{scroll-margin-top:110px;scroll-margin-bottom:110px}
+.segment.active{box-shadow:inset 4px 0 0 var(--brand2)!important;background:#f0f7f3!important}
+.segment{cursor:pointer}
+.subtitle-empty{padding:24px;text-align:center;color:#7c8c85;background:#f7faf8;border-radius:12px}
+.player-status{margin-top:8px;padding:7px 10px;border-radius:8px;background:#f4f8f5;color:#5f746a;font-size:12px}
+.subtitle-scale-btn{cursor:pointer}
+@media(max-width:900px){.sidebar,.sidebar-collapsed .sidebar{position:static!important}.layout{display:block!important}}

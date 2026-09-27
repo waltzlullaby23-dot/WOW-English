@@ -1,42 +1,17 @@
-# 三木Eng｜影音・文法・多益
+# 三木Eng V6 Free Patch
 
-本版本是 GitHub Pages 靜態前端 + GitHub Actions 內容引擎。
+這個補丁把影片探索/字幕/翻譯流程改成「零 API 費用」版本：不需要 OpenAI API，也不需要 YouTube Data API key。
 
-## 已落地
+## 內容
+- `apply_v6_free.py`：放進現有 WOW-English 專案根目錄執行，會自動把前端 V6 修正、免費影片引擎、GitHub Actions 工作流程套上去。
+- `.github/workflows/content-pipeline.yml`：每天自動找新影片、驗證完整英文字幕、取得 YouTube 免費逐句中文翻譯、分類、CEFR、去重並寫回 `data/catalog.json`。
+- `engine/discover.py`：改成免費引擎 wrapper，不再呼叫 OpenAI。
+- `engine/translate.py`：改成 YouTube transcript translation wrapper，不再呼叫 OpenAI。
+- `engine/free_pipeline.py`：主要免費影片探索/字幕/翻譯/分類/CEFR/去重引擎。
+- `engine/verify_free.py`：發版前檢查，正式影片必須具有完整英文字幕與完整中文逐句翻譯。
+- `requirements.txt`：移除 OpenAI 套件依賴。
 
-- 左側可收合/展開
-- 分類改為點擊後選擇
-- 13 大類 / 78+ 子類探索架構
-- 文法 30 章 / 150 微課
-- TOEIC 400以下 / 400–600 / 600–800 / 800–990 四級距，每級 20 題
-- 影片下方字幕工作區：英文 / 中英 / 中文
-- 字幕大小 14–32px
-- YouTube IFrame API 播放時間同步：逐句高亮、自動捲動、點字幕跳轉
-- 單字點選：中文解釋、English meaning、英式/美式朗讀、收藏
-- A/B/C 字幕 fallback
-- AI 分類 + CEFR
-- 批次翻譯 + 逐句重試 + contextual retry
-- 自動 learning units
-- GitHub Actions 每小時影片探索
+## 重要
+目前 ChatGPT 對該 GitHub Repo 的讀取正常，但寫入權限仍回傳 403，因此這一版尚未直接推回你的 Repo；補丁是針對目前 `WOW-English` 結構製作的。
 
-## Secrets
-
-在 Repository → Settings → Secrets and variables → Actions 建立：
-
-- `YOUTUBE_API_KEY`
-- `OPENAI_API_KEY`
-
-## Pages
-
-Settings → Pages → Source = GitHub Actions。
-
-## 注意
-
-YouTube 嵌入播放器的廣告由 YouTube 控制，網站不能可靠保證所有 YouTube embed 無廣告。若產品最終需要完全無廣告，需改用有授權的自有/託管影片來源。
-
-
-## V5 content quality policy
-
-- TOEIC practice uses original questions aligned to the public TOEIC Listening & Reading format and ETS score-descriptor capability themes; it does not reproduce ETS copyrighted sample questions.
-- Grammar progression is newly written, informed by the topic sequence used in mainstream references such as Cambridge's *English Grammar in Use* / *Essential Grammar in Use*, without copying their exercises or wording.
-- Pasted YouTube URLs play immediately. Custom three-mode bilingual subtitles require the video to be processed by the content pipeline; YouTube native captions are the fallback for unprocessed external URLs.
+套用後，不需要建立任何 API Secret。GitHub Actions 只使用自己的免費 runner 與公開 YouTube 資料。
