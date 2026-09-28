@@ -13,11 +13,12 @@ on:
       - "data/taxonomy.json"
       - "data/catalog.json"
   schedule:
-    - cron: "17 2 * * *"
-    - cron: "17 7 * * *"
-    - cron: "17 12 * * *"
+    - cron: "17 1 * * *"
+    - cron: "17 5 * * *"
+    - cron: "17 9 * * *"
+    - cron: "17 13 * * *"
     - cron: "17 17 * * *"
-    - cron: "17 22 * * *"
+    - cron: "17 21 * * *"
   workflow_dispatch:
 
 permissions:
