@@ -4,6 +4,7 @@ import fs from 'node:fs';
 const catalog=JSON.parse(fs.readFileSync('data/catalog.json','utf8'));
 const wordBank=JSON.parse(fs.readFileSync('data/word-bank.json','utf8'));
 const existingPath='data/dictionary-index.json';
+const forceRebuild=true;
 let existing={};
 try{ existing=JSON.parse(fs.readFileSync(existingPath,'utf8')); }catch{}
 
