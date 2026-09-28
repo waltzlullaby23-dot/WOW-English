@@ -55,3 +55,5 @@ if(bad.length)process.exit(1);
 // Trigger deterministic local asset rebuild after UI pronunciation changes.
 
 // Re-run local audio builder after CI validation fix.
+
+// Force rebuild after WAV validation enhancement.
