@@ -262,7 +262,7 @@ function playPronunciation(word,locale){
   const primary=target==='en-GB'?w.audio_uk:w.audio_us;
   const secondary=target==='en-GB'?w.audio_us:w.audio_uk;
   window.__sanmuAudioLast={word:value,locale:target,status:'loading',url:''};
-  playRemoteAudioCandidates(value,target,[primary,secondary,youdaoPronunciationUrl(value,target),googleTtsUrl(value,target)],0);
+  playRemoteAudioCandidates(value,target,[youdaoPronunciationUrl(value,target),primary,secondary,googleTtsUrl(value,target)],0);
 }
 async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
 async function playGoogleTTS(value,target){playPronunciation(value,target);return true;}
