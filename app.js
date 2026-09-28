@@ -49,7 +49,7 @@ window.__sanmuDiagnostics=()=>({
   transcriptCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.length:0,
   translatedCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.filter(x=>String(x.zh||'').trim()).length:0,
   activeIndex:[...document.querySelectorAll('.segment')].findIndex(x=>x.classList.contains('active')),
-  audio:window.__sanmuAudioLast||null, dictionaryWords:Object.keys(dictionaryIndex.words||{}).length
+  audio:window.__sanmuAudioLast||null, dictionaryWords:Object.keys(dictionaryIndex.words||{}).length,wordSource:state.word?.source||''
 });
 window.addEventListener('hashchange',parseHash);
 function favs(){return load('sanmu-favs',[])} function vocab(){return load('sanmu-vocab',{})} function history(){return load('sanmu-history',[])} function prog(){return load('sanmu-lessons',{})}
@@ -355,42 +355,76 @@ async function fetchCambridgeEntry(word){
   if(fallback)return {...fallback,source:'cambridge-reference',word:key,cambridgeUrl:cambridgeUrl(key)};
   return null;
 }
+async function fetchDatamuseWord(word){
+  const q=String(word||'').trim();if(!q)return null;
+  try{
+    const data=await fetchWithTimeout('https://api.datamuse.com/words?sp='+encodeURIComponent(q)+'&md=dps&max=6',{cache:'no-store'},3000).then(r=>r.ok?r.json():null);
+    if(!Array.isArray(data)||!data.length)return null;
+    const rows=[];
+    for(const item of data){
+      for(const d of (item.defs||[])){
+        const parts=String(d).split('\t');
+        const pos=String(parts[0]||'').replace(/^./,'');
+        const definition_en=String(parts.slice(1).join('\t')||'').trim();
+        if(definition_en)rows.push({pos,definition_en,definition_zh:'',example_en:'',example_zh:''});
+      }
+    }
+    return rows.length?{pos:rows[0].pos||'',entries:rows.slice(0,6)}:null;
+  }catch{return null;}
+}
 async function enrichWord(word){
   const original=String(word||'').trim().toLowerCase();if(!original)return;
   const current=()=>state.word&&String(state.word.word).toLowerCase()===original;
   const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
-  // Primary path: fully prebuilt local dictionary data. No browser API call required.
+
+  // A missing local entry must never remain on '正在取得中文翻譯…'.
   const indexed=dictionaryIndex.words?.[original];
-  if(indexed){apply({...indexed,complete:true});return;}
-  const cacheKey='sanmu-dictionary-v9-'+original;
+  if(indexed?.complete){apply(indexed);return;}
+
+  // Ignore old runtime caches for unindexed words; they may contain the broken
+  // '查無可用詞義' result from previous versions.
+  const cacheKey='sanmu-dictionary-v10-'+original;
   try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached?.complete){apply(cached);return;}}catch{}
 
-  // Runtime fallback only for brand-new words that have not reached the dictionary build job yet.
-  let entry=null;
-  try{
-    const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},3500);
-    if(res.ok)entry=(await res.json())?.[0]||null;
-  }catch{}
-  let base=null;
-  if(entry){
-    const entries=dictionaryRowsFromApi(entry);const ph=Array.isArray(entry.phonetics)?entry.phonetics:[];
-    base={source:'runtime-fallback',complete:false,word:original,pos:entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
-      phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||''),
-      phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry?.phonetic||entry?.phonetics?.find(p=>p?.text)?.text||''),
-      audio_uk:pickPronunciationAudio(ph,'uk'),audio_us:pickPronunciationAudio(ph,'us'),entries};
-    if(!base.phonetic_us)base.phonetic_us=base.phonetic_uk;if(!base.audio_us)base.audio_us=base.audio_uk;apply(base);
+  // Start all three independent sources together.
+  const wordTranslation=translateWordOnly(original);
+  const datamuse=fetchDatamuseWord(original);
+  const dictApi=(async()=>{
+    try{
+      const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},3500);
+      return res.ok?(await res.json())?.[0]||null:null;
+    }catch{return null;}
+  })();
+
+  const [zh,dm,entry]=await Promise.all([wordTranslation,datamuse,dictApi]);
+  if(!current())return;
+
+  const ph=Array.isArray(entry?.phonetics)?entry.phonetics:[];
+  const apiEntries=entry?dictionaryRowsFromApi(entry):[];
+  const entries=dm?.entries?.length?dm.entries:apiEntries;
+  const base={
+    source:entry?'runtime-dictionaryapi':(dm?'runtime-datamuse':'runtime-translation'),
+    complete:false,word:original,
+    pos:dm?.pos||apiEntries[0]?.pos||entry?.meanings?.[0]?.partOfSpeech||'',
+    phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||''),
+    phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry?.phonetic||entry?.phonetics?.find(p=>p?.text)?.text||''),
+    audio_uk:pickPronunciationAudio(ph,'uk'),
+    audio_us:pickPronunciationAudio(ph,'us'),
+    audioFallbackUk:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(original)+'&type=1',
+    audioFallbackUs:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(original)+'&type=2',
+    definition_zh:zh||'',
+    entries
+  };
+  if(!base.phonetic_us)base.phonetic_us=base.phonetic_uk||'';
+  if(!base.audio_us)base.audio_us=base.audio_uk||'';
+
+  // Apply the result immediately; translations are already available for the word.
+  if(entries.length){
+    base.entries=entries.map(x=>({...x,definition_zh:x.definition_zh||zh||'',example_zh:x.example_zh||''}));
   }
-  const entries=base?.entries||[];
-  const translations=entries.length?await translateTextsFast(entries.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean)):{};
-  const wordZh=await translateWordOnly(original);
-  if(!base){
-    const local=wordBank.words?.[original]||CAMBRIDGE_FALLBACKS[original]||null;
-    if(local){base={...local,source:'local-fallback',word:original,complete:false,entries:local.entries||[{pos:local.pos||'',definition_en:local.gloss||'',definition_zh:local.definition_zh||'',example_en:local.example||'',example_zh:''}]};apply(base);}
-  }
-  if(!base){const payload={word:original,source:'translation-fallback',pos:'',phonetic_uk:'',phonetic_us:'',audio_uk:'',audio_us:'',definition_zh:wordZh||'暫時查不到詞義',entries:[],complete:true};apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{};return;}
-  const translatedEntries=(base.entries||[]).map(x=>({...x,definition_zh:x.definition_zh||translations[x.definition_en]||'',example_zh:x.example_zh||(x.example_en?translations[x.example_en]||'':'')}));
-  const payload={...base,entries:translatedEntries,definition_zh:base.definition_zh||translatedEntries.find(x=>x.definition_zh)?.definition_zh||wordZh||'',complete:true};
-  apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
+  base.complete=Boolean(base.definition_zh&&(base.audio_uk||base.audio_us||base.audioFallbackUk||base.audioFallbackUs));
+  apply(base);
+  try{localStorage.setItem(cacheKey,JSON.stringify(base));}catch{}
 }
 function renderWordInline(){
   const v=selectedVideo();
@@ -403,11 +437,11 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
   const normalized=raw.replace(/^[^A-Za-z]+|[^A-Za-z'’]+$/g,'').toLowerCase();if(!normalized)return;
   const info=wordBank.words?.[normalized]||{};
   const indexed=dictionaryIndex.words?.[normalized]||{};
-  let cached={};try{cached=JSON.parse(localStorage.getItem('sanmu-dictionary-v9-'+normalized)||'null')||{};}catch{}
+  let cached={};try{cached=JSON.parse(localStorage.getItem('sanmu-dictionary-v10-'+normalized)||'null')||{};}catch{}
   state.word={word:normalized,sourceVideoId,sourceSentence,...info,...cached,...indexed};
   renderWordInline();
   if(indexed?.complete)return;
-  if(!cached?.complete)enrichWord(normalized);
+  enrichWord(normalized);
 }
 function closeWord(){state.word=null;renderWordInline();}
 let speechAudio=null;
