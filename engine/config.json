@@ -1,8 +1,8 @@
 {
-  "queriesPerRun": 24,
-  "resultsPerQuery": 20,
-  "maxCandidates": 300,
-  "maxProcess": 25,
+  "queriesPerRun": 20,
+  "resultsPerQuery": 15,
+  "maxCandidates": 240,
+  "maxProcess": 20,
   "minSegments": 8,
   "minCoverage": 0.9,
   "minCharsPerMinute": 42,
