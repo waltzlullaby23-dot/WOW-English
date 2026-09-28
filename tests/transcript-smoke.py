@@ -1,4 +1,5 @@
-import subprocess, json, os, time, re
+import subprocess, json, os, time, re, requests
+from engine.free_pipeline import parse_public_transcript_text
 from youtube_transcript_api import YouTubeTranscriptApi
 
 VIDEOS = [
@@ -15,7 +16,11 @@ def hosted_probe(vid):
     for u in urls:
       try:
         r=requests.get(u,timeout=20,headers={"User-Agent":"SanmuEng/1.0"})
-        out.append({"url":u,"status":r.status_code,"chars":len(r.text or ""),"head":(r.text or "")[:300]})
+        item={"url":u,"status":r.status_code,"chars":len(r.text or ""),"head":(r.text or "")[:300]}
+        if "youtube-transcript.ai" in u and r.ok:
+          rows=parse_public_transcript_text(r.text)
+          item["parsed_rows"]=len(rows); item["parsed_chars"]=len(" ".join(x["en"] for x in rows))
+        out.append(item)
       except Exception as e:out.append({"url":u,"error":str(e)})
     return out
 
