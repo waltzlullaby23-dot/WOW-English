@@ -15,6 +15,15 @@ async function boot(){
 }
 function parseHash(){const p=location.hash.slice(1).split('/');state.route=p[0]||'learning';state.selectedVideo=state.route==='watch'?decodeURIComponent(p[1]||''):null;state.selectedLesson=state.route==='lesson'?decodeURIComponent(p[1]||''):null;if(state.route==='watch'&&!['english','bilingual','chinese'].includes(state.transcriptTab))state.transcriptTab='bilingual';if(history.scrollRestoration)history.scrollRestoration='manual';requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));render();}
 function go(route,id=''){location.hash=id?route+'/'+encodeURIComponent(id):route;}
+window.__sanmuTestSync=(t)=>syncSubtitle(Number(t)||0);
+window.__sanmuDiagnostics=()=>({
+  route:state.route,
+  videoId:state.selectedVideo,
+  transcriptCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.length:0,
+  translatedCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.filter(x=>String(x.zh||'').trim()).length:0,
+  activeIndex:[...document.querySelectorAll('.segment')].findIndex(x=>x.classList.contains('active')),
+  audio:window.__sanmuAudioLast||null
+});
 window.addEventListener('hashchange',parseHash);
 function favs(){return load('sanmu-favs',[])} function vocab(){return load('sanmu-vocab',{})} function history(){return load('sanmu-history',[])} function prog(){return load('sanmu-lessons',{})}
 function updateSearch(v){state.search=v;renderMain();}
@@ -207,37 +216,39 @@ function speak(text,locale){
     synth.speak(u);return true;
   }catch{return false;}
 }
+function googleTtsUrl(word,locale){
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(String(word||''));
+}
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const w=state.word||{},preferred=target==='en-GB'?w.audio_uk:w.audio_us;
-  const candidates=[preferred,youdaoPronunciationUrl(value,target)];
+  const w=state.word||{};
+  const candidates=[googleTtsUrl(value,target),target==='en-GB'?w.audio_uk:w.audio_us,youdaoPronunciationUrl(value,target)];
   let index=0;
+  window.__sanmuAudioLast={word:value,locale:target,status:'loading',url:''};
   const tryNext=()=>{
     const url=candidates[index++];
-    if(!url){speak(value,target);return;}
+    if(!url){
+      const ok=speak(value,target);
+      window.__sanmuAudioLast.status=ok?'speechSynthesis':'failed';
+      return;
+    }
     stopSpeechAudio();
     try{
-      const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.volume=1;
-      audio.onended=()=>{if(speechAudio===audio)speechAudio=null;};
+      const audio=new Audio();
+      speechAudio=audio;audio.preload='auto';audio.volume=1;audio.src=url;
+      window.__sanmuAudioLast.url=url;
+      audio.onended=()=>{if(speechAudio===audio)speechAudio=null;window.__sanmuAudioLast.status='ended';};
       audio.onerror=()=>{if(speechAudio===audio){speechAudio=null;tryNext();}};
-      audio.src=url;const p=audio.play();
-      if(p&&typeof p.catch==='function')p.catch(()=>{if(speechAudio===audio){speechAudio=null;tryNext();}});
+      const p=audio.play();
+      if(p&&typeof p.then==='function')p.then(()=>{window.__sanmuAudioLast.status='playing';}).catch(()=>{if(speechAudio===audio){speechAudio=null;tryNext();}});
     }catch{tryNext();}
   };
   tryNext();
 }
 async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
-async function playGoogleTTS(value,target){
-  const text=String(value||'').trim();if(!text)return false;
-  try{
-    stopSpeechAudio();
-    const url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(text);
-    const audio=new Audio(url);speechAudio=audio;audio.preload='auto';audio.volume=1;
-    audio.onended=()=>{if(speechAudio===audio)speechAudio=null;};
-    await audio.play();return true;
-  }catch{return false;}
-}
+async function playGoogleTTS(value,target){playPronunciation(value,target);return true;}
 
 
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
@@ -392,7 +403,8 @@ function syncSubtitle(t){
   const v=selectedVideo(); const seg=v?.transcript||[]; const nodes=document.querySelectorAll('.segment');
   if(!seg.length||!nodes.length)return;
   // Apply a constant user-controlled caption offset. Positive means captions are delayed.
-  const adjusted=t-(Number(state.subtitleOffset)||0);
+  const rate=Number(state.subtitleRate)||1;
+  const adjusted=(t-(Number(state.subtitleOffset)||0))*rate;
   let idx=-1;
   for(let i=0;i<seg.length;i++){
     const a=Number(seg[i].start)||0;
@@ -462,6 +474,22 @@ function parseRemoteTranscript(raw){
   return out.filter((x,i)=>x.en&&(!i||x.en.toLowerCase()!==out[i-1].en.toLowerCase())).slice(0,2500);
 }
 async function fetchRemoteTranscript(videoId){
+  // Primary browser-safe source: structured public transcript endpoint.
+  try{
+    const u='https://api.freetranscriptapi.com/v1/transcript?video_url='+encodeURIComponent(videoId)+'&lang=en';
+    const r=await fetch(u,{cache:'no-store',headers:{'Accept':'application/json'}});
+    if(r.ok){
+      const data=await r.json();
+      const raw=Array.isArray(data?.transcript)?data.transcript:[];
+      const rows=raw.map(x=>{
+        const start=Number(x?.start??x?.offset??x?.startMs/1000??0)||0;
+        const duration=Number(x?.duration??x?.durationMs/1000??0)||0;
+        return {start,end:start+Math.max(.6,duration),en:String(x?.text??x?.en??'').trim(),zh:''};
+      }).filter(x=>x.en);
+      if(rows.length>=8&&rows.reduce((n,x)=>n+x.en.length,0)>=180)return rows;
+    }
+  }catch{}
+  // Secondary no-key mirror.
   for(const url of [
     'https://youtube-transcript.ai/transcript/'+encodeURIComponent(videoId)+'.txt?lang=en',
     'https://youtube-transcript.ai/transcript/'+encodeURIComponent(videoId)+'.txt'
@@ -503,13 +531,21 @@ function saveSubtitleTranslationCache(videoId,cache){
 }
 async function translateSubtitleLine(text){
   const q=String(text||'').trim(); if(!q)return '';
-  try{
-    const r=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(q));
-    if(r.ok){
+  const urls=[
+    'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(q),
+    'https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=en&tl=zh-TW&q='+encodeURIComponent(q)
+  ];
+  for(const url of urls){
+    try{
+      const r=await fetch(url,{cache:'no-store',headers:{'Accept':'application/json'}});
+      if(!r.ok)continue;
       const data=await r.json();
-      return (data?.[0]||[]).map(x=>x?.[0]||'').join('').trim();
-    }
-  }catch{}
+      const text1=(data?.[0]||[]).map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
+      const text2=Array.isArray(data)?String(data?.[0]||'').trim():'';
+      const out=text1||text2;
+      if(out)return out;
+    }catch{}
+  }
   return '';
 }
 async function translateMissingSubtitles(v){
@@ -518,18 +554,24 @@ async function translateMissingSubtitles(v){
   subtitleTranslationJobs[v.id]=(async()=>{
     const cache=subtitleTranslationCache(v.id);
     let changed=false;
-    for(let i=0;i<v.transcript.length;i++){
-      const seg=v.transcript[i], en=String(seg.en||'').trim();
-      if(!en)continue;
-      if(!String(seg.zh||'').trim() && cache[i]){seg.zh=cache[i];changed=true;continue;}
-      if(String(seg.zh||'').trim())continue;
-      const zh=await translateSubtitleLine(en);
-      if(zh){seg.zh=zh;cache[i]=zh;changed=true;
-        const node=document.querySelector('.subtitle-list .segment[data-index="'+i+'"] .zh');
-        if(node)node.textContent=zh;
-      }
+    // Translate in small batches so the first visible sentences appear quickly.
+    for(let start=0;start<v.transcript.length;start+=8){
+      const batch=v.transcript.slice(start,start+8);
+      await Promise.all(batch.map(async(seg,localIndex)=>{
+        const i=start+localIndex,en=String(seg.en||'').trim();
+        if(!en)return;
+        if(!String(seg.zh||'').trim() && cache[i]){seg.zh=cache[i];changed=true;return;}
+        if(String(seg.zh||'').trim())return;
+        const zh=await translateSubtitleLine(en);
+        if(zh){seg.zh=zh;cache[i]=zh;changed=true;
+          const node=document.querySelector('.subtitle-list .segment[data-index="'+i+'"] .zh');
+          if(node)node.textContent=zh;
+        }
+      }));
+      if(changed)saveSubtitleTranslationCache(v.id,cache);
+      await new Promise(r=>setTimeout(r,120));
     }
-    if(changed)saveSubtitleTranslationCache(v.id,cache);
+    refreshSubtitleList();
   })().finally(()=>{delete subtitleTranslationJobs[v.id];});
   return subtitleTranslationJobs[v.id];
 }
