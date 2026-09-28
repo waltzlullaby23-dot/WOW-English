@@ -34,10 +34,11 @@ async function worker(){
     const name=safeName(word);
     const ukRel='audio/uk/'+name+'.wav';
     const usRel='audio/us/'+name+'.wav';
-    const ukPath=path.join(repoRoot,ukRel);
-    const usPath=path.join(repoRoot,usRel);
+    const ukPath=path.resolve(repoRoot,ukRel);
+    const usPath=path.resolve(repoRoot,usRel);
     const ipaUk=make(word,'en-gb',ukPath);
     const ipaUs=make(word,'en-us',usPath);
+    if(!fs.existsSync(ukPath)||!fs.existsSync(usPath))throw new Error('audio file missing: '+word);
     const old=index.words?.[word]||{word};
     index.words[word]={...old,word,ipa_uk:'/'+ipaUk.replace(/^\/+|\/+$/g,'' )+'/',ipa_us:'/'+ipaUs.replace(/^\/+|\/+$/g,'')+'/',
       phonetic_uk:old.phonetic_uk||'/'+ipaUk.replace(/^\/+|\/+$/g,'')+'/',
@@ -48,7 +49,7 @@ async function worker(){
 await Promise.all(Array.from({length:8},worker));
 index.generatedAt=new Date().toISOString();
 fs.writeFileSync(indexPath,JSON.stringify(index,null,2)+'\n','utf8');
-const bad=list.filter(w=>!fs.existsSync(index.words[w].audioLocalUk)||!fs.existsSync(index.words[w].audioLocalUs)||!index.words[w].ipa_uk||!index.words[w].ipa_us);
+const bad=list.filter(w=>!index.words[w].audioLocalUk||!index.words[w].audioLocalUs||!fs.existsSync(path.resolve(repoRoot,index.words[w].audioLocalUk))||!fs.existsSync(path.resolve(repoRoot,index.words[w].audioLocalUs))||!index.words[w].ipa_uk||!index.words[w].ipa_us);
 console.log(JSON.stringify({words:list.length,complete:list.length-bad.length,bad:bad.slice(0,30)},null,2));
 if(bad.length)process.exit(1);
 // Trigger deterministic local asset rebuild after UI pronunciation changes.
