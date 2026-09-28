@@ -157,60 +157,45 @@ function clickableSentence(text,videoId){
 function markHistory(v){let h=history(),i=h.findIndex(x=>x.id===v.id);const item={id:v.id,title:v.title,updatedAt:new Date().toISOString()};if(i>=0)h[i]={...h[i],...item};else h.unshift(item);save('sanmu-history',h.slice(0,200));let d=daily();d.minutes+=1;d.sessions+=1;save('sanmu-daily',d);}
 function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];save('sanmu-favs',f);render();}
 async function enrichWord(word){
-  const key=String(word||'').trim().toLowerCase();
-  if(!key)return;
-  const cacheKey='sanmu-word-cache-v2-'+key;
-  const looksZh=(s)=>/[\u3400-\u9fff]/.test(String(s||''));
+  const key=String(word||'').trim().toLowerCase();if(!key)return;
+  const cacheKey='sanmu-word-cache-v3-'+key;
   try{
     const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');
-    if(cached&&state.word&&String(state.word.word).toLowerCase()===key){
-      state.word={...state.word,...cached};
-      updateWordModal();
-      if(cached.definition_zh&&cached.phonetic_uk&&cached.phonetic_us)return;
-    }
+    if(cached&&state.word&&String(state.word.word).toLowerCase()===key){state.word={...state.word,...cached};updateWordModal();return;}
   }catch{}
-  const controller=new AbortController();
-  const timer=setTimeout(()=>controller.abort(),4500);
-  let zh='',phoneticUk='',phoneticUs='',audioUk='',audioUs='',pos='',example='';
+  const isCurrent=()=>state.word&&String(state.word.word).toLowerCase()===key;
+  // Phase 1: Chinese translation only. Do not wait for dictionary/audio data.
   try{
-    const results=await Promise.allSettled([
-      fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key),{cache:'no-store',headers:{'Accept':'application/json'},signal:controller.signal}),
-      fetch('https://api.mymemory.translated.net/get?'+new URLSearchParams({q:key,langpair:'en|zh-TW'}),{cache:'no-store',signal:controller.signal}),
-      fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key),{cache:'no-store',signal:controller.signal})
-    ]);
-    for(const res of results){
-      if(res.status!=='fulfilled'||!res.value?.ok)continue;
-      try{
-        const data=await res.value.json();
-        if(Array.isArray(data)&&Array.isArray(data[0])&&!zh){zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();}
-        const mt=data?.responseData?.translatedText;
-        if(!looksZh(zh)&&looksZh(mt))zh=String(mt).trim();
-        if(Array.isArray(data)){
-          const e=data[0]||{},meanings=e.meanings||[];
-          pos=meanings.map(m=>m?.partOfSpeech||'').filter(Boolean)[0]||pos;
-          example=meanings.flatMap(m=>m.definitions||[]).map(d=>d.example).find(Boolean)||example;
-          const phs=(e.phonetics||[]).filter(p=>p?.text||p?.audio);
-          const us=phs.find(p=>/us/i.test(String(p.audio||'')))||{};
-          const uk=phs.find(p=>/uk|gb/i.test(String(p.audio||'')))||{};
-          phoneticUs=us.text||phoneticUs||phs.find(p=>p?.text)?.text||'';
-          phoneticUk=uk.text||phoneticUk||phs.find(p=>p?.text)?.text||'';
-          audioUs=us.audio||audioUs||phs.find(p=>p?.audio)?.audio||'';
-          audioUk=uk.audio||audioUk||phs.find(p=>p?.audio)?.audio||'';
-        }
-      }catch{}
+    const u='https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key);
+    const res=await fetch(u,{cache:'no-store',headers:{'Accept':'application/json'},signal:AbortSignal.timeout?.(3500)});
+    if(res.ok){
+      const data=await res.json();
+      const zh=(data?.[0]||[]).map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
+      if(zh&&isCurrent()){state.word={...state.word,definition_zh:zh};updateWordModal();try{localStorage.setItem(cacheKey,JSON.stringify({definition_zh:zh}));}catch{}}
     }
-  }finally{clearTimeout(timer);}
-  const payload={
-    definition_zh:zh||state.word?.definition_zh||'暫時查不到中文翻譯，請再次查詢',
-    phonetic_uk:phoneticUk||state.word?.phonetic_uk||'',
-    phonetic_us:phoneticUs||state.word?.phonetic_us||'',
-    audio_uk:audioUk||state.word?.audio_uk||'',
-    audio_us:audioUs||state.word?.audio_us||'',
-    pos:pos||state.word?.pos||'',
-    example:example||state.word?.example||''
-  };
-  try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
-  if(state.word&&String(state.word.word).toLowerCase()===key){state.word={...state.word,...payload};updateWordModal();}
+  }catch{
+    try{
+      const res=await fetch('https://api.mymemory.translated.net/get?'+new URLSearchParams({q:key,langpair:'en|zh-TW'}),{cache:'no-store'});
+      const zh=String((await res.json())?.responseData?.translatedText||'').trim();
+      if(zh&&/[\u3400-\u9fff]/.test(zh)&&isCurrent()){state.word={...state.word,definition_zh:zh};updateWordModal();}
+    }catch{}
+  }
+  // Phase 2: pronunciation metadata runs independently in the background.
+  try{
+    const res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key),{cache:'no-store',signal:AbortSignal.timeout?.(5000)});
+    if(!res.ok)return;
+    const data=await res.json();const entry=data?.[0]||{};const meanings=entry.meanings||[];const phs=(entry.phonetics||[]).filter(p=>p?.text||p?.audio);
+    const us=phs.find(p=>/us/i.test(String(p.audio||'')))||{};const uk=phs.find(p=>/uk|gb/i.test(String(p.audio||'')))||{};
+    const payload={
+      pos:meanings.map(m=>m?.partOfSpeech||'').find(Boolean)||'',
+      phonetic_us:us.text||phs.find(p=>/us/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'',
+      phonetic_uk:uk.text||phs.find(p=>/uk|gb/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'',
+      audio_us:us.audio||phs.find(p=>/us/i.test(String(p.audio||'')))?.audio||phs.find(p=>p?.audio)?.audio||'',
+      audio_uk:uk.audio||phs.find(p=>/uk|gb/i.test(String(p.audio||'')))?.audio||phs.find(p=>p?.audio)?.audio||'',
+      example:meanings.flatMap(m=>m.definitions||[]).map(d=>d.example).find(Boolean)||''
+    };
+    if(isCurrent()){state.word={...state.word,...payload};updateWordModal();try{localStorage.setItem(cacheKey,JSON.stringify({...payload,definition_zh:state.word.definition_zh||''}));}catch{}}
+  }catch{}
 }
 function updateWordModal(){
   const w=state.word;if(!w)return;
