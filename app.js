@@ -255,17 +255,19 @@ const COMMON_ZH={
   about:'關於；大約',as:'如同；作為；當……時',at:'在；於',by:'由；藉由；在……之前',into:'進入；到……裡面',
   out:'向外；出去',up:'向上；完成',down:'向下',over:'在……上方；超過',under:'在……下面',
   very:'非常',just:'只是；剛剛',also:'也；而且',only:'只有；僅僅',more:'更多；更',most:'最多；最',
-  than:'比；與……相比',then:'然後；那時',so:'所以；如此；這麼',too:'也；太',all:'全部；所有',
+  then:'然後；那時',so:'所以；如此；這麼',too:'也；太',all:'全部；所有',
   one:'一個；一；某一個',two:'兩個；二',three:'三個；三',first:'第一；首先',other:'其他的；另一個',
   another:'另一個；再一個',some:'一些；某些',any:'任何；一些',each:'每一個',many:'許多',much:'很多',
   few:'少數；一些',both:'兩者都',same:'相同的；同樣的',different:'不同的',right:'正確的；右邊的',
   wrong:'錯誤的',good:'好的',well:'很好地；健康的',important:'重要的',particular:'特定的；特別的',
-  key:'關鍵的；關鍵',word:'單字；詞',words:'單字；詞語',th:'（序數字尾，如 4th）'
+  key:'關鍵的；關鍵',word:'單字；詞',words:'單字；詞語',th:'（序數字尾，如 4th）',
+  easy:'容易的；簡單的',ever:'曾經；在任何時候',someone:'某人；有人',pounds:'英鎊；磅',
+  obviously:'顯然地；明顯地',manners:'風度；禮貌；禮儀',retro:'懷舊的；重新流行的',helpful:'有幫助的；有用的',
+  responsibility:'責任；職責；任務',linkers:'連接詞；銜接語',conjunction:'連詞；連接詞'
 };
 const CAMBRIDGE_FALLBACKS={
   manners:{pos:'noun',phonetic_uk:'/ˈmæn.əz/',phonetic_us:'/ˈmæn.ɚz/',definition_zh:'風度；禮貌；禮儀',entries:[
-    {pos:'noun',definition_en:'polite ways of behaving with other people',definition_zh:'與他人相處時有禮貌的行為方式',example_en:'He needs to be taught some manners.',example_zh:'他需要有人教他一些禮貌。'},
-    {pos:'noun',definition_en:'ways of behaving toward people, especially ways that are socially correct and show respect for their comfort and feelings',definition_zh:'對待他人的行為方式，尤其是符合社會規範並尊重他人感受的方式',example_en:'He was always punctilious in his manners.',example_zh:'他的舉止一向非常講究。'}
+    {pos:'noun',definition_en:'polite ways of behaving with other people',definition_zh:'與他人相處時有禮貌的行為方式',example_en:'He needs to be taught some manners.',example_zh:'他需要有人教他一些禮貌。'}
   ]},
   retro:{pos:'adjective',phonetic_uk:'/ˈret.rəʊ/',phonetic_us:'/ˈret.roʊ/',definition_zh:'懷舊的；重新流行的；模仿過去式樣的',entries:[
     {pos:'adjective',definition_en:'similar to styles, fashions, etc. from the past',definition_zh:'懷舊的；重新流行的；模仿過去式樣的',example_en:'retro clothes/music',example_zh:'懷舊服裝／音樂'},
@@ -274,11 +276,27 @@ const CAMBRIDGE_FALLBACKS={
   helpful:{pos:'adjective',phonetic_uk:'/ˈhelp.fəl/',phonetic_us:'/ˈhelp.fəl/',definition_zh:'願意幫忙的；有幫助的；有用的',entries:[
     {pos:'adjective',definition_en:'willing to help, or useful',definition_zh:'願意幫忙的；有幫助的；有用的',example_en:"I'm sorry, I was only trying to be helpful.",example_zh:'真抱歉，我只是想幫忙。'}
   ]},
-  responsibility:{pos:'noun',phonetic_uk:'/rɪˌspɒn.səˈbɪl.ə.ti/',phonetic_us:'/rɪˌspɑːn.səˈbɪl.ə.t̬i/',definition_zh:'責任；負責；職責；任務',entries:[
+  responsibility:{pos:'noun',phonetic_uk:'/rɪˌspɒn.səˈbɪl.ə.ti/',phonetic_us:'/rɪˌspɑːn.səˈbɪl.ə.t̬i/',definition_zh:'責任；職責；任務',entries:[
     {pos:'noun',definition_en:'a duty to deal with or take care of someone or something',definition_zh:'對某人或某事負責或照料的義務',example_en:'It is your responsibility to look after the children.',example_zh:'照顧孩子是你的責任。'}
   ]},
   conjunction:{pos:'noun',phonetic_uk:'/kənˈdʒʌŋk.ʃən/',phonetic_us:'/kənˈdʒʌŋk.ʃən/',definition_zh:'連詞；連接詞',entries:[
     {pos:'noun',definition_en:"a word such as 'and', 'but', 'while', or 'although' that connects words, phrases, and clauses in a sentence",definition_zh:'連詞；連接詞',example_en:'Conjunctions are linking words like and, or, but, then and because.',example_zh:''}
+  ]},
+  someone:{pos:'pronoun',phonetic_uk:'/ˈsʌm.wʌn/',phonetic_us:'/ˈsʌm.wʌn/',definition_zh:'某人；有人',entries:[
+    {pos:'pronoun',definition_en:'a person who is not known or named',definition_zh:'不知名或沒有指明的人；某人',example_en:'Someone left a message for you.',example_zh:'有人留了一則訊息給你。'}
+  ]},
+  pounds:{pos:'noun',phonetic_uk:'/paʊndz/',phonetic_us:'/paʊndz/',definition_zh:'英鎊；磅',entries:[
+    {pos:'noun',definition_en:'the plural of pound, a unit of money in the UK',definition_zh:'英鎊的複數；英國的貨幣單位',example_en:'You have one hundred pounds.',example_zh:'你有一百英鎊。'},
+    {pos:'noun',definition_en:'the plural of pound, a unit of weight equal to about 0.45 kilograms',definition_zh:'磅的複數；約等於 0.45 公斤的重量單位',example_en:'The package weighs five pounds.',example_zh:'這個包裹重五磅。'}
+  ]},
+  easy:{pos:'adjective',phonetic_uk:'/ˈiː.zi/',phonetic_us:'/ˈiː.zi/',definition_zh:'容易的；簡單的',entries:[
+    {pos:'adjective',definition_en:'not difficult; needing little effort',definition_zh:'不困難的；不需要太多努力的',example_en:'The test was easy.',example_zh:'這個測驗很簡單。'}
+  ]},
+  ever:{pos:'adverb',phonetic_uk:'/ˈev.ər/',phonetic_us:'/ˈev.ɚ/',definition_zh:'曾經；在任何時候',entries:[
+    {pos:'adverb',definition_en:'at any time',definition_zh:'曾經；在任何時候',example_en:'Have you ever been to London?',example_zh:'你曾經去過倫敦嗎？'}
+  ]},
+  obviously:{pos:'adverb',phonetic_uk:'/ˈɒb.vi.əs.li/',phonetic_us:'/ˈɑːb.vi.əs.li/',definition_zh:'顯然地；明顯地',entries:[
+    {pos:'adverb',definition_en:'in a way that is easy to understand or see',definition_zh:'以容易理解或看出的方式；顯然地',example_en:'Obviously, I was very upset.',example_zh:'很顯然，我當時非常難過。'}
   ]}
 };
 function cambridgeUrl(word){return 'https://dictionary.cambridge.org/dictionary/english-chinese-traditional/'+encodeURIComponent(String(word||''));}
