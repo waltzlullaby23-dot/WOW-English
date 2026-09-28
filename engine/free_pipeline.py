@@ -179,18 +179,15 @@ def fetch_english_via_public_transcript(video_id: str):
 
 
 def transcript_candidates(video_id: str):
-    if YouTubeTranscriptApi is None:
-        return []
+    if YouTubeTranscriptApi is None:return []
     api=YouTubeTranscriptApi()
-    for attempt in range(3):
-        try:
-            lst=api.list(video_id)
-            arr=[t for t in lst if str(getattr(t,'language_code','') or '').lower().startswith('en')]
-            arr.sort(key=lambda t:(bool(getattr(t,'is_generated',False)), str(getattr(t,'language_code',''))))
-            return arr
-        except Exception:
-            time.sleep(1.5*(attempt+1))
-    return []
+    try:
+        lst=api.list(video_id)
+        arr=[t for t in lst if str(getattr(t,'language_code','') or '').lower().startswith('en')]
+        arr.sort(key=lambda t:(bool(getattr(t,'is_generated',False)),str(getattr(t,'language_code',''))))
+        return arr[:2]
+    except Exception:
+        return []
 
 def fetch_english_transcript(video_id: str):
     for tr in transcript_candidates(video_id):
@@ -251,7 +248,8 @@ def fetch_caption_tracks_from_player(video_id: str):
     try:
         import yt_dlp
         url=f'https://www.youtube.com/watch?v={video_id}'
-        opts={'quiet':True,'no_warnings':True,'skip_download':True,'noplaylist':True}
+        opts={'quiet':True,'no_warnings':True,'skip_download':True,'noplaylist':True,
+              'socket_timeout':12,'retries':1,'fragment_retries':1,'extractor_retries':1}
         with yt_dlp.YoutubeDL(opts) as ydl:
             info=ydl.extract_info(url,download=False)
         tracks=info.get('subtitles') or {}
@@ -548,7 +546,8 @@ def ydl_info(video_id):
             }
     if YoutubeDL is None:return {}
     try:
-        opts={'quiet':True,'no_warnings':True,'skip_download':True,'noplaylist':True,'socket_timeout':15,'retries':2}
+        opts={'quiet':True,'no_warnings':True,'skip_download':True,'noplaylist':True,
+              'socket_timeout':12,'retries':1,'fragment_retries':1,'extractor_retries':1}
         with YoutubeDL(opts) as ydl:
             row=ydl.extract_info(f'https://www.youtube.com/watch?v={video_id}',download=False) or {}
         return {
@@ -603,32 +602,26 @@ def fetch_english_via_transcript_txt(video_id: str):
         return []
 def best_english_transcript(video_id: str, duration: float):
     candidates=[]
-    # 1) YouTube player caption URLs via yt-dlp metadata.
     try:
         en_rows,zh_rows,source_name,source_lang=fetch_caption_tracks_from_player(video_id)
         if en_rows:candidates.append((f'youtube-{source_name}',None,en_rows,zh_rows))
     except Exception:pass
-    # 2) Direct yt-dlp subtitle download. This path is intentionally used before
-    # hosted transcript services because it follows YouTube's actual caption tracks.
     try:
         en_rows,zh_rows=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
         if en_rows:candidates.append(('youtube-ytdlp',None,en_rows,zh_rows))
-    except Exception:pass
-    # 3) Hosted transcript services.
-    try:
-        segs=fetch_english_via_free_transcript_api(video_id)
-        if segs:candidates.append(('freetranscriptapi',None,segs,[]))
     except Exception:pass
     try:
         segs=fetch_english_via_transcript_txt(video_id)
         if segs:candidates.append(('youtube-transcript-ai',None,segs,[]))
     except Exception:pass
-    # 4) youtube-transcript-api as another independent source.
+    try:
+        segs=fetch_english_via_free_transcript_api(video_id)
+        if segs:candidates.append(('freetranscriptapi',None,segs,[]))
+    except Exception:pass
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
     except Exception:pass
-
     valid=[]
     for source,tr,segs,zhrows in candidates:
         try:
@@ -636,11 +629,11 @@ def best_english_transcript(video_id: str, duration: float):
             if ok:valid.append((coverage,len(segs),source,tr,segs,zhrows))
         except Exception:pass
     if not valid:return None,None,0.0,'no-complete-english-transcript',[]
-    # Prefer a YouTube-native source when coverage is effectively tied.
-    priority={'youtube-manual':4,'youtube-auto':4,'youtube-ytdlp':4,'youtube-transcript-api':3,'freetranscriptapi':2,'youtube-transcript-ai':1}
+    priority={'youtube-manual':5,'youtube-auto':5,'youtube-ytdlp':5,'youtube-transcript-api':3,'freetranscriptapi':2,'youtube-transcript-ai':1}
     valid.sort(key=lambda x:(x[0],priority.get(x[2],0),x[1]),reverse=True)
     coverage,_,source,tr,segs,zhrows=valid[0]
     return tr,segs,coverage,source,zhrows
+
 def translate_public_google(text: str):
     import requests
     q=clean_text(text)
