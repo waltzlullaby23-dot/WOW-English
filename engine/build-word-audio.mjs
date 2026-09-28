@@ -51,3 +51,4 @@ fs.writeFileSync(indexPath,JSON.stringify(index,null,2)+'\n','utf8');
 const bad=list.filter(w=>!fs.existsSync(index.words[w].audioLocalUk)||!fs.existsSync(index.words[w].audioLocalUs)||!index.words[w].ipa_uk||!index.words[w].ipa_us);
 console.log(JSON.stringify({words:list.length,complete:list.length-bad.length,bad:bad.slice(0,30)},null,2));
 if(bad.length)process.exit(1);
+// Trigger deterministic local asset rebuild after UI pronunciation changes.
