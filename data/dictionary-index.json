@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T10:27:33.873Z",
+  "generatedAt": "2026-09-28T10:34:11.522Z",
   "source": "build-time-dictionary-index",
   "words": {
     "helpful": {
@@ -125,91 +125,6 @@
       ],
       "complete": true
     },
-    "pounds": {
-      "word": "pounds",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=pounds&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=pounds&type=2",
-      "definition_zh": "英鎊；磅",
-      "entries": [
-        {
-          "pos": "",
-          "definition_en": "A unit of mass equal to 16 avoirdupois ounces (= 453.592 g). Today this value is the most common meaning of \"pound\" as a unit of weight.",
-          "definition_zh": "質量單位等於16 avoirdupois盎司（ = 453.592克）。今天，這個值是「磅」作為重量單位的最常見含義。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The unit of currency used in the United Kingdom and its dependencies. It is divided into 100 pence. Symbol £.",
-          "definition_zh": "英國及其依存國使用的貨幣單位。它分為100便士。符號£。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A unit of weight in various measurement systems.",
-          "definition_zh": "各種測量系統中的重量單位。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A unit of currency in various currency systems.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Various non-English units of measure.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A unit of mass equal to 12 troy ounces (≈ 373.242 g). Today, this is a common unit of mass when measuring precious metals, and is little used elsewhere.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Any of various units of currency used in Egypt, Lebanon, Sudan, and Syria, and formerly in the Republic of Ireland, Cyprus, Nigeria, Israel, and South Africa.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Any of various units of currency formerly used in the United States.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "order": {
-      "word": "order",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=order&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=order&type=2",
-      "definition_zh": "訂購",
-      "entries": [],
-      "complete": true
-    },
     "obviously": {
       "word": "obviously",
       "source": "datamuse-build",
@@ -272,6 +187,20 @@
           "example_zh": ""
         }
       ],
+      "complete": true
+    },
+    "order": {
+      "word": "order",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=order&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=order&type=2",
+      "definition_zh": "訂購",
+      "entries": [],
       "complete": true
     },
     "retro": {
@@ -345,6 +274,77 @@
       ],
       "complete": true
     },
+    "pounds": {
+      "word": "pounds",
+      "source": "datamuse-build",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=pounds&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=pounds&type=2",
+      "definition_zh": "英鎊；磅",
+      "entries": [
+        {
+          "pos": "",
+          "definition_en": "A unit of mass equal to 16 avoirdupois ounces (= 453.592 g). Today this value is the most common meaning of \"pound\" as a unit of weight.",
+          "definition_zh": "質量單位等於16 avoirdupois盎司（ = 453.592克）。今天，這個值是「磅」作為重量單位的最常見含義。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "The unit of currency used in the United Kingdom and its dependencies. It is divided into 100 pence. Symbol £.",
+          "definition_zh": "英國及其依存國使用的貨幣單位。它分為100便士。符號£。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "A unit of weight in various measurement systems.",
+          "definition_zh": "各種測量系統中的重量單位。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "A unit of currency in various currency systems.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Various non-English units of measure.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "A unit of mass equal to 12 troy ounces (≈ 373.242 g). Today, this is a common unit of mass when measuring precious metals, and is little used elsewhere.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Any of various units of currency used in Egypt, Lebanon, Sudan, and Syria, and formerly in the Republic of Ireland, Cyprus, Nigeria, Israel, and South Africa.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Any of various units of currency formerly used in the United States.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
     "request": {
       "word": "request",
       "source": "fallback",
@@ -356,169 +356,6 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=request&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=request&type=2",
       "definition_zh": "要求",
-      "entries": [],
-      "complete": true
-    },
-    "responsibility": {
-      "word": "responsibility",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=responsibility&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=responsibility&type=2",
-      "definition_zh": "責任；職責；任務",
-      "entries": [
-        {
-          "pos": "",
-          "definition_en": "A duty, obligation or liability for which someone is held accountable.",
-          "definition_zh": "某人應承擔的責任、義務或責任。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The state of being responsible, accountable, or answerable. [from 18th c.]",
-          "definition_zh": "負責、負責或負責的狀態。[from 18th c.]",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The state of being liable, culpable, or responsible for something in particular.",
-          "definition_zh": "對特定事項負有責任、應負有責任或負有責任的狀態。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The obligation to carry forward an assigned task to a successful conclusion.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The obligation for the proper custody, care, and safekeeping of property or funds entrusted to someone’s possession or supervision.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Misspelling of responsibility. [The state of being responsible, accountable, or answerable. [from 18th c.]]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The character or state of being irresponsible; lack of or freedom from responsibility; want of accountability.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "questions": {
-      "word": "questions",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=questions&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=questions&type=2",
-      "definition_zh": "問題",
-      "entries": [],
-      "complete": true
-    },
-    "a": {
-      "word": "a",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=a&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=a&type=2",
-      "definition_zh": "一個；任何一個",
-      "entries": [
-        {
-          "pos": "",
-          "definition_en": "Adult; as used in film rating.",
-          "definition_zh": "成人；用於電影分級。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Answer.",
-          "definition_zh": "答案",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Ace. (including in card games)",
-          "definition_zh": "王牌（包括在紙牌遊戲中）",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Acre.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(physics) Angstrom.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Ammeter.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(sports) An assist.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(sexuality) Asexual.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "politer": {
-      "word": "politer",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=politer&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=politer&type=2",
-      "definition_zh": "政客",
       "entries": [],
       "complete": true
     },
@@ -593,6 +430,148 @@
       ],
       "complete": true
     },
+    "questions": {
+      "word": "questions",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=questions&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=questions&type=2",
+      "definition_zh": "問題",
+      "entries": [],
+      "complete": true
+    },
+    "responsibility": {
+      "word": "responsibility",
+      "source": "datamuse-build",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=responsibility&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=responsibility&type=2",
+      "definition_zh": "責任；職責；任務",
+      "entries": [
+        {
+          "pos": "",
+          "definition_en": "A duty, obligation or liability for which someone is held accountable.",
+          "definition_zh": "某人應承擔的責任、義務或責任。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "The state of being responsible, accountable, or answerable. [from 18th c.]",
+          "definition_zh": "負責、負責或負責的狀態。[from 18th c.]",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "The state of being liable, culpable, or responsible for something in particular.",
+          "definition_zh": "對特定事項負有責任、應負有責任或負有責任的狀態。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "The obligation to carry forward an assigned task to a successful conclusion.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "The obligation for the proper custody, care, and safekeeping of property or funds entrusted to someone’s possession or supervision.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Misspelling of responsibility. [The state of being responsible, accountable, or answerable. [from 18th c.]]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "The character or state of being irresponsible; lack of or freedom from responsibility; want of accountability.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
+    "politer": {
+      "word": "politer",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=politer&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=politer&type=2",
+      "definition_zh": "政客",
+      "entries": [],
+      "complete": true
+    },
+    "an": {
+      "word": "an",
+      "source": "datamuse-build",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=an&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=an&type=2",
+      "definition_zh": "一個；任何一個",
+      "entries": [
+        {
+          "pos": "",
+          "definition_en": "The first letter of the Georgian alphabet, ა (Mkhedruli), Ⴀ (Asomtavruli) or ⴀ (Nuskhuri).",
+          "definition_zh": "喬治亞語字母表中的第一個字母，「Mkhedruli」、「Asomtavruli」或「Nuskhuri」。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(military, US) A set of sizes for screw threads agreed upon and jointly used by the United States Army and Navy.",
+          "definition_zh": "（軍用，美國）美國陸軍和海軍商定並共同使用的一套螺紋尺寸。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Initialism of the Andaman and Nicobar Islands: a union territory of India.",
+          "definition_zh": "安達曼和尼科巴羣島的初始主義：印度的聯邦領土。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Initialism of author's note or authors' note.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Alternative form of Anu. [(Sumerian, Assyrian and Babylonian mythology) A sky-god, the god of heaven, lord of constellations, king of gods, spirits and demons, who dwelt in the highest heavenly region.]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
     "imperatives": {
       "word": "imperatives",
       "source": "fallback",
@@ -607,70 +586,70 @@
       "entries": [],
       "complete": true
     },
-    "or": {
-      "word": "or",
+    "a": {
+      "word": "a",
       "source": "datamuse-build",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=or&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=or&type=2",
-      "definition_zh": "或；或者",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=a&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=a&type=2",
+      "definition_zh": "一個；任何一個",
       "entries": [
         {
           "pos": "",
-          "definition_en": "(heraldry) The gold or yellow tincture on a coat of arms.",
-          "definition_zh": "（紋章）紋章上的金色或黃色酊劑。",
+          "definition_en": "Adult; as used in film rating.",
+          "definition_zh": "成人；用於電影分級。",
           "example_en": "",
           "example_zh": ""
         },
         {
-          "pos": "dj",
-          "definition_en": "(heraldry) Of gold or yellow tincture on a coat of arms.",
-          "definition_zh": "（紋章）紋章上的金色或黃色酊劑。",
+          "pos": "",
+          "definition_en": "Answer.",
+          "definition_zh": "答案",
           "example_en": "",
           "example_zh": ""
         },
         {
-          "pos": "dv",
-          "definition_en": "(obsolete) Early (on).",
-          "definition_zh": "（已淘汰）提前（開）。",
+          "pos": "",
+          "definition_en": "Ace. (including in card games)",
+          "definition_zh": "王牌（包括在紙牌遊戲中）",
           "example_en": "",
           "example_zh": ""
         },
         {
-          "pos": "dv",
-          "definition_en": "(obsolete) Earlier, previously.",
+          "pos": "",
+          "definition_en": "Acre.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
         },
         {
           "pos": "",
-          "definition_en": "(logic) The binary operator inclusive or, true if one at least one of two inputs is true. In infix notation.",
+          "definition_en": "(physics) Angstrom.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
         },
         {
           "pos": "",
-          "definition_en": "A surname.",
+          "definition_en": "Ammeter.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
         },
         {
           "pos": "",
-          "definition_en": "(logic, electronics) Alternative form of OR. [(logic) The binary operator inclusive or, true if one at least one of two inputs is true. In infix notation.]",
+          "definition_en": "(sports) An assist.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
         },
         {
           "pos": "",
-          "definition_en": "(healthcare, countable) Initialism of operating room. [A room in a hospital used for performing surgical operations.]",
+          "definition_en": "(sexuality) Asexual.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
@@ -763,49 +742,70 @@
       "entries": [],
       "complete": true
     },
-    "an": {
-      "word": "an",
+    "or": {
+      "word": "or",
       "source": "datamuse-build",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=an&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=an&type=2",
-      "definition_zh": "一個；任何一個",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=or&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=or&type=2",
+      "definition_zh": "或；或者",
       "entries": [
         {
           "pos": "",
-          "definition_en": "The first letter of the Georgian alphabet, ა (Mkhedruli), Ⴀ (Asomtavruli) or ⴀ (Nuskhuri).",
-          "definition_zh": "喬治亞語字母表中的第一個字母，「Mkhedruli」、「Asomtavruli」或「Nuskhuri」。",
+          "definition_en": "(heraldry) The gold or yellow tincture on a coat of arms.",
+          "definition_zh": "（紋章）紋章上的金色或黃色酊劑。",
           "example_en": "",
           "example_zh": ""
         },
         {
-          "pos": "",
-          "definition_en": "(military, US) A set of sizes for screw threads agreed upon and jointly used by the United States Army and Navy.",
-          "definition_zh": "（軍用，美國）美國陸軍和海軍商定並共同使用的一套螺紋尺寸。",
+          "pos": "dj",
+          "definition_en": "(heraldry) Of gold or yellow tincture on a coat of arms.",
+          "definition_zh": "（紋章）紋章上的金色或黃色酊劑。",
           "example_en": "",
           "example_zh": ""
         },
         {
-          "pos": "",
-          "definition_en": "Initialism of the Andaman and Nicobar Islands: a union territory of India.",
-          "definition_zh": "安達曼和尼科巴羣島的初始主義：印度的聯邦領土。",
+          "pos": "dv",
+          "definition_en": "(obsolete) Early (on).",
+          "definition_zh": "（已淘汰）提前（開）。",
           "example_en": "",
           "example_zh": ""
         },
         {
-          "pos": "",
-          "definition_en": "Initialism of author's note or authors' note.",
+          "pos": "dv",
+          "definition_en": "(obsolete) Earlier, previously.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
         },
         {
           "pos": "",
-          "definition_en": "Alternative form of Anu. [(Sumerian, Assyrian and Babylonian mythology) A sky-god, the god of heaven, lord of constellations, king of gods, spirits and demons, who dwelt in the highest heavenly region.]",
+          "definition_en": "(logic) The binary operator inclusive or, true if one at least one of two inputs is true. In infix notation.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "A surname.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(logic, electronics) Alternative form of OR. [(logic) The binary operator inclusive or, true if one at least one of two inputs is true. In infix notation.]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(healthcare, countable) Initialism of operating room. [A room in a hospital used for performing surgical operations.]",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
@@ -1297,6 +1297,70 @@
       ],
       "complete": true
     },
+    "you": {
+      "word": "you",
+      "source": "datamuse-build",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=you&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=you&type=2",
+      "definition_zh": "你；你們",
+      "entries": [
+        {
+          "pos": "",
+          "definition_en": "The name of the Latin-script letter U/u.",
+          "definition_zh": "拉丁字母U/u的名稱。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(transitive) To address (a person) using the pronoun you (in the past, especially to use you rather than thou, when you was considered more formal).",
+          "definition_zh": "（傳遞性）使用代詞「你」來稱呼（一個人） （在過去，當你被認為更正式時，特別是使用「你」而不是「你」）。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(countable) A surname from Chinese",
+          "definition_zh": "（可數）中文姓氏",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(Chinese mythology) Synonym of Youzhou, one of the Nine Provinces of Chinese legend.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(historical) A former prefecture of China.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
+    "ways": {
+      "word": "ways",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=ways&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=ways&type=2",
+      "definition_zh": "方法",
+      "entries": [],
+      "complete": true
+    },
     "be": {
       "word": "be",
       "source": "datamuse-build",
@@ -1368,70 +1432,6 @@
       ],
       "complete": true
     },
-    "ways": {
-      "word": "ways",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=ways&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=ways&type=2",
-      "definition_zh": "方法",
-      "entries": [],
-      "complete": true
-    },
-    "you": {
-      "word": "you",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=you&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=you&type=2",
-      "definition_zh": "你；你們",
-      "entries": [
-        {
-          "pos": "",
-          "definition_en": "The name of the Latin-script letter U/u.",
-          "definition_zh": "拉丁字母U/u的名稱。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(transitive) To address (a person) using the pronoun you (in the past, especially to use you rather than thou, when you was considered more formal).",
-          "definition_zh": "（傳遞性）使用代詞「你」來稱呼（一個人） （在過去，當你被認為更正式時，特別是使用「你」而不是「你」）。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(countable) A surname from Chinese",
-          "definition_zh": "（可數）中文姓氏",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(Chinese mythology) Synonym of Youzhou, one of the Nine Provinces of Chinese legend.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(historical) A former prefecture of China.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
     "expressing": {
       "word": "expressing",
       "source": "fallback",
@@ -1443,91 +1443,6 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=expressing&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=expressing&type=2",
       "definition_zh": "表達",
-      "entries": [],
-      "complete": true
-    },
-    "in": {
-      "word": "in",
-      "source": "datamuse-build",
-      "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=in&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=in&type=2",
-      "definition_zh": "在……裡；在……期間",
-      "entries": [
-        {
-          "pos": "dv",
-          "definition_en": "At or towards the interior of a defined space, such as a building or room.",
-          "definition_zh": "位於或朝向特定空間（例如建築物或房間）的內部。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "Towards the speaker or other reference point.",
-          "definition_zh": "朝向講者或其他參考點。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "So as to be enclosed or surrounded by something.",
-          "definition_zh": "以便被某些東西包圍或包圍",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(not comparable) Located indoors, especially at home or at one's office or place of work.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(not comparable) Located inside something.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "(in combination, after a verb) Denotes a gathering of people assembled for the stated activity, sometimes, though not always, suggesting a protest.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(sports, of the ball or other playing implement) Falling or remaining within the bounds of the playing area.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Inserted or fitted into something.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "depending": {
-      "word": "depending",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=depending&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=depending&type=2",
-      "definition_zh": "依賴",
       "entries": [],
       "complete": true
     },
@@ -1595,6 +1510,91 @@
         {
           "pos": "",
           "definition_en": "A surname.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
+    "depending": {
+      "word": "depending",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=depending&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=depending&type=2",
+      "definition_zh": "依賴",
+      "entries": [],
+      "complete": true
+    },
+    "in": {
+      "word": "in",
+      "source": "datamuse-build",
+      "pos": "dv",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=in&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=in&type=2",
+      "definition_zh": "在……裡；在……期間",
+      "entries": [
+        {
+          "pos": "dv",
+          "definition_en": "At or towards the interior of a defined space, such as a building or room.",
+          "definition_zh": "位於或朝向特定空間（例如建築物或房間）的內部。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dv",
+          "definition_en": "Towards the speaker or other reference point.",
+          "definition_zh": "朝向講者或其他參考點。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dv",
+          "definition_en": "So as to be enclosed or surrounded by something.",
+          "definition_zh": "以便被某些東西包圍或包圍",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "(not comparable) Located indoors, especially at home or at one's office or place of work.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "(not comparable) Located inside something.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dv",
+          "definition_en": "(in combination, after a verb) Denotes a gathering of people assembled for the stated activity, sometimes, though not always, suggesting a protest.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "(sports, of the ball or other playing implement) Falling or remaining within the bounds of the playing area.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "Inserted or fitted into something.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
@@ -1737,112 +1737,6 @@
       ],
       "complete": true
     },
-    "of": {
-      "word": "of",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=of&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=of&type=2",
-      "definition_zh": "……的；關於",
-      "entries": [
-        {
-          "pos": "",
-          "definition_en": "(usually in modal perfect constructions) Eye dialect spelling of have and 've, chiefly in depictions of colloquial speech.",
-          "definition_zh": "（通常在模態完美結構中） HAVE和VE的眼方言拼寫，主要是在口語的描繪中。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(Internet slang) Abbreviation of OnlyFans. [(colloquial) An account on OnlyFans.]",
-          "definition_zh": "（互聯網俚語） OnlyFans的縮寫。[（口語） OnlyFans上的帳戶。]",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(baseball) Abbreviation of outfield. [(baseball, softball) The region of the field between the infield and the outer fence.]",
-          "definition_zh": "（棒球）外場的縮寫。[（棒球，壘球）內場和外圍圍欄之間的場地區域。]",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(baseball) Abbreviation of outfielder. [(cricket, baseball) A player that plays in the outfield, which is the outer portion of the field.]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(Roman Catholicism) Initialism of Ordinary Form. [(Roman Catholicism) The version of the Roman Rite introduced after the Second Vatican Council, usually celebrated in the vernacular.]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Initialism of Old French. [The French language as spoken or written from the 9th to the early 14th century.]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Initialism of Old Frisian. [a West Germanic language spoken on parts of the North Sea coast of modern Netherlands and Germany until the 16th century]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "bbc": {
-      "word": "bbc",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=bbc&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=bbc&type=2",
-      "definition_zh": "英国广播公司",
-      "entries": [],
-      "complete": true
-    },
-    "learning": {
-      "word": "learning",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=learning&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=learning&type=2",
-      "definition_zh": "學習",
-      "entries": [],
-      "complete": true
-    },
-    "today": {
-      "word": "today",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=today&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=today&type=2",
-      "definition_zh": "今天得知",
-      "entries": [],
-      "complete": true
-    },
     "it": {
       "word": "it",
       "source": "datamuse-build",
@@ -1914,6 +1808,112 @@
       ],
       "complete": true
     },
+    "bbc": {
+      "word": "bbc",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=bbc&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=bbc&type=2",
+      "definition_zh": "英国广播公司",
+      "entries": [],
+      "complete": true
+    },
+    "learning": {
+      "word": "learning",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=learning&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=learning&type=2",
+      "definition_zh": "學習",
+      "entries": [],
+      "complete": true
+    },
+    "today": {
+      "word": "today",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=today&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=today&type=2",
+      "definition_zh": "今天得知",
+      "entries": [],
+      "complete": true
+    },
+    "of": {
+      "word": "of",
+      "source": "datamuse-build",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=of&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=of&type=2",
+      "definition_zh": "……的；關於",
+      "entries": [
+        {
+          "pos": "",
+          "definition_en": "(usually in modal perfect constructions) Eye dialect spelling of have and 've, chiefly in depictions of colloquial speech.",
+          "definition_zh": "（通常在模態完美結構中） HAVE和VE的眼方言拼寫，主要是在口語的描繪中。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(Internet slang) Abbreviation of OnlyFans. [(colloquial) An account on OnlyFans.]",
+          "definition_zh": "（互聯網俚語） OnlyFans的縮寫。[（口語） OnlyFans上的帳戶。]",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(baseball) Abbreviation of outfield. [(baseball, softball) The region of the field between the infield and the outer fence.]",
+          "definition_zh": "（棒球）外場的縮寫。[（棒球，壘球）內場和外圍圍欄之間的場地區域。]",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(baseball) Abbreviation of outfielder. [(cricket, baseball) A player that plays in the outfield, which is the outer portion of the field.]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(Roman Catholicism) Initialism of Ordinary Form. [(Roman Catholicism) The version of the Roman Rite introduced after the Second Vatican Council, usually celebrated in the vernacular.]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Initialism of Old French. [The French language as spoken or written from the 9th to the early 14th century.]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "Initialism of Old Frisian. [a West Germanic language spoken on parts of the North Sea coast of modern Netherlands and Germany until the 16th century]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
     "talking": {
       "word": "talking",
       "source": "fallback",
@@ -1925,91 +1925,6 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=talking&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=talking&type=2",
       "definition_zh": "對話",
-      "entries": [],
-      "complete": true
-    },
-    "on": {
-      "word": "on",
-      "source": "datamuse-build",
-      "pos": "dj",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=on&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=on&type=2",
-      "definition_zh": "在……上；關於",
-      "entries": [
-        {
-          "pos": "dj",
-          "definition_en": "In the state of being active, functioning or operating.",
-          "definition_zh": "處於活躍、運作或運作的狀態。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Happening; taking place; being or due to be put into action.",
-          "definition_zh": "發生；正在發生；正在或將要付諸行動。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(informal) Of a person, used to express agreement to or acceptance of a proposal or challenge made by that person; most commonly with subject \"you\" (see you're on).",
-          "definition_zh": "（非正式）一個人，用於表示同意或接受該人提出的建議或挑戰；最常見的主題是「你」（見你）。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(postpositive) Of a stated part of something, oriented towards the viewer or other specified direction.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Fitted; covering or being worn.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "To an operating state.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "So as to cover or be fitted.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "Along, forwards (continuing an action), onwards.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "food": {
-      "word": "food",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=food&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=food&type=2",
-      "definition_zh": "食物",
       "entries": [],
       "complete": true
     },
@@ -2077,6 +1992,91 @@
         {
           "pos": "",
           "definition_en": "(sports) Initialism of turnover. [The amount of money taken as sales transacted in a given period.]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
+    "food": {
+      "word": "food",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=food&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=food&type=2",
+      "definition_zh": "食物",
+      "entries": [],
+      "complete": true
+    },
+    "on": {
+      "word": "on",
+      "source": "datamuse-build",
+      "pos": "dj",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=on&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=on&type=2",
+      "definition_zh": "在……上；關於",
+      "entries": [
+        {
+          "pos": "dj",
+          "definition_en": "In the state of being active, functioning or operating.",
+          "definition_zh": "處於活躍、運作或運作的狀態。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "Happening; taking place; being or due to be put into action.",
+          "definition_zh": "發生；正在發生；正在或將要付諸行動。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "(informal) Of a person, used to express agreement to or acceptance of a proposal or challenge made by that person; most commonly with subject \"you\" (see you're on).",
+          "definition_zh": "（非正式）一個人，用於表示同意或接受該人提出的建議或挑戰；最常見的主題是「你」（見你）。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "(postpositive) Of a stated part of something, oriented towards the viewer or other specified direction.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "Fitted; covering or being worn.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dv",
+          "definition_en": "To an operating state.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dv",
+          "definition_en": "So as to cover or be fitted.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dv",
+          "definition_en": "Along, forwards (continuing an action), onwards.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
@@ -2560,70 +2560,70 @@
       "entries": [],
       "complete": true
     },
-    "and": {
-      "word": "and",
+    "often": {
+      "word": "often",
       "source": "datamuse-build",
-      "pos": "",
+      "pos": "dv",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=and&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=and&type=2",
-      "definition_zh": "和；以及",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=often&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=often&type=2",
+      "definition_zh": "常常；經常",
       "entries": [
         {
-          "pos": "",
-          "definition_en": "(music, often informal) In rhythm, the second half of a divided beat.",
-          "definition_zh": "（音樂，通常是非正式的）在節奏中，分裂節拍的下半部分",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(UK dialectal) Breath.",
-          "definition_zh": "（英國方言）呼吸。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(UK dialectal) Sea smoke; steam fog.",
-          "definition_zh": "（英國方言）海煙；蒸汽霧。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(UK dialectal, intransitive) To breathe; whisper; devise; imagine.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(logic) The binary operator and, only true if both of two inputs is true. In infix notation.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(logic, transitive) To combine (a value) with another value by means of this operator.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(logic) Alternative form of ∧, the conjunction operator.",
-          "definition_zh": "",
+          "pos": "dv",
+          "definition_en": "Frequently; many times on different occasions.",
+          "definition_zh": "經常；在不同場合多次。",
           "example_en": "",
           "example_zh": ""
         },
         {
           "pos": "dj",
-          "definition_en": "(aviation) Initialism of airplane nose down.",
+          "definition_en": "(archaic) Frequent.",
+          "definition_zh": "（古老的）經常。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(transitive) To make something soft or softer.",
+          "definition_zh": "（傳遞性）製作柔軟或更柔軟的東西。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(transitive) To make less harsh.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(intransitive) To become soft or softer.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(transitive) To undermine the morale of someone (often soften up).",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(ambitransitive, phonology) To become or make (a consonant) more lenis, to lenite.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(Slavic phonology) To palatalize.",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
@@ -2701,91 +2701,6 @@
       "entries": [],
       "complete": true
     },
-    "often": {
-      "word": "often",
-      "source": "datamuse-build",
-      "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=often&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=often&type=2",
-      "definition_zh": "常常；經常",
-      "entries": [
-        {
-          "pos": "dv",
-          "definition_en": "Frequently; many times on different occasions.",
-          "definition_zh": "經常；在不同場合多次。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(archaic) Frequent.",
-          "definition_zh": "（古老的）經常。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(transitive) To make something soft or softer.",
-          "definition_zh": "（傳遞性）製作柔軟或更柔軟的東西。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(transitive) To make less harsh.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(intransitive) To become soft or softer.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(transitive) To undermine the morale of someone (often soften up).",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(ambitransitive, phonology) To become or make (a consonant) more lenis, to lenite.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(Slavic phonology) To palatalize.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "choose": {
-      "word": "choose",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=choose&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=choose&type=2",
-      "definition_zh": "選擇",
-      "entries": [],
-      "complete": true
-    },
     "passive": {
       "word": "passive",
       "source": "word-bank",
@@ -2804,6 +2719,91 @@
           "definition_zh": "被動的；被動語態",
           "example_en": "The passive changes the focus.",
           "example_zh": "被動會改變焦點。"
+        }
+      ],
+      "complete": true
+    },
+    "choose": {
+      "word": "choose",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=choose&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=choose&type=2",
+      "definition_zh": "選擇",
+      "entries": [],
+      "complete": true
+    },
+    "and": {
+      "word": "and",
+      "source": "datamuse-build",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=and&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=and&type=2",
+      "definition_zh": "和；以及",
+      "entries": [
+        {
+          "pos": "",
+          "definition_en": "(music, often informal) In rhythm, the second half of a divided beat.",
+          "definition_zh": "（音樂，通常是非正式的）在節奏中，分裂節拍的下半部分",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(UK dialectal) Breath.",
+          "definition_zh": "（英國方言）呼吸。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(UK dialectal) Sea smoke; steam fog.",
+          "definition_zh": "（英國方言）海煙；蒸汽霧。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(UK dialectal, intransitive) To breathe; whisper; devise; imagine.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(logic) The binary operator and, only true if both of two inputs is true. In infix notation.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(logic, transitive) To combine (a value) with another value by means of this operator.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(logic) Alternative form of ∧, the conjunction operator.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "(aviation) Initialism of airplane nose down.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
         }
       ],
       "complete": true
@@ -3099,91 +3099,6 @@
       ],
       "complete": true
     },
-    "one": {
-      "word": "one",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=one&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=one&type=2",
-      "definition_zh": "一個；一；某一個",
-      "entries": [
-        {
-          "pos": "",
-          "definition_en": "The digit or figure 1.",
-          "definition_zh": "數字或圖1。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(by ellipsis) Used to briefly refer to a noun phrase understood by context",
-          "definition_zh": "（通過省略號）用於簡要地指代由上下文理解的名詞短語",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(US) A one-dollar bill.",
-          "definition_zh": "（美國）一美元鈔票。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "One o'clock, either a.m. or p.m.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Being a single, unspecified thing; a; any.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Sole, only.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Whole, entire.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A person or thing (having some specified characteristic or attribute).",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        }
-      ],
-      "complete": true
-    },
-    "think": {
-      "word": "think",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=think&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=think&type=2",
-      "definition_zh": "思维",
-      "entries": [],
-      "complete": true
-    },
     "which": {
       "word": "which",
       "source": "datamuse-build",
@@ -3248,6 +3163,91 @@
         {
           "pos": "",
           "definition_en": "(UK, slang) Clipping of Chichester. [A cathedral city and civil parish in West Sussex, England (OS grid ref SU8504).]",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        }
+      ],
+      "complete": true
+    },
+    "think": {
+      "word": "think",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=think&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=think&type=2",
+      "definition_zh": "思维",
+      "entries": [],
+      "complete": true
+    },
+    "one": {
+      "word": "one",
+      "source": "datamuse-build",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=one&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=one&type=2",
+      "definition_zh": "一個；一；某一個",
+      "entries": [
+        {
+          "pos": "",
+          "definition_en": "The digit or figure 1.",
+          "definition_zh": "數字或圖1。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(by ellipsis) Used to briefly refer to a noun phrase understood by context",
+          "definition_zh": "（通過省略號）用於簡要地指代由上下文理解的名詞短語",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "(US) A one-dollar bill.",
+          "definition_zh": "（美國）一美元鈔票。",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "One o'clock, either a.m. or p.m.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "Being a single, unspecified thing; a; any.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "Sole, only.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "dj",
+          "definition_en": "Whole, entire.",
+          "definition_zh": "",
+          "example_en": "",
+          "example_zh": ""
+        },
+        {
+          "pos": "",
+          "definition_en": "A person or thing (having some specified characteristic or attribute).",
           "definition_zh": "",
           "example_en": "",
           "example_zh": ""
