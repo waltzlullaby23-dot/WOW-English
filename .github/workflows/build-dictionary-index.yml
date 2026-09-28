@@ -6,6 +6,8 @@ on:
     paths:
       - "data/catalog.json"
       - "engine/build-dictionary-index.mjs"
+      - "engine/apply-curated-dictionary.mjs"
+      - ".github/workflows/build-dictionary-index.yml"
   schedule:
     - cron: "47 2 * * *"
     - cron: "47 8 * * *"
