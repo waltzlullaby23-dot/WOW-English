@@ -12,7 +12,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link rel="stylesheet" href="styles.css?v=02cc72d8">
+  <link rel="stylesheet" href="styles.css?v=02cc72d8b">
 </head>
 <body>
 <div id="app"></div>
@@ -20,7 +20,21 @@
   window.YT = window.YT || null;
   window.onYouTubeIframeAPIReady = function(){ window.__ytApiReady = true; window.dispatchEvent(new Event('ytapiready')); };
 </script>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script src="app.js?v=02cc72d8" defer></script>
+<script async src="https://www.youtube.com/iframe_api"></script>
+<script src="app.js?v=02cc72d8b" defer></script>
+<script>
+  window.addEventListener('error', function(e){
+    var app=document.getElementById('app');
+    if(app && !app.innerHTML.trim()) {
+      app.innerHTML='<div style="padding:48px;font:16px system-ui;color:#173f36"><h2 style="margin:0 0 10px">三木Eng 正在載入</h2><p>頁面腳本發生錯誤，請重新整理一次。若仍然空白，請提供瀏覽器主控台錯誤。</p><pre style="white-space:pre-wrap;color:#7a2d2d">'+String(e.message||e.error||'Unknown error')+'</pre></div>';
+    }
+  });
+  window.setTimeout(function(){
+    var app=document.getElementById('app');
+    if(app && !app.innerHTML.trim()) {
+      app.innerHTML='<div style="padding:48px;font:16px system-ui;color:#173f36"><h2 style="margin:0 0 10px">三木Eng 載入中斷</h2><p>App 沒有成功啟動。請再重新整理一次。</p></div>';
+    }
+  },7000);
+</script>
 </body>
 </html>
