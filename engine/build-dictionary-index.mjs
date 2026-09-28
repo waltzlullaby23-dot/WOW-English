@@ -27,7 +27,7 @@ const COMMON_ZH={
   key:'關鍵的；關鍵',word:'單字；詞',words:'單字；詞語',th:'（序數字尾，如 4th）',
   easy:'容易的；簡單的',ever:'曾經；在任何時候',someone:'某人；有人',pounds:'英鎊；磅',
   obviously:'顯然地；明顯地',manners:'風度；禮貌；禮儀',retro:'懷舊的；重新流行的',helpful:'有幫助的；有用的',
-  responsibility:'責任；職責；任務',linkers:'連接詞；銜接語',conjunction:'連詞；連接詞',passive:'被動的；消極的',"let's":'讓我們',start:'開始；啟動'
+  responsibility:'責任；職責；任務',linkers:'連接詞；銜接語',conjunction:'連詞；連接詞',passive:'被動的；消極的',"let's":'讓我們',"we'll":'我們將；我們會',start:'開始；啟動'
 };
 
 const words=new Set();
