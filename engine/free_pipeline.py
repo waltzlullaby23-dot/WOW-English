@@ -508,8 +508,41 @@ def ydl_info(video_id):
             }
     return {}
  
+def fetch_english_via_free_transcript_api(video_id: str):
+    # FreeTranscriptAPI: no key required for low-volume use; use an optional
+    # secret key when available for higher throughput. This avoids GitHub
+    # runner bot checks against YouTube itself.
+    try:
+        import requests
+        headers={'User-Agent':'SanmuEng/1.0'}
+        key=os.environ.get('FREETRANSCRIPT_API_KEY','').strip()
+        if key: headers['Authorization']=f'Bearer {key}'
+        r=requests.get(
+            'https://api.freetranscriptapi.com/v1/transcript',
+            params={'video_url':video_id,'lang':'en'},
+            headers=headers,timeout=30
+        )
+        if not r.ok:return []
+        data=r.json() or {}
+        raw=data.get('transcript') or []
+        rows=[]
+        for x in raw:
+            text=clean_text(x.get('text') or x.get('en') or '')
+            start=float(x.get('start') or 0)
+            dur=float(x.get('duration') or 0)
+            if text: rows.append({'start':start,'end':start+max(.5,dur),'en':text})
+        return normalize_segments(rows)
+    except Exception:
+        return []
+
 def best_english_transcript(video_id: str, duration: float):
     candidates=[]
+    # Primary free hosted transcript route. It does not require a local AI model
+    # and is specifically designed to return timestamped YouTube captions.
+    try:
+        segs=fetch_english_via_free_transcript_api(video_id)
+        if segs:candidates.append(('freetranscriptapi',None,segs,[]))
+    except Exception:pass
     # Fastest free route first: public transcript mirrors that preserve the
     # original YouTube caption timestamps. This also prevents expensive
     # yt-dlp retries from delaying every seed repair.
