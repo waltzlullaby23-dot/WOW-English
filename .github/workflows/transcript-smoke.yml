@@ -1,0 +1,23 @@
+name: Transcript Provider Smoke Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tests/transcript-smoke.py"
+      - ".github/workflows/transcript-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip && python -m pip install yt-dlp>=2026.8.1 youtube-transcript-api>=1.2.0
+      - run: python tests/transcript-smoke.py
