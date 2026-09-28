@@ -307,17 +307,6 @@ let speechVoices=[];
 function refreshSpeechVoices(){try{speechVoices=window.speechSynthesis?window.speechSynthesis.getVoices():[];}catch{speechVoices=[];}}
 try{if(window.speechSynthesis){refreshSpeechVoices();window.speechSynthesis.onvoiceschanged=refreshSpeechVoices;}}catch{}
 function accentVoice(locale){
-  const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
-  const voices=speechVoices.length?speechVoices:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);
-  if(target==='en-GB')return voices.find(v=>/^en-GB/i.test(v.lang||''))||voices.find(v=>/british|uk|hazel|george|daniel/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
-  return voices.find(v=>/^en-US/i.test(v.lang||''))||voices.find(v=>/american|us|david|mark|zira|samantha|alex/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
-}
-function youdaoPronunciationUrl(word,locale){const type=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'1':'2';return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;}
-let speechAudio=null;
-let speechVoices=[];
-function refreshSpeechVoices(){try{speechVoices=window.speechSynthesis?window.speechSynthesis.getVoices():[];}catch{speechVoices=[];}}
-try{if(window.speechSynthesis){refreshSpeechVoices();window.speechSynthesis.onvoiceschanged=refreshSpeechVoices;}}catch{}
-function accentVoice(locale){
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
   const voices=speechVoices.length?speechVoices:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);
   if(target==='en-GB')return voices.find(v=>/^en-GB/i.test(v.lang||''))||voices.find(v=>/british|uk|hazel|george|daniel/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
@@ -333,9 +322,7 @@ function speak(text,locale){
     u.onstart=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',url:''};};
     u.onend=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',url:''};};
     u.onerror=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'speech-error',url:''};};
-    synth.resume();synth.speak(u);
-    window.__sanmuAudioLast={word:value,locale:target,status:'queued',url:''};
-    return true;
+    synth.resume();synth.speak(u);window.__sanmuAudioLast={word:value,locale:target,status:'queued',url:''};return true;
   }catch{return false;}
 }
 function audioUrlFor(word,locale){
@@ -347,21 +334,19 @@ function audioUrlFor(word,locale){
 }
 function playAudioElement(url,word,locale){
   try{
-    if(speechAudio){try{speechAudio.pause();speechAudio.remove();}catch{}speechAudio=null;}
-    const audio=new Audio();audio.preload='auto';audio.src=url;audio.volume=1;audio.setAttribute('playsinline','');speechAudio=audio;
-    window.__sanmuAudioLast={word,locale,status:'loading',url};
+    if(speechAudio){try{speechAudio.pause();}catch{}speechAudio=null;}
+    const audio=new Audio();audio.preload='auto';audio.src=String(url||'');audio.volume=1;audio.setAttribute('playsinline','');speechAudio=audio;
+    window.__sanmuAudioLast={word,locale,status:'loading',url:audio.src};
     audio.onplaying=()=>{window.__sanmuAudioLast.status='playing';};
     audio.onended=()=>{window.__sanmuAudioLast.status='ended';if(speechAudio===audio)speechAudio=null;};
     audio.onerror=()=>{if(speechAudio===audio)speechAudio=null;speak(word,locale);};
-    const p=audio.play();
-    if(p&&p.catch)p.catch(()=>{if(speechAudio===audio)speechAudio=null;speak(word,locale);});
+    const p=audio.play();if(p&&p.catch)p.catch(()=>{if(speechAudio===audio)speechAudio=null;speak(word,locale);});
     return true;
   }catch{return speak(word,locale);}
 }
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  // Actual MP3 first. This call is made directly by the button click.
   return playAudioElement(audioUrlFor(value,target),value,target);
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioElement(url||audioUrlFor(fallbackText,target),fallbackText,target);}
