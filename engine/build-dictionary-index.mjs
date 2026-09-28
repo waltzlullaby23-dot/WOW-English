@@ -2,6 +2,7 @@ import fs from 'node:fs';
 
 // Build dictionary data server-side; browser only reads the generated static index.
 const catalog=JSON.parse(fs.readFileSync('data/catalog.json','utf8'));
+const wordBank=JSON.parse(fs.readFileSync('data/word-bank.json','utf8'));
 const existingPath='data/dictionary-index.json';
 let existing={};
 try{ existing=JSON.parse(fs.readFileSync(existingPath,'utf8')); }catch{}
@@ -66,6 +67,19 @@ function rows(entry){
     example_en:String(d.example||'').trim(),example_zh:''
   }))).filter(x=>x.definition_en||x.example_en).slice(0,12);
 }
+async function datamuse(word){
+  const data=await getJson('https://api.datamuse.com/words?sp='+encodeURIComponent(word)+'&md=dps&max=8',7000);
+  if(!Array.isArray(data))return null;
+  const rows=[];
+  for(const item of data){
+    for(const d of (item.defs||[])){
+      const parts=String(d).split('\t');
+      const pos=parts[0]||'';const def=parts.slice(1).join('\t').trim();
+      if(def)rows.push({pos:pos.replace(/^./,''),definition_en:def,definition_zh:'',example_en:'',example_zh:''});
+    }
+  }
+  return {pos:rows[0]?.pos||'',entries:rows.slice(0,8)};
+}
 function audio(phonetics,re){
   for(const p of (phonetics||[]))if(p?.audio&&re.test(String(p.audio)))return String(p.audio).replace(/^\/\//,'https://');
   return String((phonetics||[]).find(p=>p?.audio)?.audio||'').replace(/^\/\//,'https://');
@@ -95,21 +109,27 @@ const workers=Array.from({length:6},async()=>{
       data.phonetic_us=String(entry.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry.phonetic||entry.phonetics?.find(p=>p?.text)?.text||'');
       data.audio_uk=audio(entry.phonetics,/_gb|_uk|gb|uk/i);
       data.audio_us=audio(entry.phonetics,/_us|en-us|us/i)||data.audio_uk;
-
-      // The critical runtime guarantee is a Chinese word meaning + audio.
-      // Definitions/examples are enriched opportunistically; failures there must
-      // not invalidate an otherwise usable word card.
-      // One translation request per word keeps the build reliable under
-      // public translation-service rate limits. The UI can still show the
-      // English dictionary definitions alongside the Chinese word meaning.
-      const wordZh=data.definition_zh||await translate(word);
-      data.definition_zh=wordZh;
-      for(const row of data.entries.slice(0,3)){
-        if(!row.definition_zh)row.definition_zh=wordZh;
-      }
     }else{
-      data.definition_zh=data.definition_zh||await translate(word);
+      const wb=wordBank.words?.[word];
+      if(wb){
+        data.source='word-bank';data.pos=wb.pos||'';data.phonetic_uk=wb.phonetic_uk||'';data.phonetic_us=wb.phonetic_us||'';
+        data.definition_zh=wb.definition_zh||data.definition_zh;
+        data.entries=[{pos:wb.pos||'',definition_en:wb.gloss||'',definition_zh:wb.definition_zh||'',example_en:wb.example||'',example_zh:''}];
+      }else{
+        const dm=await datamuse(word);
+        if(dm?.entries?.length){data.source='datamuse-build';data.pos=dm.pos;data.entries=dm.entries;}
+      }
     }
+
+    // Always guarantee a word-level Traditional Chinese meaning.
+    data.definition_zh=data.definition_zh||await translate(word);
+    // Translate up to three English definitions so the card can display real dictionary detail.
+    for(const row of data.entries.slice(0,3)){
+      if(!row.definition_zh&&row.definition_en)row.definition_zh=await translate(row.definition_en)||data.definition_zh;
+      if(!row.example_zh&&row.example_en)row.example_zh=await translate(row.example_en);
+    }
+    if(!data.phonetic_us)data.phonetic_us=data.phonetic_uk;
+    if(!data.audio_us)data.audio_us=data.audio_uk;
     data.complete=Boolean(data.definition_zh&&(data.audio_uk||data.audio_us||data.audioFallbackUk||data.audioFallbackUs));
     out.words[word]=data;
     if((i+1)%10===0)console.log('dictionary',i+1,'/',list.length);
