@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T06:24:13.154Z",
+  "generatedAt": "2026-09-28T08:48:08.101Z",
   "source": "build-time-dictionary-index",
   "words": {
     "an": {
@@ -14,6 +14,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=an&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=an&type=2",
       "definition_zh": "一個；任何一個",
+      "entries": [],
+      "complete": true
+    },
+    "order": {
+      "word": "order",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=order&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=order&type=2",
+      "definition_zh": "訂購",
       "entries": [],
       "complete": true
     },
@@ -45,34 +59,6 @@
       "entries": [],
       "complete": true
     },
-    "why": {
-      "word": "why",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=why&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=why&type=2",
-      "definition_zh": "為什麼",
-      "entries": [],
-      "complete": true
-    },
-    "order": {
-      "word": "order",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=order&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=order&type=2",
-      "definition_zh": "訂購",
-      "entries": [],
-      "complete": true
-    },
     "request": {
       "word": "request",
       "source": "fallback",
@@ -87,45 +73,17 @@
       "entries": [],
       "complete": true
     },
-    "are": {
-      "word": "are",
+    "why": {
+      "word": "why",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=are&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=are&type=2",
-      "definition_zh": "是；存在",
-      "entries": [],
-      "complete": true
-    },
-    "than": {
-      "word": "than",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=than&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=than&type=2",
-      "definition_zh": "比；與……相比",
-      "entries": [],
-      "complete": true
-    },
-    "politer": {
-      "word": "politer",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=politer&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=politer&type=2",
-      "definition_zh": "政客",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=why&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=why&type=2",
+      "definition_zh": "為什麼",
       "entries": [],
       "complete": true
     },
@@ -143,17 +101,45 @@
       "entries": [],
       "complete": true
     },
-    "can": {
-      "word": "can",
+    "are": {
+      "word": "are",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=can&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=can&type=2",
-      "definition_zh": "能；可以",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=are&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=are&type=2",
+      "definition_zh": "是；存在",
+      "entries": [],
+      "complete": true
+    },
+    "politer": {
+      "word": "politer",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=politer&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=politer&type=2",
+      "definition_zh": "政客",
+      "entries": [],
+      "complete": true
+    },
+    "than": {
+      "word": "than",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=than&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=than&type=2",
+      "definition_zh": "比；與……相比",
       "entries": [],
       "complete": true
     },
@@ -168,6 +154,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=imperatives&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=imperatives&type=2",
       "definition_zh": "當務之急",
+      "entries": [],
+      "complete": true
+    },
+    "can": {
+      "word": "can",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=can&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=can&type=2",
+      "definition_zh": "能；可以",
       "entries": [],
       "complete": true
     },
@@ -297,20 +297,6 @@
       "entries": [],
       "complete": true
     },
-    "in": {
-      "word": "in",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=in&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=in&type=2",
-      "definition_zh": "在……裡；在……期間",
-      "entries": [],
-      "complete": true
-    },
     "polite": {
       "word": "polite",
       "source": "fallback",
@@ -322,6 +308,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=polite&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=polite&type=2",
       "definition_zh": "有禮貌",
+      "entries": [],
+      "complete": true
+    },
+    "in": {
+      "word": "in",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=in&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=in&type=2",
+      "definition_zh": "在……裡；在……期間",
       "entries": [],
       "complete": true
     },
@@ -367,20 +367,6 @@
       "entries": [],
       "complete": true
     },
-    "of": {
-      "word": "of",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=of&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=of&type=2",
-      "definition_zh": "……的；關於",
-      "entries": [],
-      "complete": true
-    },
     "ways": {
       "word": "ways",
       "source": "fallback",
@@ -395,17 +381,17 @@
       "entries": [],
       "complete": true
     },
-    "it": {
-      "word": "it",
+    "of": {
+      "word": "of",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=it&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=it&type=2",
-      "definition_zh": "它；這件事",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=of&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=of&type=2",
+      "definition_zh": "……的；關於",
       "entries": [],
       "complete": true
     },
@@ -423,17 +409,17 @@
       "entries": [],
       "complete": true
     },
-    "on": {
-      "word": "on",
+    "it": {
+      "word": "it",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=on&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=on&type=2",
-      "definition_zh": "在……上；關於",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=it&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=it&type=2",
+      "definition_zh": "它；這件事",
       "entries": [],
       "complete": true
     },
@@ -448,6 +434,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=depending&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=depending&type=2",
       "definition_zh": "依賴",
+      "entries": [],
+      "complete": true
+    },
+    "on": {
+      "word": "on",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=on&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=on&type=2",
+      "definition_zh": "在……上；關於",
       "entries": [],
       "complete": true
     },
@@ -507,20 +507,6 @@
       "entries": [],
       "complete": true
     },
-    "from": {
-      "word": "from",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=from&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=from&type=2",
-      "definition_zh": "從；來自",
-      "entries": [],
-      "complete": true
-    },
     "easy": {
       "word": "easy",
       "source": "fallback",
@@ -532,6 +518,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=easy&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=easy&type=2",
       "definition_zh": "容易",
+      "entries": [],
+      "complete": true
+    },
+    "from": {
+      "word": "from",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=from&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=from&type=2",
+      "definition_zh": "從；來自",
       "entries": [],
       "complete": true
     },
@@ -591,20 +591,6 @@
       "entries": [],
       "complete": true
     },
-    "about": {
-      "word": "about",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=about&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=about&type=2",
-      "definition_zh": "關於；大約",
-      "entries": [],
-      "complete": true
-    },
     "talking": {
       "word": "talking",
       "source": "fallback",
@@ -619,17 +605,17 @@
       "entries": [],
       "complete": true
     },
-    "particular": {
-      "word": "particular",
+    "about": {
+      "word": "about",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=particular&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=particular&type=2",
-      "definition_zh": "特定的；特別的",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=about&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=about&type=2",
+      "definition_zh": "關於；大約",
       "entries": [],
       "complete": true
     },
@@ -644,6 +630,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=food&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=food&type=2",
       "definition_zh": "食物",
+      "entries": [],
+      "complete": true
+    },
+    "particular": {
+      "word": "particular",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=particular&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=particular&type=2",
+      "definition_zh": "特定的；特別的",
       "entries": [],
       "complete": true
     },
@@ -703,20 +703,6 @@
       "entries": [],
       "complete": true
     },
-    "and": {
-      "word": "and",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=and&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=and&type=2",
-      "definition_zh": "和；以及",
-      "entries": [],
-      "complete": true
-    },
     "foods": {
       "word": "foods",
       "source": "fallback",
@@ -728,6 +714,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=foods&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=foods&type=2",
       "definition_zh": "食品",
+      "entries": [],
+      "complete": true
+    },
+    "and": {
+      "word": "and",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=and&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=and&type=2",
+      "definition_zh": "和；以及",
       "entries": [],
       "complete": true
     },
@@ -773,20 +773,6 @@
       "entries": [],
       "complete": true
     },
-    "the": {
-      "word": "the",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=the&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=the&type=2",
-      "definition_zh": "這／那個；該",
-      "entries": [],
-      "complete": true
-    },
     "what's": {
       "word": "what's",
       "source": "fallback",
@@ -798,6 +784,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=what's&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=what's&type=2",
       "definition_zh": "什麼是",
+      "entries": [],
+      "complete": true
+    },
+    "the": {
+      "word": "the",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=the&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=the&type=2",
+      "definition_zh": "這／那個；該",
       "entries": [],
       "complete": true
     },
@@ -843,20 +843,6 @@
       "entries": [],
       "complete": true
     },
-    "at": {
-      "word": "at",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=at&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=at&type=2",
-      "definition_zh": "在；於",
-      "entries": [],
-      "complete": true
-    },
     "look": {
       "word": "look",
       "source": "fallback",
@@ -868,6 +854,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=look&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=look&type=2",
       "definition_zh": "視圖",
+      "entries": [],
+      "complete": true
+    },
+    "at": {
+      "word": "at",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=at&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=at&type=2",
+      "definition_zh": "在；於",
       "entries": [],
       "complete": true
     },
@@ -927,20 +927,6 @@
       "entries": [],
       "complete": true
     },
-    "do": {
-      "word": "do",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=do&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=do&type=2",
-      "definition_zh": "做；執行",
-      "entries": [],
-      "complete": true
-    },
     "synonyms": {
       "word": "synonyms",
       "source": "fallback",
@@ -952,6 +938,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=synonyms&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=synonyms&type=2",
       "definition_zh": "同義詞",
+      "entries": [],
+      "complete": true
+    },
+    "do": {
+      "word": "do",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=do&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=do&type=2",
+      "definition_zh": "做；執行",
       "entries": [],
       "complete": true
     },
@@ -1011,20 +1011,6 @@
       "entries": [],
       "complete": true
     },
-    "key": {
-      "word": "key",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=key&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=key&type=2",
-      "definition_zh": "關鍵的；關鍵",
-      "entries": [],
-      "complete": true
-    },
     "context": {
       "word": "context",
       "source": "fallback",
@@ -1036,6 +1022,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=context&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=context&type=2",
       "definition_zh": "內容",
+      "entries": [],
+      "complete": true
+    },
+    "key": {
+      "word": "key",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=key&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=key&type=2",
+      "definition_zh": "關鍵的；關鍵",
       "entries": [],
       "complete": true
     },
@@ -1095,6 +1095,20 @@
       "entries": [],
       "complete": true
     },
+    "think": {
+      "word": "think",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=think&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=think&type=2",
+      "definition_zh": "思维",
+      "entries": [],
+      "complete": true
+    },
     "three": {
       "word": "three",
       "source": "fallback",
@@ -1120,20 +1134,6 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=this&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=this&type=2",
       "definition_zh": "這個；這件事",
-      "entries": [],
-      "complete": true
-    },
-    "think": {
-      "word": "think",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=think&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=think&type=2",
-      "definition_zh": "思维",
       "entries": [],
       "complete": true
     },
@@ -1361,20 +1361,6 @@
       "entries": [],
       "complete": true
     },
-    "challenge": {
-      "word": "challenge",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=challenge&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=challenge&type=2",
-      "definition_zh": "挑戰",
-      "entries": [],
-      "complete": true
-    },
     "edinburgh": {
       "word": "edinburgh",
       "source": "fallback",
@@ -1386,6 +1372,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=edinburgh&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=edinburgh&type=2",
       "definition_zh": "愛丁堡",
+      "entries": [],
+      "complete": true
+    },
+    "challenge": {
+      "word": "challenge",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=challenge&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=challenge&type=2",
+      "definition_zh": "挑戰",
       "entries": [],
       "complete": true
     },
@@ -1459,20 +1459,6 @@
       "entries": [],
       "complete": true
     },
-    "bond": {
-      "word": "bond",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=bond&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=bond&type=2",
-      "definition_zh": "證券紙",
-      "entries": [],
-      "complete": true
-    },
     "looking": {
       "word": "looking",
       "source": "fallback",
@@ -1484,6 +1470,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=looking&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=looking&type=2",
       "definition_zh": "看起來",
+      "entries": [],
+      "complete": true
+    },
+    "bond": {
+      "word": "bond",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=bond&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=bond&type=2",
+      "definition_zh": "證券紙",
       "entries": [],
       "complete": true
     },
