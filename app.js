@@ -170,13 +170,18 @@ function setSubtitleRate(rate){state.subtitleRate=Number(rate)||1;save('sanmu-su
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;}
 function fmt(s){s=Number(s)||0;return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');}
 function clickableSentence(text,videoId){
-  return esc(text).replace(/[A-Za-z]+(?:['’][A-Za-z]+)?/g,w=>{
-    const k=w.toLowerCase();
-    const info=wordBank.words?.[k];
-    return `<button class="word-token ${info?'known':''}" title="中文解釋＋英式／美式發音" onclick='event.stopPropagation();openWord(${JSON.stringify(k)},${JSON.stringify(videoId)},${JSON.stringify(text)})'>${w}</button>`;
-  });
+  const raw=String(text||'');
+  const re=/[A-Za-z]+(?:['’][A-Za-z]+)?/g;
+  let out='',last=0,m;
+  while((m=re.exec(raw))){
+    out+=esc(raw.slice(last,m.index));
+    const word=m[0],k=word.toLowerCase();
+    out+='<button type="button" class="word-token" title="中文解釋＋英式／美式發音" onclick="event.stopPropagation();openWord('+JSON.stringify(k)+','+JSON.stringify(videoId)+','+JSON.stringify(raw)+')">'+esc(word)+'</button>';
+    last=re.lastIndex;
+  }
+  out+=esc(raw.slice(last));
+  return out;
 }
-
 function markHistory(v){let h=history(),i=h.findIndex(x=>x.id===v.id);const item={id:v.id,title:v.title,updatedAt:new Date().toISOString()};if(i>=0)h[i]={...h[i],...item};else h.unshift(item);save('sanmu-history',h.slice(0,200));let d=daily();d.minutes+=1;d.sessions+=1;save('sanmu-daily',d);}
 function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];save('sanmu-favs',f);render();}
 async function enrichWord(word){
@@ -230,6 +235,12 @@ function updateWordModal(){
   };
   Object.entries(map).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=value;});
 }
+function renderWordInline(){
+  const v=selectedVideo();
+  if(!v)return;
+  const list=document.querySelector('.subtitle-list');
+  if(list){list.innerHTML=subtitleHTML(v,lastSubtitleIndex>=0?lastSubtitleIndex:0);}
+}
 function openWord(word,sourceVideoId='',sourceSentence=''){
   const raw=String(word||'').trim();
   if(!raw)return;
@@ -237,12 +248,12 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
   if(!normalized)return;
   const info=wordBank.words?.[normalized]||{};
   let cached={};
-  try{cached=JSON.parse(localStorage.getItem('sanmu-word-cache-v2-'+normalized)||'null')||{};}catch{}
+  try{cached=JSON.parse(localStorage.getItem('sanmu-word-cache-v4-'+normalized)||'null')||{};}catch{}
   state.word={word:normalized,sourceVideoId,sourceSentence,...cached,...info};
-  render();
+  renderWordInline();
   if(!state.word.definition_zh||!state.word.phonetic_uk||!state.word.phonetic_us)enrichWord(normalized);
 }
-function closeWord(){state.word=null;render();}
+function closeWord(){state.word=null;renderWordInline();}
 let speechAudio=null;
 let speechVoices=[];
 function refreshSpeechVoices(){try{speechVoices=window.speechSynthesis?window.speechSynthesis.getVoices():[];}catch{speechVoices=[];}}
@@ -258,11 +269,21 @@ function speak(text,locale){
   const value=String(text||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
   try{
-    const synth=window.speechSynthesis;if(!synth||!window.SpeechSynthesisUtterance)return false;
-    synth.cancel();refreshSpeechVoices();
-    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target)||null;u.rate=.88;u.pitch=1;u.volume=1;
-    synth.resume();synth.speak(u);
-    window.__sanmuAudioLast={word:value,locale:target,status:'speech-queued',url:''};
+    const synth=window.speechSynthesis;
+    if(!synth||!window.SpeechSynthesisUtterance)return false;
+    refreshSpeechVoices();
+    try{synth.cancel();}catch{}
+    const u=new SpeechSynthesisUtterance(value);
+    u.lang=target;
+    u.voice=accentVoice(target)||null;
+    u.rate=.88;u.pitch=1;u.volume=1;
+    u.onstart=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',url:''};};
+    u.onend=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',url:''};};
+    u.onerror=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'speech-error',url:''};};
+    synth.resume();
+    // speak() is called directly from the button click path; do not defer it.
+    synth.speak(u);
+    window.__sanmuAudioLast={word:value,locale:target,status:'queued',url:''};
     return true;
   }catch{return false;}
 }
@@ -273,14 +294,10 @@ function pronunciationCandidates(word,locale){
   const primary=target==='en-GB'?w.audio_uk:w.audio_us;
   const secondary=target==='en-GB'?w.audio_us:w.audio_uk;
   const type=target==='en-GB'?'1':'2';
-  return [primary,secondary,`https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(value)}&type=${type}`,`https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${encodeURIComponent(target)}&q=${encodeURIComponent(value)}`].filter(Boolean);
+  return [primary,secondary,'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(value)+'&type='+type,'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value)].filter(Boolean);
 }
 function playRemotePronunciation(urls,index=0,word='',locale='en-US'){
-  if(index>=urls.length){
-    const ok=speak(word,locale);
-    if(!ok)window.__sanmuAudioLast={word,locale,status:'no-audio-source',url:''};
-    return;
-  }
+  if(index>=urls.length)return false;
   try{
     if(speechAudio){try{speechAudio.pause();}catch{}speechAudio=null;}
     const audio=new Audio();audio.preload='auto';audio.volume=1;audio.src=urls[index];speechAudio=audio;
@@ -289,17 +306,19 @@ function playRemotePronunciation(urls,index=0,word='',locale='en-US'){
     audio.onerror=()=>{if(speechAudio===audio)speechAudio=null;playRemotePronunciation(urls,index+1,word,locale);};
     const p=audio.play();
     if(p&&p.catch)p.catch(()=>{if(speechAudio===audio)speechAudio=null;playRemotePronunciation(urls,index+1,word,locale);});
-  }catch{playRemotePronunciation(urls,index+1,word,locale);}
+    return true;
+  }catch{return playRemotePronunciation(urls,index+1,word,locale);}
 }
 function playPronunciation(word,locale){
-  const value=String(word||'').trim();if(!value)return;
+  const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
-  // The click handler starts an actual audio file first, which is more reliable than speech synthesis.
-  const urls=pronunciationCandidates(value,target);
-  playRemotePronunciation(urls,0,value,target);
+  // Priority 1: direct browser speech inside the click handler.
+  if(speak(value,target))return true;
+  // Priority 2: remote audio only when SpeechSynthesis is unavailable.
+  return playRemotePronunciation(pronunciationCandidates(value,target),0,value,target);
 }
-async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);return true;}
-async function playGoogleTTS(value,target){playPronunciation(value,target);return true;}
+async function playAudioUrl(url,fallbackText,target){return playPronunciation(fallbackText,target);}
+async function playGoogleTTS(value,target){return playPronunciation(value,target);}
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
   const w=state.word||{};
@@ -641,7 +660,9 @@ function subtitleHTML(v,index=null){
   const x=segs[i]||{}, zh=String(x.zh||'').trim(), en=String(x.en||'').trim();
   const zhHtml=state.transcriptTab!=='english'?'<div class="zh">'+esc(zh||'翻譯整理中…')+'</div>':'';
   const enHtml=state.transcriptTab!=='chinese'?'<div class="en">'+clickableSentence(en,v.id)+'</div>':'';
-  return '<div class="segment active live-segment" data-index="'+i+'" onclick="seek('+(Number(x.start)||0)+')"><div class="time">'+fmt(x.start)+' · sentence '+(i+1)+'</div>'+zhHtml+enHtml+'</div>';
+  const showWordCard=!!(state.word && String(state.word.sourceVideoId||'')===String(v.id||'') && String(state.word.sourceSentence||'')===en);
+  const wordHtml=showWordCard?'<div class="word-inline-slot">'+wordModal()+'</div>':'';
+  return '<div class="segment active live-segment" data-index="'+i+'" onclick="seek('+(Number(x.start)||0)+')"><div class="time">'+fmt(x.start)+' · sentence '+(i+1)+'</div>'+zhHtml+enHtml+'</div>'+wordHtml;
 }
 function watch(){
   const v=selectedVideo();
