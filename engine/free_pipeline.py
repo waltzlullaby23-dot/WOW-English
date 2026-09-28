@@ -322,10 +322,7 @@ def align_translation_segments(en_rows, zh_rows):
 def fetch_subtitle_bundle_via_ytdlp(video_url: str):
     # Fast YouTube-native caption fallback. Keep this bounded because this function
     # is used inside the daily 100-video pipeline.
-    client_args=[
-        'youtube:player_client=web_embedded,web',
-        'youtube:player_client=web,ios',
-    ]
+    client_args=['youtube:player_client=web_embedded,web']
     with tempfile.TemporaryDirectory() as td:
         out=str(Path(td)/'%(id)s.%(language)s.%(ext)s')
         for client in client_args:
@@ -333,7 +330,7 @@ def fetch_subtitle_bundle_via_ytdlp(video_url: str):
                  '--sub-format','vtt','--sub-langs','en.*,zh.*',
                  '--extractor-args',client,'--no-warnings','-o',out,video_url]
             try:
-                subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=35,check=False)
+                subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=25,check=False)
             except Exception:
                 continue
             files=sorted(Path(td).glob('*.vtt'))+sorted(Path(td).glob('*.srt'))
@@ -746,6 +743,19 @@ def process_video(video_id, meta, existing, idx=0):
     }
     return rec,None
 
+def process_batch(items, existing, workers=6):
+    # Transcript retrieval/translation are network-bound. Process candidates concurrently
+    # so 25 videos/run can finish in minutes rather than serially timing out.
+    results=[]
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    with ThreadPoolExecutor(max_workers=max(1,int(workers))) as pool:
+        futures={pool.submit(process_video,vid,meta,existing,idx):(vid,meta,idx) for idx,(vid,meta) in enumerate(items)}
+        for fut in as_completed(futures):
+            vid,meta,idx=futures[fut]
+            try: results.append((idx,vid,meta,*fut.result()))
+            except Exception as exc: results.append((idx,vid,meta,None,{'id':vid,'title':meta.get('title',''),'status':'review','reason':'worker-exception','detail':str(exc)[:500]}))
+    results.sort(key=lambda x:x[0])
+    return results
 def main():
     cfg=load_json(ROOT/'engine/config.json',{})
     for k,v in cfg.items():
@@ -769,14 +779,14 @@ def main():
     # Keep each run bounded: repair only part of the legacy queue, then spend
     # the remaining processing budget on genuinely new videos.
     run_budget=max(1,int(CONFIG.get('maxProcess',10)))
+    CONFIG['workers']=max(1,int(CONFIG.get('workers',6)))
     repair_budget=min(len(repair_candidates),max(0,run_budget//2))
     repair_candidates=repair_candidates[:repair_budget]
 
     new=[];review=[]
     repaired=0
     processed=0
-    for idx,(vid,meta) in enumerate(repair_candidates):
-        rec,err=process_video(vid,meta,existing,idx)
+    for idx,vid,meta,rec,err in process_batch(repair_candidates,existing,workers=6):
         processed+=1
         if rec:
             existing[vid]=rec;new.append(rec);repaired+=1
@@ -794,8 +804,8 @@ def main():
         time.sleep(float(CONFIG['queryCooldown']))
     candidates=list(cand.items())[:int(CONFIG['maxCandidates'])]
     remaining=max(0,run_budget-processed)
-    for idx,(vid,meta) in enumerate(candidates[:remaining]):
-        rec,err=process_video(vid,meta,existing,idx+processed)
+    batch=[x for x in candidates[:remaining]]
+    for idx,vid,meta,rec,err in process_batch(batch,existing,workers=6):
         processed+=1
         if rec:
             existing[vid]=rec;new.append(rec)
