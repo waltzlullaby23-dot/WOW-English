@@ -66,33 +66,48 @@ function audio(phonetics,re){
 }
 const out={schemaVersion:1,generatedAt:new Date().toISOString(),source:'build-time-dictionary-index',words:{}};
 const list=[...words];
-for(let i=0;i<list.length;i++){
-  const word=list[i];
-  const old=existing?.words?.[word];
-  if(old?.complete&&old.definition_zh&&(old.audio_uk||old.audio_us||old.audioFallbackUk||old.audioFallbackUs)){out.words[word]=old;continue;}
-  const entry=(await getJson('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word),8000))?.[0]||null;
-  const data={word,source:entry?'dictionaryapi-build':'fallback',pos:'',phonetic_uk:'',phonetic_us:'',
-    audio_uk:'',audio_us:'',
-    audioFallbackUk:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=1',
-    audioFallbackUs:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=2',
-    definition_zh:COMMON_ZH[word]||'',entries:[]};
-  if(entry){
-    data.entries=rows(entry);data.pos=data.entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'';
-    data.phonetic_uk=String(entry.phonetics?.find(p=>p?.text)?.text||entry.phonetic||'');
-    data.phonetic_us=String(entry.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry.phonetic||entry.phonetics?.find(p=>p?.text)?.text||'');
-    data.audio_uk=audio(entry.phonetics,/_gb|_uk|gb|uk/i);data.audio_us=audio(entry.phonetics,/_us|en-us|us/i)||data.audio_uk;
-    for(const row of data.entries){
-      if(row.definition_en)row.definition_zh=await translate(row.definition_en);
-      if(row.example_en)row.example_zh=await translate(row.example_en);
+let cursor=0;
+const workers=Array.from({length:6},async()=>{
+  while(true){
+    const i=cursor++;
+    if(i>=list.length)return;
+    const word=list[i];
+    const old=existing?.words?.[word];
+    if(old?.complete&&old.definition_zh&&(old.audio_uk||old.audio_us||old.audioFallbackUk||old.audioFallbackUs)){out.words[word]=old;continue;}
+
+    const entry=(await getJson('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word),8000))?.[0]||null;
+    const data={word,source:entry?'dictionaryapi-build':'fallback',pos:'',phonetic_uk:'',phonetic_us:'',
+      audio_uk:'',audio_us:'',
+      audioFallbackUk:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=1',
+      audioFallbackUs:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=2',
+      definition_zh:COMMON_ZH[word]||'',entries:[]};
+
+    if(entry){
+      data.entries=rows(entry);
+      data.pos=data.entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'';
+      data.phonetic_uk=String(entry.phonetics?.find(p=>p?.text)?.text||entry.phonetic||'');
+      data.phonetic_us=String(entry.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry.phonetic||entry.phonetics?.find(p=>p?.text)?.text||'');
+      data.audio_uk=audio(entry.phonetics,/_gb|_uk|gb|uk/i);
+      data.audio_us=audio(entry.phonetics,/_us|en-us|us/i)||data.audio_uk;
+
+      // Only enrich the first three definitions/examples. The UI has enough
+      // complete information without translating a long dictionary payload.
+      const work=data.entries.slice(0,3);
+      await Promise.all(work.map(async row=>{
+        const jobs=[];
+        if(row.definition_en)jobs.push(translate(row.definition_en).then(x=>{row.definition_zh=x;}));
+        if(row.example_en)jobs.push(translate(row.example_en).then(x=>{row.example_zh=x;}));
+        await Promise.all(jobs);
+      }));
+      data.definition_zh=data.definition_zh||data.entries.find(x=>x.definition_zh)?.definition_zh||await translate(word);
+    }else{
+      data.definition_zh=data.definition_zh||await translate(word);
     }
-    data.definition_zh=data.definition_zh||data.entries.find(x=>x.definition_zh)?.definition_zh||await translate(word);
-  }else{
-    data.definition_zh=data.definition_zh||await translate(word);
+    data.complete=Boolean(data.definition_zh&&(data.audio_uk||data.audio_us||data.audioFallbackUk||data.audioFallbackUs));
+    out.words[word]=data;
+    if((i+1)%10===0)console.log('dictionary',i+1,'/',list.length);
   }
-  data.complete=Boolean(data.definition_zh&&(data.audio_uk||data.audio_us||data.audioFallbackUk||data.audioFallbackUs));
-  out.words[word]=data;
-  if((i+1)%10===0)console.log('dictionary',i+1,'/',list.length);
-  await sleep(60);
-}
+});
+await Promise.all(workers);
 fs.writeFileSync(existingPath,JSON.stringify(out,null,2)+'\\n','utf8');
 console.log(JSON.stringify({uniqueWords:list.length,indexed:Object.keys(out.words).length,complete:Object.values(out.words).filter(x=>x.complete).length},null,2));
