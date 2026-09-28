@@ -5,6 +5,20 @@ VIDEOS = [
     "0Nv-zlhdb7Y","3NM72kTE2oQ","4C4wlOAscv4","SMIgI-qDNCA","uz2C3bQot6o"
 ]
 
+def hosted_probe(vid):
+    import requests
+    urls=[
+      f"https://youtube-transcript.ai/transcript/{vid}.txt?lang=en",
+      f"https://youtube2text.org/api/transcribe?url=https://www.youtube.com/watch?v={vid}&maxChars=30000"
+    ]
+    out=[]
+    for u in urls:
+      try:
+        r=requests.get(u,timeout=20,headers={"User-Agent":"SanmuEng/1.0"})
+        out.append({"url":u,"status":r.status_code,"chars":len(r.text or ""),"head":(r.text or "")[:300]})
+      except Exception as e:out.append({"url":u,"error":str(e)})
+    return out
+
 def yt_dlp_probe(vid):
     try:
         p=subprocess.run(
@@ -38,7 +52,7 @@ def api_probe(vid):
 
 out={}
 for vid in VIDEOS:
-    out[vid]={"yt_dlp":yt_dlp_probe(vid),"transcript_api":api_probe(vid)}
+    out[vid]={"yt_dlp":yt_dlp_probe(vid),"transcript_api":api_probe(vid),"hosted":hosted_probe(vid)}
     time.sleep(.5)
 
 print(json.dumps(out,ensure_ascii=False,indent=2))
