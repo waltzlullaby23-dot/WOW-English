@@ -265,6 +265,19 @@ const COMMON_ZH={
   obviously:'顯然地；明顯地',manners:'風度；禮貌；禮儀',retro:'懷舊的；重新流行的',helpful:'有幫助的；有用的',
   responsibility:'責任；職責；任務',linkers:'連接詞；銜接語',conjunction:'連詞；連接詞',passive:'被動的；消極的',"let's":'讓我們',"we'll":'我們將；我們會',start:'開始；啟動'
 };
+const CONTEXT_ZH={
+  order:'訂單；訂購；順序',request:'請求；要求',questions:'問題；疑問',politer:'更有禮貌的',imperatives:'祈使句；命令語氣',
+  politeness:'禮貌',polite:'有禮貌的',english:'英語；英文',ways:'方法；方式',expressing:'表達；表示',depending:'取決於；依賴',
+  want:'想要；需要',welcome:'歡迎',real:'真實的；真正的',bbc:'英國廣播公司',learning:'學習；學習過程',today:'今天',
+  talking:'談話；交談',food:'食物',talk:'談話；說話',favourite:'最喜愛的；最喜歡的人或事物',foods:'食物（複數）',
+  eat:'吃',them:'他們；她們；它們（受格）',"what's":'什麼是；是什麼',"we'll":'我們將；我們會',"let's":'讓我們',
+  voice:'聲音；嗓音',look:'看；外觀',changes:'改變；變化',focus:'焦點；重點',sentence:'句子',lots:'很多；大量',
+  synonyms:'同義詞',choose:'選擇',use:'使用；用途',context:'語境；上下文',choosing:'選擇；挑選',think:'想；認為',
+  sound:'聲音；聽起來',learn:'學習；學會',pronounce:'發音；讀音',properly:'正確地；恰當地',"we're":'我們是；我們正在',
+  families:'家庭；家人',compare:'比較',things:'事情；事物',bathroom:'浴室；洗手間',have:'有；擁有',
+  used:'使用過的；習慣於',language:'語言',app:'應用程式',looking:'看；尋找；看起來',bond:'連結；關係',
+  between:'在……之間',sisters:'姊妹',start:'開始；啟動',challenge:'挑戰',london:'倫敦',edinburgh:'愛丁堡'
+};
 const CAMBRIDGE_FALLBACKS={
   manners:{pos:'noun',phonetic_uk:'/ˈmæn.əz/',phonetic_us:'/ˈmæn.ɚz/',definition_zh:'風度；禮貌；禮儀',entries:[
     {pos:'noun',definition_en:'polite ways of behaving with other people',definition_zh:'與他人相處時有禮貌的行為方式',example_en:'He needs to be taught some manners.',example_zh:'他需要有人教他一些禮貌。'}
