@@ -39,11 +39,12 @@ jobs:
         run: |
           node - <<'JS'
           const fs=require('fs');
+          const path=require('path');
           const d=JSON.parse(fs.readFileSync('data/dictionary-index.json','utf8'));
           const bad=Object.entries(d.words||{}).filter(([w,x])=>{
             const uk=String(x.ipa_uk||'').trim(), us=String(x.ipa_us||'').trim();
             const au=String(x.audioLocalUk||'').trim(), as=String(x.audioLocalUs||'').trim();
-            return !uk || !us || !au || !as || !fs.existsSync(au) || !fs.existsSync(as);
+            return !uk || !us || !au || !as || !fs.existsSync(path.resolve(au)) || !fs.existsSync(path.resolve(as));
           });
           console.log('WORDS=',Object.keys(d.words||{}).length);
           console.log('COMPLETE=',Object.keys(d.words||{}).length-bad.length);
