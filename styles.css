@@ -385,3 +385,102 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
   .dictionary-zh,.dictionary-example,.dictionary-example-zh{font-size:15px}
 }
 
+
+/* VoiceTube-style compact dictionary card: word + POS + UK/US IPA/audio + Chinese only. */
+.word-inline-card{
+  width:100%;
+  margin:12px 0 8px;
+}
+.vt-dictionary-card{
+  position:relative;
+  width:min(620px, calc(100% - 24px));
+  margin:0 auto;
+  box-sizing:border-box;
+  padding:14px 18px 15px;
+  background:#202020;
+  color:#fff;
+  border:1px solid #5d5d5d;
+  border-radius:6px;
+  box-shadow:0 8px 20px rgba(0,0,0,.22);
+}
+.vt-dictionary-close{
+  position:absolute;
+  top:9px;
+  right:12px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:29px;
+  line-height:1;
+  padding:0;
+  cursor:pointer;
+  opacity:.95;
+}
+.vt-word{
+  padding-right:34px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:25px;
+  font-weight:700;
+  line-height:1.15;
+  letter-spacing:.01em;
+}
+.vt-pos{
+  margin-top:5px;
+  font-size:13px;
+  font-weight:700;
+  color:#d7d7d7;
+}
+.vt-pronunciation{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:11px;
+  color:#d0d0d0;
+  font-size:13px;
+}
+.vt-pron-btn{
+  border:0;
+  background:transparent;
+  color:#fff;
+  padding:0;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:13px;
+}
+.vt-pron-btn:hover{color:#9edcff}
+.vt-speaker{
+  font-size:18px;
+  line-height:1;
+}
+.vt-ipa{
+  color:#ddd;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13px;
+  white-space:nowrap;
+}
+.vt-pron-dot{
+  color:#888;
+  margin:0 1px;
+}
+.vt-divider{
+  height:1px;
+  margin:11px 0 10px;
+  background:#4c4c4c;
+}
+.vt-meaning{
+  font-size:17px;
+  line-height:1.45;
+  font-weight:700;
+  color:#fff;
+}
+@media(max-width:700px){
+  .vt-dictionary-card{
+    width:calc(100% - 8px);
+    padding:13px 15px 14px;
+  }
+  .vt-word{font-size:22px}
+  .vt-meaning{font-size:16px}
+}
