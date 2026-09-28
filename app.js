@@ -8,10 +8,33 @@ let catalog={videos:[]},taxonomy={categories:[]},lessons={chapters:[],microLesso
 let ytPlayer=null,ytTimer=null,categoryModalOpen=false;
 
 async function boot(){
-  const files=await Promise.all(['catalog','taxonomy','lessons','toeic','word-bank','learning-units'].map(x=>fetch('data/'+x+'.json',{cache:'no-store'}).then(r=>r.json())));
-  [catalog,taxonomy,lessons,toeic,wordBank,learningUnits]=files;
-  state.sidebarCollapsed=load('evl-sidebar-collapsed',false);state.subtitleOffset=Number(load('sanmu-subtitle-offset',0))||0;state.subtitleRate=Number(load('sanmu-subtitle-rate',1))||1;
-  parseHash();
+  try{
+    const names=['catalog','taxonomy','lessons','toeic','word-bank','learning-units'];
+    const files=await Promise.all(names.map(async x=>{
+      const r=await fetch('data/'+x+'.json',{cache:'no-store'});
+      if(!r.ok)throw new Error(x+' data HTTP '+r.status);
+      return r.json();
+    }));
+    [catalog,taxonomy,lessons,toeic,wordBank,learningUnits]=files;
+    state.sidebarCollapsed=load('evl-sidebar-collapsed',false);
+    state.subtitleOffset=Number(load('sanmu-subtitle-offset',0))||0;
+    state.subtitleRate=Number(load('sanmu-subtitle-rate',1))||1;
+    parseHash();
+  }catch(err){
+    console.error('[三木Eng] boot failed',err);
+    // Never leave a completely blank page when a secondary data file fails.
+    catalog=catalog&&Array.isArray(catalog.videos)?catalog:{videos:[]};
+    taxonomy=taxonomy&&Array.isArray(taxonomy.categories)?taxonomy:{categories:[]};
+    lessons=lessons&&Array.isArray(lessons.chapters)?lessons:{chapters:[],microLessons:[]};
+    toeic=toeic&&toeic.bands?toeic:{bands:{}};
+    wordBank=wordBank&&wordBank.words?wordBank:{words:{}};
+    learningUnits=learningUnits&&learningUnits.units?learningUnits:{units:{}};
+    try{parseHash();}catch(renderErr){
+      console.error('[三木Eng] fallback render failed',renderErr);
+      const app=document.querySelector('#app');
+      if(app)app.innerHTML='<main style="padding:48px;font:16px system-ui;color:#173f36"><h1>三木Eng</h1><p>網站正在修復載入問題，請重新整理。</p></main>';
+    }
+  }
 }
 function parseHash(){const p=location.hash.slice(1).split('/');state.route=p[0]||'learning';state.selectedVideo=state.route==='watch'?decodeURIComponent(p[1]||''):null;state.selectedLesson=state.route==='lesson'?decodeURIComponent(p[1]||''):null;if(state.route==='watch'&&!['english','bilingual','chinese'].includes(state.transcriptTab))state.transcriptTab='bilingual';if(history.scrollRestoration)history.scrollRestoration='manual';requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));render();}
 function go(route,id=''){location.hash=id?route+'/'+encodeURIComponent(id):route;}
@@ -726,4 +749,4 @@ window.setSubtitleScale=setSubtitleScale;
 window.answerMicroPractice=answerMicroPractice;
 
 if(window.speechSynthesis){ window.speechSynthesis.addEventListener('voiceschanged',()=>window.speechSynthesis.getVoices()); setTimeout(()=>window.speechSynthesis.getVoices(),300); }
-boot();
+boot().catch(err=>console.error('[三木Eng] startup error',err));
