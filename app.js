@@ -302,20 +302,23 @@ async function fetchCambridgeEntry(word){
 }
 async function enrichWord(word){
   const original=String(word||'').trim().toLowerCase();if(!original)return;
-  const cacheKey='sanmu-dictionary-v7-'+original;
+  const cacheKey='sanmu-dictionary-v8-'+original;
   const current=()=>state.word&&String(state.word.word).toLowerCase()===original;
   const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
   try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached){apply(cached);if(cached.complete)return;}}catch{}
+
   let entry=null;
   try{
-    const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},4000);
+    const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},3500);
     if(res.ok)entry=(await res.json())?.[0]||null;
   }catch{}
+
   let base=null;
   if(entry){
     const entries=dictionaryRowsFromApi(entry);
     const audioRows=Array.isArray(entry.phonetics)?entry.phonetics:[];
-    base={source:'dictionaryapi',complete:false,word:original,pos:entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
+    base={source:'dictionaryapi',complete:false,word:original,
+      pos:entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
       phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||''),
       phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry?.phonetic||entry?.phonetics?.find(p=>p?.text)?.text||''),
       audio_uk:pickPronunciationAudio(audioRows,'uk'),audio_us:pickPronunciationAudio(audioRows,'us'),entries};
@@ -323,31 +326,45 @@ async function enrichWord(word){
     if(!base.audio_us)base.audio_us=base.audio_uk;
     apply(base);
   }
-  const terms=base?.entries?.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean)||[];
-  const translations=terms.length?await translateTextsFast(terms):{};
+
+  const entries=base?.entries||[];
+  const texts=entries.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean);
+  const translations=texts.length?await translateTextsFast(texts):{};
+  const wordZh=await translateWordOnly(original);
+
   if(!base){
     const local=wordBank.words?.[original]||CAMBRIDGE_FALLBACKS[original]||null;
     if(local){
       base={...local,source:'local-fallback',word:original,complete:false,entries:local.entries||[{pos:local.pos||'',definition_en:local.gloss||'',definition_zh:local.definition_zh||'',example_en:local.example||'',example_zh:''}]};
+      if(!base.audio_us)base.audio_us=base.audio_uk||'';
       apply(base);
     }
   }
+
   if(!base){
-    const zh=await translateWordOnly(original);
-    const payload={word:original,source:'translation-fallback',pos:'',phonetic_uk:'',phonetic_us:'',audio_uk:'',audio_us:'',definition_zh:zh||'暫時查不到詞義',entries:[],complete:true};
+    const payload={word:original,source:'translation-fallback',pos:'',phonetic_uk:'',phonetic_us:'',audio_uk:'',audio_us:'',definition_zh:wordZh||'查詢不到中文翻譯',entries:[],complete:true};
     apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{};return;
   }
-  const translatedEntries=(base.entries||[]).map(x=>({...x,definition_zh:x.definition_zh||translations[x.definition_en]||'',example_zh:x.example_zh||(x.example_en?translations[x.example_en]||'':'')}));
-  const payload={...base,entries:translatedEntries,definition_zh:base.definition_zh||translatedEntries.find(x=>x.definition_zh)?.definition_zh||translations[original]||'',complete:true};
+
+  const translatedEntries=(base.entries||[]).map(x=>({...x,
+    definition_zh:x.definition_zh||translations[x.definition_en]||'',
+    example_zh:x.example_zh||(x.example_en?translations[x.example_en]||'':'')}));
+  const definitionZh=base.definition_zh||translatedEntries.find(x=>x.definition_zh)?.definition_zh||wordZh||'';
+  const payload={...base,entries:translatedEntries,definition_zh:definitionZh,complete:true};
   apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
 }
 async function translateWordOnly(word){
   const text=String(word||'').trim();if(!text)return '';
-  const urls=['https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text),'https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|zh-TW'];
-  for(const url of urls){
+  const providers=[
+    'https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|zh-TW',
+    'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text)
+  ];
+  for(const url of providers){
     try{
-      const res=await fetchWithTimeout(url,{cache:'no-store',headers:{'Accept':'application/json'}},3000);if(!res.ok)continue;
-      const data=await res.json();let zh='';
+      const res=await fetchWithTimeout(url,{cache:'no-store',headers:{'Accept':'application/json'}},2500);
+      if(!res.ok)continue;
+      const data=await res.json();
+      let zh='';
       if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
       if(!zh)zh=String(data?.responseData?.translatedText||'').trim();
       if(zh&&/[\u3400-\u9fff]/.test(zh))return zh;
@@ -395,46 +412,45 @@ function speak(text,locale){
     synth.resume();synth.speak(u);window.__sanmuAudioLast={word:value,locale:target,status:'queued',url:''};return true;
   }catch{return false;}
 }
-function audioUrlFor(word,locale){
-  const w=state.word||{};const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+function audioCandidates(word,locale){
+  const value=String(word||'').trim();
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  const w=state.word||{};
   const direct=target==='en-GB'?w.audio_uk:w.audio_us;
-  if(direct)return normalizeAudioUrl(direct);
   const other=target==='en-GB'?w.audio_us:w.audio_uk;
-  if(other)return normalizeAudioUrl(other);
-  const suffix=target==='en-GB'?'_gb_1':'_us_1';
-  return 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/'+encodeURIComponent(String(word||''))+'--'+suffix+'.mp3';
+  const type=target==='en-GB'?'1':'2';
+  const gSuffix=target==='en-GB'?'_gb_1':'_us_1';
+  return [
+    'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(value)+'&type='+type,
+    direct,
+    other,
+    'https://ssl.gstatic.com/dictionary/static/sounds/20200429/'+encodeURIComponent(value)+'--'+gSuffix+'.mp3'
+  ].map(normalizeAudioUrl).filter(Boolean);
 }
-function playAudioElement(url,word,locale){
+function playAudioCandidates(urls,index,word,locale){
+  if(index>=urls.length)return speak(word,locale);
   try{
     if(speechAudio){try{speechAudio.pause();}catch{}speechAudio=null;}
-    const audio=new Audio();audio.preload='auto';audio.src=String(url||'');audio.volume=1;audio.setAttribute('playsinline','');speechAudio=audio;
-    window.__sanmuAudioLast={word,locale,status:'loading',url:audio.src};
-    let finished=false;
-    const fallback=()=>{if(finished)return;finished=true;if(speechAudio===audio)speechAudio=null;try{audio.pause();}catch{};speak(word,locale);};
-    audio.onplaying=()=>{finished=true;window.__sanmuAudioLast.status='playing';};
-    audio.onended=()=>{window.__sanmuAudioLast.status='ended';if(speechAudio===audio)speechAudio=null;};
+    const audio=new Audio();
+    audio.preload='auto';audio.src=urls[index];audio.volume=1;audio.setAttribute('playsinline','');
+    speechAudio=audio;window.__sanmuAudioLast={word,locale,status:'loading',source:'audio',url:audio.src};
+    let settled=false;
+    const fallback=()=>{if(settled)return;settled=true;if(speechAudio===audio)speechAudio=null;try{audio.pause();}catch{};playAudioCandidates(urls,index+1,word,locale);};
+    audio.onplaying=()=>{settled=true;window.__sanmuAudioLast={word,locale,status:'playing',source:'audio',url:audio.src};};
+    audio.onended=()=>{window.__sanmuAudioLast={word,locale,status:'ended',source:'audio',url:audio.src};if(speechAudio===audio)speechAudio=null;};
     audio.onerror=fallback;
-    const timer=setTimeout(fallback,1400);
-    const p=audio.play();
-    if(p&&p.catch)p.catch(()=>{clearTimeout(timer);fallback();});
+    const p=audio.play();if(p&&p.catch)p.catch(fallback);
+    setTimeout(fallback,1600);
     return true;
-  }catch{return speak(word,locale);}
+  }catch{return playAudioCandidates(urls,index+1,word,locale);}
 }
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
-    try{
-      const synth=window.speechSynthesis;refreshSpeechVoices();synth.cancel();
-      const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target)||null;u.rate=.9;u.pitch=1;u.volume=1;
-      u.onstart=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'speechSynthesis'};};
-      u.onend=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',source:'speechSynthesis'};};
-      u.onerror=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'speech-error',source:'speechSynthesis'};};
-      synth.resume();synth.speak(u);window.__sanmuAudioLast={word:value,locale:target,status:'queued',source:'speechSynthesis'};return true;
-    }catch{}
-  }
-  return playAudioElement(audioUrlFor(value,target),value,target);
+  return playAudioCandidates(audioCandidates(value,target),0,value,target);
 }
+async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
+async function playGoogleTTS(value,target){return speak(value,target);}
 async function playAudioUrl(url,fallbackText,target){return playAudioElement(url||audioUrlFor(fallbackText,target),fallbackText,target);}
 async function playGoogleTTS(value,target){return playPronunciation(value,target);}
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
