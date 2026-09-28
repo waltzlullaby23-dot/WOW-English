@@ -44,7 +44,24 @@ const CONTEXT_ZH={
   families:'家庭；家人',compare:'比較',things:'事情；事物',bathroom:'浴室；洗手間',have:'有；擁有',
   used:'使用過的；習慣於',language:'語言',app:'應用程式',looking:'看；尋找；看起來',bond:'連結；關係',
   between:'在……之間',sisters:'姊妹',start:'開始；啟動',challenge:'挑戰',london:'倫敦',edinburgh:'愛丁堡'
+};const CONTEXT_ENTRIES={
+  linkers:[{pos:'noun',definition_en:'words or phrases used to connect ideas, clauses, or sentences',definition_zh:'用來連接思想、子句或句子的詞語',example_en:'Linkers connect ideas and make writing easier to follow.',example_zh:'連接詞可以連結想法，讓文章更容易理解。'}],
+  "we'll":[{pos:'contraction',definition_en:"a short form of 'we will' or 'we shall'",definition_zh:'we will／we shall 的縮寫',example_en:"We'll see you tomorrow.",example_zh:'我們明天會見到你。'}],
+  "what's":[{pos:'contraction',definition_en:"a short form of 'what is' or 'what has'",definition_zh:'what is／what has 的縮寫',example_en:"What's your name?",example_zh:'你叫什麼名字？'}],
+  "let's":[{pos:'contraction',definition_en:"a short form of 'let us', used to suggest doing something together",definition_zh:'let us 的縮寫，用來提議一起做某事',example_en:"Let's go.",example_zh:'我們走吧。'}],
+  politer:[{pos:'adjective',definition_en:'more polite',definition_zh:'更有禮貌的',example_en:'This phrase is politer than the first one.',example_zh:'這個說法比第一個更有禮貌。'}],
+  imperatives:[{pos:'noun',definition_en:'verb forms or sentences used to give an order or instruction',definition_zh:'用來下命令或給指示的動詞形式或句子；祈使句',example_en:'Imperatives are often used for instructions.',example_zh:'祈使句常用來給予指示。'}],
+  real:[{pos:'adjective',definition_en:'actually existing or true; not imagined or artificial',definition_zh:'真實存在或確實為真的；不是想像或虛假的',example_en:'This is a real example.',example_zh:'這是一個真實的例子。'}],
+  order:[{pos:'noun/verb',definition_en:'a request to buy or supply something; or to arrange things in sequence',definition_zh:'訂購、訂單；或依順序排列',example_en:'I placed an order for food.',example_zh:'我下單買了食物。'}],
+  request:[{pos:'noun/verb',definition_en:'an act of asking for something politely or formally',definition_zh:'禮貌或正式地要求某事的行為；請求',example_en:'She made a request for more information.',example_zh:'她提出了索取更多資訊的請求。'}],
+  questions:[{pos:'noun',definition_en:'sentences or phrases used to ask for information',definition_zh:'用來詢問資訊的句子或片語；問題',example_en:'The teacher asked three questions.',example_zh:'老師問了三個問題。'}],
+  favourite:[{pos:'adjective/noun',definition_en:'liked more than others; the person or thing liked most',definition_zh:'最喜愛的；最喜愛的人或事物',example_en:'This is my favourite food.',example_zh:'這是我最喜歡的食物。'}],
+  today:[{pos:'adverb/noun',definition_en:'on or during this present day',definition_zh:'今天；在今天',example_en:'I am busy today.',example_zh:'我今天很忙。'}],
+  them:[{pos:'pronoun',definition_en:'used as the object of a verb or preposition to refer to people or things already mentioned',definition_zh:'指已提及的人或事物，作動詞或介系詞的受詞；他們／她們／它們',example_en:'I saw them yesterday.',example_zh:'我昨天看到他們。'}],
+  bathroom:[{pos:'noun',definition_en:'a room with a toilet and usually a sink or bath',definition_zh:'設有馬桶，通常還有洗手台或浴缸的房間；浴室、洗手間',example_en:'The bathroom is upstairs.',example_zh:'浴室在樓上。'}],
+  bond:[{pos:'noun',definition_en:'a strong connection or relationship between people or things',definition_zh:'人與人或事物之間的緊密連結或關係',example_en:'The sisters have a strong bond.',example_zh:'這對姊妹有很深的感情連結。'}]
 };
+
 const words=new Set();
 for(const w of ['someone','pounds','retro','obviously','manners','helpful','responsibility','linkers'])words.add(w);
 for(const v of (catalog.videos||[])){
@@ -119,7 +136,7 @@ const workers=Array.from({length:6},async()=>{
       audio_uk:'',audio_us:'',
       audioFallbackUk:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=1',
       audioFallbackUs:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=2',
-      definition_zh:COMMON_ZH[word]||'',entries:[]};
+      definition_zh:CONTEXT_ZH[word]||COMMON_ZH[word]||'',entries:CONTEXT_ENTRIES[word]?[...CONTEXT_ENTRIES[word]]:[]};
 
     if(entry){
       data.entries=rows(entry);
@@ -141,8 +158,9 @@ const workers=Array.from({length:6},async()=>{
     }
 
     // Always guarantee a word-level Traditional Chinese meaning.
-    data.definition_zh=data.definition_zh||await translate(word);
+    data.definition_zh=data.definition_zh||CONTEXT_ZH[word]||await translate(word);
     // Translate up to three English definitions so the card can display real dictionary detail.
+    if(CONTEXT_ENTRIES[word])data.entries=[...CONTEXT_ENTRIES[word]];
     for(const row of data.entries.slice(0,3)){
       if(!row.definition_zh&&row.definition_en)row.definition_zh=await translate(row.definition_en)||data.definition_zh;
       if(!row.example_zh&&row.example_en)row.example_zh=await translate(row.example_en);
