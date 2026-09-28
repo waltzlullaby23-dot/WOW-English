@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T13:32:17.209Z",
+  "generatedAt": "2026-09-28T13:32:43.753Z",
   "source": "build-time-dictionary-index",
   "words": {
     "helpful": {
@@ -3140,71 +3140,22 @@
     },
     "which": {
       "word": "which",
-      "source": "datamuse-build",
-      "pos": "",
+      "source": "curated",
+      "pos": "pronoun/determiner",
       "phonetic_uk": "/wˈɪtʃ/",
       "phonetic_us": "/wˈɪtʃ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=which&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=which&type=2",
-      "definition_zh": "哪一個；哪一些",
+      "definition_zh": "哪一個；哪些；（關係代名詞）那個／那些",
       "entries": [
         {
-          "pos": "",
-          "definition_en": "In computing, which is a command for various operating systems used to identify the location of executables.",
-          "definition_zh": "在計算中，這是用於識別可執行檔位置的各種操作系統的命令。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A sibilant sound, especially that of rapid movement through the air.",
-          "definition_zh": "一種竊竊私語的聲音，特別是在空中快速移動的聲音。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(intransitive) To make such a sound.",
-          "definition_zh": "（不可傳遞的）發出這樣的聲音。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(obsolete) Silent.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A wich town, particularly one of several former salt mining towns in Cheshire with a name ending -wich.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Alternative spelling of wych (“brine spring or well”). [A brine spring or well.]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The chickpea.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(UK, slang) Clipping of Chichester. [A cathedral city and civil parish in West Sussex, England (OS grid ref SU8504).]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "pronoun/determiner",
+          "definition_en": "used to ask or say which one or ones",
+          "definition_zh": "用於詢問或指出哪一個或哪些",
+          "example_en": "Which book do you want?",
+          "example_zh": "你要哪一本書？"
         }
       ],
       "complete": true,
@@ -3383,71 +3334,22 @@
     },
     "right": {
       "word": "right",
-      "source": "datamuse-build",
-      "pos": "dj",
+      "source": "curated",
+      "pos": "adjective/adverb/interjection",
       "phonetic_uk": "/ɹˈaɪt/",
       "phonetic_us": "/ɹˈaɪt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=right&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=right&type=2",
-      "definition_zh": "正確的；右邊的",
+      "definition_zh": "正確的；對的；右邊的；好吧／對",
       "entries": [
         {
-          "pos": "dj",
-          "definition_en": "Complying with justice, correctness, or reason; correct, just, true. See also the interjection senses below.",
-          "definition_zh": "遵守正義、正確或理性；正確、公正、真實。另請參閱下面的插入感。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Designating the side of the body which is positioned to the east if one is facing north, the side on which the heart is not located in most humans. This arrow points to the reader's right: →",
-          "definition_zh": "如果朝北，則指定身體向東的一側，即大多數人心臟不在的一側。此箭頭指向讀者的右側： →",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Clockwise, particularly when describing a change in direction or orientation.",
-          "definition_zh": "順時針方向，特別是在描述方向或方向的變化時。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Appropriate, perfectly suitable; fit for purpose.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Healthy, sane, competent.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "(politics) Pertaining to the political right; conservative.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "In a correct manner.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "According to fact or truth; actually; truly; really.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "adjective/adverb/interjection",
+          "definition_en": "correct; on or toward the right side; used to show agreement",
+          "definition_zh": "正確的；右邊的；用來表示同意的「對／好吧」",
+          "example_en": "Right, let's start.",
+          "example_zh": "好吧，我們開始吧。"
         }
       ],
       "complete": true,
@@ -4069,8 +3971,8 @@
     },
     "language": {
       "word": "language",
-      "source": "fallback",
-      "pos": "",
+      "source": "curated",
+      "pos": "noun",
       "phonetic_uk": "/lˈaŋɡwɪdʒ/",
       "phonetic_us": "/lˈæŋɡwɪdʒ/",
       "audio_uk": "",
@@ -4078,7 +3980,15 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=language&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=language&type=2",
       "definition_zh": "語言",
-      "entries": [],
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "a system of communication used by people",
+          "definition_zh": "人們使用的溝通系統；語言",
+          "example_en": "English is an international language.",
+          "example_zh": "英文是一種國際語言。"
+        }
+      ],
       "complete": true,
       "ipa_uk": "/lˈaŋɡwɪdʒ/",
       "ipa_us": "/lˈæŋɡwɪdʒ/",
@@ -4480,6 +4390,186 @@
       "ipa_us": "/tˌiːˈeɪtʃ/",
       "audioLocalUk": "audio/uk/th-fa6af6e9.wav",
       "audioLocalUs": "audio/us/th-fa6af6e9.wav"
+    },
+    "realistically": {
+      "word": "realistically",
+      "pos": "adverb",
+      "definition_zh": "切合實際地；實際上；如實地",
+      "entries": [
+        {
+          "pos": "adverb",
+          "definition_en": "in a practical or realistic way",
+          "definition_zh": "以切合實際的方式；實際地",
+          "example_en": "We need to think realistically.",
+          "example_zh": "我們需要實際地思考。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=realistically&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=realistically&type=2"
+    },
+    "grammar": {
+      "word": "grammar",
+      "pos": "noun",
+      "definition_zh": "文法；語法",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "the rules that explain how words are used in a language",
+          "definition_zh": "說明語言中詞語如何使用的規則；文法；語法",
+          "example_en": "She is studying English grammar.",
+          "example_zh": "她正在學習英文文法。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=grammar&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=grammar&type=2"
+    },
+    "immersion": {
+      "word": "immersion",
+      "pos": "noun",
+      "definition_zh": "沉浸；沉浸式體驗",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "the act of becoming completely involved in something",
+          "definition_zh": "完全投入某事的過程；沉浸；沉浸式體驗",
+          "example_en": "Language immersion can help adults learn.",
+          "example_zh": "語言沉浸式學習可以幫助成年人學習。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=immersion&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=immersion&type=2"
+    },
+    "full": {
+      "word": "full",
+      "pos": "adjective",
+      "definition_zh": "完整的；充分的；滿的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "complete; containing or involving as much as possible",
+          "definition_zh": "完整的；包含或涉及最大程度的；充分的",
+          "example_en": "You need full immersion.",
+          "example_zh": "你需要完整的沉浸式體驗。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=full&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=full&type=2"
+    },
+    "adults": {
+      "word": "adults",
+      "pos": "noun",
+      "definition_zh": "成年人；成人",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "people who are fully grown",
+          "definition_zh": "已完全長大的人；成年人",
+          "example_en": "Adults can learn languages in different ways.",
+          "example_zh": "成年人可以用不同方式學習語言。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=adults&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=adults&type=2"
+    },
+    "achieve": {
+      "word": "achieve",
+      "pos": "verb",
+      "definition_zh": "達成；實現；取得",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "to succeed in reaching a goal or getting a result",
+          "definition_zh": "成功達成目標或取得結果",
+          "example_en": "They achieved their goal.",
+          "example_zh": "他們達成了目標。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=achieve&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=achieve&type=2"
+    },
+    "so": {
+      "word": "so",
+      "pos": "adverb/conjunction",
+      "definition_zh": "如此；這麼；所以；因此",
+      "entries": [
+        {
+          "pos": "adverb/conjunction",
+          "definition_en": "to such a degree; therefore or for that reason",
+          "definition_zh": "到如此程度；因此；所以",
+          "example_en": "So, what should we do?",
+          "example_zh": "所以，我們該做什麼？"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=so&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=so&type=2"
+    },
+    "can't": {
+      "word": "can't",
+      "pos": "contraction",
+      "definition_zh": "cannot 的縮寫；不能；無法",
+      "entries": [
+        {
+          "pos": "contraction",
+          "definition_en": "short form of cannot",
+          "definition_zh": "cannot 的縮寫；表示不能或無法",
+          "example_en": "Adults can't fully immerse themselves.",
+          "example_zh": "成年人無法完全沉浸其中。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=can't&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=can't&type=2"
+    },
+    "apps": {
+      "word": "apps",
+      "pos": "noun",
+      "definition_zh": "應用程式（app 的複數）",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "plural of app; application programs",
+          "definition_zh": "app 的複數；應用程式",
+          "example_en": "Many apps teach languages.",
+          "example_zh": "許多應用程式可以教語言。"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=apps&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=apps&type=2"
+    },
+    "teach": {
+      "word": "teach",
+      "pos": "verb",
+      "definition_zh": "教；教授",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "to give someone knowledge or skills",
+          "definition_zh": "傳授某人知識或技能；教導",
+          "example_en": "Can apps teach you a language?",
+          "example_zh": "應用程式可以教你語言嗎？"
+        }
+      ],
+      "source": "curated",
+      "complete": true,
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=teach&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=teach&type=2"
     }
   }
 }
