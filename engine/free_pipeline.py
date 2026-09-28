@@ -537,34 +537,22 @@ def fetch_english_via_free_transcript_api(video_id: str):
 
 def best_english_transcript(video_id: str, duration: float):
     candidates=[]
-    # Primary free hosted transcript route. It does not require a local AI model
-    # and is specifically designed to return timestamped YouTube captions.
+    # Production backend order is intentionally short and deterministic:
+    # 1) hosted free transcript API (avoids YouTube bot checks)
+    # 2) youtube-transcript-api
+    # 3) public transcript mirror
+    # Browser-side hydration has its own independent fallback chain.
     try:
         segs=fetch_english_via_free_transcript_api(video_id)
         if segs:candidates.append(('freetranscriptapi',None,segs,[]))
-    except Exception:pass
-    # Fastest free route first: public transcript mirrors that preserve the
-    # original YouTube caption timestamps. This also prevents expensive
-    # yt-dlp retries from delaying every seed repair.
-    try:
-        segs=fetch_english_via_public_transcript(video_id)
-        if segs:candidates.append(('public-transcript',None,segs,[]))
-    except Exception:pass
-    try:
-        en,zh,source,lang=fetch_caption_tracks_from_player(video_id)
-        if en:candidates.append(('youtube-player-track',None,en,zh))
     except Exception:pass
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
     except Exception:pass
     try:
-        ok,segs=fetch_english_via_timedtext(video_id)
-        if segs:candidates.append(('youtube-timedtext',None,segs,[]))
-    except Exception:pass
-    try:
-        en,zh=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
-        if en:candidates.append(('yt-dlp',None,en,zh))
+        segs=fetch_english_via_public_transcript(video_id)
+        if segs:candidates.append(('public-transcript',None,segs,[]))
     except Exception:pass
 
     valid=[]
@@ -577,7 +565,6 @@ def best_english_transcript(video_id: str, duration: float):
     valid.sort(key=lambda x:(x[0],x[1]),reverse=True)
     coverage,_,source,tr,segs,zhrows=valid[0]
     return tr,segs,coverage,source,zhrows
-
 
 def translate_public_google(text: str):
     import requests
