@@ -169,6 +169,14 @@ function setSubtitleOffset(sec){state.subtitleOffset=Number(sec)||0;save('sanmu-
 function setSubtitleRate(rate){state.subtitleRate=Number(rate)||1;save('sanmu-subtitle-rate',state.subtitleRate);document.querySelectorAll('.subtitle-rate-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.rate)===state.subtitleRate));}
 function ytEmbed(id){return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&origin=${encodeURIComponent(location.origin)}&rel=0&playsinline=1&hl=zh-TW&modestbranding=1`;}
 function fmt(s){s=Number(s)||0;return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');}
+function wordTokenClick(event,button){
+  event.preventDefault();
+  event.stopPropagation();
+  const word=button?.dataset?.word||'';
+  const videoId=button?.dataset?.videoId||'';
+  const sentence=button?.dataset?.sentence||'';
+  openWord(word,videoId,sentence);
+}
 function clickableSentence(text,videoId){
   const raw=String(text||'');
   const re=/[A-Za-z]+(?:['’][A-Za-z]+)?/g;
@@ -176,7 +184,7 @@ function clickableSentence(text,videoId){
   while((m=re.exec(raw))){
     out+=esc(raw.slice(last,m.index));
     const word=m[0],k=word.toLowerCase();
-    out+='<button type="button" class="word-token" title="中文解釋＋英式／美式發音" onclick="event.stopPropagation();openWord('+JSON.stringify(k)+','+JSON.stringify(videoId)+','+JSON.stringify(raw)+')">'+esc(word)+'</button>';
+    out+='<button type="button" class="word-token" title="中文解釋＋英式／美式發音" data-word="'+esc(k)+'" data-video-id="'+esc(videoId)+'" data-sentence="'+esc(raw)+'" onclick="wordTokenClick(event,this)">'+esc(word)+'</button>';
     last=re.lastIndex;
   }
   out+=esc(raw.slice(last));
