@@ -238,50 +238,98 @@ async function translateTexts(items){
   }));
   return out;
 }
-async function enrichWord(word){
-  const key=String(word||'').trim().toLowerCase();if(!key)return;
-  const cacheKey='sanmu-word-cambridge-v1-'+key;
-  const current=()=>state.word&&String(state.word.word).toLowerCase()===key;
-  const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
-  let cached=null;
-  try{cached=JSON.parse(localStorage.getItem(cacheKey)||'null');}catch{}
-  if(cached&&Array.isArray(cached.entries)){apply(cached);if(cached.entries.every(x=>x.definition_zh&&(!x.example_en||x.example_zh)))return;}
-
-  // One dictionary request supplies the whole definition/phonetic/audio bundle.
-  let entry=null;
+const CAMBRIDGE_FALLBACKS={
+  retro:{pos:'adjective',phonetic_uk:'/ˈret.rəʊ/',phonetic_us:'/ˈret.roʊ/',definition_zh:'懷舊的；重新流行的；模仿過去式樣的',entries:[
+    {pos:'adjective',definition_en:'similar to styles, fashions, etc. from the past',definition_zh:'懷舊的；重新流行的；模仿過去式樣的',example_en:'retro clothes/music',example_zh:'懷舊服裝／音樂'},
+    {pos:'adjective',definition_en:'a retro style',definition_zh:'重新流行的款式',example_en:'Inside, the decor is very retro.',example_zh:'室內的裝修格調具有非常濃厚的復古韻味。'}
+  ]},
+  helpful:{pos:'adjective',phonetic_uk:'/ˈhelp.fəl/',phonetic_us:'/ˈhelp.fəl/',definition_zh:'願意幫忙的；有幫助的；有用的',entries:[
+    {pos:'adjective',definition_en:'willing to help, or useful',definition_zh:'願意幫忙的；有幫助的；有用的',example_en:"I'm sorry, I was only trying to be helpful.",example_zh:'真抱歉，我只是想幫忙。'}
+  ]},
+  conjunction:{pos:'noun',phonetic_uk:'/kənˈdʒʌŋk.ʃən/',phonetic_us:'/kənˈdʒʌŋk.ʃən/',definition_zh:'連詞；連接詞',entries:[
+    {pos:'noun',definition_en:"a word such as 'and', 'but', 'while', or 'although' that connects words, phrases, and clauses in a sentence",definition_zh:'連詞；連接詞',example_en:'Conjunctions are linking words like and, or, but, then and because.',example_zh:''}
+  ]}
+};
+function cambridgeUrl(word){return 'https://dictionary.cambridge.org/dictionary/english-chinese-traditional/'+encodeURIComponent(String(word||''));}
+function normalizeDictionaryWord(word){
+  const k=String(word||'').trim().toLowerCase();
+  if(k==='linkers')return 'conjunction';
+  return k;
+}
+async function fetchCambridgeEntry(word){
+  const key=normalizeDictionaryWord(word);
+  const fallback=CAMBRIDGE_FALLBACKS[key];
   try{
-    const res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key),{cache:'force-cache'});
-    if(res.ok)entry=(await res.json())?.[0]||null;
+    const url='https://r.jina.ai/http://dictionary.cambridge.org/dictionary/english-chinese-traditional/'+encodeURIComponent(key);
+    const res=await fetch(url,{cache:'force-cache',headers:{'Accept':'text/plain'}});
+    if(res.ok){
+      const text=await res.text();
+      const clean=text.replace(/\r/g,'').replace(/\n{3,}/g,'\n\n');
+      const posMatch=clean.match(/\n(adjective|noun|verb|adverb|pronoun|preposition|conjunction|determiner|adverbial phrase)\n/i);
+      const ipa=(clean.match(/\/(?:[^/]|\\\/)+\/g)||[]);
+      const uk=ipa[0]||'';const us=ipa[1]||uk;
+      const lines=clean.split('\n').map(x=>x.trim()).filter(Boolean);
+      const candidateDefs=[];
+      for(let i=0;i<lines.length;i++){
+        const line=lines[i];
+        if(line.length<8||line.length>240)continue;
+        if(/^(add to word list|your browser|translations of|examples of|more examples|see more|uk|us)$/i.test(line))continue;
+        if(/^\//.test(line))continue;
+        if(/[\u3400-\u9fff]/.test(line))continue;
+        if(/[.!?]$/.test(line)||/^similar to |^a word such as |^willing to |^the quality of |^a connection between /i.test(line)){
+          const zh=lines.slice(i+1,i+3).find(x=>/[\u3400-\u9fff]/.test(x))||'';
+          if(zh)candidateDefs.push({pos:posMatch?.[1]||'',definition_en:line,definition_zh:zh,example_en:'',example_zh:''});
+        }
+      }
+      const entries=candidateDefs.slice(0,6);
+      if((posMatch||entries.length)&&(/[\u3400-\u9fff]/.test(clean))){
+        return {source:'cambridge',word:key,pos:posMatch?.[1]||fallback?.pos||'',phonetic_uk:uk,phonetic_us:us,entries,definition_zh:entries[0]?.definition_zh||fallback?.definition_zh||'',cambridgeUrl:cambridgeUrl(key)};
+      }
+    }
   }catch{}
+  if(fallback)return {...fallback,source:'cambridge-reference',word:key,cambridgeUrl:cambridgeUrl(key)};
+  return null;
+}
+async function enrichWord(word){
+  const original=String(word||'').trim().toLowerCase();if(!original)return;
+  const key=normalizeDictionaryWord(original);
+  const cacheKey='sanmu-dictionary-v5-'+original;
+  const current=()=>state.word&&String(state.word.word).toLowerCase()===original;
+  const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
+  try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached){apply(cached);if(cached.entries?.length)return;}}catch{}
+
+  // Cambridge-first dictionary source.
+  const cam=await fetchCambridgeEntry(original);
+  if(cam&&current()){
+    apply({source:cam.source,cambridgeUrl:cam.cambridgeUrl,pos:cam.pos,phonetic_uk:cam.phonetic_uk,phonetic_us:cam.phonetic_us,entries:cam.entries,definition_zh:cam.definition_zh});
+    // Cambridge fallback data is already complete. For live Cambridge text, enrich
+    // any example rows only when the reader could not extract them.
+    try{localStorage.setItem(cacheKey,JSON.stringify({...cam,audio_uk:'',audio_us:''}));}catch{}
+    if(cam.entries?.length&&cam.phonetic_uk&&cam.phonetic_us)return;
+  }
+
+  // Dictionary API is the fallback for words Cambridge's page reader cannot parse.
+  let entry=null;
+  try{const res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'force-cache'});if(res.ok)entry=(await res.json())?.[0]||null;}catch{}
   if(!entry){
-    // Keep the UI useful for words that already exist in our local bank.
-    const info=wordBank.words?.[key]||{};
-    apply({definition_zh:info.definition_zh||'暫時查不到中文翻譯',phonetic_uk:info.phonetic_uk||'',phonetic_us:info.phonetic_us||'',audio_uk:normalizeAudioUrl(info.audio_uk||''),audio_us:normalizeAudioUrl(info.audio_us||''),pos:info.pos||'n.',entries:info.definition_zh?[{pos:info.pos||'n.',definition_en:info.gloss||'',definition_zh:info.definition_zh,example_en:info.example||'',example_zh:''}]:[]});
-    return;
+    if(cam){apply(cam);return;}
+    apply({definition_zh:'暫時查不到中文翻譯',entries:[]});return;
   }
   const entries=dictionaryRowsFromApi(entry);
-  const primaryPos=entries[0]?.pos||String(entry?.meanings?.[0]?.partOfSpeech||'n.');
+  const audioRows=entry.phonetics||[];
+  const ukAudio=pickPronunciationAudio(audioRows,'uk'),usAudio=pickPronunciationAudio(audioRows,'us');
   const info={
-    pos:primaryPos,
-    phonetic_uk:String(entry?.phonetics?.find(p=>p?.text&&/(^|[_-])(gb|uk)([_-]|\.|$)/i.test(String(p.audio||'')))?.text||entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||'').trim(),
-    phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(^|[_-])(us|en-us)([_-]|\.|$)/i.test(String(p.audio||'')))?.text||'').trim(),
-    audio_uk:pickPronunciationAudio(entry?.phonetics,'uk'),
-    audio_us:pickPronunciationAudio(entry?.phonetics,'us'),
-    entries
+    source:'dictionaryapi-fallback',word:original,cambridgeUrl:cambridgeUrl(original),
+    pos:entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
+    phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||''),
+    phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/us|en-us/i.test(String(p.audio||'')))?.text||entry?.phonetics?.find(p=>p?.text)?.text||''),
+    audio_uk:ukAudio,audio_us:usAudio,entries
   };
-  if(!info.phonetic_us)info.phonetic_us=info.phonetic_uk;
-  if(!info.audio_us)info.audio_us=info.audio_uk;
-  // Render the English dictionary data immediately; translations load in parallel.
-  apply(info);
-  const texts=entries.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean);
-  const translations=await translateTexts(texts);
-  if(current()){
-    const translatedEntries=entries.map(x=>({...x,definition_zh:translations[x.definition_en]||'',example_zh:x.example_en?(translations[x.example_en]||''):''}));
-    const firstZh=translatedEntries.find(x=>x.definition_zh)?.definition_zh||'暫時查不到中文翻譯';
-    const payload={...info,entries:translatedEntries,definition_zh:firstZh};
-    apply(payload);
-    try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
-  }
+  const translations=await translateTexts(entries.flatMap(x=>[x.definition_en,x.example_en]));
+  const translatedEntries=entries.map(x=>({...x,definition_zh:translations[x.definition_en]||'',example_zh:x.example_en?(translations[x.example_en]||''):''}));
+  const payload={...info,entries:translatedEntries,definition_zh:translatedEntries.find(x=>x.definition_zh)?.definition_zh||''};
+  apply(payload);
+  try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
 }
 function renderWordInline(){
   const v=selectedVideo();
@@ -356,9 +404,9 @@ function wordModal(){
   const w=state.word||{};const fav=Object.keys(vocab()).includes(String(w.word||'').toLowerCase());
   const entries=Array.isArray(w.entries)?w.entries:[];
   const fallbackZh=w.definition_zh||'正在取得中文翻譯…';
-  const entryHtml=entries.map((x,i)=>`<div class="dictionary-entry">
-    <div class="dictionary-definition"><span class="dictionary-bullet">•</span><span><i>${esc(x.definition_en||'')}</i></span></div>
-    ${x.definition_en&&x.definition_zh?`<div class="dictionary-zh">${esc(x.definition_zh)}</div>`:''}
+  const entryHtml=entries.map(x=>`<div class="dictionary-entry">
+    <div class="dictionary-definition"><span class="dictionary-bullet">•</span><span>${x.definition_en?`<b>${esc(x.definition_en)}</b>`:''}</span></div>
+    ${x.definition_zh?`<div class="dictionary-zh">${esc(x.definition_zh)}</div>`:''}
     ${x.example_en?`<div class="dictionary-example"><i>${esc(x.example_en)}</i></div>`:''}
     ${x.example_zh?`<div class="dictionary-example-zh">${esc(x.example_zh)}</div>`:''}
   </div>`).join('');
@@ -376,6 +424,7 @@ function wordModal(){
       </div>
       <div class="dictionary-rule"></div>
       ${entryHtml||`<div class="dictionary-definition"><span class="dictionary-bullet">•</span><span>${esc(fallbackZh)}</span></div>`}
+      <div class="dictionary-meta"><a href="${esc(w.cambridgeUrl||cambridgeUrl(w.word))}" target="_blank" rel="noopener">Cambridge Dictionary ↗</a></div>
       <div class="dictionary-actions"><button type="button" class="word-save-btn ${fav?'saved':''}" onclick="event.stopPropagation();addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button></div>
     </div>
   </div>`;
