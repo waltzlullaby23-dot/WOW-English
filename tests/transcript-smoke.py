@@ -1,0 +1,44 @@
+import subprocess, json, os, time, re
+from youtube_transcript_api import YouTubeTranscriptApi
+
+VIDEOS = [
+    "0Nv-zlhdb7Y","3NM72kTE2oQ","4C4wlOAscv4","SMIgI-qDNCA","uz2C3bQot6o"
+]
+
+def yt_dlp_probe(vid):
+    try:
+        p=subprocess.run(
+            ["yt-dlp","--skip-download","--list-subs","--no-warnings",
+             "--extractor-args","youtube:player_client=web_embedded,web",
+             f"https://www.youtube.com/watch?v={vid}"],
+            text=True,capture_output=True,timeout=30
+        )
+        out=p.stdout+p.stderr
+        langs=[]
+        for line in out.splitlines():
+            m=re.search(r"^\s*([A-Za-z]{2,}(?:-[A-Za-z0-9]+)?)\s+",line)
+            if m and ("English" in line or m.group(1).lower().startswith("en")):
+                langs.append(m.group(1))
+        return {"returncode":p.returncode,"english_lines":langs[:20],"tail":out[-1200:]}
+    except Exception as e:return {"error":str(e)}
+
+def api_probe(vid):
+    try:
+        api=YouTubeTranscriptApi()
+        lst=api.list(vid)
+        rows=[]
+        for t in lst:
+            rows.append({
+              "lang":getattr(t,"language_code",""),
+              "generated":bool(getattr(t,"is_generated",False))
+            })
+        en=[x for x in rows if str(x["lang"]).lower().startswith("en")]
+        return {"tracks":rows[:20],"english_tracks":en[:10]}
+    except Exception as e:return {"error":str(e)}
+
+out={}
+for vid in VIDEOS:
+    out[vid]={"yt_dlp":yt_dlp_probe(vid),"transcript_api":api_probe(vid)}
+    time.sleep(.5)
+
+print(json.dumps(out,ensure_ascii=False,indent=2))
