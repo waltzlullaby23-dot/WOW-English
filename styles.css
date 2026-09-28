@@ -339,3 +339,49 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
   .word-main-line strong{font-size:27px}
   .word-save-btn{margin-left:0}
 }
+
+
+/* Cambridge-inspired dictionary presentation: IPA + audio, divider, meanings, translations, examples. */
+.dictionary-card{
+  width:100%;box-sizing:border-box;
+  background:#fffdf7;
+  border:1px solid #e5bd63;
+  border-radius:16px;
+  padding:20px 24px 18px;
+  color:#173e35;
+  box-shadow:0 8px 22px rgba(60,55,30,.08);
+}
+.dictionary-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.dictionary-word{font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:700;line-height:1.05}
+.dictionary-pos{margin-top:7px;font-weight:700;color:#334d45;font-style:italic}
+.dictionary-close{border:0;background:transparent;color:#6d786f;font-size:34px;line-height:1;cursor:pointer;padding:0 2px}
+.dictionary-pron{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.dictionary-audio{
+  border:0;background:transparent;color:#1f365f;font-weight:800;font-size:15px;
+  padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:4px;
+}
+.dictionary-audio:hover{text-decoration:underline}
+.speaker-icon{font-size:18px}
+.dictionary-ipa{font-family:Georgia,'Times New Roman',serif;color:#223d70;font-size:17px;margin-right:8px}
+.dictionary-rule{height:1px;background:#e6bd63;margin:14px 0 13px}
+.dictionary-entry{margin:0 0 14px}
+.dictionary-definition{display:flex;gap:8px;align-items:flex-start;font-size:18px;font-weight:650;line-height:1.6}
+.dictionary-bullet{flex:0 0 auto}
+.dictionary-zh{margin:4px 0 0 19px;color:#1686ea;font-size:17px;line-height:1.55}
+.dictionary-example{margin:11px 0 0 18px;color:#293e38;font-size:16px;line-height:1.55}
+.dictionary-example-zh{margin:2px 0 0 19px;color:#1686ea;font-size:16px;line-height:1.55}
+.dictionary-actions{display:flex;justify-content:flex-end;margin-top:8px}
+.word-inline-card{width:100%;margin:14px 0 6px}
+.word-inline-card .dictionary-card{max-width:1040px;margin:0 auto}
+.word-inline-card .word-save-btn{
+  min-height:38px;border:1px solid #a9ccb8;background:#eaf7ef;color:#2f7664;
+  border-radius:10px;padding:0 14px;font-weight:800;cursor:pointer
+}
+.word-inline-card .word-save-btn.saved{background:#dcefe4}
+@media(max-width:700px){
+  .dictionary-card{padding:16px}
+  .dictionary-word{font-size:29px}
+  .dictionary-definition{font-size:17px}
+  .dictionary-zh,.dictionary-example,.dictionary-example-zh{font-size:15px}
+}
+
