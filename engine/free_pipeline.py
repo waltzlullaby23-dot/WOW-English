@@ -686,7 +686,7 @@ def main():
         time.sleep(float(CONFIG['queryCooldown']))
     candidates=list(cand.items())[:int(CONFIG['maxCandidates'])]
     processed=0
-    for idx,(vid,meta) in enumerate(candidates[:min(int(CONFIG['maxProcess']),4)]):
+    for idx,(vid,meta) in enumerate(candidates[:int(CONFIG['maxProcess'])]):
         rec,err=process_video(vid,meta,existing,idx)
         processed+=1
         if rec:
