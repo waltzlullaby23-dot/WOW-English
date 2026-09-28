@@ -4,18 +4,18 @@ const pct=(n)=>Math.round((Number(n)||0)*100)+'%';
 const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const state={route:'learning',selectedVideo:null,selectedLesson:null,search:'',category:'all',subcategory:'all',level:'all',caption:'all',transcriptTab:'bilingual',subtitleSize:100,speed:1,subtitleOffset:0,subtitleRate:1,word:null,sidebarCollapsed:false,quizBand:'400-600',quizIndex:0,quizAnswers:{}};
-let catalog={videos:[]},taxonomy={categories:[]},lessons={chapters:[],microLessons:[]},toeic={bands:{}},wordBank={words:{}},learningUnits={units:{}};
+let catalog={videos:[]},taxonomy={categories:[]},lessons={chapters:[],microLessons:[]},toeic={bands:{}},wordBank={words:{}},learningUnits={units:{}},dictionaryIndex={words:{}};
 let ytPlayer=null,ytTimer=null,categoryModalOpen=false;
 
 async function boot(){
   try{
-    const names=['catalog','taxonomy','lessons','toeic','word-bank','learning-units'];
+    const names=['catalog','taxonomy','lessons','toeic','word-bank','learning-units','dictionary-index'];
     const files=await Promise.all(names.map(async x=>{
       const r=await fetch('data/'+x+'.json',{cache:'no-store'});
       if(!r.ok)throw new Error(x+' data HTTP '+r.status);
       return r.json();
     }));
-    [catalog,taxonomy,lessons,toeic,wordBank,learningUnits]=files;
+    [catalog,taxonomy,lessons,toeic,wordBank,learningUnits,dictionaryIndex]=files;
     state.sidebarCollapsed=load('evl-sidebar-collapsed',false);
     state.subtitleOffset=Number(load('sanmu-subtitle-offset',0))||0;
     state.subtitleRate=Number(load('sanmu-subtitle-rate',1))||1;
@@ -28,7 +28,7 @@ async function boot(){
     lessons=lessons&&Array.isArray(lessons.chapters)?lessons:{chapters:[],microLessons:[]};
     toeic=toeic&&toeic.bands?toeic:{bands:{}};
     wordBank=wordBank&&wordBank.words?wordBank:{words:{}};
-    learningUnits=learningUnits&&learningUnits.units?learningUnits:{units:{}};
+    learningUnits=learningUnits&&learningUnits.units?learningUnits:{units:{}}; dictionaryIndex=dictionaryIndex&&dictionaryIndex.words?dictionaryIndex:{words:{}};
     try{parseHash();}catch(renderErr){
       console.error('[三木Eng] fallback render failed',renderErr);
       const app=document.querySelector('#app');
@@ -45,7 +45,7 @@ window.__sanmuDiagnostics=()=>({
   transcriptCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.length:0,
   translatedCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.filter(x=>String(x.zh||'').trim()).length:0,
   activeIndex:[...document.querySelectorAll('.segment')].findIndex(x=>x.classList.contains('active')),
-  audio:window.__sanmuAudioLast||null
+  audio:window.__sanmuAudioLast||null, dictionaryWords:Object.keys(dictionaryIndex.words||{}).length
 });
 window.addEventListener('hashchange',parseHash);
 function favs(){return load('sanmu-favs',[])} function vocab(){return load('sanmu-vocab',{})} function history(){return load('sanmu-history',[])} function prog(){return load('sanmu-lessons',{})}
@@ -322,74 +322,40 @@ async function fetchCambridgeEntry(word){
 }
 async function enrichWord(word){
   const original=String(word||'').trim().toLowerCase();if(!original)return;
-  const cacheKey='sanmu-dictionary-v8-'+original;
   const current=()=>state.word&&String(state.word.word).toLowerCase()===original;
   const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
-  try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached){apply(cached);if(cached.complete)return;}}catch{}
+  // Primary path: fully prebuilt local dictionary data. No browser API call required.
+  const indexed=dictionaryIndex.words?.[original];
+  if(indexed){apply({...indexed,complete:true});return;}
+  const cacheKey='sanmu-dictionary-v9-'+original;
+  try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached?.complete){apply(cached);return;}}catch{}
 
+  // Runtime fallback only for brand-new words that have not reached the dictionary build job yet.
   let entry=null;
   try{
     const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},3500);
     if(res.ok)entry=(await res.json())?.[0]||null;
   }catch{}
-
   let base=null;
   if(entry){
-    const entries=dictionaryRowsFromApi(entry);
-    const audioRows=Array.isArray(entry.phonetics)?entry.phonetics:[];
-    base={source:'dictionaryapi',complete:false,word:original,
-      pos:entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
+    const entries=dictionaryRowsFromApi(entry);const ph=Array.isArray(entry.phonetics)?entry.phonetics:[];
+    base={source:'runtime-fallback',complete:false,word:original,pos:entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
       phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||''),
       phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry?.phonetic||entry?.phonetics?.find(p=>p?.text)?.text||''),
-      audio_uk:pickPronunciationAudio(audioRows,'uk'),audio_us:pickPronunciationAudio(audioRows,'us'),entries};
-    if(!base.phonetic_us)base.phonetic_us=base.phonetic_uk;
-    if(!base.audio_us)base.audio_us=base.audio_uk;
-    apply(base);
+      audio_uk:pickPronunciationAudio(ph,'uk'),audio_us:pickPronunciationAudio(ph,'us'),entries};
+    if(!base.phonetic_us)base.phonetic_us=base.phonetic_uk;if(!base.audio_us)base.audio_us=base.audio_uk;apply(base);
   }
-
   const entries=base?.entries||[];
-  const texts=entries.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean);
-  const translations=texts.length?await translateTextsFast(texts):{};
+  const translations=entries.length?await translateTextsFast(entries.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean)):{};
   const wordZh=await translateWordOnly(original);
-
   if(!base){
     const local=wordBank.words?.[original]||CAMBRIDGE_FALLBACKS[original]||null;
-    if(local){
-      base={...local,source:'local-fallback',word:original,complete:false,entries:local.entries||[{pos:local.pos||'',definition_en:local.gloss||'',definition_zh:local.definition_zh||'',example_en:local.example||'',example_zh:''}]};
-      if(!base.audio_us)base.audio_us=base.audio_uk||'';
-      apply(base);
-    }
+    if(local){base={...local,source:'local-fallback',word:original,complete:false,entries:local.entries||[{pos:local.pos||'',definition_en:local.gloss||'',definition_zh:local.definition_zh||'',example_en:local.example||'',example_zh:''}]};apply(base);}
   }
-
-  if(!base){
-    const payload={word:original,source:'translation-fallback',pos:'',phonetic_uk:'',phonetic_us:'',audio_uk:'',audio_us:'',definition_zh:wordZh||'查詢不到中文翻譯',entries:[],complete:true};
-    apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{};return;
-  }
-
-  const translatedEntries=(base.entries||[]).map(x=>({...x,
-    definition_zh:x.definition_zh||translations[x.definition_en]||'',
-    example_zh:x.example_zh||(x.example_en?translations[x.example_en]||'':'')}));
-  const definitionZh=base.definition_zh||translatedEntries.find(x=>x.definition_zh)?.definition_zh||wordZh||'';
-  const payload={...base,entries:translatedEntries,definition_zh:definitionZh,complete:true};
+  if(!base){const payload={word:original,source:'translation-fallback',pos:'',phonetic_uk:'',phonetic_us:'',audio_uk:'',audio_us:'',definition_zh:wordZh||'暫時查不到詞義',entries:[],complete:true};apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{};return;}
+  const translatedEntries=(base.entries||[]).map(x=>({...x,definition_zh:x.definition_zh||translations[x.definition_en]||'',example_zh:x.example_zh||(x.example_en?translations[x.example_en]||'':'')}));
+  const payload={...base,entries:translatedEntries,definition_zh:base.definition_zh||translatedEntries.find(x=>x.definition_zh)?.definition_zh||wordZh||'',complete:true};
   apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
-}
-async function translateWordOnly(word){
-  const text=String(word||'').trim().toLowerCase();if(!text)return '';
-  if(COMMON_ZH[text])return COMMON_ZH[text];
-  const providers=[
-    'https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|zh-TW',
-    'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text)
-  ];
-  for(const url of providers){
-    try{
-      const res=await fetchWithTimeout(url,{cache:'no-store',headers:{'Accept':'application/json'}},2500);if(!res.ok)continue;
-      const data=await res.json();let zh='';
-      if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
-      if(!zh)zh=String(data?.responseData?.translatedText||'').trim();
-      if(zh&&/[\u3400-\u9fff]/.test(zh))return zh;
-    }catch{}
-  }
-  return '';
 }
 function renderWordInline(){
   const v=selectedVideo();
@@ -401,11 +367,12 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
   const raw=String(word||'').trim();if(!raw)return;
   const normalized=raw.replace(/^[^A-Za-z]+|[^A-Za-z'’]+$/g,'').toLowerCase();if(!normalized)return;
   const info=wordBank.words?.[normalized]||{};
-  let cached={};try{cached=JSON.parse(localStorage.getItem('sanmu-dictionary-v6-'+normalized)||'null')||{};}catch{}
-  state.word={word:normalized,sourceVideoId,sourceSentence,...info,...cached};
+  const indexed=dictionaryIndex.words?.[normalized]||{};
+  let cached={};try{cached=JSON.parse(localStorage.getItem('sanmu-dictionary-v9-'+normalized)||'null')||{};}catch{}
+  state.word={word:normalized,sourceVideoId,sourceSentence,...info,...cached,...indexed};
   renderWordInline();
-  // Always query once for a word without a complete dictionary entry; stale v4/v5 data is ignored.
-  if(!cached.entries?.length)enrichWord(normalized);
+  if(indexed?.complete)return;
+  if(!cached?.complete)enrichWord(normalized);
 }
 function closeWord(){state.word=null;renderWordInline();}
 let speechAudio=null;
@@ -470,8 +437,6 @@ function playPronunciation(word,locale){
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
 async function playGoogleTTS(value,target){return speak(value,target);}
-async function playAudioUrl(url,fallbackText,target){return playAudioElement(url||audioUrlFor(fallbackText,target),fallbackText,target);}
-async function playGoogleTTS(value,target){return playPronunciation(value,target);}
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
   const w=state.word||{};const fav=Object.keys(vocab()).includes(String(w.word||'').toLowerCase());
