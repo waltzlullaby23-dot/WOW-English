@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 
+// Build dictionary data server-side; browser only reads the generated static index.
 const catalog=JSON.parse(fs.readFileSync('data/catalog.json','utf8'));
 const existingPath='data/dictionary-index.json';
 let existing={};
