@@ -241,6 +241,18 @@ function updateWordModal(){
   const map={zh:w.definition_zh||'正在取得中文翻譯…',uk:w.phonetic_uk||'—',us:w.phonetic_us||'—',pos:w.pos||'查詢中…',ex:w.example||w.sourceSentence||'—'};
   Object.entries(ids).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.textContent=map[k];});
 }
+function openWord(word,sourceVideoId='',sourceSentence=''){
+  const raw=String(word||'').trim();
+  if(!raw)return;
+  const normalized=raw.replace(/^[^A-Za-z]+|[^A-Za-z'’]+$/g,'').toLowerCase();
+  if(!normalized)return;
+  const info=wordBank.words?.[normalized]||{};
+  let cached={};
+  try{cached=JSON.parse(localStorage.getItem('sanmu-word-cache-v2-'+normalized)||'null')||{};}catch{}
+  state.word={word:normalized,sourceVideoId,sourceSentence,...cached,...info};
+  render();
+  if(!state.word.definition_zh||!state.word.phonetic_uk||!state.word.phonetic_us)enrichWord(normalized);
+}
 function closeWord(){state.word=null;render();}
 let speechAudio=null;
 let speechVoices=[];
