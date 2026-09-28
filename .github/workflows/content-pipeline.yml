@@ -14,17 +14,9 @@ on:
       - "data/catalog.json"
   schedule:
     - cron: "17 1 * * *"
-    - cron: "17 3 * * *"
-    - cron: "17 5 * * *"
     - cron: "17 7 * * *"
-    - cron: "17 9 * * *"
-    - cron: "17 11 * * *"
     - cron: "17 13 * * *"
-    - cron: "17 15 * * *"
-    - cron: "17 17 * * *"
     - cron: "17 19 * * *"
-    - cron: "17 21 * * *"
-    - cron: "17 23 * * *"
   workflow_dispatch:
 
 permissions:
@@ -64,7 +56,8 @@ jobs:
           r=requests.get('https://www.googleapis.com/youtube/v3/search',params={'part':'snippet','q':'English learning BBC','type':'video','maxResults':1,'key':key},timeout=20)
           print('YOUTUBE_API_STATUS=',r.status_code)
           print('YOUTUBE_API_ITEMS=',len(r.json().get('items',[])) if r.ok else 0)
-          if not r.ok: raise SystemExit(r.text[:600])
+          if not r.ok:
+              print('WARNING: YouTube Data API unavailable; discovery will use yt-dlp YouTube search fallback.')
           PY
       - name: Run free discovery + caption verification + translation
         env:
