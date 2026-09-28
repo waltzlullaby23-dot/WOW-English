@@ -686,13 +686,20 @@ def process_video(video_id, meta, existing, idx=0):
     if zh is None:
         try: zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
         except Exception: zh=None
-    # 2) Transcript API translation, if its track object is available.
+    # 2) Transcript API / YouTube translation track, if available.
     if zh is None:
         try:
             zh,zh_source=translate_from_youtube(tr,segs)
         except Exception:
             zh=None
-    # 3) Free Google Translate public endpoint (no key).
+    # 3) Reliable free batch translator via deep-translator (Google web backend).
+    # Prefer this before the line-by-line public endpoint to reduce throttling.
+    if zh is None:
+        try:
+            zh,zh_source=translate_with_argos(segs)
+        except Exception:
+            zh=None
+    # 4) Public Google Translate fallback.
     if zh is None:
         try:
             lines=[s['en'] for s in segs]
@@ -701,10 +708,13 @@ def process_video(video_id, meta, existing, idx=0):
                 zh,zh_source=got,'google-public-translate'
         except Exception:
             zh=None
-    # 4) Local/offline translator if present.
+    # 5) Last-mile recovery: translate missing lines individually.
     if zh is None:
         try:
-            zh,zh_source=translate_with_argos(segs)
+            lines=[s['en'] for s in segs]
+            recovered=[translate_one(line) for line in lines]
+            if len(recovered)==len(lines) and all(clean_text(x) for x in recovered):
+                zh,zh_source=recovered,'deep-translator-one-by-one'
         except Exception:
             zh=None
 
