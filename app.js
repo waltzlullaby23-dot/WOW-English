@@ -266,7 +266,7 @@ async function fetchCambridgeEntry(word){
       const text=await res.text();
       const clean=text.replace(/\r/g,'').replace(/\n{3,}/g,'\n\n');
       const posMatch=clean.match(/\n(adjective|noun|verb|adverb|pronoun|preposition|conjunction|determiner|adverbial phrase)\n/i);
-      const ipa=(clean.match(/\/(?:[^/]|\\\/)+\/g)||[]);
+      const ipa=(clean.match(/\/[^\/\n]{2,80}\//g)||[]);
       const uk=ipa[0]||'';const us=ipa[1]||uk;
       const lines=clean.split('\n').map(x=>x.trim()).filter(Boolean);
       const candidateDefs=[];
