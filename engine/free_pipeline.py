@@ -520,7 +520,7 @@ def fetch_english_via_free_transcript_api(video_id: str):
         r=requests.get(
             'https://api.freetranscriptapi.com/v1/transcript',
             params={'video_url':video_id,'lang':'en'},
-            headers=headers,timeout=30
+            headers=headers,timeout=8
         )
         if not r.ok:return []
         data=r.json() or {}
@@ -536,25 +536,18 @@ def fetch_english_via_free_transcript_api(video_id: str):
         return []
 
 def best_english_transcript(video_id: str, duration: float):
+    # CI release gate: use the hosted transcript service first and fail fast.
+    # Slow YouTube scraping is deliberately not part of the release path.
     candidates=[]
-    # Production backend order is intentionally short and deterministic:
-    # 1) hosted free transcript API (avoids YouTube bot checks)
-    # 2) youtube-transcript-api
-    # 3) public transcript mirror
-    # Browser-side hydration has its own independent fallback chain.
     try:
         segs=fetch_english_via_free_transcript_api(video_id)
         if segs:candidates.append(('freetranscriptapi',None,segs,[]))
     except Exception:pass
+    # A single direct transcript-api attempt is a secondary fallback.
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
     except Exception:pass
-    try:
-        segs=fetch_english_via_public_transcript(video_id)
-        if segs:candidates.append(('public-transcript',None,segs,[]))
-    except Exception:pass
-
     valid=[]
     for source,tr,segs,zhrows in candidates:
         try:
