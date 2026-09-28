@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T08:53:38.240Z",
+  "generatedAt": "2026-09-28T09:12:03.261Z",
   "source": "build-time-dictionary-index",
   "words": {
     "order": {
@@ -731,17 +731,17 @@
       "entries": [],
       "complete": true
     },
-    "passive": {
-      "word": "passive",
+    "particular": {
+      "word": "particular",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=passive&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=passive&type=2",
-      "definition_zh": "被動",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=particular&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=particular&type=2",
+      "definition_zh": "特定的；特別的",
       "entries": [],
       "complete": true
     },
@@ -759,17 +759,17 @@
       "entries": [],
       "complete": true
     },
-    "let's": {
-      "word": "let's",
+    "our": {
+      "word": "our",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=let's&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=let's&type=2",
-      "definition_zh": "祈使語氣",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=our&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=our&type=2",
+      "definition_zh": "我們的",
       "entries": [],
       "complete": true
     },
@@ -787,17 +787,17 @@
       "entries": [],
       "complete": true
     },
-    "particular": {
-      "word": "particular",
+    "and": {
+      "word": "and",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=particular&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=particular&type=2",
-      "definition_zh": "特定的；特別的",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=and&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=and&type=2",
+      "definition_zh": "和；以及",
       "entries": [],
       "complete": true
     },
@@ -871,17 +871,17 @@
       "entries": [],
       "complete": true
     },
-    "our": {
-      "word": "our",
+    "often": {
+      "word": "often",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=our&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=our&type=2",
-      "definition_zh": "我們的",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=often&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=often&type=2",
+      "definition_zh": "常常；經常",
       "entries": [],
       "complete": true
     },
@@ -899,31 +899,31 @@
       "entries": [],
       "complete": true
     },
-    "and": {
-      "word": "and",
+    "the": {
+      "word": "the",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=and&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=and&type=2",
-      "definition_zh": "和；以及",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=the&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=the&type=2",
+      "definition_zh": "這／那個；該",
       "entries": [],
       "complete": true
     },
-    "often": {
-      "word": "often",
+    "passive": {
+      "word": "passive",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=often&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=often&type=2",
-      "definition_zh": "常常；經常",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=passive&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=passive&type=2",
+      "definition_zh": "被動的；消極的",
       "entries": [],
       "complete": true
     },
@@ -955,17 +955,17 @@
       "entries": [],
       "complete": true
     },
-    "the": {
-      "word": "the",
+    "let's": {
+      "word": "let's",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=the&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=the&type=2",
-      "definition_zh": "這／那個；該",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=let's&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=let's&type=2",
+      "definition_zh": "讓我們",
       "entries": [],
       "complete": true
     },
@@ -1095,20 +1095,6 @@
       "entries": [],
       "complete": true
     },
-    "start": {
-      "word": "start",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=start&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=start&type=2",
-      "definition_zh": "開始",
-      "entries": [],
-      "complete": true
-    },
     "words": {
       "word": "words",
       "source": "fallback",
@@ -1134,6 +1120,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=three&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=three&type=2",
       "definition_zh": "三個；三",
+      "entries": [],
+      "complete": true
+    },
+    "this": {
+      "word": "this",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=this&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=this&type=2",
+      "definition_zh": "這個；這件事",
       "entries": [],
       "complete": true
     },
@@ -1333,17 +1333,17 @@
       "entries": [],
       "complete": true
     },
-    "this": {
-      "word": "this",
+    "then": {
+      "word": "then",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=this&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=this&type=2",
-      "definition_zh": "這個；這件事",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=then&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=then&type=2",
+      "definition_zh": "然後；那時",
       "entries": [],
       "complete": true
     },
@@ -1445,20 +1445,6 @@
       "entries": [],
       "complete": true
     },
-    "then": {
-      "word": "then",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=then&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=then&type=2",
-      "definition_zh": "然後；那時",
-      "entries": [],
-      "complete": true
-    },
     "all": {
       "word": "all",
       "source": "fallback",
@@ -1470,6 +1456,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=all&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=all&type=2",
       "definition_zh": "全部；所有",
+      "entries": [],
+      "complete": true
+    },
+    "start": {
+      "word": "start",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=start&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=start&type=2",
+      "definition_zh": "開始；啟動",
       "entries": [],
       "complete": true
     },
