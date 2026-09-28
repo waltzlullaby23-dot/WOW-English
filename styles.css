@@ -263,27 +263,25 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
 .word-modal .pron-button{min-width:86px;min-height:36px;display:inline-flex;align-items:center;justify-content:center}
 
 /* Dictionary-style word lookup card: matches the compact reference layout. */
-.word-popover-layer{
-  position:fixed;inset:0;z-index:1200;
-  pointer-events:none;
-  background:transparent;
+.word-inline-card{
+  width:100%;
+  margin:16px 0 4px;
 }
 .word-popover{
-  pointer-events:auto;
-  position:relative;
-  width:calc(100% - 48px);
-  max-width:1180px;
-  margin:18px auto 0;
+  width:100%;
   background:#fffaf0;
   border:1px solid #efbd67;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(74,55,25,.12);
-  padding:22px 24px 18px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(74,55,25,.10);
+  padding:18px 20px 16px;
   color:#193f36;
 }
 .word-popover-head{
   display:flex;align-items:flex-start;justify-content:space-between;gap:18px;
 }
+.subtitle-list .word-inline-card{max-width:1040px;margin-left:auto;margin-right:auto;}
+.subtitle-list .word-inline-card .word-popover{box-sizing:border-box;}
+
 .word-main-line{
   display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
   min-width:0;
@@ -336,7 +334,8 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
 }
 .word-save-btn.saved{background:#dcefe4}
 @media(max-width:700px){
-  .word-popover{width:calc(100% - 20px);margin-top:10px;padding:18px}
+  .word-inline-card{margin-top:12px}
+  .word-popover{width:100%;padding:16px}
   .word-main-line strong{font-size:27px}
   .word-save-btn{margin-left:0}
 }
