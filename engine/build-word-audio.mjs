@@ -19,7 +19,7 @@ const safeName=w=>{
 };
 const ensure=p=>fs.mkdirSync(p,{recursive:true});
 const make= (word, locale, out)=>{
-  execFileSync('espeak',['-q','-v',locale,'-s','150','-w',out,word],{stdio:'ignore'});
+  execFileSync('espeak',['-v',locale,'-s','150','-w',out,word],{stdio:'ignore'});
   return execFileSync('espeak',['-q','--ipa','-v',locale,word],{encoding:'utf8'}).trim().replace(/^\s+|\s+$/g,'');
 };
 ensure('audio/uk');
