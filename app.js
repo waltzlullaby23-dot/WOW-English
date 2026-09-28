@@ -9,13 +9,17 @@ let ytPlayer=null,ytTimer=null,categoryModalOpen=false;
 
 async function boot(){
   try{
-    const names=['catalog','taxonomy','lessons','toeic','word-bank','learning-units','dictionary-index'];
+    const names=['catalog','taxonomy','lessons','toeic','word-bank','learning-units'];
     const files=await Promise.all(names.map(async x=>{
       const r=await fetch('data/'+x+'.json',{cache:'no-store'});
       if(!r.ok)throw new Error(x+' data HTTP '+r.status);
       return r.json();
     }));
-    [catalog,taxonomy,lessons,toeic,wordBank,learningUnits,dictionaryIndex]=files;
+    [catalog,taxonomy,lessons,toeic,wordBank,learningUnits]=files;
+    try{
+      const dr=await fetch('data/dictionary-index.json',{cache:'no-store'});
+      dictionaryIndex=dr.ok?await dr.json():{words:{}};
+    }catch{dictionaryIndex={words:{}};}
     state.sidebarCollapsed=load('evl-sidebar-collapsed',false);
     state.subtitleOffset=Number(load('sanmu-subtitle-offset',0))||0;
     state.subtitleRate=Number(load('sanmu-subtitle-rate',1))||1;
