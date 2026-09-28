@@ -53,3 +53,5 @@ const bad=list.filter(w=>!index.words[w].audioLocalUk||!index.words[w].audioLoca
 console.log(JSON.stringify({words:list.length,complete:list.length-bad.length,bad:bad.slice(0,30)},null,2));
 if(bad.length)process.exit(1);
 // Trigger deterministic local asset rebuild after UI pronunciation changes.
+
+// Re-run local audio builder after CI validation fix.
