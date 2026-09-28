@@ -1,36 +1,36 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T10:40:46.223Z",
+  "generatedAt": "2026-09-28T12:38:24.688Z",
   "source": "build-time-dictionary-index",
   "words": {
     "helpful": {
       "word": "helpful",
-      "source": "datamuse-build",
-      "pos": "dj",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "adjective",
+      "phonetic_uk": "/ˈhelp.fəl/",
+      "phonetic_us": "/ˈhelp.fəl/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=helpful&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=helpful&type=2",
-      "definition_zh": "有幫助的；有用的",
+      "definition_zh": "有幫助的；有用的；願意幫忙的",
       "entries": [
         {
-          "pos": "dj",
-          "definition_en": "Furnishing help; giving aid; useful.",
-          "definition_zh": "提供幫助；提供幫助；有用。",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "adjective",
+          "definition_en": "willing to help, or useful",
+          "definition_zh": "有幫助的；有用的；願意幫忙的",
+          "example_en": "I'm trying to be helpful.",
+          "example_zh": "我只是想幫忙。"
         }
       ],
       "complete": true
     },
     "someone": {
       "word": "someone",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "pronoun",
+      "phonetic_uk": "/ˈsʌm.wʌn/",
+      "phonetic_us": "/ˈsʌm.wʌn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=someone&type=1",
@@ -38,28 +38,21 @@
       "definition_zh": "某人；有人",
       "entries": [
         {
-          "pos": "",
-          "definition_en": "A partially specified but unnamed person.",
-          "definition_zh": "部分指定但未命名的人。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "An important person.",
-          "definition_zh": "重要人物。",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "pronoun",
+          "definition_en": "an unspecified person; somebody",
+          "definition_zh": "某人；有人",
+          "example_en": "Someone is waiting outside.",
+          "example_zh": "有人正在外面等候。"
         }
       ],
       "complete": true
     },
     "manners": {
       "word": "manners",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/ˈmæn.əz/",
+      "phonetic_us": "/ˈmæn.ɚz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=manners&type=1",
@@ -67,70 +60,21 @@
       "definition_zh": "風度；禮貌；禮儀",
       "entries": [
         {
-          "pos": "",
-          "definition_en": "Good manners.",
-          "definition_zh": "有禮貌。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Etiquette.",
-          "definition_zh": "禮儀",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A surname from Norman.",
-          "definition_zh": "諾曼的姓氏。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Mode of action; way of performing or doing anything.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Characteristic mode of acting or behaving; bearing.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Good, polite behaviour.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "One's customary method of acting; habit.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Sort; kind; style.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "noun",
+          "definition_en": "polite ways of behaving with other people",
+          "definition_zh": "風度；禮貌；禮儀",
+          "example_en": "He needs to learn some manners.",
+          "example_zh": "他需要學習一些禮貌。"
         }
       ],
       "complete": true
     },
     "pounds": {
       "word": "pounds",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/paʊndz/",
+      "phonetic_us": "/paʊndz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=pounds&type=1",
@@ -138,84 +82,43 @@
       "definition_zh": "英鎊；磅",
       "entries": [
         {
-          "pos": "",
-          "definition_en": "A unit of mass equal to 16 avoirdupois ounces (= 453.592 g). Today this value is the most common meaning of \"pound\" as a unit of weight.",
-          "definition_zh": "質量單位等於16 avoirdupois盎司（ = 453.592克）。今天，這個值是「磅」作為重量單位的最常見含義。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The unit of currency used in the United Kingdom and its dependencies. It is divided into 100 pence. Symbol £.",
-          "definition_zh": "英國及其依存國使用的貨幣單位。它分為100便士。符號£。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A unit of weight in various measurement systems.",
-          "definition_zh": "各種測量系統中的重量單位。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A unit of currency in various currency systems.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Various non-English units of measure.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "A unit of mass equal to 12 troy ounces (≈ 373.242 g). Today, this is a common unit of mass when measuring precious metals, and is little used elsewhere.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Any of various units of currency used in Egypt, Lebanon, Sudan, and Syria, and formerly in the Republic of Ireland, Cyprus, Nigeria, Israel, and South Africa.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Any of various units of currency formerly used in the United States.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "noun",
+          "definition_en": "the currency unit used in the United Kingdom; also a unit of weight",
+          "definition_zh": "英鎊；磅",
+          "example_en": "You have one hundred pounds.",
+          "example_zh": "你有一百英鎊。"
         }
       ],
       "complete": true
     },
     "order": {
       "word": "order",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun/verb",
+      "phonetic_uk": "/ˈɔː.dər/",
+      "phonetic_us": "/ˈɔːr.dɚ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=order&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=order&type=2",
-      "definition_zh": "訂購",
-      "entries": [],
+      "definition_zh": "訂單；訂購；順序",
+      "entries": [
+        {
+          "pos": "noun/verb",
+          "definition_en": "a request to buy or supply something; or to arrange things in sequence",
+          "definition_zh": "訂單；訂購；順序",
+          "example_en": "I placed an order for food.",
+          "example_zh": "我下單買了食物。"
+        }
+      ],
       "complete": true
     },
     "obviously": {
       "word": "obviously",
-      "source": "datamuse-build",
-      "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "adverb",
+      "phonetic_uk": "/ˈɒb.vi.əs.li/",
+      "phonetic_us": "/ˈɑːb.vi.əs.li/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=obviously&type=1",
@@ -223,148 +126,65 @@
       "definition_zh": "顯然地；明顯地",
       "entries": [
         {
-          "pos": "dv",
-          "definition_en": "In an obvious or clearly apparent manner.",
-          "definition_zh": "以明顯或明顯的方式。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "(colloquial) Used as a filler word, or to introduce information even when not obvious.",
-          "definition_zh": "（口語）用作填充詞，或即使不明顯也用作介紹資訊。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Easily discovered, seen, or understood; self-explanatory.",
-          "definition_zh": "容易發現、看到或理解；不言而喻。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "In a devious manner.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "in an envious manner or to an envious degree",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "In an odious manner.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dv",
-          "definition_en": "in an oblivious manner",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "adverb",
+          "definition_en": "in a way that is easy to see or understand; clearly",
+          "definition_zh": "顯然地；明顯地",
+          "example_en": "Obviously, he was tired.",
+          "example_zh": "顯然地，他累了。"
         }
       ],
       "complete": true
     },
     "retro": {
       "word": "retro",
-      "source": "datamuse-build",
-      "pos": "dj",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "adjective",
+      "phonetic_uk": "/ˈret.rəʊ/",
+      "phonetic_us": "/ˈret.roʊ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=retro&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=retro&type=2",
-      "definition_zh": "懷舊的；重新流行的",
+      "definition_zh": "懷舊的；重新流行的；模仿過去式樣的",
       "entries": [
         {
-          "pos": "dj",
-          "definition_en": "Of, or relating to, the past, past times, or the way things were.",
-          "definition_zh": "過去、過去時代或事物現狀的，或與之相關的。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(uncountable) Past fashions or trends.",
-          "definition_zh": "（無數）過去的時尚或趨勢。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "dj",
-          "definition_en": "Affecting things past; retroactive, ex post facto.",
-          "definition_zh": "影響過去的事物；事後追溯。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(chess) A chess puzzle of retrograde analysis, requiring the solver to work out the history of moves leading to the position presented.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(countable) Abbreviation of retrospective. [An exhibition of works from an extended period of an artist's activity.]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(countable) Abbreviation of retrorocket. [A small rocket engine on a larger rocket or spacecraft, designed to slow or reverse its motion.]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(general) A rapid transit rail transport system, or a train in such systems, generally underground and serving a metropolitan area.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "(less common) An urban rapid transit rail transport system, normally with lighter track and light trains (i.e. an S-Bahn or similar), or a train in such systems.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "adjective",
+          "definition_en": "similar to styles, fashions, etc. from the past",
+          "definition_zh": "懷舊的；重新流行的；模仿過去式樣的",
+          "example_en": "retro clothes/music",
+          "example_zh": "懷舊服裝／音樂。"
         }
       ],
       "complete": true
     },
     "request": {
       "word": "request",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun/verb",
+      "phonetic_uk": "/rɪˈkwest/",
+      "phonetic_us": "/rɪˈkwest/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=request&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=request&type=2",
-      "definition_zh": "要求",
-      "entries": [],
+      "definition_zh": "請求；要求",
+      "entries": [
+        {
+          "pos": "noun/verb",
+          "definition_en": "an act of asking for something politely or formally",
+          "definition_zh": "請求；要求",
+          "example_en": "She made a request for more information.",
+          "example_zh": "她提出了索取更多資訊的請求。"
+        }
+      ],
       "complete": true
     },
     "linkers": {
       "word": "linkers",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/ˈlɪŋ.kəz/",
+      "phonetic_us": "/ˈlɪŋ.kɚz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=linkers&type=1",
@@ -374,7 +194,7 @@
         {
           "pos": "noun",
           "definition_en": "words or phrases used to connect ideas, clauses, or sentences",
-          "definition_zh": "用來連接思想、子句或句子的詞語",
+          "definition_zh": "連接詞；銜接語",
           "example_en": "Linkers connect ideas and make writing easier to follow.",
           "example_zh": "連接詞可以連結想法，讓文章更容易理解。"
         }
@@ -383,24 +203,32 @@
     },
     "questions": {
       "word": "questions",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/ˈkwes.tʃənz/",
+      "phonetic_us": "/ˈkwes.tʃənz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=questions&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=questions&type=2",
-      "definition_zh": "問題",
-      "entries": [],
+      "definition_zh": "問題；疑問",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "sentences or phrases used to ask for information",
+          "definition_zh": "問題；疑問",
+          "example_en": "The teacher asked three questions.",
+          "example_zh": "老師問了三個問題。"
+        }
+      ],
       "complete": true
     },
     "responsibility": {
       "word": "responsibility",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/rɪˌspɒn.səˈbɪl.ə.ti/",
+      "phonetic_us": "/rɪˌspɑːn.səˈbɪl.ə.t̬i/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=responsibility&type=1",
@@ -408,69 +236,35 @@
       "definition_zh": "責任；職責；任務",
       "entries": [
         {
-          "pos": "",
-          "definition_en": "A duty, obligation or liability for which someone is held accountable.",
-          "definition_zh": "某人應承擔的責任、義務或責任。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The state of being responsible, accountable, or answerable. [from 18th c.]",
-          "definition_zh": "負責、負責或負責的狀態。[from 18th c.]",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The state of being liable, culpable, or responsible for something in particular.",
-          "definition_zh": "對特定事項負有責任、應負有責任或負有責任的狀態。",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The obligation to carry forward an assigned task to a successful conclusion.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The obligation for the proper custody, care, and safekeeping of property or funds entrusted to someone’s possession or supervision.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "Misspelling of responsibility. [The state of being responsible, accountable, or answerable. [from 18th c.]]",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
-        },
-        {
-          "pos": "",
-          "definition_en": "The character or state of being irresponsible; lack of or freedom from responsibility; want of accountability.",
-          "definition_zh": "",
-          "example_en": "",
-          "example_zh": ""
+          "pos": "noun",
+          "definition_en": "a duty to deal with or take care of someone or something",
+          "definition_zh": "責任；職責；任務",
+          "example_en": "It is your responsibility to look after the children.",
+          "example_zh": "照顧孩子是你的責任。"
         }
       ],
       "complete": true
     },
     "politer": {
       "word": "politer",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "adjective",
+      "phonetic_uk": "/pəˈlaɪ.tər/",
+      "phonetic_us": "/pəˈlaɪ.t̬ɚ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=politer&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=politer&type=2",
-      "definition_zh": "政客",
-      "entries": [],
+      "definition_zh": "更有禮貌的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "more polite",
+          "definition_zh": "更有禮貌的",
+          "example_en": "This phrase is politer than the first one.",
+          "example_zh": "這個說法比第一個更有禮貌。"
+        }
+      ],
       "complete": true
     },
     "an": {
@@ -525,16 +319,24 @@
     },
     "imperatives": {
       "word": "imperatives",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/ɪmˈper.ə.tɪvz/",
+      "phonetic_us": "/ɪmˈper.ə.t̬ɪvz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=imperatives&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=imperatives&type=2",
-      "definition_zh": "當務之急",
-      "entries": [],
+      "definition_zh": "祈使句；命令語氣",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "verb forms or sentences used to give an order or instruction",
+          "definition_zh": "祈使句；命令語氣",
+          "example_en": "Imperatives are often used for instructions.",
+          "example_zh": "祈使句常用來給予指示。"
+        }
+      ],
       "complete": true
     },
     "or": {
@@ -681,16 +483,24 @@
     },
     "politeness": {
       "word": "politeness",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/pəˈlaɪt.nəs/",
+      "phonetic_us": "/pəˈlaɪt.nəs/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=politeness&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=politeness&type=2",
       "definition_zh": "禮貌",
-      "entries": [],
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "the quality of behaving in a way that is socially correct and shows respect for other people",
+          "definition_zh": "禮貌",
+          "example_en": "Politeness is important.",
+          "example_zh": "禮貌很重要。"
+        }
+      ],
       "complete": true
     },
     "why": {
@@ -1654,16 +1464,24 @@
     },
     "real": {
       "word": "real",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "adjective",
+      "phonetic_uk": "/rɪəl/",
+      "phonetic_us": "/ˈriː.əl/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=real&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=real&type=2",
-      "definition_zh": "實",
-      "entries": [],
+      "definition_zh": "真實的；真正的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "actually existing or true; not imagined or artificial",
+          "definition_zh": "真實的；真正的",
+          "example_en": "This is a real example.",
+          "example_zh": "這是一個真實的例子。"
+        }
+      ],
       "complete": true
     },
     "different": {
@@ -1782,16 +1600,24 @@
     },
     "today": {
       "word": "today",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "adverb/noun",
+      "phonetic_uk": "/təˈdeɪ/",
+      "phonetic_us": "/təˈdeɪ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=today&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=today&type=2",
-      "definition_zh": "今天得知",
-      "entries": [],
+      "definition_zh": "今天；在今天",
+      "entries": [
+        {
+          "pos": "adverb/noun",
+          "definition_en": "on or during this present day",
+          "definition_zh": "今天；在今天",
+          "example_en": "I am busy today.",
+          "example_zh": "我今天很忙。"
+        }
+      ],
       "complete": true
     },
     "it": {
@@ -2151,30 +1977,46 @@
     },
     "favourite": {
       "word": "favourite",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "adjective/noun",
+      "phonetic_uk": "/ˈfeɪ.vər.ɪt/",
+      "phonetic_us": "/ˈfeɪ.vər.ət/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=favourite&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=favourite&type=2",
-      "definition_zh": "優質客戶",
-      "entries": [],
+      "definition_zh": "最喜愛的；最喜愛的人或事物",
+      "entries": [
+        {
+          "pos": "adjective/noun",
+          "definition_en": "liked more than others; the person or thing liked most",
+          "definition_zh": "最喜愛的；最喜愛的人或事物",
+          "example_en": "This is my favourite food.",
+          "example_zh": "這是我最喜歡的食物。"
+        }
+      ],
       "complete": true
     },
     "foods": {
       "word": "foods",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/fuːdz/",
+      "phonetic_us": "/fuːdz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=foods&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=foods&type=2",
-      "definition_zh": "食品",
-      "entries": [],
+      "definition_zh": "食物；食品（複數）",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "plural of food; things that people or animals eat",
+          "definition_zh": "食物；食品（複數）",
+          "example_en": "Different foods contain different nutrients.",
+          "example_zh": "不同食物含有不同的營養素。"
+        }
+      ],
       "complete": true
     },
     "we": {
@@ -2208,15 +2050,15 @@
     },
     "we'll": {
       "word": "we'll",
-      "source": "datamuse-build",
-      "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "contraction",
+      "phonetic_uk": "/wiːl/",
+      "phonetic_us": "/wil/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=we'll&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=we'll&type=2",
-      "definition_zh": "我們將；我們會",
+      "definition_zh": "we will／we shall 的縮寫",
       "entries": [
         {
           "pos": "contraction",
@@ -2244,30 +2086,46 @@
     },
     "them": {
       "word": "them",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "pronoun",
+      "phonetic_uk": "/ðem/",
+      "phonetic_us": "/ðem/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=them&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=them&type=2",
-      "definition_zh": "時時看見",
-      "entries": [],
+      "definition_zh": "他們；她們；它們（受格）",
+      "entries": [
+        {
+          "pos": "pronoun",
+          "definition_en": "used as the object of a verb or preposition to refer to people or things already mentioned",
+          "definition_zh": "他們；她們；它們（受格）",
+          "example_en": "I saw them yesterday.",
+          "example_zh": "我昨天看到他們。"
+        }
+      ],
       "complete": true
     },
     "what's": {
       "word": "what's",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "contraction",
+      "phonetic_uk": "/wɒts/",
+      "phonetic_us": "/wʌts/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=what's&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=what's&type=2",
-      "definition_zh": "什麼是",
-      "entries": [],
+      "definition_zh": "what is／what has 的縮寫",
+      "entries": [
+        {
+          "pos": "contraction",
+          "definition_en": "a short form of 'what is' or 'what has'",
+          "definition_zh": "what is／what has 的縮寫",
+          "example_en": "What's your name?",
+          "example_zh": "你叫什麼名字？"
+        }
+      ],
       "complete": true
     },
     "about": {
@@ -2450,16 +2308,24 @@
     },
     "look": {
       "word": "look",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "verb/noun",
+      "phonetic_uk": "/lʊk/",
+      "phonetic_us": "/lʊk/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=look&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=look&type=2",
-      "definition_zh": "視圖",
-      "entries": [],
+      "definition_zh": "看；查看；外觀",
+      "entries": [
+        {
+          "pos": "verb/noun",
+          "definition_en": "to use your eyes to see something; or the appearance of someone or something",
+          "definition_zh": "看；查看；外觀",
+          "example_en": "Look at this example.",
+          "example_zh": "看看這個例子。"
+        }
+      ],
       "complete": true
     },
     "and": {
@@ -2641,20 +2507,20 @@
     },
     "let's": {
       "word": "let's",
-      "source": "datamuse-build",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "contraction",
+      "phonetic_uk": "/lets/",
+      "phonetic_us": "/lets/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=let's&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=let's&type=2",
-      "definition_zh": "讓我們",
+      "definition_zh": "let us 的縮寫；讓我們",
       "entries": [
         {
           "pos": "contraction",
           "definition_en": "a short form of 'let us', used to suggest doing something together",
-          "definition_zh": "let us 的縮寫，用來提議一起做某事",
+          "definition_zh": "let us 的縮寫；讓我們",
           "example_en": "Let's go.",
           "example_zh": "我們走吧。"
         }
@@ -3620,16 +3486,24 @@
     },
     "bathroom": {
       "word": "bathroom",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/ˈbɑːθ.ruːm/",
+      "phonetic_us": "/ˈbæθ.ruːm/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=bathroom&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=bathroom&type=2",
-      "definition_zh": "衛",
-      "entries": [],
+      "definition_zh": "浴室；洗手間",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "a room with a toilet and usually a sink or bath",
+          "definition_zh": "浴室；洗手間",
+          "example_en": "The bathroom is upstairs.",
+          "example_zh": "浴室在樓上。"
+        }
+      ],
       "complete": true
     },
     "london": {
@@ -3817,16 +3691,24 @@
     },
     "bond": {
       "word": "bond",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "source": "curated",
+      "pos": "noun",
+      "phonetic_uk": "/bɒnd/",
+      "phonetic_us": "/bɑːnd/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=bond&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=bond&type=2",
-      "definition_zh": "證券紙",
-      "entries": [],
+      "definition_zh": "連結；關係",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "a strong connection or relationship between people or things",
+          "definition_zh": "連結；關係",
+          "example_en": "The sisters have a strong bond.",
+          "example_zh": "這對姊妹有很深的感情連結。"
+        }
+      ],
       "complete": true
     },
     "between": {
