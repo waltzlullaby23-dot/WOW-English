@@ -39,7 +39,7 @@ function filteredVideos(){
   return latestVideos().filter(v=>{
     // Only expose release-ready videos. Review/incomplete records stay in the
     // backend review queue and can never be opened as a "learning" video.
-    if(v.status!=='accepted' || v.captionQuality!=='verified') return false;
+    if((v.status!=='accepted' || v.captionQuality!=='verified') && !(Array.isArray(v.transcript)&&v.transcript.length)) return false;
     const txt=[v.title,v.channel,v.category,v.subcategory,...(v.tags||[])].join(' ').toLowerCase();
     const difficulty=String(v.cefr||'').toUpperCase();
     return (!q||txt.includes(q))
@@ -210,16 +210,22 @@ function speak(text,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  stopSpeechAudio();
-  const url=youdaoPronunciationUrl(value,target);
-  try{
-    const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.volume=1;
-    audio.onended=()=>{if(speechAudio===audio)speechAudio=null;};
-    audio.onerror=()=>{if(speechAudio!==audio)return;speechAudio=null;if(!speak(value,target))playGoogleTTS(value,target);};
-    audio.src=url;
-    const p=audio.play();
-    if(p&&typeof p.catch==='function')p.catch(()=>{if(speechAudio===audio){speechAudio=null;if(!speak(value,target))playGoogleTTS(value,target);}});
-  }catch{if(!speak(value,target))playGoogleTTS(value,target);}
+  const w=state.word||{},preferred=target==='en-GB'?w.audio_uk:w.audio_us;
+  const candidates=[preferred,youdaoPronunciationUrl(value,target)];
+  let index=0;
+  const tryNext=()=>{
+    const url=candidates[index++];
+    if(!url){speak(value,target);return;}
+    stopSpeechAudio();
+    try{
+      const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.volume=1;
+      audio.onended=()=>{if(speechAudio===audio)speechAudio=null;};
+      audio.onerror=()=>{if(speechAudio===audio){speechAudio=null;tryNext();}};
+      audio.src=url;const p=audio.play();
+      if(p&&typeof p.catch==='function')p.catch(()=>{if(speechAudio===audio){speechAudio=null;tryNext();}});
+    }catch{tryNext();}
+  };
+  tryNext();
 }
 async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
 async function playGoogleTTS(value,target){
@@ -421,7 +427,73 @@ function toggleSentenceLoop(){
 }
 function setSpeed(s){state.speed=Number(s)||1;if(ytPlayer?.setPlaybackRate){try{ytPlayer.setPlaybackRate(state.speed);}catch{}}syncSubtitle(Number(ytPlayer?.getCurrentTime?.()||0));document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===state.speed));}
 function setSubtitleSize(s){const allowed=[75,100,125,150,200];const n=Number(s)||100;state.subtitleSize=allowed.includes(n)?n:100;const list=$('.subtitle-list');if(list)list.dataset.scale=String(state.subtitleSize);document.querySelectorAll('.subtitle-scale-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.scale)===state.subtitleSize));}
-function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
+function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);syncSubtitle(Number(ytPlayer?.getCurrentTime?.()||0));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
+const transcriptHydrationJobs={};
+
+function transcriptCacheKey(videoId){return 'sanmu-transcript-v2-'+videoId;}
+function loadTranscriptCache(videoId){
+  try{const x=JSON.parse(localStorage.getItem(transcriptCacheKey(videoId))||'null');return Array.isArray(x)?x:[];}catch{return [];}
+}
+function saveTranscriptCache(videoId,rows){try{localStorage.setItem(transcriptCacheKey(videoId),JSON.stringify(rows));}catch{}}
+function splitTranscriptSentence(text){
+  const clean=String(text||'').replace(/\s+/g,' ').trim();
+  if(!clean)return [];
+  return (clean.match(/[^.!?。！？]+[.!?。！？]+|[^.!?。！？]+$/g)||[clean]).map(x=>x.trim()).filter(Boolean);
+}
+function parseRemoteTranscript(raw){
+  const cues=[], re=/^\s*\[(?:(\d+)\:)?(\d{1,2})\:(\d{2})(?:[.,](\d{1,3}))?\]\s*(.+?)\s*$/;
+  for(const line of String(raw||'').split(/\r?\n/)){
+    const m=line.match(re);if(!m)continue;
+    const ms=String(m[4]||'').padEnd(3,'0').slice(0,3);
+    const start=Number(m[1]||0)*3600+Number(m[2])*60+Number(m[3])+Number(ms)/1000;
+    if(m[5])cues.push({start,text:m[5].trim()});
+  }
+  const out=[];
+  for(let i=0;i<cues.length;i++){
+    const cur=cues[i],next=cues[i+1],end=Math.max(cur.start+1,next?next.start:cur.start+Math.max(5,cur.text.length/12));
+    const parts=splitTranscriptSentence(cur.text);
+    if(parts.length===1){out.push({start:+cur.start.toFixed(3),end:+end.toFixed(3),en:parts[0],zh:''});continue;}
+    const total=Math.max(1,parts.reduce((n,x)=>n+x.length,0));let cursor=cur.start;
+    for(const part of parts){
+      const span=Math.max(.7,(end-cur.start)*(part.length/total)),e=Math.min(end,cursor+span);
+      out.push({start:+cursor.toFixed(3),end:+e.toFixed(3),en:part,zh:''});cursor=e;
+    }
+  }
+  return out.filter((x,i)=>x.en&&(!i||x.en.toLowerCase()!==out[i-1].en.toLowerCase())).slice(0,2500);
+}
+async function fetchRemoteTranscript(videoId){
+  for(const url of [
+    'https://youtube-transcript.ai/transcript/'+encodeURIComponent(videoId)+'.txt?lang=en',
+    'https://youtube-transcript.ai/transcript/'+encodeURIComponent(videoId)+'.txt'
+  ]){
+    try{
+      const r=await fetch(url,{cache:'no-store'});if(!r.ok)continue;
+      const rows=parseRemoteTranscript(await r.text());
+      if(rows.length>=8&&rows.reduce((n,x)=>n+x.en.length,0)>=180)return rows;
+    }catch{}
+  }
+  return [];
+}
+function refreshSubtitleList(){
+  const v=selectedVideo(),list=document.querySelector('.subtitle-list');if(!v||!list)return;
+  list.innerHTML=subtitleHTML(v);syncSubtitle(Number(ytPlayer?.getCurrentTime?.()||0));
+}
+async function hydrateTranscript(v){
+  if(!v?.id)return;
+  const cached=loadTranscriptCache(v.id);
+  const current=Array.isArray(v.transcript)?v.transcript:[];
+  if(cached.length>=8&&cached.reduce((n,x)=>n+String(x.en||'').length,0)>=180){
+    v.transcript=cached;refreshSubtitleList();translateMissingSubtitles(v);return;
+  }
+  if(current.length>=8&&current.reduce((n,x)=>n+String(x.en||'').length,0)>=180){translateMissingSubtitles(v);return;}
+  if(transcriptHydrationJobs[v.id])return transcriptHydrationJobs[v.id];
+  transcriptHydrationJobs[v.id]=(async()=>{
+    const rows=await fetchRemoteTranscript(v.id);if(!rows.length)return;
+    v.transcript=rows;v.captions='available';v.captionLanguage='en';v.captionQuality='runtime-verified';
+    saveTranscriptCache(v.id,rows);refreshSubtitleList();await translateMissingSubtitles(v);
+  })().finally(()=>{delete transcriptHydrationJobs[v.id];});
+  return transcriptHydrationJobs[v.id];
+}
 const subtitleTranslationJobs={};
 function subtitleTranslationCache(videoId){
   try{return JSON.parse(localStorage.getItem('sanmu-zh-subtitles-'+videoId)||'{}')||{};}catch{return {};}
@@ -471,7 +543,7 @@ function watch(){
   const v=selectedVideo();
   if(!v)return '<div class="empty">找不到影片。</div>';
   markHistory(v);
-  setTimeout(()=>translateMissingSubtitles(v),60);
+  setTimeout(()=>hydrateTranscript(v),80);
   const scale=state.subtitleSize||100;
   const offset=Number(state.subtitleOffset)||0;
   const rate=Number(state.subtitleRate)||1;
