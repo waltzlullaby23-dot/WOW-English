@@ -509,9 +509,7 @@ def ydl_info(video_id):
     return {}
  
 def fetch_english_via_free_transcript_api(video_id: str):
-    # FreeTranscriptAPI: no key required for low-volume use; use an optional
-    # secret key when available for higher throughput. This avoids GitHub
-    # runner bot checks against YouTube itself.
+    # FreeTranscriptAPI expects a YouTube URL, not a bare video id.
     try:
         import requests
         headers={'User-Agent':'SanmuEng/1.0'}
@@ -519,38 +517,50 @@ def fetch_english_via_free_transcript_api(video_id: str):
         if key: headers['Authorization']=f'Bearer {key}'
         r=requests.get(
             'https://api.freetranscriptapi.com/v1/transcript',
-            params={'video_url':video_id,'lang':'en'},
-            headers=headers,timeout=8
+            params={'video_url':f'https://www.youtube.com/watch?v={video_id}','lang':'en'},
+            headers=headers,timeout=12
         )
         if not r.ok:return []
         data=r.json() or {}
-        raw=data.get('transcript') or []
+        raw=data.get('transcript') or data.get('segments') or []
         rows=[]
         for x in raw:
-            text=clean_text(x.get('text') or x.get('en') or '')
-            start=float(x.get('start') or 0)
-            dur=float(x.get('duration') or 0)
-            if text: rows.append({'start':start,'end':start+max(.5,dur),'en':text})
+            text=clean_text(x.get('text') or x.get('en') or x.get('caption') or '')
+            start=float(x.get('start') or x.get('offset') or 0)/ (1000 if float(x.get('start') or x.get('offset') or 0)>100000 else 1)
+            dur=float(x.get('duration') or 0)/ (1000 if float(x.get('duration') or 0)>100000 else 1)
+            if text:rows.append({'start':start,'end':start+max(.5,dur),'en':text})
         return normalize_segments(rows)
     except Exception:
         return []
 
+def fetch_english_via_transcript_txt(video_id: str):
+    # Independent hosted fallback. It is useful when GitHub runner IPs are blocked by YouTube.
+    try:
+        import requests
+        u=f'https://youtube-transcript.ai/transcript/{video_id}.txt?lang=en'
+        r=requests.get(u,timeout=12,headers={'User-Agent':'SanmuEng/1.0'})
+        if not r.ok:return []
+        rows=parse_public_transcript_text(r.text)
+        return normalize_segments(rows)
+    except Exception:
+        return []
 def best_english_transcript(video_id: str, duration: float):
     candidates=[]
-    # First use YouTube's own caption track metadata. This is the most direct
-    # source and preserves timestamps for sentence-level synchronization.
-    try:
-        en_rows, zh_rows, source_name, source_lang = fetch_caption_tracks_from_player(video_id)
-        if en_rows:
-            candidates.append((f'youtube-{source_name}', None, en_rows, zh_rows))
-    except Exception:
-        pass
-    # Hosted transcript API is the next fallback for runner reliability.
+    # Hosted transcript services are tried first because GitHub-hosted runners
+    # can be blocked by YouTube's direct caption endpoints.
     try:
         segs=fetch_english_via_free_transcript_api(video_id)
         if segs:candidates.append(('freetranscriptapi',None,segs,[]))
     except Exception:pass
-    # Direct transcript API is a final fallback.
+    try:
+        segs=fetch_english_via_transcript_txt(video_id)
+        if segs:candidates.append(('youtube-transcript-ai',None,segs,[]))
+    except Exception:pass
+    # Then use YouTube's own caption metadata / local transcript libraries.
+    try:
+        en_rows,zh_rows,source_name,source_lang=fetch_caption_tracks_from_player(video_id)
+        if en_rows:candidates.append((f'youtube-{source_name}',None,en_rows,zh_rows))
+    except Exception:pass
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
