@@ -693,12 +693,18 @@ def main():
                 'term':v.get('subcategory',''),
                 'title':v.get('title','')
             }))
-    repair_candidates=repair_candidates[:11]
+    # Keep each run bounded: repair only part of the legacy queue, then spend
+    # the remaining processing budget on genuinely new videos.
+    run_budget=max(1,int(CONFIG.get('maxProcess',10)))
+    repair_budget=min(len(repair_candidates),max(0,run_budget//2))
+    repair_candidates=repair_candidates[:repair_budget]
 
     new=[];review=[]
     repaired=0
+    processed=0
     for idx,(vid,meta) in enumerate(repair_candidates):
         rec,err=process_video(vid,meta,existing,idx)
+        processed+=1
         if rec:
             existing[vid]=rec;new.append(rec);repaired+=1
         elif err and err.get('reason')!='duplicate':
@@ -714,9 +720,9 @@ def main():
                 cand.setdefault(vid,{'query':q,'category':cat,'term':term,'title':clean_text(row.get('title',''))})
         time.sleep(float(CONFIG['queryCooldown']))
     candidates=list(cand.items())[:int(CONFIG['maxCandidates'])]
-    processed=0
-    for idx,(vid,meta) in enumerate(candidates[:int(CONFIG['maxProcess'])]):
-        rec,err=process_video(vid,meta,existing,idx)
+    remaining=max(0,run_budget-processed)
+    for idx,(vid,meta) in enumerate(candidates[:remaining]):
+        rec,err=process_video(vid,meta,existing,idx+processed)
         processed+=1
         if rec:
             existing[vid]=rec;new.append(rec)
