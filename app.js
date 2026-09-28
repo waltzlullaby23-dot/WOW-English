@@ -515,46 +515,33 @@ function playAudioCandidates(urls,index,word,locale){
   try{
     if(speechAudio){try{speechAudio.pause();}catch{}speechAudio=null;}
     const audio=new Audio();
-    audio.preload='auto';audio.src=urls[index];audio.volume=1;audio.setAttribute('playsinline','');
+    audio.preload='auto';audio.src=urls[index];audio.volume=1;audio.muted=false;audio.setAttribute('playsinline','');
     speechAudio=audio;window.__sanmuAudioLast={word,locale,status:'loading',source:'audio',url:audio.src};
     let settled=false;
     const fallback=()=>{if(settled)return;settled=true;if(speechAudio===audio)speechAudio=null;try{audio.pause();}catch{};playAudioCandidates(urls,index+1,word,locale);};
     audio.onplaying=()=>{settled=true;window.__sanmuAudioLast={word,locale,status:'playing',source:'audio',url:audio.src};};
     audio.onended=()=>{window.__sanmuAudioLast={word,locale,status:'ended',source:'audio',url:audio.src};if(speechAudio===audio)speechAudio=null;};
     audio.onerror=fallback;
+    try{audio.load();}catch{}
     const p=audio.play();if(p&&p.catch)p.catch(fallback);
-    setTimeout(fallback,1600);
+    setTimeout(fallback,1800);
     return true;
   }catch{return playAudioCandidates(urls,index+1,word,locale);}
 }
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  // Primary: browser's native speech engine, called directly from the click.
-  // This avoids waiting for any network request before producing sound.
-  if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
-    try{
-      const synth=window.speechSynthesis;
-      refreshSpeechVoices();
-      try{synth.cancel();}catch{}
-      try{synth.resume();}catch{}
-      const u=new SpeechSynthesisUtterance(value);
-      u.lang=target;
-      u.voice=accentVoice(target)||null;
-      u.rate=.9;u.pitch=1;u.volume=1;
-      let started=false;
-      window.__sanmuAudioLast={word:value,locale:target,status:'queued',source:'speechSynthesis'};
-      u.onstart=()=>{started=true;window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'speechSynthesis'};};
-      u.onend=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',source:'speechSynthesis'};};
-      u.onerror=()=>{if(!started)playAudioCandidates(audioCandidates(value,target),0,value,target);};
-      synth.speak(u);
-      // Some Chrome/Windows voice sets fail to start the first utterance.
-      // After 900ms, only then try MP3 fallbacks; never cancel a speaking utterance.
-      setTimeout(()=>{if(!started&&synth.speaking===false)playAudioCandidates(audioCandidates(value,target),0,value,target);},900);
-      return true;
-    }catch{}
-  }
-  return playAudioCandidates(audioCandidates(value,target),0,value,target);
+  // Deterministic path: play a local/generated or remote MP3/WAV immediately.
+  // This is invoked directly by the button click, so the browser user-activation
+  // is still active when audio.play() is called.
+  const urls=audioCandidates(value,target);
+  playAudioCandidates(urls,0,value,target);
+  // Only use native speech as a fallback when audio files cannot start.
+  setTimeout(()=>{
+    const status=window.__sanmuAudioLast?.status;
+    if(status!=='playing'&&status!=='ended')speak(value,target);
+  },1000);
+  return true;
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
 async function playGoogleTTS(value,target){return speak(value,target);}
