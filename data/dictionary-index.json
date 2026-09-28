@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T12:38:24.688Z",
+  "generatedAt": "2026-09-28T13:30:24.369Z",
   "source": "build-time-dictionary-index",
   "words": {
     "helpful": {
@@ -23,7 +23,11 @@
           "example_zh": "我只是想幫忙。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/hˈɛlpfəl/",
+      "ipa_us": "/hˈɛlpfəl/",
+      "audioLocalUk": "audio/uk/helpful-4b739291.wav",
+      "audioLocalUs": "audio/us/helpful-4b739291.wav"
     },
     "someone": {
       "word": "someone",
@@ -45,7 +49,11 @@
           "example_zh": "有人正在外面等候。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/sˈʌmwɒn/",
+      "ipa_us": "/sˈʌmwʌn/",
+      "audioLocalUk": "audio/uk/someone-ca29f290.wav",
+      "audioLocalUs": "audio/us/someone-ca29f290.wav"
     },
     "manners": {
       "word": "manners",
@@ -67,7 +75,11 @@
           "example_zh": "他需要學習一些禮貌。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/mˈanəz/",
+      "ipa_us": "/mˈænɚz/",
+      "audioLocalUk": "audio/uk/manners-0b3e37bf.wav",
+      "audioLocalUs": "audio/us/manners-0b3e37bf.wav"
     },
     "pounds": {
       "word": "pounds",
@@ -89,7 +101,11 @@
           "example_zh": "你有一百英鎊。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pˈaʊndz/",
+      "ipa_us": "/pˈaʊndz/",
+      "audioLocalUk": "audio/uk/pounds-736137d4.wav",
+      "audioLocalUs": "audio/us/pounds-736137d4.wav"
     },
     "order": {
       "word": "order",
@@ -111,7 +127,11 @@
           "example_zh": "我下單買了食物。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɔːdə/",
+      "ipa_us": "/ˈɔːɹdɚ/",
+      "audioLocalUk": "audio/uk/order-cce55e43.wav",
+      "audioLocalUs": "audio/us/order-cce55e43.wav"
     },
     "obviously": {
       "word": "obviously",
@@ -133,7 +153,11 @@
           "example_zh": "顯然地，他累了。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɒbvɪəsli/",
+      "ipa_us": "/ˈɑːbvɪəsli/",
+      "audioLocalUk": "audio/uk/obviously-9fe5e197.wav",
+      "audioLocalUs": "audio/us/obviously-9fe5e197.wav"
     },
     "retro": {
       "word": "retro",
@@ -155,7 +179,11 @@
           "example_zh": "懷舊服裝／音樂。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɹˈɛtɹəʊ/",
+      "ipa_us": "/ɹˈɛtɹoʊ/",
+      "audioLocalUk": "audio/uk/retro-4c742a23.wav",
+      "audioLocalUs": "audio/us/retro-4c742a23.wav"
     },
     "request": {
       "word": "request",
@@ -177,7 +205,11 @@
           "example_zh": "她提出了索取更多資訊的請求。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɹɪkwˈɛst/",
+      "ipa_us": "/ɹɪkwˈɛst/",
+      "audioLocalUk": "audio/uk/request-088e29b0.wav",
+      "audioLocalUs": "audio/us/request-088e29b0.wav"
     },
     "linkers": {
       "word": "linkers",
@@ -199,7 +231,11 @@
           "example_zh": "連接詞可以連結想法，讓文章更容易理解。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈɪŋkəz/",
+      "ipa_us": "/lˈɪŋkɚz/",
+      "audioLocalUk": "audio/uk/linkers-7eda432b.wav",
+      "audioLocalUs": "audio/us/linkers-7eda432b.wav"
     },
     "questions": {
       "word": "questions",
@@ -221,7 +257,11 @@
           "example_zh": "老師問了三個問題。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/kwˈɛstʃənz/",
+      "ipa_us": "/kwˈɛstʃənz/",
+      "audioLocalUk": "audio/uk/questions-ff3d39b6.wav",
+      "audioLocalUs": "audio/us/questions-ff3d39b6.wav"
     },
     "responsibility": {
       "word": "responsibility",
@@ -243,7 +283,11 @@
           "example_zh": "照顧孩子是你的責任。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɹɪspˌɒnsəbˈɪlɪti/",
+      "ipa_us": "/ɹɪspˌɑːnsəbˈɪlɪɾi/",
+      "audioLocalUk": "audio/uk/responsibility-0cbd2645.wav",
+      "audioLocalUs": "audio/us/responsibility-0cbd2645.wav"
     },
     "politer": {
       "word": "politer",
@@ -265,14 +309,18 @@
           "example_zh": "這個說法比第一個更有禮貌。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pəlˈaɪtə/",
+      "ipa_us": "/pəlˈaɪɾɚ/",
+      "audioLocalUk": "audio/uk/politer-0517f7c8.wav",
+      "audioLocalUs": "audio/us/politer-0517f7c8.wav"
     },
     "an": {
       "word": "an",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈan/",
+      "phonetic_us": "/ˈæn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=an&type=1",
@@ -315,7 +363,11 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈan/",
+      "ipa_us": "/ˈæn/",
+      "audioLocalUk": "audio/uk/an-de73eac0.wav",
+      "audioLocalUs": "audio/us/an-de73eac0.wav"
     },
     "imperatives": {
       "word": "imperatives",
@@ -337,14 +389,18 @@
           "example_zh": "祈使句常用來給予指示。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɪmpˈɛɹətˌɪvz/",
+      "ipa_us": "/ɪmpˈɛɹətˌɪvz/",
+      "audioLocalUk": "audio/uk/imperatives-6c99bf8f.wav",
+      "audioLocalUs": "audio/us/imperatives-6c99bf8f.wav"
     },
     "or": {
       "word": "or",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɔː/",
+      "phonetic_us": "/ˈɔːɹ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=or&type=1",
@@ -408,14 +464,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɔː/",
+      "ipa_us": "/ˈɔːɹ/",
+      "audioLocalUk": "audio/uk/or-1758356d.wav",
+      "audioLocalUs": "audio/us/or-1758356d.wav"
     },
     "a": {
       "word": "a",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈeɪ/",
+      "phonetic_us": "/ˈeɪ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=a&type=1",
@@ -479,7 +539,11 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈeɪ/",
+      "ipa_us": "/ˈeɪ/",
+      "audioLocalUk": "audio/uk/a-86f7e437.wav",
+      "audioLocalUs": "audio/us/a-86f7e437.wav"
     },
     "politeness": {
       "word": "politeness",
@@ -501,14 +565,18 @@
           "example_zh": "禮貌很重要。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pəlˈaɪtnəs/",
+      "ipa_us": "/pəlˈaɪtnəs/",
+      "audioLocalUk": "audio/uk/politeness-68b6cb14.wav",
+      "audioLocalUs": "audio/us/politeness-68b6cb14.wav"
     },
     "why": {
       "word": "why",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈaɪ/",
+      "phonetic_us": "/wˈaɪ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=why&type=1",
@@ -572,14 +640,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈaɪ/",
+      "ipa_us": "/wˈaɪ/",
+      "audioLocalUk": "audio/uk/why-10cff403.wav",
+      "audioLocalUs": "audio/us/why-10cff403.wav"
     },
     "are": {
       "word": "are",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɑː/",
+      "phonetic_us": "/ˈɑːɹ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=are&type=1",
@@ -615,14 +687,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɑː/",
+      "ipa_us": "/ˈɑːɹ/",
+      "audioLocalUk": "audio/uk/are-5f9e5802.wav",
+      "audioLocalUs": "audio/us/are-5f9e5802.wav"
     },
     "than": {
       "word": "than",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ðˈɐn/",
+      "phonetic_us": "/ðˈɐn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=than&type=1",
@@ -658,14 +734,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ðˈɐn/",
+      "ipa_us": "/ðˈɐn/",
+      "audioLocalUk": "audio/uk/than-d820aa5f.wav",
+      "audioLocalUs": "audio/us/than-d820aa5f.wav"
     },
     "could": {
       "word": "could",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/kˈʊd/",
+      "phonetic_us": "/kˈʊd/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=could&type=1",
@@ -729,14 +809,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/kˈʊd/",
+      "ipa_us": "/kˈʊd/",
+      "audioLocalUk": "audio/uk/could-e30de8fd.wav",
+      "audioLocalUs": "audio/us/could-e30de8fd.wav"
     },
     "is": {
       "word": "is",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɪz/",
+      "phonetic_us": "/ˈɪz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=is&type=1",
@@ -800,14 +884,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɪz/",
+      "ipa_us": "/ˈɪz/",
+      "audioLocalUk": "audio/uk/is-b47f363e.wav",
+      "audioLocalUs": "audio/us/is-b47f363e.wav"
     },
     "very": {
       "word": "very",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/vˈɛɹi/",
+      "phonetic_us": "/vˈɛɹi/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=very&type=1",
@@ -864,14 +952,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/vˈɛɹi/",
+      "ipa_us": "/vˈɛɹi/",
+      "audioLocalUk": "audio/uk/very-e74295bf.wav",
+      "audioLocalUs": "audio/us/very-e74295bf.wav"
     },
     "can": {
       "word": "can",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/kˈan/",
+      "phonetic_us": "/kˈæn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=can&type=1",
@@ -935,21 +1027,29 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/kˈan/",
+      "ipa_us": "/kˈæn/",
+      "audioLocalUk": "audio/uk/can-7e9219a0.wav",
+      "audioLocalUs": "audio/us/can-7e9219a0.wav"
     },
     "polite": {
       "word": "polite",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/pəlˈaɪt/",
+      "phonetic_us": "/pəlˈaɪt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=polite&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=polite&type=2",
       "definition_zh": "有禮貌",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pəlˈaɪt/",
+      "ipa_us": "/pəlˈaɪt/",
+      "audioLocalUk": "audio/uk/polite-16f57568.wav",
+      "audioLocalUs": "audio/us/polite-16f57568.wav"
     },
     "important": {
       "word": "important",
@@ -971,28 +1071,36 @@
           "example_zh": "這一點很重要。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɪmpˈɔːtənt/",
+      "ipa_us": "/ɪmpˈoːɹtənt/",
+      "audioLocalUk": "audio/uk/important-5b400951.wav",
+      "audioLocalUs": "audio/us/important-5b400951.wav"
     },
     "english": {
       "word": "english",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɪŋɡlɪʃ/",
+      "phonetic_us": "/ˈɪŋɡlɪʃ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=english&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=english&type=2",
       "definition_zh": "英文",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɪŋɡlɪʃ/",
+      "ipa_us": "/ˈɪŋɡlɪʃ/",
+      "audioLocalUk": "audio/uk/english-1b669334.wav",
+      "audioLocalUs": "audio/us/english-1b669334.wav"
     },
     "how": {
       "word": "how",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/hˈaʊ/",
+      "phonetic_us": "/hˈaʊ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=how&type=1",
@@ -1056,14 +1164,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/hˈaʊ/",
+      "ipa_us": "/hˈaʊ/",
+      "audioLocalUk": "audio/uk/how-0b064373.wav",
+      "audioLocalUs": "audio/us/how-0b064373.wav"
     },
     "be": {
       "word": "be",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/bˈiː/",
+      "phonetic_us": "/bˈiː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=be&type=1",
@@ -1127,28 +1239,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/bˈiː/",
+      "ipa_us": "/bˈiː/",
+      "audioLocalUk": "audio/uk/be-986b1bc1.wav",
+      "audioLocalUs": "audio/us/be-986b1bc1.wav"
     },
     "ways": {
       "word": "ways",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈeɪz/",
+      "phonetic_us": "/wˈeɪz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=ways&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=ways&type=2",
       "definition_zh": "方法",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈeɪz/",
+      "ipa_us": "/wˈeɪz/",
+      "audioLocalUk": "audio/uk/ways-7b75b497.wav",
+      "audioLocalUs": "audio/us/ways-7b75b497.wav"
     },
     "you": {
       "word": "you",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/jˈuː/",
+      "phonetic_us": "/jˈuː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=you&type=1",
@@ -1191,28 +1311,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/jˈuː/",
+      "ipa_us": "/jˈuː/",
+      "audioLocalUk": "audio/uk/you-8af56de6.wav",
+      "audioLocalUs": "audio/us/you-8af56de6.wav"
     },
     "expressing": {
       "word": "expressing",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ɛkspɹˈɛsɪŋ/",
+      "phonetic_us": "/ɛkspɹˈɛsɪŋ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=expressing&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=expressing&type=2",
       "definition_zh": "表達",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɛkspɹˈɛsɪŋ/",
+      "ipa_us": "/ɛkspɹˈɛsɪŋ/",
+      "audioLocalUk": "audio/uk/expressing-0d25d96a.wav",
+      "audioLocalUs": "audio/us/expressing-0d25d96a.wav"
     },
     "but": {
       "word": "but",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/bˈʌt/",
+      "phonetic_us": "/bˈʌt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=but&type=1",
@@ -1276,28 +1404,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/bˈʌt/",
+      "ipa_us": "/bˈʌt/",
+      "audioLocalUk": "audio/uk/but-786e97b3.wav",
+      "audioLocalUs": "audio/us/but-786e97b3.wav"
     },
     "depending": {
       "word": "depending",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/dɪpˈɛndɪŋ/",
+      "phonetic_us": "/dɪpˈɛndɪŋ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=depending&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=depending&type=2",
       "definition_zh": "依賴",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/dɪpˈɛndɪŋ/",
+      "ipa_us": "/dɪpˈɛndɪŋ/",
+      "audioLocalUk": "audio/uk/depending-c16d881c.wav",
+      "audioLocalUs": "audio/us/depending-c16d881c.wav"
     },
     "in": {
       "word": "in",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɪn/",
+      "phonetic_us": "/ˈɪn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=in&type=1",
@@ -1361,28 +1497,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɪn/",
+      "ipa_us": "/ˈɪn/",
+      "audioLocalUk": "audio/uk/in-af10ef20.wav",
+      "audioLocalUs": "audio/us/in-af10ef20.wav"
     },
     "want": {
       "word": "want",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈɒnt/",
+      "phonetic_us": "/wˈɑːnt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=want&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=want&type=2",
       "definition_zh": "要",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɒnt/",
+      "ipa_us": "/wˈɑːnt/",
+      "audioLocalUk": "audio/uk/want-b5f23bca.wav",
+      "audioLocalUs": "audio/us/want-b5f23bca.wav"
     },
     "there": {
       "word": "there",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ðˈeə/",
+      "phonetic_us": "/ðˈɛɹ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=there&type=1",
@@ -1446,21 +1590,29 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ðˈeə/",
+      "ipa_us": "/ðˈɛɹ/",
+      "audioLocalUk": "audio/uk/there-490528f3.wav",
+      "audioLocalUs": "audio/us/there-490528f3.wav"
     },
     "welcome": {
       "word": "welcome",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈɛlkʌm/",
+      "phonetic_us": "/wˈɛlkʌm/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=welcome&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=welcome&type=2",
       "definition_zh": "歡迎",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɛlkʌm/",
+      "ipa_us": "/wˈɛlkʌm/",
+      "audioLocalUk": "audio/uk/welcome-c0b137fe.wav",
+      "audioLocalUs": "audio/us/welcome-c0b137fe.wav"
     },
     "real": {
       "word": "real",
@@ -1482,7 +1634,11 @@
           "example_zh": "這是一個真實的例子。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɹˈiəl/",
+      "ipa_us": "/ɹˈiːəl/",
+      "audioLocalUk": "audio/uk/real-c9c64e07.wav",
+      "audioLocalUs": "audio/us/real-c9c64e07.wav"
     },
     "different": {
       "word": "different",
@@ -1504,14 +1660,18 @@
           "example_zh": "你可以用不同的方式來表達。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/dˈɪfɹənt/",
+      "ipa_us": "/dˈɪfɹənt/",
+      "audioLocalUk": "audio/uk/different-517d5a72.wav",
+      "audioLocalUs": "audio/us/different-517d5a72.wav"
     },
     "of": {
       "word": "of",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɒv/",
+      "phonetic_us": "/ˈʌv/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=of&type=1",
@@ -1568,35 +1728,47 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɒv/",
+      "ipa_us": "/ˈʌv/",
+      "audioLocalUk": "audio/uk/of-de04fa0e.wav",
+      "audioLocalUs": "audio/us/of-de04fa0e.wav"
     },
     "bbc": {
       "word": "bbc",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/bˌiːbˌiːsˈiː/",
+      "phonetic_us": "/bˌiːbˌiːsˈiː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=bbc&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=bbc&type=2",
       "definition_zh": "英国广播公司",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/bˌiːbˌiːsˈiː/",
+      "ipa_us": "/bˌiːbˌiːsˈiː/",
+      "audioLocalUk": "audio/uk/bbc-0fbe2a58.wav",
+      "audioLocalUs": "audio/us/bbc-0fbe2a58.wav"
     },
     "learning": {
       "word": "learning",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/lˈɜːnɪŋ/",
+      "phonetic_us": "/lˈɜːnɪŋ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=learning&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=learning&type=2",
       "definition_zh": "學習",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈɜːnɪŋ/",
+      "ipa_us": "/lˈɜːnɪŋ/",
+      "audioLocalUk": "audio/uk/learning-ea9ffb6e.wav",
+      "audioLocalUs": "audio/us/learning-ea9ffb6e.wav"
     },
     "today": {
       "word": "today",
@@ -1618,14 +1790,18 @@
           "example_zh": "我今天很忙。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tədˈeɪ/",
+      "ipa_us": "/tədˈeɪ/",
+      "audioLocalUk": "audio/uk/today-2dd2bed7.wav",
+      "audioLocalUs": "audio/us/today-2dd2bed7.wav"
     },
     "it": {
       "word": "it",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɪt/",
+      "phonetic_us": "/ˈɪt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=it&type=1",
@@ -1689,28 +1865,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɪt/",
+      "ipa_us": "/ˈɪt/",
+      "audioLocalUk": "audio/uk/it-6c5522ca.wav",
+      "audioLocalUs": "audio/us/it-6c5522ca.wav"
     },
     "talking": {
       "word": "talking",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tˈɔːkɪŋ/",
+      "phonetic_us": "/tˈɔːkɪŋ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=talking&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=talking&type=2",
       "definition_zh": "對話",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tˈɔːkɪŋ/",
+      "ipa_us": "/tˈɔːkɪŋ/",
+      "audioLocalUk": "audio/uk/talking-a2716ecc.wav",
+      "audioLocalUs": "audio/us/talking-a2716ecc.wav"
     },
     "on": {
       "word": "on",
       "source": "datamuse-build",
       "pos": "dj",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɒn/",
+      "phonetic_us": "/ˈɑːn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=on&type=1",
@@ -1774,28 +1958,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɒn/",
+      "ipa_us": "/ˈɑːn/",
+      "audioLocalUk": "audio/uk/on-db3d405b.wav",
+      "audioLocalUs": "audio/us/on-db3d405b.wav"
     },
     "food": {
       "word": "food",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/fˈuːd/",
+      "phonetic_us": "/fˈuːd/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=food&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=food&type=2",
       "definition_zh": "食物",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/fˈuːd/",
+      "ipa_us": "/fˈuːd/",
+      "audioLocalUk": "audio/uk/food-39ccb32d.wav",
+      "audioLocalUs": "audio/us/food-39ccb32d.wav"
     },
     "to": {
       "word": "to",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tˈuː/",
+      "phonetic_us": "/tˈuː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=to&type=1",
@@ -1859,14 +2051,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tˈuː/",
+      "ipa_us": "/tˈuː/",
+      "audioLocalUk": "audio/uk/to-4374aaee.wav",
+      "audioLocalUs": "audio/us/to-4374aaee.wav"
     },
     "easy": {
       "word": "easy",
       "source": "datamuse-build",
       "pos": "dj",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈiːzi/",
+      "phonetic_us": "/ˈiːzi/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=easy&type=1",
@@ -1930,28 +2126,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈiːzi/",
+      "ipa_us": "/ˈiːzi/",
+      "audioLocalUk": "audio/uk/easy-861c4f67.wav",
+      "audioLocalUs": "audio/us/easy-861c4f67.wav"
     },
     "talk": {
       "word": "talk",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tˈɔːk/",
+      "phonetic_us": "/tˈɔːk/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=talk&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=talk&type=2",
       "definition_zh": "傾訴",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tˈɔːk/",
+      "ipa_us": "/tˈɔːk/",
+      "audioLocalUk": "audio/uk/talk-e55e91b2.wav",
+      "audioLocalUs": "audio/us/talk-e55e91b2.wav"
     },
     "from": {
       "word": "from",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/fɹˈɒm/",
+      "phonetic_us": "/fɹˈʌm/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=from&type=1",
@@ -1973,7 +2177,11 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/fɹˈɒm/",
+      "ipa_us": "/fɹˈʌm/",
+      "audioLocalUk": "audio/uk/from-0b1e95cf.wav",
+      "audioLocalUs": "audio/us/from-0b1e95cf.wav"
     },
     "favourite": {
       "word": "favourite",
@@ -1995,7 +2203,11 @@
           "example_zh": "這是我最喜歡的食物。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/fˈeɪvɹɪt/",
+      "ipa_us": "/fˈeɪvɹɪt/",
+      "audioLocalUk": "audio/uk/favourite-824168b6.wav",
+      "audioLocalUs": "audio/us/favourite-824168b6.wav"
     },
     "foods": {
       "word": "foods",
@@ -2017,14 +2229,18 @@
           "example_zh": "不同食物含有不同的營養素。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/fˈuːdz/",
+      "ipa_us": "/fˈuːdz/",
+      "audioLocalUk": "audio/uk/foods-2b184d33.wav",
+      "audioLocalUs": "audio/us/foods-2b184d33.wav"
     },
     "we": {
       "word": "we",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈiː/",
+      "phonetic_us": "/wˈiː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=we&type=1",
@@ -2046,7 +2262,11 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈiː/",
+      "ipa_us": "/wˈiː/",
+      "audioLocalUk": "audio/uk/we-676e6f35.wav",
+      "audioLocalUs": "audio/us/we-676e6f35.wav"
     },
     "we'll": {
       "word": "we'll",
@@ -2068,21 +2288,29 @@
           "example_zh": "我們明天會見到你。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈiːl/",
+      "ipa_us": "/wˈiːl/",
+      "audioLocalUk": "audio/uk/we_ll-b1df8fa5.wav",
+      "audioLocalUs": "audio/us/we_ll-b1df8fa5.wav"
     },
     "eat": {
       "word": "eat",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈiːt/",
+      "phonetic_us": "/ˈiːt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=eat&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=eat&type=2",
       "definition_zh": "吃",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈiːt/",
+      "ipa_us": "/ˈiːt/",
+      "audioLocalUk": "audio/uk/eat-d8945575.wav",
+      "audioLocalUs": "audio/us/eat-d8945575.wav"
     },
     "them": {
       "word": "them",
@@ -2104,7 +2332,11 @@
           "example_zh": "我昨天看到他們。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ðˈɛm/",
+      "ipa_us": "/ðˈɛm/",
+      "audioLocalUk": "audio/uk/them-98910a6e.wav",
+      "audioLocalUs": "audio/us/them-98910a6e.wav"
     },
     "what's": {
       "word": "what's",
@@ -2126,14 +2358,18 @@
           "example_zh": "你叫什麼名字？"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɒts/",
+      "ipa_us": "/wˈʌts/",
+      "audioLocalUk": "audio/uk/what_s-951a34d9.wav",
+      "audioLocalUs": "audio/us/what_s-951a34d9.wav"
     },
     "about": {
       "word": "about",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ɐbˈaʊt/",
+      "phonetic_us": "/ɐbˈaʊt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=about&type=1",
@@ -2197,14 +2433,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɐbˈaʊt/",
+      "ipa_us": "/ɐbˈaʊt/",
+      "audioLocalUk": "audio/uk/about-5780daf6.wav",
+      "audioLocalUs": "audio/us/about-5780daf6.wav"
     },
     "particular": {
       "word": "particular",
       "source": "datamuse-build",
       "pos": "dj",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/pətˈɪkjʊlə/",
+      "phonetic_us": "/pɚtˈɪkjʊlɚ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=particular&type=1",
@@ -2268,28 +2508,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pətˈɪkjʊlə/",
+      "ipa_us": "/pɚtˈɪkjʊlɚ/",
+      "audioLocalUk": "audio/uk/particular-8c4a6b36.wav",
+      "audioLocalUs": "audio/us/particular-8c4a6b36.wav"
     },
     "voice": {
       "word": "voice",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/vˈɔɪs/",
+      "phonetic_us": "/vˈɔɪs/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=voice&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=voice&type=2",
       "definition_zh": "聲音",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/vˈɔɪs/",
+      "ipa_us": "/vˈɔɪs/",
+      "audioLocalUk": "audio/uk/voice-47ef6589.wav",
+      "audioLocalUs": "audio/us/voice-47ef6589.wav"
     },
     "our": {
       "word": "our",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈaʊə/",
+      "phonetic_us": "/ˈaʊɚ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=our&type=1",
@@ -2304,7 +2552,11 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈaʊə/",
+      "ipa_us": "/ˈaʊɚ/",
+      "audioLocalUk": "audio/uk/our-2cd7484b.wav",
+      "audioLocalUs": "audio/us/our-2cd7484b.wav"
     },
     "look": {
       "word": "look",
@@ -2326,14 +2578,18 @@
           "example_zh": "看看這個例子。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈʊk/",
+      "ipa_us": "/lˈʊk/",
+      "audioLocalUk": "audio/uk/look-e09315fa.wav",
+      "audioLocalUs": "audio/us/look-e09315fa.wav"
     },
     "and": {
       "word": "and",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈand/",
+      "phonetic_us": "/ˈænd/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=and&type=1",
@@ -2397,77 +2653,101 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈand/",
+      "ipa_us": "/ˈænd/",
+      "audioLocalUk": "audio/uk/and-cffa50a3.wav",
+      "audioLocalUs": "audio/us/and-cffa50a3.wav"
     },
     "changes": {
       "word": "changes",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tʃˈeɪndʒɪz/",
+      "phonetic_us": "/tʃˈeɪndʒɪz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=changes&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=changes&type=2",
       "definition_zh": "變更",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tʃˈeɪndʒɪz/",
+      "ipa_us": "/tʃˈeɪndʒɪz/",
+      "audioLocalUk": "audio/uk/changes-49a04ba4.wav",
+      "audioLocalUs": "audio/us/changes-49a04ba4.wav"
     },
     "focus": {
       "word": "focus",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/fˈəʊkəs/",
+      "phonetic_us": "/fˈoʊkəs/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=focus&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=focus&type=2",
       "definition_zh": "焦點",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/fˈəʊkəs/",
+      "ipa_us": "/fˈoʊkəs/",
+      "audioLocalUk": "audio/uk/focus-78918dca.wav",
+      "audioLocalUs": "audio/us/focus-78918dca.wav"
     },
     "sentence": {
       "word": "sentence",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/sˈɛntəns/",
+      "phonetic_us": "/sˈɛntəns/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=sentence&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=sentence&type=2",
       "definition_zh": "句子",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/sˈɛntəns/",
+      "ipa_us": "/sˈɛntəns/",
+      "audioLocalUk": "audio/uk/sentence-a17dbb9a.wav",
+      "audioLocalUs": "audio/us/sentence-a17dbb9a.wav"
     },
     "lots": {
       "word": "lots",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/lˈɒts/",
+      "phonetic_us": "/lˈɑːts/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=lots&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=lots&type=2",
       "definition_zh": "批次",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈɒts/",
+      "ipa_us": "/lˈɑːts/",
+      "audioLocalUk": "audio/uk/lots-a75bc65e.wav",
+      "audioLocalUs": "audio/us/lots-a75bc65e.wav"
     },
     "synonyms": {
       "word": "synonyms",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/sˈɪnənˌɪmz/",
+      "phonetic_us": "/sˈɪnənˌɪmz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=synonyms&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=synonyms&type=2",
       "definition_zh": "同義詞",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/sˈɪnənˌɪmz/",
+      "ipa_us": "/sˈɪnənˌɪmz/",
+      "audioLocalUk": "audio/uk/synonyms-19409e7a.wav",
+      "audioLocalUs": "audio/us/synonyms-19409e7a.wav"
     },
     "passive": {
       "word": "passive",
@@ -2489,21 +2769,29 @@
           "example_zh": "被動會改變焦點。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pˈasɪv/",
+      "ipa_us": "/pˈæsɪv/",
+      "audioLocalUk": "audio/uk/passive-8cf03f5f.wav",
+      "audioLocalUs": "audio/us/passive-8cf03f5f.wav"
     },
     "choose": {
       "word": "choose",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tʃˈuːz/",
+      "phonetic_us": "/tʃˈuːz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=choose&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=choose&type=2",
       "definition_zh": "選擇",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tʃˈuːz/",
+      "ipa_us": "/tʃˈuːz/",
+      "audioLocalUk": "audio/uk/choose-9477fdc8.wav",
+      "audioLocalUs": "audio/us/choose-9477fdc8.wav"
     },
     "let's": {
       "word": "let's",
@@ -2525,14 +2813,18 @@
           "example_zh": "我們走吧。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈɛts/",
+      "ipa_us": "/lˈɛts/",
+      "audioLocalUk": "audio/uk/let_s-062ef401.wav",
+      "audioLocalUs": "audio/us/let_s-062ef401.wav"
     },
     "often": {
       "word": "often",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɒfən/",
+      "phonetic_us": "/ˈɔfən/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=often&type=1",
@@ -2596,42 +2888,54 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɒfən/",
+      "ipa_us": "/ˈɔfən/",
+      "audioLocalUk": "audio/uk/often-6b77993c.wav",
+      "audioLocalUs": "audio/us/often-6b77993c.wav"
     },
     "use": {
       "word": "use",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/jˈuːs/",
+      "phonetic_us": "/jˈuːs/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=use&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=use&type=2",
       "definition_zh": "使用",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/jˈuːs/",
+      "ipa_us": "/jˈuːs/",
+      "audioLocalUk": "audio/uk/use-04489a12.wav",
+      "audioLocalUs": "audio/us/use-04489a12.wav"
     },
     "context": {
       "word": "context",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/kˈɒntɛkst/",
+      "phonetic_us": "/kˈɑːntɛkst/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=context&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=context&type=2",
       "definition_zh": "內容",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/kˈɒntɛkst/",
+      "ipa_us": "/kˈɑːntɛkst/",
+      "audioLocalUk": "audio/uk/context-ec2727b3.wav",
+      "audioLocalUs": "audio/us/context-ec2727b3.wav"
     },
     "the": {
       "word": "the",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ðˈə/",
+      "phonetic_us": "/ðˈə/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=the&type=1",
@@ -2660,28 +2964,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ðˈə/",
+      "ipa_us": "/ðˈə/",
+      "audioLocalUk": "audio/uk/the-bbccdf2e.wav",
+      "audioLocalUs": "audio/us/the-bbccdf2e.wav"
     },
     "choosing": {
       "word": "choosing",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tʃˈuːzɪŋ/",
+      "phonetic_us": "/tʃˈuːzɪŋ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=choosing&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=choosing&type=2",
       "definition_zh": "選擇",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tʃˈuːzɪŋ/",
+      "ipa_us": "/tʃˈuːzɪŋ/",
+      "audioLocalUk": "audio/uk/choosing-e2d35000.wav",
+      "audioLocalUs": "audio/us/choosing-e2d35000.wav"
     },
     "at": {
       "word": "at",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈat/",
+      "phonetic_us": "/ˈæt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=at&type=1",
@@ -2745,14 +3057,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈat/",
+      "ipa_us": "/ˈæt/",
+      "audioLocalUk": "audio/uk/at-27e90dfa.wav",
+      "audioLocalUs": "audio/us/at-27e90dfa.wav"
     },
     "do": {
       "word": "do",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/dˈuː/",
+      "phonetic_us": "/dˈuː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=do&type=1",
@@ -2816,14 +3132,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/dˈuː/",
+      "ipa_us": "/dˈuː/",
+      "audioLocalUk": "audio/uk/do-eadcd9bd.wav",
+      "audioLocalUs": "audio/us/do-eadcd9bd.wav"
     },
     "which": {
       "word": "which",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈɪtʃ/",
+      "phonetic_us": "/wˈɪtʃ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=which&type=1",
@@ -2887,28 +3207,36 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɪtʃ/",
+      "ipa_us": "/wˈɪtʃ/",
+      "audioLocalUk": "audio/uk/which-ed04ff4d.wav",
+      "audioLocalUs": "audio/us/which-ed04ff4d.wav"
     },
     "think": {
       "word": "think",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/θˈɪŋk/",
+      "phonetic_us": "/θˈɪŋk/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=think&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=think&type=2",
       "definition_zh": "思维",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/θˈɪŋk/",
+      "ipa_us": "/θˈɪŋk/",
+      "audioLocalUk": "audio/uk/think-b7c61c80.wav",
+      "audioLocalUs": "audio/us/think-b7c61c80.wav"
     },
     "one": {
       "word": "one",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈɒn/",
+      "phonetic_us": "/wˈʌn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=one&type=1",
@@ -2972,14 +3300,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɒn/",
+      "ipa_us": "/wˈʌn/",
+      "audioLocalUk": "audio/uk/one-fe05bcdc.wav",
+      "audioLocalUs": "audio/us/one-fe05bcdc.wav"
     },
     "key": {
       "word": "key",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/kˈiː/",
+      "phonetic_us": "/kˈiː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=key&type=1",
@@ -3043,14 +3375,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/kˈiː/",
+      "ipa_us": "/kˈiː/",
+      "audioLocalUk": "audio/uk/key-a62f2225.wav",
+      "audioLocalUs": "audio/us/key-a62f2225.wav"
     },
     "right": {
       "word": "right",
       "source": "datamuse-build",
       "pos": "dj",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ɹˈaɪt/",
+      "phonetic_us": "/ɹˈaɪt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=right&type=1",
@@ -3114,14 +3450,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ɹˈaɪt/",
+      "ipa_us": "/ɹˈaɪt/",
+      "audioLocalUk": "audio/uk/right-d27a1f11.wav",
+      "audioLocalUs": "audio/us/right-d27a1f11.wav"
     },
     "word": {
       "word": "word",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈɜːd/",
+      "phonetic_us": "/wˈɜːd/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=word&type=1",
@@ -3185,14 +3525,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɜːd/",
+      "ipa_us": "/wˈɜːd/",
+      "audioLocalUk": "audio/uk/word-3cbcd90a.wav",
+      "audioLocalUs": "audio/us/word-3cbcd90a.wav"
     },
     "words": {
       "word": "words",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈɜːdz/",
+      "phonetic_us": "/wˈɜːdz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=words&type=1",
@@ -3256,14 +3600,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɜːdz/",
+      "ipa_us": "/wˈɜːdz/",
+      "audioLocalUk": "audio/uk/words-efb89361.wav",
+      "audioLocalUs": "audio/us/words-efb89361.wav"
     },
     "this": {
       "word": "this",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ðˈɪs/",
+      "phonetic_us": "/ðˈɪs/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=this&type=1",
@@ -3285,14 +3633,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ðˈɪs/",
+      "ipa_us": "/ðˈɪs/",
+      "audioLocalUk": "audio/uk/this-c2543fff.wav",
+      "audioLocalUs": "audio/us/this-c2543fff.wav"
     },
     "three": {
       "word": "three",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/θɹˈiː/",
+      "phonetic_us": "/θɹˈiː/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=three&type=1",
@@ -3356,133 +3708,173 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/θɹˈiː/",
+      "ipa_us": "/θɹˈiː/",
+      "audioLocalUk": "audio/uk/three-b802f384.wav",
+      "audioLocalUs": "audio/us/three-b802f384.wav"
     },
     "sound": {
       "word": "sound",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/sˈaʊnd/",
+      "phonetic_us": "/sˈaʊnd/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=sound&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=sound&type=2",
       "definition_zh": "合理",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/sˈaʊnd/",
+      "ipa_us": "/sˈaʊnd/",
+      "audioLocalUk": "audio/uk/sound-5e2e97c3.wav",
+      "audioLocalUs": "audio/us/sound-5e2e97c3.wav"
     },
     "learn": {
       "word": "learn",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/lˈɜːn/",
+      "phonetic_us": "/lˈɜːn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=learn&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=learn&type=2",
       "definition_zh": "學",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈɜːn/",
+      "ipa_us": "/lˈɜːn/",
+      "audioLocalUk": "audio/uk/learn-7dca5d4c.wav",
+      "audioLocalUs": "audio/us/learn-7dca5d4c.wav"
     },
     "pronounce": {
       "word": "pronounce",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/pɹənˈaʊns/",
+      "phonetic_us": "/pɹənˈaʊns/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=pronounce&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=pronounce&type=2",
       "definition_zh": "讀音",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pɹənˈaʊns/",
+      "ipa_us": "/pɹənˈaʊns/",
+      "audioLocalUk": "audio/uk/pronounce-080aebbf.wav",
+      "audioLocalUs": "audio/us/pronounce-080aebbf.wav"
     },
     "properly": {
       "word": "properly",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/pɹˈɒpəli/",
+      "phonetic_us": "/pɹˈɑːpɚli/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=properly&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=properly&type=2",
       "definition_zh": "正確",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/pɹˈɒpəli/",
+      "ipa_us": "/pɹˈɑːpɚli/",
+      "audioLocalUk": "audio/uk/properly-6348da66.wav",
+      "audioLocalUs": "audio/us/properly-6348da66.wav"
     },
     "we're": {
       "word": "we're",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈiə/",
+      "phonetic_us": "/wˈɪɹ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=we're&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=we're&type=2",
       "definition_zh": "我們",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈiə/",
+      "ipa_us": "/wˈɪɹ/",
+      "audioLocalUk": "audio/uk/we_re-8d3bbb6a.wav",
+      "audioLocalUs": "audio/us/we_re-8d3bbb6a.wav"
     },
     "families": {
       "word": "families",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/fˈamɪliz/",
+      "phonetic_us": "/fˈæmɪliz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=families&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=families&type=2",
       "definition_zh": "家庭",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/fˈamɪliz/",
+      "ipa_us": "/fˈæmɪliz/",
+      "audioLocalUk": "audio/uk/families-f1ac7251.wav",
+      "audioLocalUs": "audio/us/families-f1ac7251.wav"
     },
     "compare": {
       "word": "compare",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/kəmpˈeə/",
+      "phonetic_us": "/kəmpˈɛɹ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=compare&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=compare&type=2",
       "definition_zh": "比較",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/kəmpˈeə/",
+      "ipa_us": "/kəmpˈɛɹ/",
+      "audioLocalUk": "audio/uk/compare-b64ca250.wav",
+      "audioLocalUs": "audio/us/compare-b64ca250.wav"
     },
     "things": {
       "word": "things",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/θˈɪŋz/",
+      "phonetic_us": "/θˈɪŋz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=things&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=things&type=2",
       "definition_zh": "事情",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/θˈɪŋz/",
+      "ipa_us": "/θˈɪŋz/",
+      "audioLocalUk": "audio/uk/things-dac16133.wav",
+      "audioLocalUs": "audio/us/things-dac16133.wav"
     },
     "ten": {
       "word": "ten",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tˈɛn/",
+      "phonetic_us": "/tˈɛn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=ten&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=ten&type=2",
       "definition_zh": "十",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tˈɛn/",
+      "ipa_us": "/tˈɛn/",
+      "audioLocalUk": "audio/uk/ten-dd356244.wav",
+      "audioLocalUs": "audio/us/ten-dd356244.wav"
     },
     "bathroom": {
       "word": "bathroom",
@@ -3504,70 +3896,90 @@
           "example_zh": "浴室在樓上。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/bˈaθɹuːm/",
+      "ipa_us": "/bˈæθɹuːm/",
+      "audioLocalUk": "audio/uk/bathroom-72bfb054.wav",
+      "audioLocalUs": "audio/us/bathroom-72bfb054.wav"
     },
     "london": {
       "word": "london",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/lˈʌndən/",
+      "phonetic_us": "/lˈʌndən/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=london&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=london&type=2",
       "definition_zh": "倫敦",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈʌndən/",
+      "ipa_us": "/lˈʌndən/",
+      "audioLocalUk": "audio/uk/london-1645ee78.wav",
+      "audioLocalUs": "audio/us/london-1645ee78.wav"
     },
     "edinburgh": {
       "word": "edinburgh",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɛdɪnbʌɹə/",
+      "phonetic_us": "/ˈɛdɪnbʌɹə/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=edinburgh&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=edinburgh&type=2",
       "definition_zh": "愛丁堡",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɛdɪnbʌɹə/",
+      "ipa_us": "/ˈɛdɪnbʌɹə/",
+      "audioLocalUk": "audio/uk/edinburgh-1b4e9835.wav",
+      "audioLocalUs": "audio/us/edinburgh-1b4e9835.wav"
     },
     "challenge": {
       "word": "challenge",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tʃˈalɪndʒ/",
+      "phonetic_us": "/tʃˈælɪndʒ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=challenge&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=challenge&type=2",
       "definition_zh": "挑戰",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tʃˈalɪndʒ/",
+      "ipa_us": "/tʃˈælɪndʒ/",
+      "audioLocalUk": "audio/uk/challenge-bb064b23.wav",
+      "audioLocalUs": "audio/us/challenge-bb064b23.wav"
     },
     "have": {
       "word": "have",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/hˈav/",
+      "phonetic_us": "/hˈæv/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=have&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=have&type=2",
       "definition_zh": "問題",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/hˈav/",
+      "ipa_us": "/hˈæv/",
+      "audioLocalUk": "audio/uk/have-ff87cea4.wav",
+      "audioLocalUs": "audio/us/have-ff87cea4.wav"
     },
     "then": {
       "word": "then",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ðˈɛn/",
+      "phonetic_us": "/ðˈɛn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=then&type=1",
@@ -3631,63 +4043,83 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ðˈɛn/",
+      "ipa_us": "/ðˈɛn/",
+      "audioLocalUk": "audio/uk/then-6f8f8e9f.wav",
+      "audioLocalUs": "audio/us/then-6f8f8e9f.wav"
     },
     "used": {
       "word": "used",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/jˈuːzd/",
+      "phonetic_us": "/jˈuːzd/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=used&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=used&type=2",
       "definition_zh": "使用的",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/jˈuːzd/",
+      "ipa_us": "/jˈuːzd/",
+      "audioLocalUk": "audio/uk/used-192a5675.wav",
+      "audioLocalUs": "audio/us/used-192a5675.wav"
     },
     "language": {
       "word": "language",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/lˈaŋɡwɪdʒ/",
+      "phonetic_us": "/lˈæŋɡwɪdʒ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=language&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=language&type=2",
       "definition_zh": "語言",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈaŋɡwɪdʒ/",
+      "ipa_us": "/lˈæŋɡwɪdʒ/",
+      "audioLocalUk": "audio/uk/language-e11523c5.wav",
+      "audioLocalUs": "audio/us/language-e11523c5.wav"
     },
     "app": {
       "word": "app",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈap/",
+      "phonetic_us": "/ˈæp/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=app&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=app&type=2",
       "definition_zh": "應用程式",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈap/",
+      "ipa_us": "/ˈæp/",
+      "audioLocalUk": "audio/uk/app-7d104347.wav",
+      "audioLocalUs": "audio/us/app-7d104347.wav"
     },
     "looking": {
       "word": "looking",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/lˈʊkɪŋ/",
+      "phonetic_us": "/lˈʊkɪŋ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=looking&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=looking&type=2",
       "definition_zh": "看起來",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/lˈʊkɪŋ/",
+      "ipa_us": "/lˈʊkɪŋ/",
+      "audioLocalUk": "audio/uk/looking-dac3990e.wav",
+      "audioLocalUs": "audio/us/looking-dac3990e.wav"
     },
     "bond": {
       "word": "bond",
@@ -3709,42 +4141,54 @@
           "example_zh": "這對姊妹有很深的感情連結。"
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/bˈɒnd/",
+      "ipa_us": "/bˈɑːnd/",
+      "audioLocalUk": "audio/uk/bond-1d2bba5d.wav",
+      "audioLocalUs": "audio/us/bond-1d2bba5d.wav"
     },
     "between": {
       "word": "between",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/bɪtwˈiːn/",
+      "phonetic_us": "/bɪtwˈiːn/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=between&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=between&type=2",
       "definition_zh": "兩者",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/bɪtwˈiːn/",
+      "ipa_us": "/bɪtwˈiːn/",
+      "audioLocalUk": "audio/uk/between-70963405.wav",
+      "audioLocalUs": "audio/us/between-70963405.wav"
     },
     "sisters": {
       "word": "sisters",
       "source": "fallback",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/sˈɪstəz/",
+      "phonetic_us": "/sˈɪstɚz/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=sisters&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=sisters&type=2",
       "definition_zh": "兄弟姊妹",
       "entries": [],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/sˈɪstəz/",
+      "ipa_us": "/sˈɪstɚz/",
+      "audioLocalUk": "audio/uk/sisters-dad69ad5.wav",
+      "audioLocalUs": "audio/us/sisters-dad69ad5.wav"
     },
     "all": {
       "word": "all",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɔːl/",
+      "phonetic_us": "/ˈɔːl/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=all&type=1",
@@ -3808,14 +4252,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɔːl/",
+      "ipa_us": "/ˈɔːl/",
+      "audioLocalUk": "audio/uk/all-d87c4480.wav",
+      "audioLocalUs": "audio/us/all-d87c4480.wav"
     },
     "start": {
       "word": "start",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/stˈɑːt/",
+      "phonetic_us": "/stˈɑːɹt/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=start&type=1",
@@ -3879,14 +4327,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/stˈɑːt/",
+      "ipa_us": "/stˈɑːɹt/",
+      "audioLocalUk": "audio/uk/start-2b020927.wav",
+      "audioLocalUs": "audio/us/start-2b020927.wav"
     },
     "with": {
       "word": "with",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/wˈɪð/",
+      "phonetic_us": "/wˈɪð/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=with&type=1",
@@ -3908,14 +4360,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/wˈɪð/",
+      "ipa_us": "/wˈɪð/",
+      "audioLocalUk": "audio/uk/with-8fcd25a3.wav",
+      "audioLocalUs": "audio/us/with-8fcd25a3.wav"
     },
     "ever": {
       "word": "ever",
       "source": "datamuse-build",
       "pos": "dv",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/ˈɛvə/",
+      "phonetic_us": "/ˈɛvɚ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=ever&type=1",
@@ -3965,14 +4421,18 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/ˈɛvə/",
+      "ipa_us": "/ˈɛvɚ/",
+      "audioLocalUk": "audio/uk/ever-55472e53.wav",
+      "audioLocalUs": "audio/us/ever-55472e53.wav"
     },
     "th": {
       "word": "th",
       "source": "datamuse-build",
       "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
+      "phonetic_uk": "/tˌiːˈeɪtʃ/",
+      "phonetic_us": "/tˌiːˈeɪtʃ/",
       "audio_uk": "",
       "audio_us": "",
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=th&type=1",
@@ -4015,7 +4475,11 @@
           "example_zh": ""
         }
       ],
-      "complete": true
+      "complete": true,
+      "ipa_uk": "/tˌiːˈeɪtʃ/",
+      "ipa_us": "/tˌiːˈeɪtʃ/",
+      "audioLocalUk": "audio/uk/th-fa6af6e9.wav",
+      "audioLocalUs": "audio/us/th-fa6af6e9.wav"
     }
   }
 }
