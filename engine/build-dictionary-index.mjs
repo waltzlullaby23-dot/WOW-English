@@ -24,7 +24,10 @@ const COMMON_ZH={
   another:'另一個；再一個',some:'一些；某些',any:'任何；一些',each:'每一個',many:'許多',much:'很多',
   few:'少數；一些',both:'兩者都',same:'相同的；同樣的',different:'不同的',right:'正確的；右邊的',
   wrong:'錯誤的',good:'好的',well:'很好地；健康的',important:'重要的',particular:'特定的；特別的',
-  key:'關鍵的；關鍵',word:'單字；詞',words:'單字；詞語',th:'（序數字尾，如 4th）'
+  key:'關鍵的；關鍵',word:'單字；詞',words:'單字；詞語',th:'（序數字尾，如 4th）',
+  easy:'容易的；簡單的',ever:'曾經；在任何時候',someone:'某人；有人',pounds:'英鎊；磅',
+  obviously:'顯然地；明顯地',manners:'風度；禮貌；禮儀',retro:'懷舊的；重新流行的',helpful:'有幫助的；有用的',
+  responsibility:'責任；職責；任務',linkers:'連接詞；銜接語',conjunction:'連詞；連接詞'
 };
 
 const words=new Set();
