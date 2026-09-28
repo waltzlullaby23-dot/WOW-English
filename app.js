@@ -36,12 +36,22 @@ const DIFFICULTY_LABELS={A1:'初級',A2:'初中級',B1:'中級',B2:'中高級',C
 function difficultyLabel(cefr){return DIFFICULTY_LABELS[String(cefr||'').toUpperCase()]||'未分級';}
 function latestVideos(){
   return catalog.videos.map((v,i)=>({v,i})).sort((a,b)=>{
-    const ad=Date.parse(a.v.published||'')||0,bd=Date.parse(b.v.published||'')||0;
-    if(ad!==bd)return bd-ad;
-    const an=Date.parse(a.v.discoveredAt||a.v.addedAt||'')||0,bn=Date.parse(b.v.discoveredAt||b.v.addedAt||'')||0;
-    if(an!==bn)return bn-an;
+    const at=Date.parse(a.v.addedAt||a.v.acceptedAt||a.v.discoveredAt||'')||0;
+    const bt=Date.parse(b.v.addedAt||b.v.acceptedAt||b.v.discoveredAt||'')||0;
+    if(at!==bt)return bt-at;
+    const ap=Date.parse(a.v.published||'')||0,bp=Date.parse(b.v.published||'')||0;
+    if(ap!==bp)return bp-ap;
     return a.i-b.i;
   }).map(x=>x.v);
+}
+function taipeiDate(value){
+  const d=new Date(value);
+  if(Number.isNaN(d.getTime()))return '';
+  try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(d);}catch{return d.toISOString().slice(0,10);}
+}
+function isNewlyAdded(v){
+  const t=v?.addedAt||v?.acceptedAt||v?.discoveredAt;
+  return !!t && taipeiDate(t)===taipeiDate(Date.now());
 }
 function filteredVideos(){
   const q=state.search.trim().toLowerCase();
@@ -59,7 +69,7 @@ function filteredVideos(){
 }
 function categoryCount(id){return catalog.videos.filter(v=>v.category===id).length}
 function shell(main){const d=daily(), collapsed=state.sidebarCollapsed;return `<div class="app ${collapsed?'sidebar-collapsed':''}">
-<header class="topbar"><a class="brand" href="#learning"><img src="assets/logo.png" alt="三木Eng"></a><div class="search"><input value="${esc(state.search)}" oninput="updateSearch(this.value)" placeholder="搜尋影片、主題、單字、頻道…"></div><div class="top-actions"><button onclick="go('learning')">影片學習</button></div></header>
+<header class="topbar"><a class="brand" href="#learning"><img src="assets/logo.png" alt="三木Eng"></a><div class="search"><input value="${esc(state.search)}" oninput="updateSearch(this.value)" onkeydown="handleGlobalSearchKey(event,this.value)" placeholder="搜尋影片、主題、單字、頻道…"></div><div class="top-actions"><button onclick="go('learning')">影片學習</button></div></header>
 <div class="layout"><aside class="sidebar">
 <div class="brand-mini"><span>三木</span><button class="sidebar-toggle" onclick="toggleSidebar()">${collapsed?'»':'«'}</button></div>
 <button class="side-main ${['learning','watch'].includes(state.route)?'active':''}" onclick="go('learning')"><span class="side-icon">▶</span><span><b>影片學習</b><small>影片・字幕・單字</small></span></button>
@@ -89,17 +99,20 @@ function render(){destroyPlayer();document.querySelector('#app').innerHTML=shell
 function renderMain(){const m=$('main');if(m){destroyPlayer();m.innerHTML=content();if(state.route==='watch')setTimeout(initPlayer,80);}}
 function home(){return explore();}
 function videoCard(v){
-  return `<article class="video-card" onclick="go('watch','${v.id}')">
-    <div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/hqdefault.jpg" alt=""><span class="grade">${esc(difficultyLabel(v.cefr))}</span><span class="duration">${esc(v.duration||'')}</span></div>
+  const isNew=isNewlyAdded(v);
+  return `<article class="video-card ${isNew?'is-new':''}" onclick="go('watch','${v.id}')">
+    <div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/hqdefault.jpg" alt=""><span class="grade">${esc(difficultyLabel(v.cefr))}</span><span class="duration">${esc(v.duration||'')}</span>${isNew?'<span class="new-badge">新增</span>':''}</div>
     <div class="video-info"><h3>${esc(v.title)}</h3><p>${esc(v.channel)}</p><div class="chips"><span>EN ${pct(v.englishScore)}</span><span>${esc(v.subcategory||v.category||'')}</span><span>${v.translation==='available'?'中譯已備妥':'中譯待補'}</span></div></div>
   </article>`;
 }
 function explore(){
   const vs=filteredVideos();
+  const newVideos=vs.filter(isNewlyAdded);
+  const otherVideos=vs.filter(v=>!isNewlyAdded(v));
   const difficultyOptions=[['all','全部難易度'],['A1','初級'],['A2','初中級'],['B1','中級'],['B2','中高級'],['C1','高級'],['C2','特高級']];
   return `<section class="latest-page">
     <div class="latest-banner">
-      <div><span class="latest-kicker">VIDEO LEARNING</span><h1>最新影片</h1><p>依更新時間排列，直接進入影片學習。</p></div>
+      <div><span class="latest-kicker">VIDEO LEARNING</span><h1>最新影片</h1><p>依「加入學習庫」時間排列；每日新增內容固定置頂。</p></div>
       <span class="count-pill">${vs.length} 部</span>
     </div>
     <div class="filters">
@@ -108,7 +121,11 @@ function explore(){
       <select aria-label="字幕" onchange="state.caption=this.value;renderMain()"><option value="all">全部字幕狀態</option><option value="ready" ${state.caption==='ready'?'selected':''}>英文字幕已驗證</option><option value="pending" ${state.caption==='pending'?'selected':''}>字幕待補</option></select>
     </div>
     <div class="results-meta">英文語言驗證 ・ 字幕驗證 ・ 難易度 ・ 13 大類分類 ・ 去重</div>
-    <div class="video-grid">${vs.map(videoCard).join('')||'<div class="empty">目前沒有符合條件的影片。</div>'}</div>
+    ${newVideos.length?`<section class="video-section new-video-section"><div class="video-section-head"><div><div class="new-video-label">新增影片</div><small>今日加入學習庫的內容</small></div><span class="count-pill">${newVideos.length} 部</span></div><div class="video-grid">${newVideos.map(videoCard).join('')}</div></section>`:''}
+    <section class="video-section">
+      <div class="video-section-head"><div><h2>全部影片</h2><small>${otherVideos.length?'依加入時間由新到舊排列':'今天的新增影片已全部顯示在上方。'}</small></div><span class="count-pill">${otherVideos.length} 部</span></div>
+      <div class="video-grid">${otherVideos.map(videoCard).join('')||'<div class="empty">目前沒有其他符合條件的影片。</div>'}</div>
+    </section>
   </section>`;
 }
 const TITLE_ZH={
@@ -142,49 +159,58 @@ function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,i
 async function enrichWord(word){
   const key=String(word||'').trim().toLowerCase();
   if(!key)return;
-  let zh='',gloss='',phoneticUk='',phoneticUs='',audioUk='',audioUs='',pos='';
+  let zh='',gloss='',phoneticUk='',phoneticUs='',audioUk='',audioUs='',pos='',example='';
+  const looksZh=(s)=>/[\u3400-\u9fff]/.test(String(s||''));
   try{
-    const tr=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key));
+    const tr=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key),{cache:'no-store',headers:{'Accept':'application/json'}});
     if(tr.ok){
       const data=await tr.json();
-      zh=(data?.[0]||[]).map(x=>x?.[0]||'').join('').trim();
+      zh=(data?.[0]||[]).map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
     }
   }catch{}
+  if(!looksZh(zh)){
+    try{
+      const tr=await fetch('https://api.mymemory.translated.net/get?'+new URLSearchParams({q:key,langpair:'en|zh-TW'}),{cache:'no-store'});
+      if(tr.ok){
+        const data=await tr.json();
+        const candidate=String(data?.responseData?.translatedText||'').trim();
+        if(looksZh(candidate))zh=candidate;
+      }
+    }catch{}
+  }
   try{
-    const dr=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key));
+    const dr=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key),{cache:'no-store'});
     if(dr.ok){
       const data=await dr.json();
       const entries=Array.isArray(data)?data:[];
       const e=entries[0]||{};
-      pos=e?.meanings?.[0]?.partOfSpeech||'';
-      gloss=(e?.meanings||[]).flatMap(m=>m.definitions||[]).slice(0,3).map(d=>d.definition).filter(Boolean).join('；');
-      const phs=(e?.phonetics||[]).filter(p=>p?.text||p?.audio);
+      const meanings=e.meanings||[];
+      pos=meanings.map(m=>m?.partOfSpeech||'').filter(Boolean)[0]||'';
+      gloss=meanings.flatMap(m=>m.definitions||[]).slice(0,3).map(d=>d.definition).filter(Boolean).join('；');
+      example=meanings.flatMap(m=>m.definitions||[]).map(d=>d.example).find(Boolean)||'';
+      const phs=(e.phonetics||[]).filter(p=>p?.text||p?.audio);
       const us=phs.find(p=>/us/i.test(String(p.audio||'')))||{};
       const uk=phs.find(p=>/uk|gb/i.test(String(p.audio||'')))||{};
-      phoneticUs=us.text||phs[0]?.text||'';
-      phoneticUk=uk.text||phs.find(p=>p?.text)?.text||'';
-      audioUs=us.audio||phs.find(p=>p?.audio)?.audio||'';
-      audioUk=uk.audio||phs.find(p=>p?.audio)?.audio||'';
+      phoneticUs=us.text||phs.find(p=>/us/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'';
+      phoneticUk=uk.text||phs.find(p=>/uk|gb/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'';
+      audioUs=us.audio||phs.find(p=>/us/i.test(String(p.audio||'')))?.audio||phs.find(p=>p?.audio)?.audio||'';
+      audioUk=uk.audio||phs.find(p=>/uk|gb/i.test(String(p.audio||'')))?.audio||phs.find(p=>p?.audio)?.audio||'';
     }
   }catch{}
   if(state.word&&String(state.word.word).toLowerCase()===key){
-    state.word={...state.word,
-      definition_zh:zh||state.word.definition_zh||'此字目前無單一中文詞義，請依影片語境理解',
-      gloss:gloss||state.word.gloss||'',
-      phonetic_uk:phoneticUk||state.word.phonetic_uk||'',
-      phonetic_us:phoneticUs||state.word.phonetic_us||'',
-      audio_uk:audioUk||state.word.audio_uk||'',
-      audio_us:audioUs||state.word.audio_us||'',
-      pos:pos||state.word.pos||''
-    };
+    state.word={...state.word,definition_zh:zh||state.word.definition_zh||'暫時查不到中文詞義，請再次查詢',gloss:gloss||state.word.gloss||'',phonetic_uk:phoneticUk||state.word.phonetic_uk||'',phonetic_us:phoneticUs||state.word.phonetic_us||'',audio_uk:audioUk||state.word.audio_uk||'',audio_us:audioUs||state.word.audio_us||'',pos:pos||state.word.pos||'',example:example||state.word.example||''};
     render();
   }
 }
 function openWord(word,sourceVideoId='',sourceSentence=''){
-  const info=wordBank.words?.[String(word).toLowerCase()]||{};
-  state.word={word,sourceVideoId,sourceSentence,...info};
+  const raw=String(word||'').trim();
+  if(!raw)return;
+  const normalized=raw.replace(/^[^A-Za-z]+|[^A-Za-z'’]+$/g,'').toLowerCase();
+  if(!normalized)return;
+  const info=wordBank.words?.[normalized]||{};
+  state.word={word:normalized,sourceVideoId,sourceSentence,...info};
   render();
-  if(!info.definition_zh||!info.audio_uk||!info.audio_us) enrichWord(word);
+  if(!info.definition_zh||!info.audio_uk||!info.audio_us) enrichWord(normalized);
 }
 function closeWord(){state.word=null;render();}
 let speechAudio=null;
@@ -202,82 +228,74 @@ function stopSpeechAudio(){
   try{if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}}catch{}
   speechAudio=null;
 }
-function youdaoPronunciationUrl(word,locale){
-  const type=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'1':'2';
-  return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;
-}
-async function speak(text,locale){
-  const value=String(text||'').trim();if(!value)return false;
+function youdaoPronunciationUrl(word,locale){const type=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'1':'2';return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;}
+function speak(text,locale){
+  const value=String(text||'').trim();if(!value)return Promise.resolve(false);
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
   try{
-    const synth=window.speechSynthesis;if(!synth)return false;
+    const synth=window.speechSynthesis;if(!synth)return Promise.resolve(false);
     synth.cancel();refreshSpeechVoices();
-    if(!speechVoices.length&&'onvoiceschanged' in synth){
-      await new Promise(resolve=>{
-        let done=false;
-        const finish=()=>{if(done)return;done=true;clearTimeout(timer);synth.removeEventListener('voiceschanged',finish);refreshSpeechVoices();resolve();};
-        const timer=setTimeout(finish,700);
-        synth.addEventListener('voiceschanged',finish,{once:true});
-      });
-    }
-    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target);u.rate=.9;u.pitch=1;u.volume=1;
-    synth.resume?.();synth.speak(u);return true;
-  }catch{return false;}
+    const voice=accentVoice(target);
+    if(!voice&&!synth.getVoices?.().length)return Promise.resolve(false);
+    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=voice||null;u.rate=.9;u.pitch=1;u.volume=1;
+    synth.resume?.();synth.speak(u);return Promise.resolve(true);
+  }catch{return Promise.resolve(false);}
 }
-function googleTtsUrl(word,locale){
+function googleTtsUrl(word,locale){const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(String(word||''));}
+function playRemoteAudioCandidates(word,locale,candidates,index=0){
+  const value=String(word||'').trim();if(!value)return;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(String(word||''));
+  const list=[...new Set((candidates||[]).filter(Boolean))];
+  if(index>=list.length){window.__sanmuAudioLast.status='remote-failed';speak(value,target).then(ok=>{window.__sanmuAudioLast.status=ok?'speechSynthesis':'failed';});return;}
+  const url=list[index];stopSpeechAudio();
+  try{
+    const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.src=url;window.__sanmuAudioLast.url=url;
+    audio.onended=()=>{if(speechAudio===audio){speechAudio=null;window.__sanmuAudioLast.status='ended';}};
+    audio.onerror=()=>{if(speechAudio===audio)playRemoteAudioCandidates(value,target,list,index+1);};
+    const p=audio.play();if(p&&typeof p.then==='function')p.then(()=>{window.__sanmuAudioLast.status='playing';}).catch(()=>{if(speechAudio===audio)playRemoteAudioCandidates(value,target,list,index+1);});
+  }catch{playRemoteAudioCandidates(value,target,list,index+1);}
 }
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  window.__sanmuAudioLast={word:value,locale:target,status:'speechSynthesis-first',url:''};
-  speak(value,target).then(ok=>{
-    if(ok){window.__sanmuAudioLast.status='speechSynthesis';return;}
-    const w=state.word||{},candidates=[googleTtsUrl(value,target),target==='en-GB'?w.audio_uk:w.audio_us,youdaoPronunciationUrl(value,target)];
-    let index=0;
-    const tryRemote=()=>{
-      const url=candidates[index++];if(!url){window.__sanmuAudioLast.status='failed';return;}
-      stopSpeechAudio();
-      try{
-        const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.volume=1;audio.src=url;window.__sanmuAudioLast.url=url;
-        audio.onended=()=>{if(speechAudio===audio)speechAudio=null;window.__sanmuAudioLast.status='ended';};
-        audio.onerror=()=>{if(speechAudio===audio){speechAudio=null;tryRemote();}};
-        const p=audio.play();
-        if(p&&typeof p.then==='function')p.then(()=>{window.__sanmuAudioLast.status='playing';}).catch(()=>{if(speechAudio===audio){speechAudio=null;tryRemote();}});
-      }catch{tryRemote();}
-    };
-    tryRemote();
-  });
-}async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
+  const w=state.word||{};
+  const primary=target==='en-GB'?w.audio_uk:w.audio_us;
+  const secondary=target==='en-GB'?w.audio_us:w.audio_uk;
+  window.__sanmuAudioLast={word:value,locale:target,status:'loading',url:''};
+  playRemoteAudioCandidates(value,target,[primary,secondary,youdaoPronunciationUrl(value,target),googleTtsUrl(value,target)],0);
+}
+async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
 async function playGoogleTTS(value,target){playPronunciation(value,target);return true;}
-
-
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
   const w=state.word,fav=Object.keys(vocab()).includes(String(w.word).toLowerCase());
   return `<div class="modal-backdrop" onclick="closeWord()"><div class="word-modal" onclick="event.stopPropagation()">
-    <div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div>${esc(w.pos||'')}</div></div><button onclick="closeWord()">×</button></div>
+    <div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div class="word-pos">${esc(w.pos||'查詢中…')}</div></div><button onclick="closeWord()">×</button></div>
     <div class="pron-row">
-      <span>英式 ${esc(w.phonetic_uk||'')}</span>
-      <button onclick="playPronunciation(${JSON.stringify(w.word)},'en-GB')">🔊 英式發音</button>
-      <span>美式 ${esc(w.phonetic_us||'')}</span>
-      <button onclick="playPronunciation(${JSON.stringify(w.word)},'en-US')">🔊 美式發音</button>
+      <span>英式 ${esc(w.phonetic_uk||'—')}</span><button class="pron-button" onclick="playPronunciation(${JSON.stringify(w.word)},'en-GB')">英式發音</button>
+      <span>美式 ${esc(w.phonetic_us||'—')}</span><button class="pron-button" onclick="playPronunciation(${JSON.stringify(w.word)},'en-US')">美式發音</button>
     </div>
-    <section><label>中文解釋</label><p>${esc(w.definition_zh||'正在取得中文解釋…')}</p></section>
-    <section><label>例句</label><p>${esc(w.example||w.sourceSentence||'—')}</p><button class="secondary" onclick="speak(${JSON.stringify(w.example||w.sourceSentence||w.word)},'en-US')">🔊 例句</button></section>
+    <section><label>中文翻譯</label><p class="word-zh">${esc(w.definition_zh||'正在取得中文翻譯…')}</p></section>
+    <section><label>英文定義</label><p>${esc(w.gloss||'正在取得英文定義…')}</p></section>
+    <section><label>例句</label><p>${esc(w.example||w.sourceSentence||'—')}</p><button class="secondary" onclick="speak(${JSON.stringify(w.example||w.sourceSentence||w.word)},'en-US')">朗讀例句</button></section>
     <button class="primary" onclick="addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button>
   </div></div>`;
-}function grammar(){const done=Object.values(prog()).filter(Boolean).length;return `<div class="section-head"><div><h2>英文文法 · 30 章 / 150 微課</h2><p>Form → Meaning → Use → Contrast → Error；每課都有說明、句型、例句、常見錯誤與練習。</p></div><span class="count-pill">${done}/150</span></div><div class="overview-progress"><strong>${done} / 150 課</strong><div><i style="width:${done/1.5}%"></i></div></div><div class="chapter-grid">${lessons.chapters.map(c=>{const ms=lessons.microLessons.filter(m=>m.chapter_id===c[0]);return `<article class="chapter"><div class="chapter-head"><h3>${c[0]}. ${esc(c[1])}</h3><span>${esc(c[3]||'')}</span></div><p>${esc(c[2])}</p><div class="micro-list">${ms.map(m=>`<button class="micro-btn ${prog()[m.lesson_id]?'done':''}" onclick="go('lesson','${m.lesson_id}')"><span>${m.lesson_id.split('-')[1]}</span>${esc(m.title_zh)}<i>→</i></button>`).join('')}</div></article>`}).join('')}</div>`;}
+}
+function grammar(){const done=Object.values(prog()).filter(Boolean).length;return `<div class="section-head"><div><h2>英文文法 · 30 章 / 150 微課</h2><p>Form → Meaning → Use → Contrast → Error；每課都有說明、句型、例句、常見錯誤與練習。</p></div><span class="count-pill">${done}/150</span></div><div class="overview-progress"><strong>${done} / 150 課</strong><div><i style="width:${done/1.5}%"></i></div></div><div class="chapter-grid">${lessons.chapters.map(c=>{const ms=lessons.microLessons.filter(m=>m.chapter_id===c[0]);return `<article class="chapter"><div class="chapter-head"><h3>${c[0]}. ${esc(c[1])}</h3><span>${esc(c[3]||'')}</span></div><p>${esc(c[2])}</p><div class="micro-list">${ms.map(m=>`<button class="micro-btn ${prog()[m.lesson_id]?'done':''}" onclick="go('lesson','${m.lesson_id}')"><span>${m.lesson_id.split('-')[1]}</span>${esc(m.title_zh)}<i>→</i></button>`).join('')}</div></article>`}).join('')}</div>`;}
 function lesson(){const l=lessons.microLessons.find(x=>x.lesson_id===state.selectedLesson);if(!l)return '<div class="empty">找不到微課。</div>';const done=!!prog()[l.lesson_id];return `<div class="lesson-page"><div class="section-head"><div><div class="eyebrow">MICRO LESSON ${l.lesson_id}</div><h2>${esc(l.title_zh)}</h2><p>${esc(l.cefr)} ・ ${esc(l.title_en)}</p></div><span class="count-pill">${done?'已完成':'未完成'}</span></div><div class="lesson-grid"><div class="panel big-copy"><h3>① 觀念</h3><p>${esc(l.explanation)}</p></div><div class="panel big-copy"><h3>② 句型</h3><div class="formula">${esc(l.pattern)}</div></div><div class="panel big-copy"><h3>③ 例句</h3>${l.examples.map(e=>`<p class="example">${esc(e)} <button onclick="speak(${JSON.stringify(e)},'en-US')">🔊</button></p>`).join('')}</div><div class="panel big-copy"><h3>④ 常見錯誤</h3>${l.common_errors.map(e=>`<p>⚠ ${esc(e)}</p>`).join('')}</div><div class="panel big-copy"><h3>⑤ Contrast</h3>${l.contrast.map(e=>`<p>${esc(e)}</p>`).join('')}</div><div class="panel big-copy"><h3>⑥ 微練習</h3>${l.practice.map((e,i)=>`<p>${i+1}. ${esc(e)}</p>`).join('')}<div class="tip">Mastery tip：${esc(l.mastery_tip)}</div></div></div><div class="lesson-actions"><button onclick="go('grammar')">← 回到 30 章</button><button class="primary" onclick="toggleLesson('${l.lesson_id}')">${done?'取消完成':'完成本微課'}</button><button onclick="go('quiz')">做分級測驗 →</button></div></div>`;}
 function toggleLesson(id){const p=prog();p[id]=!p[id];save('sanmu-lessons',p);render();}
 function quiz(){const bands=Object.keys(toeic.bands||{}),band=toeic.bands[state.quizBand]||toeic.bands['400-600'],q=(band.questions||[])[state.quizIndex]||band.questions[0],answered=state.quizAnswers[state.quizBand]?.[state.quizIndex]!==undefined;return `<div class="quiz-page"><div class="section-head"><div><h2>多益分級練習 · 20 題</h2><p>依目標分數帶選題：400分以下、400–600、600–800、800–990。</p></div><span class="count-pill">第 ${state.quizIndex+1} / 20 題</span></div><div class="band-grid">${bands.map(b=>`<button class="band-card ${state.quizBand===b?'active':''}" onclick="state.quizBand='${b}';state.quizIndex=0;state.quizAnswers={};renderMain()"><strong>${esc(toeic.bands[b].label)}</strong><small>${esc(toeic.bands[b].description)}</small></button>`).join('')}</div><div class="quiz-card"><h3>${esc(q.prompt)}</h3><div class="answers">${q.options.map((o,i)=>`<button class="answer ${answered&&i===q.answer?'correct':''} ${answered&&state.quizAnswers[state.quizBand][state.quizIndex]===i&&i!==q.answer?'wrong':''}" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div>${answered?`<div class="quiz-explain"><strong>${state.quizAnswers[state.quizBand][state.quizIndex]===q.answer?'答對了':'再想一次'}</strong><p>${esc(q.explanation)}</p><button class="primary" onclick="nextQuiz()">${state.quizIndex===19?'完成':'下一題'}</button></div>`:''}</div></div>`;}
 function answerQuiz(i){if(!state.quizAnswers[state.quizBand])state.quizAnswers[state.quizBand]={};state.quizAnswers[state.quizBand][state.quizIndex]=i;renderMain();}
 function nextQuiz(){state.quizIndex=state.quizIndex>=19?0:state.quizIndex+1;renderMain();}
 function listPage(title,items){return `<div class="section-head"><div><h2>${title}</h2><p>你的個人學習資料儲存在瀏覽器本機。</p></div></div><div class="video-grid">${items.map(videoCard).join('')||'<div class="empty">目前沒有資料。</div>'}</div>`;}
-function vocabularyPage(){const items=Object.values(vocab());return `<div class="section-head"><div><h2>我的單字庫</h2><p>從字幕點擊單字後可收藏；支援英式 / 美式發音。</p></div><span class="count-pill">${items.length} 字</span></div><div class="vocab-grid">${items.map(w=>`<div class="vocab-card"><div><strong>${esc(w.word)}</strong><small>${esc(w.pos||'')}</small></div><p>${esc(w.definition_zh||'')}</p><button onclick='openWord(${JSON.stringify(w.word)},${JSON.stringify(w.sourceVideoId||'')},${JSON.stringify(w.sourceSentence||'')})'>查看</button></div>`).join('')||'<div class="empty">尚未收藏單字。</div>'}</div>`;}
+function vocabularyPage(){
+  const items=Object.values(vocab());
+  return `<div class="section-head"><div><h2>我的單字庫</h2><p>字幕中的每個英文單字都可直接點擊查詢；也可以輸入任意單字。</p></div><span class="count-pill">${items.length} 字</span></div>
+  <div class="word-lookup panel"><div><strong>單字查詢</strong><small>中文翻譯＋英式／美式發音＋詞性＋英文定義</small></div><div class="word-lookup-row"><input id="word-lookup-input" type="text" placeholder="輸入英文單字，例如 polite" onkeydown="handleWordLookupKey(event,this.value)"><button onclick="lookupWordInput()">查詢單字</button></div></div>
+  <div class="vocab-grid">${items.map(w=>`<div class="vocab-card"><div><strong>${esc(w.word)}</strong><small>${esc(w.pos||'')}</small></div><p>${esc(w.definition_zh||'尚未翻譯')}</p><button onclick='openWord(${JSON.stringify(w.word)},${JSON.stringify(w.sourceVideoId||'')},${JSON.stringify(w.sourceSentence||'')})'>查看</button></div>`).join('')||'<div class="empty">尚未收藏單字。</div>'}</div>`;
+}
 function engine(){const s=catalog.stats||{};return `<div class="section-head"><div><h2>影片探索引擎</h2><p>候選搜尋 → 語言辨識 → 字幕 A/B/C → AI CEFR / 分類 → 去重 → 翻譯 → 學習單元。</p></div><span class="count-pill">13 類・${taxonomy.totalSubcategories} 子類</span></div><div class="engine-grid"><div class="panel pipeline"><h3>Continuous Discovery</h3><div>${[['大量搜尋','每次 32 個 query、雙頁候選'],['語言閘門','English / Multilingual / confidence'],['字幕','A → B → C fallback'],['分類','AI 13 大類 / 子類'],['難度','A1–C2 CEFR'],['去重','ID / fingerprint / embedding'],['翻譯','batch → sentence → context'],['學習單元','Vocabulary / Phrases / Grammar / Questions']].map((x,i)=>`<div class="stage"><b>${i+1}. ${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div></div><div class="panel"><h3>目前資料</h3><div class="metric-grid"><div><b>${s.accepted||catalog.videos.length}</b><small>收錄</small></div><div><b>${s.candidates||0}</b><small>候選</small></div><div><b>${s.review||0}</b><small>待審</small></div><div><b>${catalog.translationStats?.translated||0}</b><small>已翻句</small></div></div><p class="engine-note">真正大量增加影片需要 GitHub Actions 取得 YOUTUBE_API_KEY 與 OPENAI_API_KEY 後自動執行。</p></div></div>`;}
-window.toggleSidebar=toggleSidebar;window.openCategoryModal=openCategoryModal;window.closeCategoryModal=closeCategoryModal;window.chooseCategory=chooseCategory;window.go=go;window.updateSearch=updateSearch;window.renderMain=renderMain;window.setSpeed=setSpeed;window.setSubtitleSize=setSubtitleSize;window.setTab=setTab;window.seek=seek;window.toggleFav=toggleFav;window.openWord=openWord;window.closeWord=closeWord;window.speak=speak;window.addWord=addWord;window.answerQuiz=answerQuiz;window.nextQuiz=nextQuiz;window.toggleLesson=toggleLesson;
+window.toggleSidebar=toggleSidebar;window.handleGlobalSearchKey=handleGlobalSearchKey;window.handleWordLookupKey=handleWordLookupKey;window.lookupWordInput=lookupWordInput;window.playPronunciation=playPronunciation;window.openCategoryModal=openCategoryModal;window.closeCategoryModal=closeCategoryModal;window.chooseCategory=chooseCategory;window.go=go;window.updateSearch=updateSearch;window.renderMain=renderMain;window.setSpeed=setSpeed;window.setSubtitleSize=setSubtitleSize;window.setTab=setTab;window.seek=seek;window.toggleFav=toggleFav;window.openWord=openWord;window.closeWord=closeWord;window.speak=speak;window.addWord=addWord;window.answerQuiz=answerQuiz;window.nextQuiz=nextQuiz;window.toggleLesson=toggleLesson;
 
 
 /* =========================================================
@@ -339,14 +357,19 @@ function selectedVideo(){
 }
 
 function handleSearchKey(e,value){
-  if(e.key!=='Enter') return;
+  if(e.key!=='Enter')return;
   const id=extractYouTubeId(value);
-  if(id){
-    state.search='';
-    go('watch',id);
-  }
+  if(id){state.search='';go('watch',id);}
 }
-
+function handleGlobalSearchKey(e,value){
+  if(e.key!=='Enter')return;
+  const q=String(value||'').trim();if(!q)return;
+  const id=extractYouTubeId(q);
+  if(id){state.search='';go('watch',id);return;}
+  if(/^[A-Za-z]+(?:['’][A-Za-z]+)?$/.test(q)){state.search='';openWord(q);}
+}
+function handleWordLookupKey(e,value){if(e.key==='Enter')openWord(String(value||''));}
+function lookupWordInput(){const el=document.getElementById('word-lookup-input');if(el&&el.value.trim())openWord(el.value.trim());}
 function setSubtitleScale(scale){
   const n=Number(scale)||1;
   state.subtitleScale=Math.max(.75,Math.min(2,n));
