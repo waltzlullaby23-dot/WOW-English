@@ -57,3 +57,5 @@ if(bad.length)process.exit(1);
 // Re-run local audio builder after CI validation fix.
 
 // Force rebuild after WAV validation enhancement.
+
+// Rebuild newly preloaded runtime subtitle words.
