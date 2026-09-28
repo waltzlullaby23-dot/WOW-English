@@ -412,6 +412,7 @@ function audioCandidates(word,locale){
   const gSuffix=target==='en-GB'?'_gb_1':'_us_1';
   return [
     'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(value)+'&type='+type,
+    'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value),
     direct,
     other,
     'https://ssl.gstatic.com/dictionary/static/sounds/20200429/'+encodeURIComponent(value)+'--'+gSuffix+'.mp3'
@@ -437,6 +438,30 @@ function playAudioCandidates(urls,index,word,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  // Primary: browser speech starts immediately inside the user gesture.
+  // This avoids waiting on any network request before producing speech.
+  if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
+    try{
+      const synth=window.speechSynthesis;refreshSpeechVoices();
+      try{synth.cancel();}catch{}
+      const u=new SpeechSynthesisUtterance(value);
+      u.lang=target;u.voice=accentVoice(target)||null;u.rate=.9;u.pitch=1;u.volume=1;
+      let started=false,finished=false;
+      window.__sanmuAudioLast={word:value,locale:target,status:'queued',source:'speechSynthesis'};
+      const fallbackRemote=()=>{
+        if(finished)return;finished=true;
+        try{synth.cancel();}catch{}
+        window.__sanmuAudioLast={word:value,locale:target,status:'fallback-audio',source:'audio'};
+        playAudioCandidates(audioCandidates(value,target),0,value,target);
+      };
+      u.onstart=()=>{started=true;window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'speechSynthesis'};};
+      u.onend=()=>{finished=true;window.__sanmuAudioLast={word:value,locale:target,status:'ended',source:'speechSynthesis'};};
+      u.onerror=()=>{fallbackRemote();};
+      synth.resume();synth.speak(u);
+      setTimeout(()=>{if(!started&&!finished)fallbackRemote();},1000);
+      return true;
+    }catch{}
+  }
   return playAudioCandidates(audioCandidates(value,target),0,value,target);
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
