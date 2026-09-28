@@ -201,19 +201,48 @@ def fetch_english_transcript(video_id: str):
             continue
     return None,[]
 
-def _download_vtt_url(url: str):
+def _download_caption_url(url: str):
     try:
-        import requests
+        import requests, json as _json, html as _html, xml.etree.ElementTree as ET
         r=requests.get(url,timeout=25,headers={'User-Agent':'Mozilla/5.0'})
-        if r.ok and 'WEBVTT' in r.text[:100]:
+        if not r.ok:return []
+        body=r.text or ''
+        head=body.lstrip()[:120].lower()
+        if 'webvtt' in head:
             from tempfile import NamedTemporaryFile
             with NamedTemporaryFile('w+',suffix='.vtt',encoding='utf-8') as f:
-                f.write(r.text);f.flush()
-                rows=parse_vtt(Path(f.name))
-            return rows
+                f.write(body);f.flush()
+                return parse_vtt(Path(f.name))
+        if head.startswith('<') and ('<text' in body or '<tt' in body):
+            root=ET.fromstring(body)
+            rows=[]
+            for node in root.iter():
+                tag=str(node.tag).lower().split('}')[-1]
+                if tag!='text':continue
+                start=float(node.attrib.get('start','0') or 0)
+                dur=float(node.attrib.get('dur','4') or 4)
+                txt=_html.unescape(''.join(node.itertext())).strip()
+                txt=clean_text(re.sub(r'<[^>]+>',' ',txt))
+                if txt:rows.append({'start':start,'end':start+max(.1,dur),'en':txt})
+            return normalize_segments(rows)
+        if head.startswith('{') or head.startswith('['):
+            data=_json.loads(body)
+            events=data.get('events',[]) if isinstance(data,dict) else data
+            rows=[]
+            for ev in events or []:
+                if not isinstance(ev,dict):continue
+                txt=''.join(str(seg.get('utf8','')) for seg in (ev.get('segs') or []) if isinstance(seg,dict))
+                if not txt:continue
+                start=float(ev.get('tStartMs',0) or 0)/1000.0
+                dur=float(ev.get('dDurationMs',4000) or 4000)/1000.0
+                rows.append({'start':start,'end':start+max(.1,dur),'en':clean_text(txt)})
+            return normalize_segments(rows)
     except Exception:
         pass
     return []
+
+def _download_vtt_url(url: str):
+    return _download_caption_url(url)
 
 def fetch_caption_tracks_from_player(video_id: str):
     # Read YouTube's own caption-track URLs from yt-dlp's player metadata.
@@ -234,11 +263,14 @@ def fetch_caption_tracks_from_player(video_id: str):
                 if not ll.startswith('en'): continue
                 for e in entries or []:
                     u=e.get('url')
-                    if u and ('vtt' in str(e.get('ext','')).lower() or 'timedtext' in u):
-                        pool.append((len(u),source_name,lang,u))
-        # Prefer auto English, then manual English; prefer webvtt.
-        pool.sort(key=lambda x:(0 if x[1]=='auto' else 1,0 if 'en-us' in x[2].lower() else 1,len(x[0] and x[0] or '')))
-        for _,source_name,lang,u in pool:
+                    if u:
+                        pool.append((len(str(u)),source_name,lang,u,e.get('ext','')))
+        # Prefer auto English, then manual English; prefer en-US/en and VTT.
+        pool.sort(key=lambda x:(0 if x[1]=='auto' else 1,
+                                0 if str(x[2]).lower() in {'en-us','en'} else 1,
+                                0 if str(x[4]).lower()=='vtt' else 1,
+                                x[0]))
+        for _,source_name,lang,u,_ext in pool:
             en_rows=_download_vtt_url(u)
             if len(en_rows)<CONFIG['minSegments'] or len(' '.join(x['en'] for x in en_rows))<180: continue
             zh_rows=[]
@@ -480,7 +512,7 @@ def ydl_search(query, n):
     # yt-dlp to access YouTube search pages, avoiding GitHub-runner bot checks.
     key=os.environ.get('YOUTUBE_API_KEY','').strip()
     if key:
-        info=youtube_api_get('search',{'part':'snippet','q':query,'type':'video','maxResults':min(50,int(n)),'relevanceLanguage':'en'})
+        info=youtube_api_get('search',{'part':'snippet','q':query,'type':'video','maxResults':min(50,int(n)),'relevanceLanguage':'en','videoCaption':'closedCaption','order':'date'})
         out=[]
         for row in info.get('items',[]) or []:
             vid=((row.get('id') or {}).get('videoId'))
@@ -504,7 +536,9 @@ def ydl_info(video_id):
                 'uploader':sn.get('channelTitle',''),
                 'upload_date':str(sn.get('publishedAt',''))[:10].replace('-',''),
                 'duration':parse_iso_duration((row.get('contentDetails') or {}).get('duration','')),
-                'language':sn.get('defaultLanguage') or sn.get('defaultAudioLanguage') or ''
+                'language':sn.get('defaultLanguage') or sn.get('defaultAudioLanguage') or '',
+                'description':sn.get('description',''),
+                'has_caption':str((row.get('contentDetails') or {}).get('caption','')).lower()=='true'
             }
     return {}
  
@@ -603,6 +637,10 @@ def process_video(video_id, meta, existing, idx=0):
     if not title:return None,{'id':video_id,'title':'','status':'review','reason':'missing-title'}
     duration=float(info.get('duration') or 0)
 
+    raw_lang=str(info.get('language') or '').lower().replace('_','-')
+    if raw_lang and not raw_lang.startswith('en'):
+        return None,{'id':video_id,'title':title,'status':'review','reason':'non-english-metadata','spokenLanguage':raw_lang}
+
     tr,segs,coverage,transcript_source,youtube_zh_rows=best_english_transcript(video_id,duration)
     if not segs:
         return None,{'id':video_id,'title':title,'status':'review','reason':'no-complete-english-transcript'}
@@ -618,7 +656,9 @@ def process_video(video_id, meta, existing, idx=0):
     # 1) YouTube's own caption track translated by tlang (same source as the player).
     if youtube_zh_rows:
         zh=align_translation_segments(segs,youtube_zh_rows)
-        if zh and all(clean_text(x) for x in zh): zh_source='youtube-player-translation'
+        if zh and all(clean_text(x) for x in zh):
+            # YouTube supplied a timestamp-aligned Chinese translation track.
+            zh_source='youtube-player-translation'
     # 2) YouTube timedtext translation fallback.
     if zh is None:
         try: zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
