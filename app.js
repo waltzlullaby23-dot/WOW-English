@@ -221,9 +221,14 @@ async function enrichWord(word){
 }
 function updateWordModal(){
   const w=state.word;if(!w)return;
-  const ids={zh:'word-definition-zh',uk:'word-phonetic-uk',us:'word-phonetic-us',pos:'word-pos',ex:'word-example'};
-  const map={zh:w.definition_zh||'正在取得中文翻譯…',uk:w.phonetic_uk||'—',us:w.phonetic_us||'—',pos:w.pos||'查詢中…',ex:w.example||w.sourceSentence||'—'};
-  Object.entries(ids).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.textContent=map[k];});
+  const map={
+    'word-definition-zh':w.definition_zh||'正在取得中文翻譯…',
+    'word-phonetic-uk':w.phonetic_uk||'—',
+    'word-phonetic-us':w.phonetic_us||'—',
+    'word-pos':w.pos||'n.',
+    'word-meaning-pos':w.pos||'n.'
+  };
+  Object.entries(map).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=value;});
 }
 function openWord(word,sourceVideoId='',sourceSentence=''){
   const raw=String(word||'').trim();
@@ -307,10 +312,10 @@ function wordModal(){
   return `<div class="word-popover-layer" onclick="closeWord()">
     <div class="word-popover" role="dialog" aria-label="${esc(w.word||'單字查詢')}" onclick="event.stopPropagation()">
       <div class="word-popover-head">
-        <div class="word-main-line"><strong>${esc(w.word||'')}</strong><span class="word-phonetic-inline">${esc(phonUk)}</span><span class="word-phonetic-inline us-inline">${esc(phonUs)}</span><span class="word-pos-pill">${esc(pos)}</span></div>
+        <div class="word-main-line"><strong>${esc(w.word||'')}</strong><span id="word-phonetic-uk" class="word-phonetic-inline">${esc(phonUk)}</span><span id="word-phonetic-us" class="word-phonetic-inline us-inline">${esc(phonUs)}</span><span id="word-pos" class="word-pos-pill">${esc(pos)}</span></div>
         <button type="button" class="word-close" onclick="closeWord()" aria-label="關閉">×</button>
       </div>
-      <div class="word-meaning"><span class="meaning-pos">${esc(pos)}</span> ${esc(zh)}</div>
+      <div class="word-meaning"><span id="word-meaning-pos" class="meaning-pos">${esc(pos)}</span> <span id="word-definition-zh">${esc(zh)}</span></div>
       ${sourceSentence?`<div class="word-example-line">${esc(sourceSentence)}</div>`:''}
       <div class="word-actions">
         <button type="button" class="word-audio-btn" onclick="playPronunciation(${JSON.stringify(w.word)},'en-GB')"><span class="speaker">🔊</span> UK</button>
