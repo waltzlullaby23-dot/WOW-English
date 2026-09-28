@@ -41,16 +41,19 @@ async function getJson(url,ms=8000){
 }
 async function translate(text){
   const key=String(text||'').toLowerCase();if(COMMON_ZH[key])return COMMON_ZH[key];
-  const urls=[
+  const providers=[
     'https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|zh-TW',
     'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text)
   ];
-  for(const url of urls){
-    const data=await getJson(url,7000);if(!data)continue;
-    let zh='';
-    if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
-    if(!zh)zh=String(data?.responseData?.translatedText||'').trim();
-    if(/[\\u3400-\\u9fff]/.test(zh))return zh;
+  for(let attempt=0;attempt<3;attempt++){
+    for(const url of providers){
+      const data=await getJson(url,7000);if(!data)continue;
+      let zh='';
+      if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
+      if(!zh)zh=String(data?.responseData?.translatedText||'').trim();
+      if(/[\u3400-\u9fff]/.test(zh))return zh;
+    }
+    await sleep(250* (attempt+1));
   }
   return '';
 }
@@ -93,16 +96,14 @@ const workers=Array.from({length:6},async()=>{
       // The critical runtime guarantee is a Chinese word meaning + audio.
       // Definitions/examples are enriched opportunistically; failures there must
       // not invalidate an otherwise usable word card.
+      // One translation request per word keeps the build reliable under
+      // public translation-service rate limits. The UI can still show the
+      // English dictionary definitions alongside the Chinese word meaning.
       const wordZh=data.definition_zh||await translate(word);
       data.definition_zh=wordZh;
-      const work=data.entries.slice(0,2);
-      await Promise.all(work.map(async row=>{
-        if(row.definition_en&&!row.definition_zh){
-          const zh=await translate(row.definition_en);
-          row.definition_zh=zh||wordZh;
-        }
-        if(row.example_en&&!row.example_zh)row.example_zh=await translate(row.example_en);
-      }));
+      for(const row of data.entries.slice(0,3)){
+        if(!row.definition_zh)row.definition_zh=wordZh;
+      }
     }else{
       data.definition_zh=data.definition_zh||await translate(word);
     }
