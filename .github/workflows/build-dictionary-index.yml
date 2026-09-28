@@ -1,0 +1,58 @@
+name: Build Dictionary Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/catalog.json"
+      - "engine/build-dictionary-index.mjs"
+  schedule:
+    - cron: "47 2 * * *"
+    - cron: "47 8 * * *"
+    - cron: "47 14 * * *"
+    - cron: "47 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dictionary-index
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build local dictionary index
+        run: node engine/build-dictionary-index.mjs
+      - name: Validate dictionary index
+        run: |
+          node - <<'JS'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('data/dictionary-index.json','utf8'));
+          const entries=Object.values(d.words||{});
+          const bad=entries.filter(x=>!x.definition_zh || !(x.audio_uk||x.audio_us||x.audioFallbackUk||x.audioFallbackUs));
+          console.log('INDEX_WORDS=',entries.length);
+          console.log('INDEX_COMPLETE=',entries.length-bad.length);
+          if(bad.length){console.error('Incomplete:',bad.slice(0,30).map(x=>x.word));process.exit(1);}
+          JS
+      - name: Commit dictionary index
+        run: |
+          git config user.name "sanmu-eng-dictionary-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dictionary-index.json
+          if git diff --cached --quiet; then
+            echo "No dictionary index changes."
+          else
+            git commit -m "chore: rebuild local dictionary index"
+            git pull --rebase origin main
+            git push
+          fi
