@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T09:12:03.261Z",
+  "generatedAt": "2026-09-28T09:15:29.494Z",
   "source": "build-time-dictionary-index",
   "words": {
     "order": {
@@ -577,17 +577,17 @@
       "entries": [],
       "complete": true
     },
-    "we'll": {
-      "word": "we'll",
+    "easy": {
+      "word": "easy",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=we'll&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=we'll&type=2",
-      "definition_zh": "我們會",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=easy&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=easy&type=2",
+      "definition_zh": "容易的；簡單的",
       "entries": [],
       "complete": true
     },
@@ -605,17 +605,17 @@
       "entries": [],
       "complete": true
     },
-    "easy": {
-      "word": "easy",
+    "from": {
+      "word": "from",
       "source": "fallback",
       "pos": "",
       "phonetic_uk": "",
       "phonetic_us": "",
       "audio_uk": "",
       "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=easy&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=easy&type=2",
-      "definition_zh": "容易的；簡單的",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=from&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=from&type=2",
+      "definition_zh": "從；來自",
       "entries": [],
       "complete": true
     },
@@ -647,20 +647,6 @@
       "entries": [],
       "complete": true
     },
-    "from": {
-      "word": "from",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=from&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=from&type=2",
-      "definition_zh": "從；來自",
-      "entries": [],
-      "complete": true
-    },
     "we": {
       "word": "we",
       "source": "fallback",
@@ -672,6 +658,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=we&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=we&type=2",
       "definition_zh": "我們",
+      "entries": [],
+      "complete": true
+    },
+    "about": {
+      "word": "about",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=about&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=about&type=2",
+      "definition_zh": "關於；大約",
       "entries": [],
       "complete": true
     },
@@ -717,20 +717,6 @@
       "entries": [],
       "complete": true
     },
-    "about": {
-      "word": "about",
-      "source": "fallback",
-      "pos": "",
-      "phonetic_uk": "",
-      "phonetic_us": "",
-      "audio_uk": "",
-      "audio_us": "",
-      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=about&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=about&type=2",
-      "definition_zh": "關於；大約",
-      "entries": [],
-      "complete": true
-    },
     "particular": {
       "word": "particular",
       "source": "fallback",
@@ -742,6 +728,20 @@
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=particular&type=1",
       "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=particular&type=2",
       "definition_zh": "特定的；特別的",
+      "entries": [],
+      "complete": true
+    },
+    "we'll": {
+      "word": "we'll",
+      "source": "fallback",
+      "pos": "",
+      "phonetic_uk": "",
+      "phonetic_us": "",
+      "audio_uk": "",
+      "audio_us": "",
+      "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=we'll&type=1",
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=we'll&type=2",
+      "definition_zh": "我們將；我們會",
       "entries": [],
       "complete": true
     },
