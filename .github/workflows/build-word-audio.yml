@@ -44,7 +44,13 @@ jobs:
           const bad=Object.entries(d.words||{}).filter(([w,x])=>{
             const uk=String(x.ipa_uk||'').trim(), us=String(x.ipa_us||'').trim();
             const au=String(x.audioLocalUk||'').trim(), as=String(x.audioLocalUs||'').trim();
-            return !uk || !us || !au || !as || !fs.existsSync(path.resolve(au)) || !fs.existsSync(path.resolve(as));
+            const up=path.resolve(au), sp=path.resolve(as);
+            const validWav=(p)=>{
+              if(!fs.existsSync(p))return false;
+              const b=fs.readFileSync(p);
+              return b.length>8000 && b.subarray(0,4).toString()==='RIFF' && b.subarray(8,12).toString()==='WAVE';
+            };
+            return !uk || !us || !au || !as || !validWav(up) || !validWav(sp);
           });
           console.log('WORDS=',Object.keys(d.words||{}).length);
           console.log('COMPLETE=',Object.keys(d.words||{}).length-bad.length);
