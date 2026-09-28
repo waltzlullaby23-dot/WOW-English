@@ -677,38 +677,47 @@ def process_video(video_id, meta, existing, idx=0):
         return None,{'id':video_id,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken}
 
     zh=None; zh_source='none'
+    youtube_reference=None
 
-    # 1) YouTube's own caption track translated by tlang (same source as the player).
+    # 1) Use YouTube's own translated caption as a reference/validation layer.
     if youtube_zh_rows:
-        zh=align_translation_segments(segs,youtube_zh_rows)
-        if zh and all(clean_text(x) for x in zh): zh_source='youtube-player-translation'
-    # 2) YouTube timedtext translation fallback.
-    if zh is None:
-        try: zh,zh_source=fetch_youtube_timedtext_translation(video_id,segs)
-        except Exception: zh=None
-    # 2) Transcript API / YouTube translation track, if available.
-    if zh is None:
         try:
-            zh,zh_source=translate_from_youtube(tr,segs)
+            candidate=align_translation_segments(segs,youtube_zh_rows)
+            if candidate and len(candidate)==len(segs) and all(clean_text(x) for x in candidate):
+                youtube_reference=candidate
+                zh=candidate
+                zh_source='youtube-player-reference'
         except Exception:
-            zh=None
-    # 3) Reliable free batch translator via deep-translator (Google web backend).
-    # Prefer this before the line-by-line public endpoint to reduce throttling.
-    if zh is None:
+            youtube_reference=None
+
+    # 2) Prefer a translation generated from the English transcript.
+    try:
+        got,src=translate_from_youtube(tr,segs) if tr is not None else (None,'none')
+        if got and len(got)==len(segs) and all(clean_text(x) for x in got):
+            zh,zh_source=got,'youtube-transcript-translation'
+    except Exception:
+        pass
+
+    # 3) Free batch translation backend.
+    if zh_source in {'youtube-player-reference','none'}:
         try:
-            zh,zh_source=translate_with_argos(segs)
+            got,src=translate_with_argos(segs)
+            if got and len(got)==len(segs) and all(clean_text(x) for x in got):
+                zh,zh_source=got,'deep-translator-google'
         except Exception:
-            zh=None
+            pass
+
     # 4) Public Google Translate fallback.
-    if zh is None:
+    if zh_source in {'youtube-player-reference','none'}:
         try:
             lines=[s['en'] for s in segs]
             got=translate_lines_public_google(lines)
             if len(got)==len(lines) and all(got):
                 zh,zh_source=got,'google-public-translate'
         except Exception:
-            zh=None
-    # 5) Last-mile recovery: translate missing lines individually.
+            pass
+
+    # 5) Last-mile line repair.
     if zh is None:
         try:
             lines=[s['en'] for s in segs]
@@ -716,8 +725,25 @@ def process_video(video_id, meta, existing, idx=0):
             if len(recovered)==len(lines) and all(clean_text(x) for x in recovered):
                 zh,zh_source=recovered,'deep-translator-one-by-one'
         except Exception:
-            zh=None
+            pass
 
+    # 6) Fill only missing lines from the validated YouTube reference.
+    if zh is not None and youtube_reference:
+        if len(zh)!=len(segs):
+            zh=['']*len(segs)
+        repaired=False
+        for i in range(len(segs)):
+            if not clean_text(zh[i]):
+                zh[i]=youtube_reference[i]
+                repaired=True
+        if repaired:
+            zh_source=(zh_source or 'translation')+'+youtube-reference-repair'
+
+    # 7) Emergency fallback: a fully aligned YouTube translation is better than
+    # publishing an English-only lesson when a public translator is throttled.
+    if (zh is None or len(zh)!=len(segs) or not all(clean_text(x) for x in zh)) and youtube_reference:
+        zh=list(youtube_reference)
+        zh_source='youtube-reference-fallback'
     if zh is None or len(zh)!=len(segs) or not all(clean_text(x) for x in zh):
         return None,{'id':video_id,'title':title,'status':'review','reason':zh_source or 'translation-incomplete','coverage':round(coverage,3)}
 
