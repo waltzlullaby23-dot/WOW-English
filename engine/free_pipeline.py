@@ -617,8 +617,18 @@ def fetch_english_via_transcript_txt(video_id: str):
         return []
 def best_english_transcript(video_id: str, duration: float):
     candidates=[]
-    # Hosted transcript services are tried first because GitHub-hosted runners
-    # can be blocked by YouTube's direct caption endpoints.
+    # 1) YouTube player caption URLs via yt-dlp metadata.
+    try:
+        en_rows,zh_rows,source_name,source_lang=fetch_caption_tracks_from_player(video_id)
+        if en_rows:candidates.append((f'youtube-{source_name}',None,en_rows,zh_rows))
+    except Exception:pass
+    # 2) Direct yt-dlp subtitle download. This path is intentionally used before
+    # hosted transcript services because it follows YouTube's actual caption tracks.
+    try:
+        en_rows,zh_rows=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
+        if en_rows:candidates.append(('youtube-ytdlp',None,en_rows,zh_rows))
+    except Exception:pass
+    # 3) Hosted transcript services.
     try:
         segs=fetch_english_via_free_transcript_api(video_id)
         if segs:candidates.append(('freetranscriptapi',None,segs,[]))
@@ -627,15 +637,12 @@ def best_english_transcript(video_id: str, duration: float):
         segs=fetch_english_via_transcript_txt(video_id)
         if segs:candidates.append(('youtube-transcript-ai',None,segs,[]))
     except Exception:pass
-    # Then use YouTube's own caption metadata / local transcript libraries.
-    try:
-        en_rows,zh_rows,source_name,source_lang=fetch_caption_tracks_from_player(video_id)
-        if en_rows:candidates.append((f'youtube-{source_name}',None,en_rows,zh_rows))
-    except Exception:pass
+    # 4) youtube-transcript-api as another independent source.
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
     except Exception:pass
+
     valid=[]
     for source,tr,segs,zhrows in candidates:
         try:
@@ -643,7 +650,9 @@ def best_english_transcript(video_id: str, duration: float):
             if ok:valid.append((coverage,len(segs),source,tr,segs,zhrows))
         except Exception:pass
     if not valid:return None,None,0.0,'no-complete-english-transcript',[]
-    valid.sort(key=lambda x:(x[0],x[1]),reverse=True)
+    # Prefer a YouTube-native source when coverage is effectively tied.
+    priority={'youtube-manual':4,'youtube-auto':4,'youtube-ytdlp':4,'youtube-transcript-api':3,'freetranscriptapi':2,'youtube-transcript-ai':1}
+    valid.sort(key=lambda x:(x[0],priority.get(x[2],0),x[1]),reverse=True)
     coverage,_,source,tr,segs,zhrows=valid[0]
     return tr,segs,coverage,source,zhrows
 def translate_public_google(text: str):
