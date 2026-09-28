@@ -169,8 +169,8 @@ async function enrichWord(word){
   }catch{}
   if(state.word&&String(state.word.word).toLowerCase()===key){
     state.word={...state.word,
-      definition_zh:zh||state.word.definition_zh||'目前暫無中文解釋',
-      gloss:gloss||state.word.gloss||'暫無英文定義',
+      definition_zh:zh||state.word.definition_zh||'此字目前無單一中文詞義，請依影片語境理解',
+      gloss:gloss||state.word.gloss||'',
       phonetic_uk:phoneticUk||state.word.phonetic_uk||'',
       phonetic_us:phoneticUs||state.word.phonetic_us||'',
       audio_uk:audioUk||state.word.audio_uk||'',
@@ -184,7 +184,7 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
   const info=wordBank.words?.[String(word).toLowerCase()]||{};
   state.word={word,sourceVideoId,sourceSentence,...info};
   render();
-  if(!info.definition_zh||!info.gloss) enrichWord(word);
+  if(!info.definition_zh||!info.audio_uk||!info.audio_us) enrichWord(word);
 }
 function closeWord(){state.word=null;render();}
 let speechAudio=null;
@@ -206,14 +206,22 @@ function youdaoPronunciationUrl(word,locale){
   const type=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'1':'2';
   return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;
 }
-function speak(text,locale){
+async function speak(text,locale){
   const value=String(text||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
   try{
     const synth=window.speechSynthesis;if(!synth)return false;
     synth.cancel();refreshSpeechVoices();
-    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target);u.rate=.88;u.pitch=1;u.volume=1;
-    synth.speak(u);return true;
+    if(!speechVoices.length&&'onvoiceschanged' in synth){
+      await new Promise(resolve=>{
+        let done=false;
+        const finish=()=>{if(done)return;done=true;clearTimeout(timer);synth.removeEventListener('voiceschanged',finish);refreshSpeechVoices();resolve();};
+        const timer=setTimeout(finish,700);
+        synth.addEventListener('voiceschanged',finish,{once:true});
+      });
+    }
+    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target);u.rate=.9;u.pitch=1;u.volume=1;
+    synth.resume?.();synth.speak(u);return true;
   }catch{return false;}
 }
 function googleTtsUrl(word,locale){
@@ -223,31 +231,25 @@ function googleTtsUrl(word,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const w=state.word||{};
-  const candidates=[googleTtsUrl(value,target),target==='en-GB'?w.audio_uk:w.audio_us,youdaoPronunciationUrl(value,target)];
-  let index=0;
-  window.__sanmuAudioLast={word:value,locale:target,status:'loading',url:''};
-  const tryNext=()=>{
-    const url=candidates[index++];
-    if(!url){
-      const ok=speak(value,target);
-      window.__sanmuAudioLast.status=ok?'speechSynthesis':'failed';
-      return;
-    }
-    stopSpeechAudio();
-    try{
-      const audio=new Audio();
-      speechAudio=audio;audio.preload='auto';audio.volume=1;audio.src=url;
-      window.__sanmuAudioLast.url=url;
-      audio.onended=()=>{if(speechAudio===audio)speechAudio=null;window.__sanmuAudioLast.status='ended';};
-      audio.onerror=()=>{if(speechAudio===audio){speechAudio=null;tryNext();}};
-      const p=audio.play();
-      if(p&&typeof p.then==='function')p.then(()=>{window.__sanmuAudioLast.status='playing';}).catch(()=>{if(speechAudio===audio){speechAudio=null;tryNext();}});
-    }catch{tryNext();}
-  };
-  tryNext();
-}
-async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
+  window.__sanmuAudioLast={word:value,locale:target,status:'speechSynthesis-first',url:''};
+  speak(value,target).then(ok=>{
+    if(ok){window.__sanmuAudioLast.status='speechSynthesis';return;}
+    const w=state.word||{},candidates=[googleTtsUrl(value,target),target==='en-GB'?w.audio_uk:w.audio_us,youdaoPronunciationUrl(value,target)];
+    let index=0;
+    const tryRemote=()=>{
+      const url=candidates[index++];if(!url){window.__sanmuAudioLast.status='failed';return;}
+      stopSpeechAudio();
+      try{
+        const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.volume=1;audio.src=url;window.__sanmuAudioLast.url=url;
+        audio.onended=()=>{if(speechAudio===audio)speechAudio=null;window.__sanmuAudioLast.status='ended';};
+        audio.onerror=()=>{if(speechAudio===audio){speechAudio=null;tryRemote();}};
+        const p=audio.play();
+        if(p&&typeof p.then==='function')p.then(()=>{window.__sanmuAudioLast.status='playing';}).catch(()=>{if(speechAudio===audio){speechAudio=null;tryRemote();}});
+      }catch{tryRemote();}
+    };
+    tryRemote();
+  });
+}async function playAudioUrl(url,fallbackText,target){playPronunciation(fallbackText,target);}
 async function playGoogleTTS(value,target){playPronunciation(value,target);return true;}
 
 
@@ -263,7 +265,6 @@ function wordModal(){
       <button onclick="playPronunciation(${JSON.stringify(w.word)},'en-US')">🔊 美式發音</button>
     </div>
     <section><label>中文解釋</label><p>${esc(w.definition_zh||'正在取得中文解釋…')}</p></section>
-    <section><label>English meaning</label><p>${esc(w.gloss||'正在取得英文解釋…')}</p></section>
     <section><label>例句</label><p>${esc(w.example||w.sourceSentence||'—')}</p><button class="secondary" onclick="speak(${JSON.stringify(w.example||w.sourceSentence||w.word)},'en-US')">🔊 例句</button></section>
     <button class="primary" onclick="addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button>
   </div></div>`;
@@ -400,25 +401,16 @@ function startSubtitleSync(){
   ytTimer=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;let t=0;try{t=Number(ytPlayer.getCurrentTime())||0}catch{return}syncSubtitle(t);},180);
 }
 function syncSubtitle(t){
-  const v=selectedVideo(); const seg=v?.transcript||[]; const nodes=document.querySelectorAll('.segment');
-  if(!seg.length||!nodes.length)return;
-  // Apply a constant user-controlled caption offset. Positive means captions are delayed.
-  const rate=Number(state.subtitleRate)||1;
-  const adjusted=(t-(Number(state.subtitleOffset)||0))*rate;
+  const v=selectedVideo(),seg=v?.transcript||[],list=document.querySelector('.subtitle-list');
+  if(!seg.length||!list)return;
+  const rate=Number(state.subtitleRate)||1, adjusted=(t-(Number(state.subtitleOffset)||0))*rate;
   let idx=-1;
   for(let i=0;i<seg.length;i++){
-    const a=Number(seg[i].start)||0;
-    const b=Number(seg[i].end);
-    const end=Number.isFinite(b)&&b>a?b:(Number(seg[i+1]?.start)||a+6);
+    const a=Number(seg[i].start)||0,b=Number(seg[i].end),end=Number.isFinite(b)&&b>a?b:(Number(seg[i+1]?.start)||a+6);
     if(adjusted>=a&&adjusted<end){idx=i;break;}
   }
   if(idx<0&&adjusted>=Number(seg[seg.length-1]?.start||0))idx=seg.length-1;
-  nodes.forEach((el,i)=>el.classList.toggle('active',i===idx));
-  if(idx!==lastSubtitleIndex && idx>=0){
-    const active=nodes[idx];
-    active?.scrollIntoView?.({behavior:'smooth',block:'center'});
-    lastSubtitleIndex=idx;
-  }
+  if(idx>=0&&idx!==lastSubtitleIndex){lastSubtitleIndex=idx;list.innerHTML=subtitleHTML(v,idx);}
 }
 function destroyPlayer(){if(ytTimer){clearInterval(ytTimer);ytTimer=null;}try{ytPlayer?.destroy?.();}catch{}ytPlayer=null;lastSubtitleIndex=-1;}
 function seek(sec){if(ytPlayer?.seekTo){try{ytPlayer.seekTo(Number(sec),true);ytPlayer.playVideo?.();}catch{}}}
@@ -439,7 +431,7 @@ function toggleSentenceLoop(){
 }
 function setSpeed(s){state.speed=Number(s)||1;if(ytPlayer?.setPlaybackRate){try{ytPlayer.setPlaybackRate(state.speed);}catch{}}syncSubtitle(Number(ytPlayer?.getCurrentTime?.()||0));document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===state.speed));}
 function setSubtitleSize(s){const allowed=[75,100,125,150,200];const n=Number(s)||100;state.subtitleSize=allowed.includes(n)?n:100;const list=$('.subtitle-list');if(list)list.dataset.scale=String(state.subtitleSize);document.querySelectorAll('.subtitle-scale-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.scale)===state.subtitleSize));}
-function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v);syncSubtitle(Number(ytPlayer?.getCurrentTime?.()||0));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
+function setTab(t){state.transcriptTab=t;const v=selectedVideo();const list=$('.subtitle-list');if(list)list.innerHTML=subtitleHTML(v,lastSubtitleIndex>=0?lastSubtitleIndex:0);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.textContent.trim()===(t==='english'?'英文':t==='bilingual'?'中英':'中文')));}
 const transcriptHydrationJobs={};
 
 function transcriptCacheKey(videoId){return 'sanmu-transcript-v2-'+videoId;}
@@ -502,9 +494,9 @@ async function fetchRemoteTranscript(videoId){
   }
   return [];
 }
-function refreshSubtitleList(){
+function refreshSubtitleList(index=null){
   const v=selectedVideo(),list=document.querySelector('.subtitle-list');if(!v||!list)return;
-  list.innerHTML=subtitleHTML(v);syncSubtitle(Number(ytPlayer?.getCurrentTime?.()||0));
+  list.innerHTML=subtitleHTML(v,index);
 }
 async function hydrateTranscript(v){
   if(!v?.id)return;
@@ -576,10 +568,14 @@ async function translateMissingSubtitles(v){
   return subtitleTranslationJobs[v.id];
 }
 
-function subtitleHTML(v){
+function subtitleHTML(v,index=null){
   const segs=v?.transcript||[];
   if(!segs.length)return '<div class="empty"><b>這部影片的完整字幕正在整理中</b><p>系統會先取得完整英文字幕，再逐句建立中文翻譯；沒有完整字幕的影片不列入正式學習庫。</p></div>';
-  return segs.map((x,i)=>{const zh=String(x.zh||'').trim();const en=String(x.en||'').trim();return `<div class="segment" data-index="${i}" onclick="seek(${Number(x.start)||0})"><div class="time">${fmt(x.start)} · sentence ${i+1}</div>${state.transcriptTab!=='english'?`<div class="zh">${esc(zh||'翻譯整理中…')}</div>`:''}${state.transcriptTab!=='chinese'?`<div class="en">${clickableSentence(en,v.id)}</div>`:''}</div>`}).join('');
+  const i=index===null?Math.max(0,lastSubtitleIndex>=0?lastSubtitleIndex:0):Math.max(0,Math.min(Number(index)||0,segs.length-1));
+  const x=segs[i]||{}, zh=String(x.zh||'').trim(), en=String(x.en||'').trim();
+  const zhHtml=state.transcriptTab!=='english'?'<div class="zh">'+esc(zh||'翻譯整理中…')+'</div>':'';
+  const enHtml=state.transcriptTab!=='chinese'?'<div class="en">'+clickableSentence(en,v.id)+'</div>':'';
+  return '<div class="segment active live-segment" data-index="'+i+'" onclick="seek('+(Number(x.start)||0)+')"><div class="time">'+fmt(x.start)+' · sentence '+(i+1)+'</div>'+zhHtml+enHtml+'</div>';
 }
 function watch(){
   const v=selectedVideo();
