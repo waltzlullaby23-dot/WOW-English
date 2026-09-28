@@ -39,7 +39,7 @@ const CONTEXT_ZH={
   talking:'談話；交談',food:'食物',talk:'談話；說話',favourite:'最喜愛的；最喜歡的人或事物',foods:'食物（複數）',
   eat:'吃',them:'他們；她們；它們（受格）',"what's":'什麼是；是什麼',"we'll":'我們將；我們會',"let's":'讓我們',
   voice:'聲音；嗓音',look:'看；外觀',changes:'改變；變化',focus:'焦點；重點',sentence:'句子',lots:'很多；大量',
-  synonyms:'同義詞',choose:'選擇',use:'使用；用途',context:'語境；上下文',choosing:'選擇；挑選',think:'想；認為',
+  synonyms:'同義詞',foods:'食物；食品（複數）',look:'看；查看；外觀',choose:'選擇',use:'使用；用途',context:'語境；上下文',choosing:'選擇；挑選',think:'想；認為',
   sound:'聲音；聽起來',learn:'學習；學會',pronounce:'發音；讀音',properly:'正確地；恰當地',"we're":'我們是；我們正在',
   families:'家庭；家人',compare:'比較',things:'事情；事物',bathroom:'浴室；洗手間',have:'有；擁有',
   used:'使用過的；習慣於',language:'語言',app:'應用程式',looking:'看；尋找；看起來',bond:'連結；關係',
