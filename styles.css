@@ -254,3 +254,10 @@ main{height:auto!important;min-height:0!important;overflow:visible!important}
   .word-lookup-row{margin-top:12px}
 }
 
+
+/* Pronunciation buttons: explicit hit area and stacking so modal layers never swallow clicks. */
+.word-modal .pron-row{position:relative;z-index:5}
+.word-modal .pron-row button,
+.word-modal .pron-button,
+.word-modal section button{position:relative;z-index:6;pointer-events:auto;cursor:pointer;touch-action:manipulation}
+.word-modal .pron-button{min-width:86px;min-height:36px;display:inline-flex;align-items:center;justify-content:center}
