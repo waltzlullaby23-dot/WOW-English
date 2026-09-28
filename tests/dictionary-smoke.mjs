@@ -25,16 +25,28 @@ async function probeAudioUrl(url){
     return b.byteLength>512 && (/audio|mpeg|mp3|octet-stream/.test(ct) || url.includes('dictvoice') || url.includes('.mp3'));
   }catch{return false}finally{clearTimeout(t)}
 }
+async function fetchAudio(url){
+  const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),7000);
+  try{const r=await fetch(url,{signal:ctl.signal,headers:{'User-Agent':'Mozilla/5.0','Accept':'audio/mpeg,audio/*;q=0.9,*/*;q=0.1'}});
+    if(!r.ok)return {ok:false,status:r.status,type:'',bytes:0};
+    const type=String(r.headers.get('content-type')||'').toLowerCase();
+    const buf=await r.arrayBuffer();
+    return {ok:buf.byteLength>1000&&(/audio\//.test(type)||/mpeg|mp3|octet-stream/.test(type)),status:r.status,type,bytes:buf.byteLength};
+  }catch{return {ok:false,status:0,type:'',bytes:0}}finally{clearTimeout(t)}
+}
 async function hasAudio(word,entry){
-  const candidates=[
-    ...(entry?.phonetics||[]).map(x=>x?.audio).filter(Boolean),
-    'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=1',
+  const urls=[];
+  for(const p of (entry?.phonetics||[]))if(p?.audio)urls.push(p.audio);
+  urls.push(
     'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=2',
-    'https://ssl.gstatic.com/dictionary/static/sounds/20200429/'+encodeURIComponent(word)+'--_gb_1.mp3',
-    'https://ssl.gstatic.com/dictionary/static/sounds/20200429/'+encodeURIComponent(word)+'--_us_1.mp3'
-  ];
-  for(const u of candidates){if(await probeAudioUrl(u))return true;}
-  return false;
+    'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(word)+'&type=1',
+    'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en-US&q='+encodeURIComponent(word),
+    'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en-GB&q='+encodeURIComponent(word)
+  );
+  for(const u of [...new Set(urls.filter(Boolean))]){
+    const x=await fetchAudio(u);if(x.ok)return {ok:true,url:u,bytes:x.bytes,type:x.type};
+  }
+  return {ok:false,url:'',bytes:0,type:''};
 }
 async function translate(text){
   const g='https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text);
