@@ -1,0 +1,63 @@
+name: Build Local Word Audio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/catalog.json"
+      - "engine/build-word-audio.mjs"
+  schedule:
+    - cron: "10 2 * * *"
+    - cron: "10 8 * * *"
+    - cron: "10 14 * * *"
+    - cron: "10 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: local-word-audio
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install speech engine
+        run: sudo apt-get update && sudo apt-get install -y espeak
+      - name: Generate local UK and US audio plus IPA
+        run: node engine/build-word-audio.mjs
+      - name: Validate every indexed word asset
+        run: |
+          node - <<'JS'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('data/dictionary-index.json','utf8'));
+          const bad=Object.entries(d.words||{}).filter(([w,x])=>{
+            const uk=String(x.ipa_uk||'').trim(), us=String(x.ipa_us||'').trim();
+            const au=String(x.audioLocalUk||'').trim(), as=String(x.audioLocalUs||'').trim();
+            return !uk || !us || !au || !as || !fs.existsSync(au) || !fs.existsSync(as);
+          });
+          console.log('WORDS=',Object.keys(d.words||{}).length);
+          console.log('COMPLETE=',Object.keys(d.words||{}).length-bad.length);
+          if(bad.length){console.error('BAD_WORDS=',bad.slice(0,30).map(x=>x[0]));process.exit(1);}
+          JS
+      - name: Commit generated audio and IPA
+        run: |
+          git config user.name "sanmu-eng-audio-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/ data/dictionary-index.json
+          if git diff --cached --quiet; then
+            echo "No audio changes."
+          else
+            git commit -m "chore: generate local UK and US word audio"
+            git pull --rebase origin main
+            git push
+          fi
