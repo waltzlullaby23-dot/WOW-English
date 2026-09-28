@@ -302,79 +302,58 @@ async function fetchCambridgeEntry(word){
 }
 async function enrichWord(word){
   const original=String(word||'').trim().toLowerCase();if(!original)return;
-  const cacheKey='sanmu-dictionary-v6-'+original;
+  const cacheKey='sanmu-dictionary-v7-'+original;
   const current=()=>state.word&&String(state.word.word).toLowerCase()===original;
   const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
-  try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached)apply(cached);}catch{}
-
-  const camPromise=fetchCambridgeEntry(original);
-  const dictPromise=(async()=>{
-    try{
-      const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},3500);
-      return res.ok?(await res.json())?.[0]||null:null;
-    }catch{return null;}
-  })();
-  const [cam,entry]=await Promise.all([camPromise,dictPromise]);
-  if(!current())return;
-
-  // Cambridge content wins when it could be read; Dictionary API supplies reliable audio/IPA.
-  let base={};
-  if(cam){base={...cam};}
+  try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached){apply(cached);if(cached.complete)return;}}catch{}
+  let entry=null;
+  try{
+    const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},4000);
+    if(res.ok)entry=(await res.json())?.[0]||null;
+  }catch{}
+  let base=null;
   if(entry){
     const entries=dictionaryRowsFromApi(entry);
     const audioRows=Array.isArray(entry.phonetics)?entry.phonetics:[];
-    const ukAudio=pickPronunciationAudio(audioRows,'uk');
-    const usAudio=pickPronunciationAudio(audioRows,'us');
-    base={...base,source:cam?.source||'dictionaryapi-fallback',word:original,cambridgeUrl:cambridgeUrl(original),
-      pos:cam?.pos||entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
-      phonetic_uk:cam?.phonetic_uk||entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||'',
-      phonetic_us:cam?.phonetic_us||entry?.phonetics?.find(p=>p?.text&&/us|en-us/i.test(String(p.audio||'')))?.text||entry?.phonetic||'',
-      audio_uk:ukAudio,audio_us:usAudio,
-      entries:(cam?.entries?.length?cam.entries:entries)};
+    base={source:'dictionaryapi',complete:false,word:original,pos:entries[0]?.pos||entry.meanings?.[0]?.partOfSpeech||'',
+      phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||''),
+      phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry?.phonetic||entry?.phonetics?.find(p=>p?.text)?.text||''),
+      audio_uk:pickPronunciationAudio(audioRows,'uk'),audio_us:pickPronunciationAudio(audioRows,'us'),entries};
+    if(!base.phonetic_us)base.phonetic_us=base.phonetic_uk;
+    if(!base.audio_us)base.audio_us=base.audio_uk;
+    apply(base);
   }
-  if(!base.entries?.length&&!base.definition_zh){
-    const local=wordBank.words?.[original]||{};
-    if(local.definition_zh)base={...local,word:original,cambridgeUrl:cambridgeUrl(original),entries:[{pos:local.pos||'',definition_en:local.gloss||'',definition_zh:local.definition_zh,example_en:local.example||'',example_zh:''}]};
-  }
-  if(base.entries?.length||base.definition_zh)apply(base);
-
-  // Any missing Traditional Chinese is translated in parallel with a timeout.
-  const entries=Array.isArray(base.entries)?base.entries:[];
-  if(entries.length){
-    const texts=entries.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean);
-    const translations=await translateTextsFast(texts);
-    if(!current())return;
-    const translated=entries.map(x=>({...x,definition_zh:x.definition_zh||translations[x.definition_en]||'',example_zh:x.example_zh||(x.example_en?translations[x.example_en]||'':'')}));
-    const payload={...base,entries:translated,definition_zh:base.definition_zh||translated.find(x=>x.definition_zh)?.definition_zh||''};
-    apply(payload);
-    try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
-  }else if(base.definition_zh){
-    apply(base);try{localStorage.setItem(cacheKey,JSON.stringify(base));}catch{}
-  }else{
-    apply({word:original,cambridgeUrl:cambridgeUrl(original),definition_zh:'查無可用詞義，請開啟 Cambridge Dictionary 查看完整條目。',entries:[]});
-  }
-}
-async function translateTextsFast(items){
-  const unique=[...new Set(items.map(x=>String(x||'').trim()).filter(Boolean))];
-  const out={};
-  await Promise.all(unique.map(async text=>{
-    const urls=[
-      'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text),
-      'https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|zh-TW'
-    ];
-    for(const url of urls){
-      try{
-        const res=await fetchWithTimeout(url,{cache:'no-store',headers:{'Accept':'application/json'}},2800);
-        if(!res.ok)continue;
-        const data=await res.json();
-        let zh='';
-        if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
-        if(!zh)zh=String(data?.responseData?.translatedText||'').trim();
-        if(zh&&/[\u3400-\u9fff]/.test(zh)){out[text]=zh;break;}
-      }catch{}
+  const terms=base?.entries?.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean)||[];
+  const translations=terms.length?await translateTextsFast(terms):{};
+  if(!base){
+    const local=wordBank.words?.[original]||CAMBRIDGE_FALLBACKS[original]||null;
+    if(local){
+      base={...local,source:'local-fallback',word:original,complete:false,entries:local.entries||[{pos:local.pos||'',definition_en:local.gloss||'',definition_zh:local.definition_zh||'',example_en:local.example||'',example_zh:''}]};
+      apply(base);
     }
-  }));
-  return out;
+  }
+  if(!base){
+    const zh=await translateWordOnly(original);
+    const payload={word:original,source:'translation-fallback',pos:'',phonetic_uk:'',phonetic_us:'',audio_uk:'',audio_us:'',definition_zh:zh||'暫時查不到詞義',entries:[],complete:true};
+    apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{};return;
+  }
+  const translatedEntries=(base.entries||[]).map(x=>({...x,definition_zh:x.definition_zh||translations[x.definition_en]||'',example_zh:x.example_zh||(x.example_en?translations[x.example_en]||'':'')}));
+  const payload={...base,entries:translatedEntries,definition_zh:base.definition_zh||translatedEntries.find(x=>x.definition_zh)?.definition_zh||translations[original]||'',complete:true};
+  apply(payload);try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
+}
+async function translateWordOnly(word){
+  const text=String(word||'').trim();if(!text)return '';
+  const urls=['https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text),'https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|zh-TW'];
+  for(const url of urls){
+    try{
+      const res=await fetchWithTimeout(url,{cache:'no-store',headers:{'Accept':'application/json'}},3000);if(!res.ok)continue;
+      const data=await res.json();let zh='';
+      if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
+      if(!zh)zh=String(data?.responseData?.translatedText||'').trim();
+      if(zh&&/[\u3400-\u9fff]/.test(zh))return zh;
+    }catch{}
+  }
+  return '';
 }
 function renderWordInline(){
   const v=selectedVideo();
@@ -444,10 +423,20 @@ function playAudioElement(url,word,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
+    try{
+      const synth=window.speechSynthesis;refreshSpeechVoices();synth.cancel();
+      const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target)||null;u.rate=.9;u.pitch=1;u.volume=1;
+      u.onstart=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'speechSynthesis'};};
+      u.onend=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',source:'speechSynthesis'};};
+      u.onerror=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'speech-error',source:'speechSynthesis'};};
+      synth.resume();synth.speak(u);window.__sanmuAudioLast={word:value,locale:target,status:'queued',source:'speechSynthesis'};return true;
+    }catch{}
+  }
   return playAudioElement(audioUrlFor(value,target),value,target);
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioElement(url||audioUrlFor(fallbackText,target),fallbackText,target);}
-async function playGoogleTTS(value,target){return speak(value,target);}
+async function playGoogleTTS(value,target){return playPronunciation(value,target);}
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
   const w=state.word||{};const fav=Object.keys(vocab()).includes(String(w.word||'').toLowerCase());
@@ -473,7 +462,6 @@ function wordModal(){
       </div>
       <div class="dictionary-rule"></div>
       ${entryHtml||`<div class="dictionary-definition"><span class="dictionary-bullet">•</span><span>${esc(fallbackZh)}</span></div>`}
-      <div class="dictionary-meta"><a href="${esc(w.cambridgeUrl||cambridgeUrl(w.word))}" target="_blank" rel="noopener">Cambridge Dictionary ↗</a></div>
       <div class="dictionary-actions"><button type="button" class="word-save-btn ${fav?'saved':''}" onclick="event.stopPropagation();addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button></div>
     </div>
   </div>`;
