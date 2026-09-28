@@ -8,11 +8,6 @@ on:
       - "engine/build-dictionary-index.mjs"
       - "engine/apply-curated-dictionary.mjs"
       - ".github/workflows/build-dictionary-index.yml"
-  schedule:
-    - cron: "47 2 * * *"
-    - cron: "47 8 * * *"
-    - cron: "47 14 * * *"
-    - cron: "47 20 * * *"
   workflow_dispatch:
 
 permissions:
