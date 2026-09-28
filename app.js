@@ -372,57 +372,83 @@ async function fetchDatamuseWord(word){
     return rows.length?{pos:rows[0].pos||'',entries:rows.slice(0,6)}:null;
   }catch{return null;}
 }
+async function translateWordOnly(word){
+  const text=String(word||'').trim().toLowerCase();if(!text)return '';
+  if(CONTEXT_ZH[text])return CONTEXT_ZH[text];
+  if(COMMON_ZH[text])return COMMON_ZH[text];
+  const providers=[
+    'https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|zh-TW',
+    'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text)
+  ];
+  for(let attempt=0;attempt<3;attempt++){
+    for(const url of providers){
+      try{
+        const res=await fetchWithTimeout(url,{cache:'no-store',headers:{'Accept':'application/json'}},3000);
+        if(!res.ok)continue;
+        const data=await res.json();
+        let zh='';
+        if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
+        if(!zh)zh=String(data?.responseData?.translatedText||'').trim();
+        if(zh&&/[\u3400-\u9fff]/.test(zh))return zh;
+      }catch{}
+    }
+    await new Promise(r=>setTimeout(r,150*(attempt+1)));
+  }
+  return '';
+}
 async function enrichWord(word){
   const original=String(word||'').trim().toLowerCase();if(!original)return;
   const current=()=>state.word&&String(state.word.word).toLowerCase()===original;
   const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
-
-  // A missing local entry must never remain on '正在取得中文翻譯…'.
   const indexed=dictionaryIndex.words?.[original];
   if(indexed?.complete){apply(indexed);return;}
 
-  // Ignore old runtime caches for unindexed words; they may contain the broken
-  // '查無可用詞義' result from previous versions.
-  const cacheKey='sanmu-dictionary-v10-'+original;
+  const cacheKey='sanmu-dictionary-v11-'+original;
   try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached?.complete){apply(cached);return;}}catch{}
 
-  // Start all three independent sources together.
-  const wordTranslation=translateWordOnly(original);
-  const datamuse=fetchDatamuseWord(original);
-  const dictApi=(async()=>{
-    try{
-      const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},3500);
-      return res.ok?(await res.json())?.[0]||null:null;
-    }catch{return null;}
-  })();
-
-  const [zh,dm,entry]=await Promise.all([wordTranslation,datamuse,dictApi]);
+  // Query translation, English dictionary, and Datamuse in parallel. One failing
+  // provider must never block the other two.
+  const jobs=await Promise.allSettled([
+    translateWordOnly(original),
+    (async()=>{
+      try{
+        const res=await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(original),{cache:'no-store'},3500);
+        return res.ok?(await res.json())?.[0]||null:null;
+      }catch{return null;}
+    })(),
+    fetchDatamuseWord(original)
+  ]);
   if(!current())return;
+  const zh=jobs[0].status==='fulfilled'?String(jobs[0].value||'').trim():'';
+  const entry=jobs[1].status==='fulfilled'?jobs[1].value:null;
+  const dm=jobs[2].status==='fulfilled'?jobs[2].value:null;
 
   const ph=Array.isArray(entry?.phonetics)?entry.phonetics:[];
   const apiEntries=entry?dictionaryRowsFromApi(entry):[];
   const entries=dm?.entries?.length?dm.entries:apiEntries;
+  let finalZh=zh;
+  if(!finalZh&&entries.length){
+    const firstDefinition=String(entries[0].definition_en||'').trim();
+    finalZh=await translateWordOnly(firstDefinition);
+  }
+  if(!finalZh&&CAMBRIDGE_FALLBACKS[original])finalZh=CAMBRIDGE_FALLBACKS[original].definition_zh||'';
+  if(!finalZh)finalZh='中文翻譯暫時無法取得';
+
   const base={
     source:entry?'runtime-dictionaryapi':(dm?'runtime-datamuse':'runtime-translation'),
-    complete:false,word:original,
+    complete:true,word:original,
     pos:dm?.pos||apiEntries[0]?.pos||entry?.meanings?.[0]?.partOfSpeech||'',
-    phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||''),
-    phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry?.phonetic||entry?.phonetics?.find(p=>p?.text)?.text||''),
+    phonetic_uk:String(entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||CAMBRIDGE_FALLBACKS[original]?.phonetic_uk||''),
+    phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(us|en-us)/i.test(String(p.audio||'')))?.text||entry?.phonetic||CAMBRIDGE_FALLBACKS[original]?.phonetic_us||entry?.phonetics?.find(p=>p?.text)?.text||''),
     audio_uk:pickPronunciationAudio(ph,'uk'),
     audio_us:pickPronunciationAudio(ph,'us'),
     audioFallbackUk:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(original)+'&type=1',
     audioFallbackUs:'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(original)+'&type=2',
-    definition_zh:zh||'',
-    entries
+    definition_zh:finalZh,
+    entries:(entries.length?entries:[{pos:'',definition_en:'',definition_zh:finalZh,example_en:'',example_zh:''}]).map(x=>({...x,definition_zh:x.definition_zh||finalZh}))
   };
   if(!base.phonetic_us)base.phonetic_us=base.phonetic_uk||'';
   if(!base.audio_us)base.audio_us=base.audio_uk||'';
-
-  // Apply the result immediately; translations are already available for the word.
-  if(entries.length){
-    base.entries=entries.map(x=>({...x,definition_zh:x.definition_zh||zh||'',example_zh:x.example_zh||''}));
-  }
-  base.complete=Boolean(base.definition_zh&&(base.audio_uk||base.audio_us||base.audioFallbackUk||base.audioFallbackUs));
   apply(base);
   try{localStorage.setItem(cacheKey,JSON.stringify(base));}catch{}
 }
@@ -437,7 +463,7 @@ function openWord(word,sourceVideoId='',sourceSentence=''){
   const normalized=raw.replace(/^[^A-Za-z]+|[^A-Za-z'’]+$/g,'').toLowerCase();if(!normalized)return;
   const info=wordBank.words?.[normalized]||{};
   const indexed=dictionaryIndex.words?.[normalized]||{};
-  let cached={};try{cached=JSON.parse(localStorage.getItem('sanmu-dictionary-v10-'+normalized)||'null')||{};}catch{}
+  let cached={};try{cached=JSON.parse(localStorage.getItem('sanmu-dictionary-v11-'+normalized)||'null')||{};}catch{}
   state.word={word:normalized,sourceVideoId,sourceSentence,...info,...cached,...indexed};
   renderWordInline();
   if(indexed?.complete)return;
@@ -504,31 +530,9 @@ function playAudioCandidates(urls,index,word,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  // Primary: browser speech starts immediately inside the user gesture.
-  // This avoids waiting on any network request before producing speech.
-  if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
-    try{
-      const synth=window.speechSynthesis;refreshSpeechVoices();
-      try{synth.cancel();}catch{}
-      const u=new SpeechSynthesisUtterance(value);
-      u.lang=target;u.voice=accentVoice(target)||null;u.rate=.9;u.pitch=1;u.volume=1;
-      let started=false,finished=false;
-      window.__sanmuAudioLast={word:value,locale:target,status:'queued',source:'speechSynthesis'};
-      const fallbackRemote=()=>{
-        if(finished)return;finished=true;
-        try{synth.cancel();}catch{}
-        window.__sanmuAudioLast={word:value,locale:target,status:'fallback-audio',source:'audio'};
-        playAudioCandidates(audioCandidates(value,target),0,value,target);
-      };
-      u.onstart=()=>{started=true;window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'speechSynthesis'};};
-      u.onend=()=>{finished=true;window.__sanmuAudioLast={word:value,locale:target,status:'ended',source:'speechSynthesis'};};
-      u.onerror=()=>{fallbackRemote();};
-      synth.resume();synth.speak(u);
-      setTimeout(()=>{if(!started&&!finished)fallbackRemote();},1000);
-      return true;
-    }catch{}
-  }
-  return playAudioCandidates(audioCandidates(value,target),0,value,target);
+  // First attempt a real audio file immediately in the user click handler.
+  playAudioCandidates(audioCandidates(value,target),0,value,target);
+  return true;
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
 async function playGoogleTTS(value,target){return speak(value,target);}
