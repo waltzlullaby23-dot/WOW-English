@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T13:32:43.753Z",
+  "generatedAt": "2026-09-28T13:33:44.875Z",
   "source": "build-time-dictionary-index",
   "words": {
     "helpful": {
@@ -4407,7 +4407,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=realistically&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=realistically&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=realistically&type=2",
+      "ipa_uk": "/ɹiəlˈɪstɪkli/",
+      "ipa_us": "/ɹiːəlˈɪstɪkli/",
+      "phonetic_uk": "/ɹiəlˈɪstɪkli/",
+      "phonetic_us": "/ɹiːəlˈɪstɪkli/",
+      "audioLocalUk": "audio/uk/realistically-770d91f7.wav",
+      "audioLocalUs": "audio/us/realistically-770d91f7.wav"
     },
     "grammar": {
       "word": "grammar",
@@ -4425,7 +4431,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=grammar&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=grammar&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=grammar&type=2",
+      "ipa_uk": "/ɡɹˈamə/",
+      "ipa_us": "/ɡɹˈæmɚ/",
+      "phonetic_uk": "/ɡɹˈamə/",
+      "phonetic_us": "/ɡɹˈæmɚ/",
+      "audioLocalUk": "audio/uk/grammar-338df5dd.wav",
+      "audioLocalUs": "audio/us/grammar-338df5dd.wav"
     },
     "immersion": {
       "word": "immersion",
@@ -4443,7 +4455,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=immersion&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=immersion&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=immersion&type=2",
+      "ipa_uk": "/ɪmˈɜːʃən/",
+      "ipa_us": "/ɪmˈɜːʒən/",
+      "phonetic_uk": "/ɪmˈɜːʃən/",
+      "phonetic_us": "/ɪmˈɜːʒən/",
+      "audioLocalUk": "audio/uk/immersion-19cd4d31.wav",
+      "audioLocalUs": "audio/us/immersion-19cd4d31.wav"
     },
     "full": {
       "word": "full",
@@ -4461,7 +4479,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=full&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=full&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=full&type=2",
+      "ipa_uk": "/fˈʊl/",
+      "ipa_us": "/fˈʊl/",
+      "phonetic_uk": "/fˈʊl/",
+      "phonetic_us": "/fˈʊl/",
+      "audioLocalUk": "audio/uk/full-52e6d8ab.wav",
+      "audioLocalUs": "audio/us/full-52e6d8ab.wav"
     },
     "adults": {
       "word": "adults",
@@ -4479,7 +4503,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=adults&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=adults&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=adults&type=2",
+      "ipa_uk": "/ˈadʌlts/",
+      "ipa_us": "/ɐdˈʌlts/",
+      "phonetic_uk": "/ˈadʌlts/",
+      "phonetic_us": "/ɐdˈʌlts/",
+      "audioLocalUk": "audio/uk/adults-bf07c56d.wav",
+      "audioLocalUs": "audio/us/adults-bf07c56d.wav"
     },
     "achieve": {
       "word": "achieve",
@@ -4497,7 +4527,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=achieve&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=achieve&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=achieve&type=2",
+      "ipa_uk": "/ɐtʃˈiːv/",
+      "ipa_us": "/ɐtʃˈiːv/",
+      "phonetic_uk": "/ɐtʃˈiːv/",
+      "phonetic_us": "/ɐtʃˈiːv/",
+      "audioLocalUk": "audio/uk/achieve-f9659d46.wav",
+      "audioLocalUs": "audio/us/achieve-f9659d46.wav"
     },
     "so": {
       "word": "so",
@@ -4515,7 +4551,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=so&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=so&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=so&type=2",
+      "ipa_uk": "/sˈəʊ/",
+      "ipa_us": "/sˈoʊ/",
+      "phonetic_uk": "/sˈəʊ/",
+      "phonetic_us": "/sˈoʊ/",
+      "audioLocalUk": "audio/uk/so-cd1b646e.wav",
+      "audioLocalUs": "audio/us/so-cd1b646e.wav"
     },
     "can't": {
       "word": "can't",
@@ -4533,7 +4575,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=can't&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=can't&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=can't&type=2",
+      "ipa_uk": "/kˈɑːnt/",
+      "ipa_us": "/kˈænt/",
+      "phonetic_uk": "/kˈɑːnt/",
+      "phonetic_us": "/kˈænt/",
+      "audioLocalUk": "audio/uk/can_t-5bac3993.wav",
+      "audioLocalUs": "audio/us/can_t-5bac3993.wav"
     },
     "apps": {
       "word": "apps",
@@ -4551,7 +4599,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=apps&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=apps&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=apps&type=2",
+      "ipa_uk": "/ˈaps/",
+      "ipa_us": "/ˈæps/",
+      "phonetic_uk": "/ˈaps/",
+      "phonetic_us": "/ˈæps/",
+      "audioLocalUk": "audio/uk/apps-8025087a.wav",
+      "audioLocalUs": "audio/us/apps-8025087a.wav"
     },
     "teach": {
       "word": "teach",
@@ -4569,7 +4623,13 @@
       "source": "curated",
       "complete": true,
       "audioFallbackUk": "https://dict.youdao.com/dictvoice?audio=teach&type=1",
-      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=teach&type=2"
+      "audioFallbackUs": "https://dict.youdao.com/dictvoice?audio=teach&type=2",
+      "ipa_uk": "/tˈiːtʃ/",
+      "ipa_us": "/tˈiːtʃ/",
+      "phonetic_uk": "/tˈiːtʃ/",
+      "phonetic_us": "/tˈiːtʃ/",
+      "audioLocalUk": "audio/uk/teach-bbe5bb36.wav",
+      "audioLocalUs": "audio/us/teach-bbe5bb36.wav"
     }
   }
 }
