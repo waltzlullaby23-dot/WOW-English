@@ -538,30 +538,25 @@ async function playAudioUrl(url,fallbackText,target){return playAudioCandidates(
 async function playGoogleTTS(value,target){return speak(value,target);}
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
-  const w=state.word||{};const fav=Object.keys(vocab()).includes(String(w.word||'').toLowerCase());
-  const entries=Array.isArray(w.entries)?w.entries:[];
-  const fallbackZh=w.definition_zh||'正在取得中文翻譯…';
-  const entryHtml=entries.map(x=>`<div class="dictionary-entry">
-    <div class="dictionary-definition"><span class="dictionary-bullet">•</span><span>${x.definition_en?`<b>${esc(x.definition_en)}</b>`:''}</span></div>
-    ${x.definition_zh?`<div class="dictionary-zh">${esc(x.definition_zh)}</div>`:''}
-    ${x.example_en?`<div class="dictionary-example"><i>${esc(x.example_en)}</i></div>`:''}
-    ${x.example_zh?`<div class="dictionary-example-zh">${esc(x.example_zh)}</div>`:''}
-  </div>`).join('');
+  const w=state.word||{};
+  const pos=String(w.pos||'').trim();
+  const zh=String(w.definition_zh||'查詢中…').trim();
+  const uk=String(w.phonetic_uk||'').trim();
+  const us=String(w.phonetic_us||uk).trim();
   return `<div class="word-inline-card">
-    <div class="dictionary-card">
-      <div class="dictionary-head">
-        <div><div class="dictionary-word">${esc(w.word||'')}</div><div class="dictionary-pos">${esc(w.pos||'')}</div></div>
-        <button type="button" class="dictionary-close" onclick="event.stopPropagation();closeWord()">×</button>
+    <div class="vt-dictionary-card">
+      <button type="button" class="vt-dictionary-close" onclick="event.stopPropagation();closeWord()" aria-label="關閉">×</button>
+      <div class="vt-word">${esc(w.word||'')}</div>
+      ${pos?`<div class="vt-pos">${esc(pos)}</div>`:''}
+      <div class="vt-pronunciation">
+        <button type="button" class="vt-pron-btn" aria-label="英式發音" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-GB')"><b>UK</b><span class="vt-speaker">🔊</span></button>
+        ${uk?`<span class="vt-ipa">${esc(uk)}</span>`:''}
+        <span class="vt-pron-dot">·</span>
+        <button type="button" class="vt-pron-btn" aria-label="美式發音" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-US')"><b>US</b><span class="vt-speaker">🔊</span></button>
+        ${us?`<span class="vt-ipa">${esc(us)}</span>`:''}
       </div>
-      <div class="dictionary-pron">
-        <button type="button" class="dictionary-audio" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-GB')">UK <span class="speaker-icon">🔊</span></button>
-        <span class="dictionary-ipa">${esc(w.phonetic_uk||'')}</span>
-        <button type="button" class="dictionary-audio" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-US')">US <span class="speaker-icon">🔊</span></button>
-        <span class="dictionary-ipa">${esc(w.phonetic_us||'')}</span>
-      </div>
-      <div class="dictionary-rule"></div>
-      ${entryHtml||`<div class="dictionary-definition"><span class="dictionary-bullet">•</span><span>${esc(fallbackZh)}</span></div>`}
-      <div class="dictionary-actions"><button type="button" class="word-save-btn ${fav?'saved':''}" onclick="event.stopPropagation();addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button></div>
+      <div class="vt-divider"></div>
+      <div class="vt-meaning">${esc(zh)}</div>
     </div>
   </div>`;
 }
