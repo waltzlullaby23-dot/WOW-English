@@ -9,5 +9,6 @@
   "maxCharsPerMinute": 1800,
   "searchRetries": 3,
   "queryCooldown": 0.05,
-  "dailyTarget": 100
+  "dailyTarget": 100,
+  "workers": 6
 }
