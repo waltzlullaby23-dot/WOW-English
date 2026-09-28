@@ -192,56 +192,96 @@ function clickableSentence(text,videoId){
 }
 function markHistory(v){let h=history(),i=h.findIndex(x=>x.id===v.id);const item={id:v.id,title:v.title,updatedAt:new Date().toISOString()};if(i>=0)h[i]={...h[i],...item};else h.unshift(item);save('sanmu-history',h.slice(0,200));let d=daily();d.minutes+=1;d.sessions+=1;save('sanmu-daily',d);}
 function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];save('sanmu-favs',f);render();}
+function normalizeAudioUrl(url){
+  const u=String(url||'').trim();
+  if(!u)return '';
+  return u.startsWith('//')?'https:'+u:u;
+}
+function pickPronunciationAudio(phonetics,kind){
+  const rows=Array.isArray(phonetics)?phonetics:[];
+  const wanted=kind==='uk'?/(^|[_-])(gb|uk)([_-]|\.|$)/i:/(^|[_-])(us|en-us)([_-]|\.|$)/i;
+  const found=rows.find(p=>p?.audio&&wanted.test(String(p.audio)));
+  return normalizeAudioUrl(found?.audio||rows.find(p=>p?.audio)?.audio||'');
+}
+function dictionaryRowsFromApi(entry){
+  const meanings=Array.isArray(entry?.meanings)?entry.meanings:[];
+  return meanings.flatMap(m=>{
+    const pos=m?.partOfSpeech||'';
+    return (m?.definitions||[]).slice(0,4).map(d=>({
+      pos,
+      definition_en:String(d?.definition||'').trim(),
+      definition_zh:'',
+      example_en:String(d?.example||'').trim(),
+      example_zh:''
+    })).filter(x=>x.definition_en||x.example_en);
+  }).slice(0,6);
+}
+async function translateTexts(items){
+  const unique=[...new Set(items.map(x=>String(x||'').trim()).filter(Boolean))];
+  const out={};
+  await Promise.all(unique.map(async text=>{
+    const urls=[
+      'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(text),
+      'https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=en&tl=zh-TW&q='+encodeURIComponent(text)
+    ];
+    for(const url of urls){
+      try{
+        const res=await fetch(url,{cache:'force-cache',headers:{'Accept':'application/json'}});
+        if(!res.ok)continue;
+        const data=await res.json();
+        let zh='';
+        if(Array.isArray(data?.[0]))zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
+        if(!zh&&Array.isArray(data))zh=String(data[0]||'').trim();
+        if(zh){out[text]=zh;break;}
+      }catch{}
+    }
+  }));
+  return out;
+}
 async function enrichWord(word){
   const key=String(word||'').trim().toLowerCase();if(!key)return;
-  const cacheKey='sanmu-word-cache-v4-'+key;
+  const cacheKey='sanmu-word-cambridge-v1-'+key;
   const current=()=>state.word&&String(state.word.word).toLowerCase()===key;
-  const setWord=(patch)=>{if(!current())return;state.word={...state.word,...patch};updateWordModal();};
-  let cached={};
-  try{cached=JSON.parse(localStorage.getItem(cacheKey)||'null')||{};}catch{}
-  if(Object.keys(cached).length){setWord(cached);}
+  const apply=(patch)=>{if(!current())return;state.word={...state.word,...patch};renderWordInline();};
+  let cached=null;
+  try{cached=JSON.parse(localStorage.getItem(cacheKey)||'null');}catch{}
+  if(cached&&Array.isArray(cached.entries)){apply(cached);if(cached.entries.every(x=>x.definition_zh&&(!x.example_en||x.example_zh)))return;}
 
-  // Fast path: only retrieve Chinese translation first. Do not wait for pronunciation/dictionary APIs.
-  if(!cached.definition_zh){
-    try{
-      const url='https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key);
-      const res=await fetch(url,{cache:'force-cache',headers:{'Accept':'application/json'}});
-      if(res.ok){
-        const data=await res.json();
-        const zh=(data?.[0]||[]).map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
-        if(zh){setWord({definition_zh:zh});cached={...cached,definition_zh:zh};try{localStorage.setItem(cacheKey,JSON.stringify(cached));}catch{}}
-      }
-    }catch{}
-  }
-
-  // Background enrichment: pronunciation metadata + example. This never blocks the Chinese result.
-  if(cached.phonetic_uk&&cached.phonetic_us&&cached.audio_uk&&cached.audio_us)return;
+  // One dictionary request supplies the whole definition/phonetic/audio bundle.
+  let entry=null;
   try{
     const res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key),{cache:'force-cache'});
-    if(!res.ok)return;
-    const entry=(await res.json())?.[0]||{};const meanings=entry.meanings||[];const phs=(entry.phonetics||[]).filter(p=>p?.text||p?.audio);
-    const us=phs.find(p=>/us/i.test(String(p.audio||'')))||{};const uk=phs.find(p=>/uk|gb/i.test(String(p.audio||'')))||{};
-    const patch={
-      pos:meanings.map(m=>m?.partOfSpeech||'').find(Boolean)||'',
-      phonetic_us:us.text||phs.find(p=>/us/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'',
-      phonetic_uk:uk.text||phs.find(p=>/uk|gb/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'',
-      audio_us:us.audio||phs.find(p=>/us/i.test(String(p.audio||'')))?.audio||'',
-      audio_uk:uk.audio||phs.find(p=>/uk|gb/i.test(String(p.audio||'')))?.audio||'',
-      example:meanings.flatMap(m=>m.definitions||[]).map(d=>d.example).find(Boolean)||''
-    };
-    setWord(patch);cached={...cached,...patch};try{localStorage.setItem(cacheKey,JSON.stringify(cached));}catch{}
+    if(res.ok)entry=(await res.json())?.[0]||null;
   }catch{}
-}
-function updateWordModal(){
-  const w=state.word;if(!w)return;
-  const map={
-    'word-definition-zh':w.definition_zh||'正在取得中文翻譯…',
-    'word-phonetic-uk':w.phonetic_uk||'—',
-    'word-phonetic-us':w.phonetic_us||'—',
-    'word-pos':w.pos||'n.',
-    'word-meaning-pos':w.pos||'n.'
+  if(!entry){
+    // Keep the UI useful for words that already exist in our local bank.
+    const info=wordBank.words?.[key]||{};
+    apply({definition_zh:info.definition_zh||'暫時查不到中文翻譯',phonetic_uk:info.phonetic_uk||'',phonetic_us:info.phonetic_us||'',audio_uk:normalizeAudioUrl(info.audio_uk||''),audio_us:normalizeAudioUrl(info.audio_us||''),pos:info.pos||'n.',entries:info.definition_zh?[{pos:info.pos||'n.',definition_en:info.gloss||'',definition_zh:info.definition_zh,example_en:info.example||'',example_zh:''}]:[]});
+    return;
+  }
+  const entries=dictionaryRowsFromApi(entry);
+  const primaryPos=entries[0]?.pos||String(entry?.meanings?.[0]?.partOfSpeech||'n.');
+  const info={
+    pos:primaryPos,
+    phonetic_uk:String(entry?.phonetics?.find(p=>p?.text&&/(^|[_-])(gb|uk)([_-]|\.|$)/i.test(String(p.audio||'')))?.text||entry?.phonetics?.find(p=>p?.text)?.text||entry?.phonetic||'').trim(),
+    phonetic_us:String(entry?.phonetics?.find(p=>p?.text&&/(^|[_-])(us|en-us)([_-]|\.|$)/i.test(String(p.audio||'')))?.text||'').trim(),
+    audio_uk:pickPronunciationAudio(entry?.phonetics,'uk'),
+    audio_us:pickPronunciationAudio(entry?.phonetics,'us'),
+    entries
   };
-  Object.entries(map).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=value;});
+  if(!info.phonetic_us)info.phonetic_us=info.phonetic_uk;
+  if(!info.audio_us)info.audio_us=info.audio_uk;
+  // Render the English dictionary data immediately; translations load in parallel.
+  apply(info);
+  const texts=entries.flatMap(x=>[x.definition_en,x.example_en]).filter(Boolean);
+  const translations=await translateTexts(texts);
+  if(current()){
+    const translatedEntries=entries.map(x=>({...x,definition_zh:translations[x.definition_en]||'',example_zh:x.example_en?(translations[x.example_en]||''):''}));
+    const firstZh=translatedEntries.find(x=>x.definition_zh)?.definition_zh||'暫時查不到中文翻譯';
+    const payload={...info,entries:translatedEntries,definition_zh:firstZh};
+    apply(payload);
+    try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
+  }
 }
 function renderWordInline(){
   const v=selectedVideo();
@@ -273,82 +313,85 @@ function accentVoice(locale){
   return voices.find(v=>/^en-US/i.test(v.lang||''))||voices.find(v=>/american|us|david|mark|zira|samantha|alex/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
 }
 function youdaoPronunciationUrl(word,locale){const type=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'1':'2';return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;}
+let speechAudio=null;
+let speechVoices=[];
+function refreshSpeechVoices(){try{speechVoices=window.speechSynthesis?window.speechSynthesis.getVoices():[];}catch{speechVoices=[];}}
+try{if(window.speechSynthesis){refreshSpeechVoices();window.speechSynthesis.onvoiceschanged=refreshSpeechVoices;}}catch{}
+function accentVoice(locale){
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  const voices=speechVoices.length?speechVoices:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);
+  if(target==='en-GB')return voices.find(v=>/^en-GB/i.test(v.lang||''))||voices.find(v=>/british|uk|hazel|george|daniel/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
+  return voices.find(v=>/^en-US/i.test(v.lang||''))||voices.find(v=>/american|us|david|mark|zira|samantha|alex/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
+}
 function speak(text,locale){
   const value=String(text||'').trim();if(!value)return false;
-  const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
   try{
-    const synth=window.speechSynthesis;
-    if(!synth||!window.SpeechSynthesisUtterance)return false;
-    refreshSpeechVoices();
-    try{synth.cancel();}catch{}
-    const u=new SpeechSynthesisUtterance(value);
-    u.lang=target;
-    u.voice=accentVoice(target)||null;
-    u.rate=.88;u.pitch=1;u.volume=1;
+    const synth=window.speechSynthesis;if(!synth||!window.SpeechSynthesisUtterance)return false;
+    refreshSpeechVoices();try{synth.cancel();}catch{}
+    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target)||null;u.rate=.88;u.pitch=1;u.volume=1;
     u.onstart=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',url:''};};
     u.onend=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',url:''};};
     u.onerror=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'speech-error',url:''};};
-    synth.resume();
-    // speak() is called directly from the button click path; do not defer it.
-    synth.speak(u);
+    synth.resume();synth.speak(u);
     window.__sanmuAudioLast={word:value,locale:target,status:'queued',url:''};
     return true;
   }catch{return false;}
 }
-function pronunciationCandidates(word,locale){
-  const value=String(word||'').trim();
-  const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
-  const w=state.word||{};
-  const primary=target==='en-GB'?w.audio_uk:w.audio_us;
-  const secondary=target==='en-GB'?w.audio_us:w.audio_uk;
+function audioUrlFor(word,locale){
+  const w=state.word||{};const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  const direct=target==='en-GB'?w.audio_uk:w.audio_us;
+  const other=target==='en-GB'?w.audio_us:w.audio_uk;
   const type=target==='en-GB'?'1':'2';
-  return [primary,secondary,'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(value)+'&type='+type,'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value)].filter(Boolean);
+  return String(direct||other||('https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type));
 }
-function playRemotePronunciation(urls,index=0,word='',locale='en-US'){
-  if(index>=urls.length)return false;
+function playAudioElement(url,word,locale){
   try{
-    if(speechAudio){try{speechAudio.pause();}catch{}speechAudio=null;}
-    const audio=new Audio();audio.preload='auto';audio.volume=1;audio.src=urls[index];speechAudio=audio;
-    window.__sanmuAudioLast={word,locale,status:'loading',url:audio.src};
+    if(speechAudio){try{speechAudio.pause();speechAudio.remove();}catch{}speechAudio=null;}
+    const audio=new Audio();audio.preload='auto';audio.src=url;audio.volume=1;audio.setAttribute('playsinline','');speechAudio=audio;
+    window.__sanmuAudioLast={word,locale,status:'loading',url};
+    audio.onplaying=()=>{window.__sanmuAudioLast.status='playing';};
     audio.onended=()=>{window.__sanmuAudioLast.status='ended';if(speechAudio===audio)speechAudio=null;};
-    audio.onerror=()=>{if(speechAudio===audio)speechAudio=null;playRemotePronunciation(urls,index+1,word,locale);};
+    audio.onerror=()=>{if(speechAudio===audio)speechAudio=null;speak(word,locale);};
     const p=audio.play();
-    if(p&&p.catch)p.catch(()=>{if(speechAudio===audio)speechAudio=null;playRemotePronunciation(urls,index+1,word,locale);});
+    if(p&&p.catch)p.catch(()=>{if(speechAudio===audio)speechAudio=null;speak(word,locale);});
     return true;
-  }catch{return playRemotePronunciation(urls,index+1,word,locale);}
+  }catch{return speak(word,locale);}
 }
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
-  const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
-  // Priority 1: direct browser speech inside the click handler.
-  if(speak(value,target))return true;
-  // Priority 2: remote audio only when SpeechSynthesis is unavailable.
-  return playRemotePronunciation(pronunciationCandidates(value,target),0,value,target);
+  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  // Actual MP3 first. This call is made directly by the button click.
+  return playAudioElement(audioUrlFor(value,target),value,target);
 }
-async function playAudioUrl(url,fallbackText,target){return playPronunciation(fallbackText,target);}
-async function playGoogleTTS(value,target){return playPronunciation(value,target);}
+async function playAudioUrl(url,fallbackText,target){return playAudioElement(url||audioUrlFor(fallbackText,target),fallbackText,target);}
+async function playGoogleTTS(value,target){return speak(value,target);}
 function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.word).toLowerCase()]={...w,addedAt:new Date().toISOString()};save('sanmu-vocab',v);render();}
 function wordModal(){
-  const w=state.word||{};
-  const fav=Object.keys(vocab()).includes(String(w.word||'').toLowerCase());
-  const zh=w.definition_zh||'正在取得中文翻譯…';
-  const pos=w.pos||'n.';
-  const phonUk=w.phonetic_uk||'—';
-  const phonUs=w.phonetic_us||'—';
-  const sourceSentence=w.sourceSentence||w.example||'';
+  const w=state.word||{};const fav=Object.keys(vocab()).includes(String(w.word||'').toLowerCase());
+  const entries=Array.isArray(w.entries)?w.entries:[];
+  const fallbackZh=w.definition_zh||'正在取得中文翻譯…';
+  const entryHtml=entries.map((x,i)=>`<div class="dictionary-entry">
+    <div class="dictionary-definition"><span class="dictionary-bullet">•</span><span><i>${esc(x.definition_en||'')}</i></span></div>
+    ${x.definition_en&&x.definition_zh?`<div class="dictionary-zh">${esc(x.definition_zh)}</div>`:''}
+    ${x.example_en?`<div class="dictionary-example"><i>${esc(x.example_en)}</i></div>`:''}
+    ${x.example_zh?`<div class="dictionary-example-zh">${esc(x.example_zh)}</div>`:''}
+  </div>`).join('');
   return `<div class="word-inline-card">
-    <div class="word-popover" role="dialog" aria-label="${esc(w.word||'單字查詢')}">
-      <div class="word-popover-head">
-        <div class="word-main-line"><strong>${esc(w.word||'')}</strong><span id="word-phonetic-uk" class="word-phonetic-inline">${esc(phonUk)}</span><span id="word-phonetic-us" class="word-phonetic-inline us-inline">${esc(phonUs)}</span><span id="word-pos" class="word-pos-pill">${esc(pos)}</span></div>
-        <button type="button" class="word-close" onclick="event.stopPropagation();closeWord()" aria-label="關閉">×</button>
+    <div class="dictionary-card">
+      <div class="dictionary-head">
+        <div><div class="dictionary-word">${esc(w.word||'')}</div><div class="dictionary-pos">${esc(w.pos||'')}</div></div>
+        <button type="button" class="dictionary-close" onclick="event.stopPropagation();closeWord()">×</button>
       </div>
-      <div class="word-meaning"><span id="word-meaning-pos" class="meaning-pos">${esc(pos)}</span> <span id="word-definition-zh">${esc(zh)}</span></div>
-      ${sourceSentence?`<div class="word-example-line">${esc(sourceSentence)}</div>`:''}
-      <div class="word-actions">
-        <button type="button" class="word-audio-btn" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-GB')"><span class="speaker">🔊</span> UK</button>
-        <button type="button" class="word-audio-btn" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-US')"><span class="speaker">🔊</span> US</button>
-        <button type="button" class="word-save-btn ${fav?'saved':''}" onclick="event.stopPropagation();addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button>
+      <div class="dictionary-pron">
+        <button type="button" class="dictionary-audio" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-GB')">UK <span class="speaker-icon">🔊</span></button>
+        <span class="dictionary-ipa">${esc(w.phonetic_uk||'')}</span>
+        <button type="button" class="dictionary-audio" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-US')">US <span class="speaker-icon">🔊</span></button>
+        <span class="dictionary-ipa">${esc(w.phonetic_us||'')}</span>
       </div>
+      <div class="dictionary-rule"></div>
+      ${entryHtml||`<div class="dictionary-definition"><span class="dictionary-bullet">•</span><span>${esc(fallbackZh)}</span></div>`}
+      <div class="dictionary-actions"><button type="button" class="word-save-btn ${fav?'saved':''}" onclick="event.stopPropagation();addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button></div>
     </div>
   </div>`;
 }
