@@ -33,6 +33,8 @@ jobs:
           node-version: 20
       - name: Build local dictionary index
         run: node engine/build-dictionary-index.mjs
+      - name: Apply curated dictionary corrections
+        run: node engine/apply-curated-dictionary.mjs
       - name: Validate dictionary index
         run: |
           node - <<'JS'
