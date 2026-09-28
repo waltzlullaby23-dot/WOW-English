@@ -115,7 +115,7 @@ def parse_vtt(path: Path) -> list[dict[str,Any]]:
 
 def parse_public_transcript_text(text: str):
     rows=[]
-    pat=re.compile(r'^\\s*\\[?(?P<t>(?:\\d{1,2}:)?\\d{1,2}:\\d{2}(?:[.,]\\d{1,3})?)\\]?\\s*[-–—:]?\\s*(?P<txt>.+?)\\s*$')
+        pat=re.compile(r'^\s*\[?(?P<t>(?:\d{1,2}:)?\d{1,2}:\d{2}(?:[.,]\d{1,3})?)\]?\s*[-–—:]?\s*(?P<txt>.+?)\s*$')
     for line in str(text or '').splitlines():
         m=pat.match(line)
         if not m: continue
