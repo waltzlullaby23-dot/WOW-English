@@ -90,16 +90,19 @@ const workers=Array.from({length:6},async()=>{
       data.audio_uk=audio(entry.phonetics,/_gb|_uk|gb|uk/i);
       data.audio_us=audio(entry.phonetics,/_us|en-us|us/i)||data.audio_uk;
 
-      // Only enrich the first three definitions/examples. The UI has enough
-      // complete information without translating a long dictionary payload.
-      const work=data.entries.slice(0,3);
+      // The critical runtime guarantee is a Chinese word meaning + audio.
+      // Definitions/examples are enriched opportunistically; failures there must
+      // not invalidate an otherwise usable word card.
+      const wordZh=data.definition_zh||await translate(word);
+      data.definition_zh=wordZh;
+      const work=data.entries.slice(0,2);
       await Promise.all(work.map(async row=>{
-        const jobs=[];
-        if(row.definition_en)jobs.push(translate(row.definition_en).then(x=>{row.definition_zh=x;}));
-        if(row.example_en)jobs.push(translate(row.example_en).then(x=>{row.example_zh=x;}));
-        await Promise.all(jobs);
+        if(row.definition_en&&!row.definition_zh){
+          const zh=await translate(row.definition_en);
+          row.definition_zh=zh||wordZh;
+        }
+        if(row.example_en&&!row.example_zh)row.example_zh=await translate(row.example_en);
       }));
-      data.definition_zh=data.definition_zh||data.entries.find(x=>x.definition_zh)?.definition_zh||await translate(word);
     }else{
       data.definition_zh=data.definition_zh||await translate(word);
     }
@@ -109,5 +112,5 @@ const workers=Array.from({length:6},async()=>{
   }
 });
 await Promise.all(workers);
-fs.writeFileSync(existingPath,JSON.stringify(out,null,2)+'\\n','utf8');
+fs.writeFileSync(existingPath,JSON.stringify(out,null,2)+'\n','utf8');
 console.log(JSON.stringify({uniqueWords:list.length,indexed:Object.keys(out.words).length,complete:Object.values(out.words).filter(x=>x.complete).length},null,2));
