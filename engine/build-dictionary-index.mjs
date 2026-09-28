@@ -79,7 +79,7 @@ const workers=Array.from({length:6},async()=>{
     if(i>=list.length)return;
     const word=list[i];
     const old=existing?.words?.[word];
-    if(old?.complete&&old.definition_zh&&(old.audio_uk||old.audio_us||old.audioFallbackUk||old.audioFallbackUs)){out.words[word]=old;continue;}
+    if(old?.complete&&old.definition_zh&&!COMMON_ZH[word]&&(old.audio_uk||old.audio_us||old.audioFallbackUk||old.audioFallbackUs)){out.words[word]=old;continue;}
 
     const entry=(await getJson('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word),8000))?.[0]||null;
     const data={word,source:entry?'dictionaryapi-build':'fallback',pos:'',phonetic_uk:'',phonetic_us:'',
