@@ -157,45 +157,60 @@ function clickableSentence(text,videoId){
 function markHistory(v){let h=history(),i=h.findIndex(x=>x.id===v.id);const item={id:v.id,title:v.title,updatedAt:new Date().toISOString()};if(i>=0)h[i]={...h[i],...item};else h.unshift(item);save('sanmu-history',h.slice(0,200));let d=daily();d.minutes+=1;d.sessions+=1;save('sanmu-daily',d);}
 function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];save('sanmu-favs',f);render();}
 async function enrichWord(word){
-  const key=String(word||'').trim().toLowerCase();if(!key)return;
-  const cacheKey='sanmu-word-cache-v3-'+key;
+  const key=String(word||'').trim().toLowerCase();
+  if(!key)return;
+  const cacheKey='sanmu-word-cache-v2-'+key;
+  const looksZh=(s)=>/[\u3400-\u9fff]/.test(String(s||''));
   try{
     const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');
-    if(cached&&state.word&&String(state.word.word).toLowerCase()===key){state.word={...state.word,...cached};updateWordModal();return;}
-  }catch{}
-  const isCurrent=()=>state.word&&String(state.word.word).toLowerCase()===key;
-  // Phase 1: Chinese translation only. Do not wait for dictionary/audio data.
-  try{
-    const u='https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key);
-    const res=await fetch(u,{cache:'no-store',headers:{'Accept':'application/json'},signal:AbortSignal.timeout?.(3500)});
-    if(res.ok){
-      const data=await res.json();
-      const zh=(data?.[0]||[]).map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();
-      if(zh&&isCurrent()){state.word={...state.word,definition_zh:zh};updateWordModal();try{localStorage.setItem(cacheKey,JSON.stringify({definition_zh:zh}));}catch{}}
+    if(cached&&state.word&&String(state.word.word).toLowerCase()===key){
+      state.word={...state.word,...cached};
+      updateWordModal();
+      if(cached.definition_zh&&cached.phonetic_uk&&cached.phonetic_us)return;
     }
-  }catch{
-    try{
-      const res=await fetch('https://api.mymemory.translated.net/get?'+new URLSearchParams({q:key,langpair:'en|zh-TW'}),{cache:'no-store'});
-      const zh=String((await res.json())?.responseData?.translatedText||'').trim();
-      if(zh&&/[\u3400-\u9fff]/.test(zh)&&isCurrent()){state.word={...state.word,definition_zh:zh};updateWordModal();}
-    }catch{}
-  }
-  // Phase 2: pronunciation metadata runs independently in the background.
-  try{
-    const res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key),{cache:'no-store',signal:AbortSignal.timeout?.(5000)});
-    if(!res.ok)return;
-    const data=await res.json();const entry=data?.[0]||{};const meanings=entry.meanings||[];const phs=(entry.phonetics||[]).filter(p=>p?.text||p?.audio);
-    const us=phs.find(p=>/us/i.test(String(p.audio||'')))||{};const uk=phs.find(p=>/uk|gb/i.test(String(p.audio||'')))||{};
-    const payload={
-      pos:meanings.map(m=>m?.partOfSpeech||'').find(Boolean)||'',
-      phonetic_us:us.text||phs.find(p=>/us/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'',
-      phonetic_uk:uk.text||phs.find(p=>/uk|gb/i.test(String(p.text||'')))?.text||phs.find(p=>p?.text)?.text||'',
-      audio_us:us.audio||phs.find(p=>/us/i.test(String(p.audio||'')))?.audio||phs.find(p=>p?.audio)?.audio||'',
-      audio_uk:uk.audio||phs.find(p=>/uk|gb/i.test(String(p.audio||'')))?.audio||phs.find(p=>p?.audio)?.audio||'',
-      example:meanings.flatMap(m=>m.definitions||[]).map(d=>d.example).find(Boolean)||''
-    };
-    if(isCurrent()){state.word={...state.word,...payload};updateWordModal();try{localStorage.setItem(cacheKey,JSON.stringify({...payload,definition_zh:state.word.definition_zh||''}));}catch{}}
   }catch{}
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),4500);
+  let zh='',phoneticUk='',phoneticUs='',audioUk='',audioUs='',pos='',example='';
+  try{
+    const results=await Promise.allSettled([
+      fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q='+encodeURIComponent(key),{cache:'no-store',headers:{'Accept':'application/json'},signal:controller.signal}),
+      fetch('https://api.mymemory.translated.net/get?'+new URLSearchParams({q:key,langpair:'en|zh-TW'}),{cache:'no-store',signal:controller.signal}),
+      fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key),{cache:'no-store',signal:controller.signal})
+    ]);
+    for(const res of results){
+      if(res.status!=='fulfilled'||!res.value?.ok)continue;
+      try{
+        const data=await res.value.json();
+        if(Array.isArray(data)&&Array.isArray(data[0])&&!zh){zh=data[0].map(x=>Array.isArray(x)?(x[0]||''):'').join('').trim();}
+        const mt=data?.responseData?.translatedText;
+        if(!looksZh(zh)&&looksZh(mt))zh=String(mt).trim();
+        if(Array.isArray(data)){
+          const e=data[0]||{},meanings=e.meanings||[];
+          pos=meanings.map(m=>m?.partOfSpeech||'').filter(Boolean)[0]||pos;
+          example=meanings.flatMap(m=>m.definitions||[]).map(d=>d.example).find(Boolean)||example;
+          const phs=(e.phonetics||[]).filter(p=>p?.text||p?.audio);
+          const us=phs.find(p=>/us/i.test(String(p.audio||'')))||{};
+          const uk=phs.find(p=>/uk|gb/i.test(String(p.audio||'')))||{};
+          phoneticUs=us.text||phoneticUs||phs.find(p=>p?.text)?.text||'';
+          phoneticUk=uk.text||phoneticUk||phs.find(p=>p?.text)?.text||'';
+          audioUs=us.audio||audioUs||phs.find(p=>p?.audio)?.audio||'';
+          audioUk=uk.audio||audioUk||phs.find(p=>p?.audio)?.audio||'';
+        }
+      }catch{}
+    }
+  }finally{clearTimeout(timer);}
+  const payload={
+    definition_zh:zh||state.word?.definition_zh||'暫時查不到中文翻譯，請再次查詢',
+    phonetic_uk:phoneticUk||state.word?.phonetic_uk||'',
+    phonetic_us:phoneticUs||state.word?.phonetic_us||'',
+    audio_uk:audioUk||state.word?.audio_uk||'',
+    audio_us:audioUs||state.word?.audio_us||'',
+    pos:pos||state.word?.pos||'',
+    example:example||state.word?.example||''
+  };
+  try{localStorage.setItem(cacheKey,JSON.stringify(payload));}catch{}
+  if(state.word&&String(state.word.word).toLowerCase()===key){state.word={...state.word,...payload};updateWordModal();}
 }
 function updateWordModal(){
   const w=state.word;if(!w)return;
@@ -206,80 +221,36 @@ function updateWordModal(){
 function closeWord(){state.word=null;render();}
 let speechAudio=null;
 let speechVoices=[];
-function refreshSpeechVoices(){try{speechVoices=window.speechSynthesis?.getVoices?.()||[];}catch{speechVoices=[];}}
+function refreshSpeechVoices(){try{speechVoices=window.speechSynthesis?window.speechSynthesis.getVoices():[];}catch{speechVoices=[];}}
 try{if(window.speechSynthesis){refreshSpeechVoices();window.speechSynthesis.onvoiceschanged=refreshSpeechVoices;}}catch{}
 function accentVoice(locale){
-  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const voices=speechVoices.length?speechVoices:(window.speechSynthesis?.getVoices?.()||[]);
-  if(target==='en-GB')return voices.find(v=>/^en-GB/i.test(v.lang||''))||voices.find(v=>/hazel|george|daniel|serena|kate|british|uk/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
-  return voices.find(v=>/^en-US/i.test(v.lang||''))||voices.find(v=>/david|mark|zira|samantha|alex|aria|jenny|american|us/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
+  const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
+  const voices=speechVoices.length?speechVoices:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);
+  if(target==='en-GB')return voices.find(v=>/^en-GB/i.test(v.lang||''))||voices.find(v=>/british|uk|hazel|george|daniel/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
+  return voices.find(v=>/^en-US/i.test(v.lang||''))||voices.find(v=>/american|us|david|mark|zira|samantha|alex/i.test(v.name||''))||voices.find(v=>/^en/i.test(v.lang||''))||null;
 }
-function stopSpeechAudio(){
-  try{window.speechSynthesis?.cancel?.();}catch{}
-  try{if(speechAudio){speechAudio.pause();speechAudio.removeAttribute('src');speechAudio.load();}}catch{}
-  speechAudio=null;
-}
-function youdaoPronunciationUrl(word,locale){const type=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'1':'2';return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;}
+function youdaoPronunciationUrl(word,locale){const type=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'1':'2';return 'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(String(word||''))+'&type='+type;}
 function speak(text,locale){
-  const value=String(text||'').trim();if(!value)return Promise.resolve(false);
-  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
+  const value=String(text||'').trim();if(!value)return false;
+  const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
   try{
-    const synth=window.speechSynthesis;if(!synth)return Promise.resolve(false);
-    synth.cancel();refreshSpeechVoices();
-    const voice=accentVoice(target);
-    if(!voice&&!synth.getVoices?.().length)return Promise.resolve(false);
-    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=voice||null;u.rate=.9;u.pitch=1;u.volume=1;
-    synth.resume?.();synth.speak(u);return Promise.resolve(true);
-  }catch{return Promise.resolve(false);}
-}
-function googleTtsUrl(word,locale){const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(String(word||''));}
-function playRemoteAudioCandidates(word,locale,candidates,index=0){
-  const value=String(word||'').trim();if(!value)return Promise.resolve(false);
-  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const list=[...new Set((candidates||[]).filter(Boolean))];
-  if(index>=list.length)return Promise.resolve(false);
-  const url=list[index];
-  stopSpeechAudio();
-  return new Promise(resolve=>{
-    try{
-      const audio=new Audio();speechAudio=audio;audio.preload='auto';audio.src=url;window.__sanmuAudioLast.url=url;
-      let settled=false;const done=(ok)=>{if(settled)return;settled=true;resolve(ok);};
-      audio.onended=()=>{window.__sanmuAudioLast.status='ended';if(speechAudio===audio)speechAudio=null;done(true);};
-      audio.onerror=async()=>{if(speechAudio===audio)speechAudio=null;const ok=await playRemoteAudioCandidates(value,target,list,index+1);done(ok);};
-      const p=audio.play();
-      if(p&&typeof p.then==='function')p.then(()=>{window.__sanmuAudioLast.status='playing';}).catch(async()=>{if(speechAudio===audio)speechAudio=null;const ok=await playRemoteAudioCandidates(value,target,list,index+1);done(ok);});
-    }catch{playRemoteAudioCandidates(value,target,list,index+1).then(done);}
-  });
-}
-function playBrowserSpeech(word,locale){
-  const value=String(word||'').trim();if(!value)return false;
-  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  try{
-    const synth=window.speechSynthesis;if(!synth)return false;
-    synth.cancel();refreshSpeechVoices();
-    const u=new SpeechSynthesisUtterance(value);
-    u.lang=target;
-    u.voice=accentVoice(target)||null;
-    u.rate=.88;u.pitch=1;u.volume=1;
-    u.onstart=()=>{window.__sanmuAudioLast.status='speech-started';};
-    u.onerror=()=>{window.__sanmuAudioLast.status='speech-error';};
-    synth.resume();synth.speak(u);
-    window.__sanmuAudioLast.status='speech-queued';
-    return true;
-  }catch{return false;}
+    if(!window.speechSynthesis||!window.SpeechSynthesisUtterance)return false;
+    const synth=window.speechSynthesis;synth.cancel();refreshSpeechVoices();
+    const u=new SpeechSynthesisUtterance(value);u.lang=target;u.voice=accentVoice(target)||null;u.rate=.88;u.pitch=1;u.volume=1;
+    synth.resume();synth.speak(u);window.__sanmuAudioLast={word:value,locale:target,status:'speech-queued',url:''};return true;
+  }catch{window.__sanmuAudioLast={word:value,locale:target,status:'speech-error',url:''};return false;}
 }
 function playPronunciation(word,locale){
-  const value=String(word||'').trim();if(!value)return false;
-  const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const w=state.word||{};window.__sanmuAudioLast={word:value,locale:target,status:'starting',url:''};
-  // Start the browser's own speech engine immediately inside the click gesture.
-  // Remote audio is then attempted as a higher-fidelity fallback/source.
-  const spoken=playBrowserSpeech(value,target);
-  const primary=target==='en-GB'?w.audio_uk:w.audio_us;
-  const secondary=target==='en-GB'?w.audio_us:w.audio_uk;
-  const remote=[primary,secondary,youdaoPronunciationUrl(value,target),googleTtsUrl(value,target)];
-  if(!spoken)playRemoteAudioCandidates(value,target,remote,0);
-  return true;
+  const value=String(word||'').trim();if(!value)return;
+  const target=String(locale||'en-US').toLowerCase().indexOf('en-gb')===0?'en-GB':'en-US';
+  const spoken=speak(value,target);if(spoken)return;
+  try{
+    const audio=new Audio(youdaoPronunciationUrl(value,target));audio.preload='auto';audio.volume=1;speechAudio=audio;
+    window.__sanmuAudioLast={word:value,locale:target,status:'remote-loading',url:audio.src};
+    audio.onended=function(){window.__sanmuAudioLast.status='ended';if(speechAudio===audio)speechAudio=null;};
+    audio.onerror=function(){window.__sanmuAudioLast.status='remote-error';if(speechAudio===audio)speechAudio=null;};
+    const p=audio.play();if(p&&p.catch)p.catch(function(){window.__sanmuAudioLast.status='autoplay-blocked';});
+  }catch{}
 }
 async function playAudioUrl(url,fallbackText,target){return playPronunciation(fallbackText,target);}
 async function playGoogleTTS(value,target){return playPronunciation(value,target);}
@@ -287,13 +258,13 @@ function addWord(){const w=state.word;if(!w)return;const v=vocab();v[String(w.wo
 function wordModal(){
   const w=state.word,fav=Object.keys(vocab()).includes(String(w.word).toLowerCase());
   return `<div class="modal-backdrop" onclick="closeWord()"><div class="word-modal" onclick="event.stopPropagation()">
-    <div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div id="word-pos" class="word-pos">${esc(w.pos||'查詢中…')}</div></div><button type="button" onclick="closeWord()">×</button></div>
+    <div class="modal-head"><div><div class="word-title">${esc(w.word)}</div><div class="word-pos">${esc(w.pos||'查詢中…')}</div></div><button type="button" onclick="closeWord()">×</button></div>
     <div class="pron-row">
-      <span>英式 <b id="word-phonetic-uk">${esc(w.phonetic_uk||'—')}</b></span><button type="button" class="pron-button" onclick="playPronunciation(${JSON.stringify(w.word)},'en-GB')">英式發音</button>
-      <span>美式 <b id="word-phonetic-us">${esc(w.phonetic_us||'—')}</b></span><button type="button" class="pron-button" onclick="playPronunciation(${JSON.stringify(w.word)},'en-US')">美式發音</button>
+      <span>英式 <b>${esc(w.phonetic_uk||'—')}</b></span><button type="button" class="pron-button" onclick="playPronunciation(${JSON.stringify(w.word)},'en-GB')">英式發音</button>
+      <span>美式 <b>${esc(w.phonetic_us||'—')}</b></span><button type="button" class="pron-button" onclick="playPronunciation(${JSON.stringify(w.word)},'en-US')">美式發音</button>
     </div>
-    <section><label>中文翻譯</label><p id="word-definition-zh" class="word-zh">${esc(w.definition_zh||'正在取得中文翻譯…')}</p></section>
-    <section><label>例句</label><p id="word-example">${esc(w.example||w.sourceSentence||'—')}</p><button type="button" class="secondary" onclick="playPronunciation(${JSON.stringify(w.example||w.sourceSentence||w.word)},'en-US')">朗讀例句</button></section>
+    <section><label>中文翻譯</label><p class="word-zh">${esc(w.definition_zh||'正在取得中文翻譯…')}</p></section>
+    <section><label>例句</label><p>${esc(w.example||w.sourceSentence||'—')}</p><button type="button" class="secondary" onclick="playPronunciation(${JSON.stringify(w.example||w.sourceSentence||w.word)},'en-US')">朗讀例句</button></section>
     <button type="button" class="primary" onclick="addWord()">${fav?'♥ 已收藏':'♡ 收藏單字'}</button>
   </div></div>`;
 }
@@ -306,12 +277,12 @@ function nextQuiz(){state.quizIndex=state.quizIndex>=19?0:state.quizIndex+1;rend
 function listPage(title,items){return `<div class="section-head"><div><h2>${title}</h2><p>你的個人學習資料儲存在瀏覽器本機。</p></div></div><div class="video-grid">${items.map(videoCard).join('')||'<div class="empty">目前沒有資料。</div>'}</div>`;}
 function vocabularyPage(){
   const items=Object.values(vocab());
-  return `<div class="section-head"><div><h2>我的單字庫</h2><p>字幕中的每個英文單字都可直接點擊查詢；也可以輸入任意單字。</p></div><span class="count-pill">${items.length} 字</span></div>
-  <div class="word-lookup panel"><div><strong>單字查詢</strong><small>中文翻譯＋英式／美式發音＋詞性＋英文定義</small></div><div class="word-lookup-row"><input id="word-lookup-input" type="text" placeholder="輸入英文單字，例如 polite" onkeydown="handleWordLookupKey(event,this.value)"><button onclick="lookupWordInput()">查詢單字</button></div></div>
-  <div class="vocab-grid">${items.map(w=>`<div class="vocab-card"><div><strong>${esc(w.word)}</strong><small>${esc(w.pos||'')}</small></div><p>${esc(w.definition_zh||'尚未翻譯')}</p><button onclick='openWord(${JSON.stringify(w.word)},${JSON.stringify(w.sourceVideoId||'')},${JSON.stringify(w.sourceSentence||'')})'>查看</button></div>`).join('')||'<div class="empty">尚未收藏單字。</div>'}</div>`;
+  return `<div class="section-head"><div><h2>我的單字庫</h2><p>字幕中的每個英文單字都可以直接查詢。</p></div><span class="count-pill">${items.length} 字</span></div>
+  <div class="word-lookup panel"><div><strong>單字查詢</strong><small>中文翻譯＋英式／美式發音</small></div><div class="word-lookup-row"><input id="word-lookup-input" type="text" placeholder="輸入英文單字，例如 continuous" onkeydown="handleWordLookupKey(event,this.value)"><button type="button" onclick="lookupWordInput()">查詢</button></div></div>
+  <div class="vocab-grid">${items.map(w=>`<div class="vocab-card"><div><strong>${esc(w.word)}</strong><small>${esc(w.pos||'')}</small></div><p>${esc(w.definition_zh||'尚未翻譯')}</p><button type="button" onclick='openWord(${JSON.stringify(w.word)},${JSON.stringify(w.sourceVideoId||'')},${JSON.stringify(w.sourceSentence||'')})'>查看</button></div>`).join('')||'<div class="empty">尚未收藏單字。</div>'}</div>`;
 }
 function engine(){const s=catalog.stats||{};return `<div class="section-head"><div><h2>影片探索引擎</h2><p>候選搜尋 → 語言辨識 → 字幕 A/B/C → AI CEFR / 分類 → 去重 → 翻譯 → 學習單元。</p></div><span class="count-pill">13 類・${taxonomy.totalSubcategories} 子類</span></div><div class="engine-grid"><div class="panel pipeline"><h3>Continuous Discovery</h3><div>${[['大量搜尋','每次 32 個 query、雙頁候選'],['語言閘門','English / Multilingual / confidence'],['字幕','A → B → C fallback'],['分類','AI 13 大類 / 子類'],['難度','A1–C2 CEFR'],['去重','ID / fingerprint / embedding'],['翻譯','batch → sentence → context'],['學習單元','Vocabulary / Phrases / Grammar / Questions']].map((x,i)=>`<div class="stage"><b>${i+1}. ${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div></div><div class="panel"><h3>目前資料</h3><div class="metric-grid"><div><b>${s.accepted||catalog.videos.length}</b><small>收錄</small></div><div><b>${s.candidates||0}</b><small>候選</small></div><div><b>${s.review||0}</b><small>待審</small></div><div><b>${catalog.translationStats?.translated||0}</b><small>已翻句</small></div></div><p class="engine-note">真正大量增加影片需要 GitHub Actions 取得 YOUTUBE_API_KEY 與 OPENAI_API_KEY 後自動執行。</p></div></div>`;}
-window.toggleSidebar=toggleSidebar;window.handleGlobalSearchKey=handleGlobalSearchKey;window.handleWordLookupKey=handleWordLookupKey;window.lookupWordInput=lookupWordInput;window.playPronunciation=playPronunciation;window.openCategoryModal=openCategoryModal;window.closeCategoryModal=closeCategoryModal;window.chooseCategory=chooseCategory;window.go=go;window.updateSearch=updateSearch;window.renderMain=renderMain;window.setSpeed=setSpeed;window.setSubtitleSize=setSubtitleSize;window.setTab=setTab;window.seek=seek;window.toggleFav=toggleFav;window.openWord=openWord;window.closeWord=closeWord;window.speak=speak;window.addWord=addWord;window.answerQuiz=answerQuiz;window.nextQuiz=nextQuiz;window.toggleLesson=toggleLesson;
+window.toggleSidebar=toggleSidebar;window.playPronunciation=playPronunciation;window.handleGlobalSearchKey=handleGlobalSearchKey;window.handleWordLookupKey=handleWordLookupKey;window.lookupWordInput=lookupWordInput;window.playPronunciation=playPronunciation;window.openCategoryModal=openCategoryModal;window.closeCategoryModal=closeCategoryModal;window.chooseCategory=chooseCategory;window.go=go;window.updateSearch=updateSearch;window.renderMain=renderMain;window.setSpeed=setSpeed;window.setSubtitleSize=setSubtitleSize;window.setTab=setTab;window.seek=seek;window.toggleFav=toggleFav;window.openWord=openWord;window.closeWord=closeWord;window.speak=speak;window.addWord=addWord;window.answerQuiz=answerQuiz;window.nextQuiz=nextQuiz;window.toggleLesson=toggleLesson;
 
 
 /* =========================================================
