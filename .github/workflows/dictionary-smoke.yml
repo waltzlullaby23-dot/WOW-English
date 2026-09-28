@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: dictionary-smoke
+  cancel-in-progress: true
+
 jobs:
   dictionary-smoke:
     runs-on: ubuntu-latest
