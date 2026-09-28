@@ -536,14 +536,21 @@ def fetch_english_via_free_transcript_api(video_id: str):
         return []
 
 def best_english_transcript(video_id: str, duration: float):
-    # CI release gate: use the hosted transcript service first and fail fast.
-    # Slow YouTube scraping is deliberately not part of the release path.
     candidates=[]
+    # First use YouTube's own caption track metadata. This is the most direct
+    # source and preserves timestamps for sentence-level synchronization.
+    try:
+        en_rows, zh_rows, source_name, source_lang = fetch_caption_tracks_from_player(video_id)
+        if en_rows:
+            candidates.append((f'youtube-{source_name}', None, en_rows, zh_rows))
+    except Exception:
+        pass
+    # Hosted transcript API is the next fallback for runner reliability.
     try:
         segs=fetch_english_via_free_transcript_api(video_id)
         if segs:candidates.append(('freetranscriptapi',None,segs,[]))
     except Exception:pass
-    # A single direct transcript-api attempt is a secondary fallback.
+    # Direct transcript API is a final fallback.
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
@@ -558,7 +565,6 @@ def best_english_transcript(video_id: str, duration: float):
     valid.sort(key=lambda x:(x[0],x[1]),reverse=True)
     coverage,_,source,tr,segs,zhrows=valid[0]
     return tr,segs,coverage,source,zhrows
-
 def translate_public_google(text: str):
     import requests
     q=clean_text(text)
@@ -643,7 +649,7 @@ def process_video(video_id, meta, existing, idx=0):
             return None,{'id':video_id,'title':title,'status':'review','reason':'duplicate'}
     title_zh=translate_public_google(title) or translate_one(title) or ''
     rec={
-      'id':video_id,'title':title,'titleZh':clean_text(title_zh),
+      'id':video_id,'title':title,'titleZh':clean_text(title_zh),'addedAt':now_iso(),'acceptedAt':now_iso(),
       'channel':clean_text(info.get('channel') or info.get('uploader') or ''),
       'duration':pretty_duration(duration),'published':str(info.get('upload_date') or '')[:10],
       'category':category['id'],'subcategory':sub,'cefr':level,'cefrScore':score,
