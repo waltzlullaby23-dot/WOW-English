@@ -7,7 +7,7 @@ const repoRoot=process.cwd();
 const catalog=JSON.parse(fs.readFileSync('data/catalog.json','utf8'));
 const indexPath='data/dictionary-index.json';
 const index=JSON.parse(fs.readFileSync(indexPath,'utf8'));
-const words=new Set();
+const words=new Set(Object.keys(index.words||{}));
 for(const v of (catalog.videos||[])){
   for(const s of (v.transcript||[])){
     for(const m of String(s.en||'').matchAll(/[A-Za-z]+(?:['’][A-Za-z]+)?/g)) words.add(m[0].toLowerCase());
