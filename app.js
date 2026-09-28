@@ -239,12 +239,19 @@ async function translateTexts(items){
   return out;
 }
 const CAMBRIDGE_FALLBACKS={
+  manners:{pos:'noun',phonetic_uk:'/ˈmæn.əz/',phonetic_us:'/ˈmæn.ɚz/',definition_zh:'風度；禮貌；禮儀',entries:[
+    {pos:'noun',definition_en:'polite ways of behaving with other people',definition_zh:'與他人相處時有禮貌的行為方式',example_en:'He needs to be taught some manners.',example_zh:'他需要有人教他一些禮貌。'},
+    {pos:'noun',definition_en:'ways of behaving toward people, especially ways that are socially correct and show respect for their comfort and feelings',definition_zh:'對待他人的行為方式，尤其是符合社會規範並尊重他人感受的方式',example_en:'He was always punctilious in his manners.',example_zh:'他的舉止一向非常講究。'}
+  ]},
   retro:{pos:'adjective',phonetic_uk:'/ˈret.rəʊ/',phonetic_us:'/ˈret.roʊ/',definition_zh:'懷舊的；重新流行的；模仿過去式樣的',entries:[
     {pos:'adjective',definition_en:'similar to styles, fashions, etc. from the past',definition_zh:'懷舊的；重新流行的；模仿過去式樣的',example_en:'retro clothes/music',example_zh:'懷舊服裝／音樂'},
     {pos:'adjective',definition_en:'a retro style',definition_zh:'重新流行的款式',example_en:'Inside, the decor is very retro.',example_zh:'室內的裝修格調具有非常濃厚的復古韻味。'}
   ]},
   helpful:{pos:'adjective',phonetic_uk:'/ˈhelp.fəl/',phonetic_us:'/ˈhelp.fəl/',definition_zh:'願意幫忙的；有幫助的；有用的',entries:[
     {pos:'adjective',definition_en:'willing to help, or useful',definition_zh:'願意幫忙的；有幫助的；有用的',example_en:"I'm sorry, I was only trying to be helpful.",example_zh:'真抱歉，我只是想幫忙。'}
+  ]},
+  responsibility:{pos:'noun',phonetic_uk:'/rɪˌspɒn.səˈbɪl.ə.ti/',phonetic_us:'/rɪˌspɑːn.səˈbɪl.ə.t̬i/',definition_zh:'責任；負責；職責；任務',entries:[
+    {pos:'noun',definition_en:'a duty to deal with or take care of someone or something',definition_zh:'對某人或某事負責或照料的義務',example_en:'It is your responsibility to look after the children.',example_zh:'照顧孩子是你的責任。'}
   ]},
   conjunction:{pos:'noun',phonetic_uk:'/kənˈdʒʌŋk.ʃən/',phonetic_us:'/kənˈdʒʌŋk.ʃən/',definition_zh:'連詞；連接詞',entries:[
     {pos:'noun',definition_en:"a word such as 'and', 'but', 'while', or 'although' that connects words, phrases, and clauses in a sentence",definition_zh:'連詞；連接詞',example_en:'Conjunctions are linking words like and, or, but, then and because.',example_zh:''}
