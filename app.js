@@ -501,11 +501,13 @@ function audioCandidates(word,locale){
   const fallback=target==='en-GB'?w.audioFallbackUk:w.audioFallbackUs;
   const other=target==='en-GB'?w.audio_us:w.audio_uk;
   const type=target==='en-GB'?'1':'2';
+  const googleLang=target.toLowerCase();
   const gSuffix=target==='en-GB'?'_gb_1':'_us_1';
   return [
     direct,
     fallback,
     'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(value)+'&type='+type,
+    'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(googleLang)+'&q='+encodeURIComponent(value),
     other,
     'https://ssl.gstatic.com/dictionary/static/sounds/20200429/'+encodeURIComponent(value)+'--'+gSuffix+'.mp3'
   ].map(normalizeAudioUrl).filter(Boolean);
@@ -530,9 +532,31 @@ function playAudioCandidates(urls,index,word,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  // First attempt a real audio file immediately in the user click handler.
-  playAudioCandidates(audioCandidates(value,target),0,value,target);
-  return true;
+  // Primary: browser's native speech engine, called directly from the click.
+  // This avoids waiting for any network request before producing sound.
+  if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
+    try{
+      const synth=window.speechSynthesis;
+      refreshSpeechVoices();
+      try{synth.cancel();}catch{}
+      try{synth.resume();}catch{}
+      const u=new SpeechSynthesisUtterance(value);
+      u.lang=target;
+      u.voice=accentVoice(target)||null;
+      u.rate=.9;u.pitch=1;u.volume=1;
+      let started=false;
+      window.__sanmuAudioLast={word:value,locale:target,status:'queued',source:'speechSynthesis'};
+      u.onstart=()=>{started=true;window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'speechSynthesis'};};
+      u.onend=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',source:'speechSynthesis'};};
+      u.onerror=()=>{if(!started)playAudioCandidates(audioCandidates(value,target),0,value,target);};
+      synth.speak(u);
+      // Some Chrome/Windows voice sets fail to start the first utterance.
+      // After 900ms, only then try MP3 fallbacks; never cancel a speaking utterance.
+      setTimeout(()=>{if(!started&&synth.speaking===false)playAudioCandidates(audioCandidates(value,target),0,value,target);},900);
+      return true;
+    }catch{}
+  }
+  return playAudioCandidates(audioCandidates(value,target),0,value,target);
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
 async function playGoogleTTS(value,target){return speak(value,target);}
