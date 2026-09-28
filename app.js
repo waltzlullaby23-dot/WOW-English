@@ -425,13 +425,14 @@ function audioCandidates(word,locale){
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
   const w=state.word||{};
   const direct=target==='en-GB'?w.audio_uk:w.audio_us;
+  const fallback=target==='en-GB'?w.audioFallbackUk:w.audioFallbackUs;
   const other=target==='en-GB'?w.audio_us:w.audio_uk;
   const type=target==='en-GB'?'1':'2';
   const gSuffix=target==='en-GB'?'_gb_1':'_us_1';
   return [
-    'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(value)+'&type='+type,
-    'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+encodeURIComponent(target)+'&q='+encodeURIComponent(value),
     direct,
+    fallback,
+    'https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(value)+'&type='+type,
     other,
     'https://ssl.gstatic.com/dictionary/static/sounds/20200429/'+encodeURIComponent(value)+'--'+gSuffix+'.mp3'
   ].map(normalizeAudioUrl).filter(Boolean);
