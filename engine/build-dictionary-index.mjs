@@ -61,8 +61,8 @@ function rows(entry){
   }))).filter(x=>x.definition_en||x.example_en).slice(0,12);
 }
 function audio(phonetics,re){
-  for(const p of (phonetics||[]))if(p?.audio&&re.test(String(p.audio)))return String(p.audio).replace(/^\\/\\//,'https://');
-  return String((phonetics||[]).find(p=>p?.audio)?.audio||'').replace(/^\\/\\//,'https://');
+  for(const p of (phonetics||[]))if(p?.audio&&re.test(String(p.audio)))return String(p.audio).replace(/^\/\//,'https://');
+  return String((phonetics||[]).find(p=>p?.audio)?.audio||'').replace(/^\/\//,'https://');
 }
 const out={schemaVersion:1,generatedAt:new Date().toISOString(),source:'build-time-dictionary-index',words:{}};
 const list=[...words];
