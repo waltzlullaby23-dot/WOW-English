@@ -1,4 +1,5 @@
-import subprocess, json, os, time, re, requests
+import subprocess, json, os, time, re, requests, sys
+sys.path.insert(0, os.getcwd())
 from engine.free_pipeline import parse_public_transcript_text
 from youtube_transcript_api import YouTubeTranscriptApi
 
