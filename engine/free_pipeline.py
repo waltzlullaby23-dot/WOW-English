@@ -687,6 +687,10 @@ def process_video(video_id, meta, existing, idx=0):
     title=clean_text(info.get('title') or meta.get('title') or '')
     if not title:return None,{'id':video_id,'title':'','status':'review','reason':'missing-title'}
     duration=float(info.get('duration') or 0)
+    # Keep the daily discovery tranche bounded; long-form documentaries are
+    # handled by a separate slower ingestion path rather than blocking 25 slots.
+    if duration > 1200:
+        return None,{'id':video_id,'title':title,'status':'review','reason':'too-long-for-fast-daily-tranche'}
 
     raw_lang=str(info.get('language') or '').lower().replace('_','-')
     if raw_lang and not raw_lang.startswith('en'):
@@ -726,8 +730,9 @@ def process_video(video_id, meta, existing, idx=0):
         pass
 
     # 3) Fast public Google translation fallback.
-    # Keep the slow local Argos engine as a last resort so one candidate
-    # cannot hold the daily discovery run for minutes.
+    if zh is None and not youtube_zh_rows and duration > 600:
+        return None,{'id':video_id,'title':title,'status':'review','reason':'youtube-translation-unavailable'}
+    # Fast public Google translation only for short videos.
     if zh is None:
         try:
             lines=[s['en'] for s in segs]
