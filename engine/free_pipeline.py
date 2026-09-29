@@ -301,11 +301,12 @@ def fetch_timedtext(video_id: str, lang='en', kind=None, tlang=None):
         return []
 
 def fetch_english_via_timedtext(video_id: str):
+    # Use only YouTube's canonical English track ids first. Avoid a matrix of
+    # language/kind requests that made each candidate unnecessarily slow.
     for kind in (None,'asr'):
-        for lang in ('en','en-US','en-GB'):
-            rows=fetch_timedtext(video_id,lang,kind)
-            if rows and len(' '.join(x['en'] for x in rows))>=180:
-                return True,rows,lang,kind
+        rows=fetch_timedtext(video_id,'en',kind)
+        if rows and len(' '.join(x['en'] for x in rows))>=180:
+            return True,rows,'en',kind
     return False,[],None,None
 def fetch_youtube_timedtext_translation(video_id: str, en_segments):
     # Ask YouTube's own timedtext service for its player translation.
@@ -624,7 +625,7 @@ def best_english_transcript(video_id: str, duration: float):
             valid,coverage,reason=validate_transcript(segs,duration)
             if valid:
                 zh_rows=[]
-                for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
+                for tlang in ('zh-TW','zh-Hant','zh'):
                     rows=fetch_timedtext(video_id,lang,kind,tlang)
                     if rows and len(rows)>=max(CONFIG['minSegments'],int(len(segs)*0.6)):
                         zh_rows=rows
