@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T08:24:53.427Z",
+  "generatedAt": "2026-09-29T12:46:15.613Z",
   "source": "build-time-dictionary-index",
   "words": {
     "helpful": {
@@ -26,8 +26,8 @@
       "complete": true,
       "ipa_uk": "/hˈɛlpfəl/",
       "ipa_us": "/hˈɛlpfəl/",
-      "audioLocalUk": "audio/uk/helpful-4b739291.wav",
-      "audioLocalUs": "audio/us/helpful-4b739291.wav"
+      "audioLocalUk": "audio/uk/helpful-4b739291.mp3",
+      "audioLocalUs": "audio/us/helpful-4b739291.mp3"
     },
     "someone": {
       "word": "someone",
@@ -52,8 +52,8 @@
       "complete": true,
       "ipa_uk": "/sˈʌmwɒn/",
       "ipa_us": "/sˈʌmwʌn/",
-      "audioLocalUk": "audio/uk/someone-ca29f290.wav",
-      "audioLocalUs": "audio/us/someone-ca29f290.wav"
+      "audioLocalUk": "audio/uk/someone-ca29f290.mp3",
+      "audioLocalUs": "audio/us/someone-ca29f290.mp3"
     },
     "manners": {
       "word": "manners",
@@ -78,8 +78,8 @@
       "complete": true,
       "ipa_uk": "/mˈanəz/",
       "ipa_us": "/mˈænɚz/",
-      "audioLocalUk": "audio/uk/manners-0b3e37bf.wav",
-      "audioLocalUs": "audio/us/manners-0b3e37bf.wav"
+      "audioLocalUk": "audio/uk/manners-0b3e37bf.mp3",
+      "audioLocalUs": "audio/us/manners-0b3e37bf.mp3"
     },
     "pounds": {
       "word": "pounds",
@@ -104,8 +104,8 @@
       "complete": true,
       "ipa_uk": "/pˈaʊndz/",
       "ipa_us": "/pˈaʊndz/",
-      "audioLocalUk": "audio/uk/pounds-736137d4.wav",
-      "audioLocalUs": "audio/us/pounds-736137d4.wav"
+      "audioLocalUk": "audio/uk/pounds-736137d4.mp3",
+      "audioLocalUs": "audio/us/pounds-736137d4.mp3"
     },
     "order": {
       "word": "order",
@@ -130,8 +130,8 @@
       "complete": true,
       "ipa_uk": "/ˈɔːdə/",
       "ipa_us": "/ˈɔːɹdɚ/",
-      "audioLocalUk": "audio/uk/order-cce55e43.wav",
-      "audioLocalUs": "audio/us/order-cce55e43.wav"
+      "audioLocalUk": "audio/uk/order-cce55e43.mp3",
+      "audioLocalUs": "audio/us/order-cce55e43.mp3"
     },
     "obviously": {
       "word": "obviously",
@@ -156,8 +156,8 @@
       "complete": true,
       "ipa_uk": "/ˈɒbvɪəsli/",
       "ipa_us": "/ˈɑːbvɪəsli/",
-      "audioLocalUk": "audio/uk/obviously-9fe5e197.wav",
-      "audioLocalUs": "audio/us/obviously-9fe5e197.wav"
+      "audioLocalUk": "audio/uk/obviously-9fe5e197.mp3",
+      "audioLocalUs": "audio/us/obviously-9fe5e197.mp3"
     },
     "retro": {
       "word": "retro",
@@ -182,8 +182,8 @@
       "complete": true,
       "ipa_uk": "/ɹˈɛtɹəʊ/",
       "ipa_us": "/ɹˈɛtɹoʊ/",
-      "audioLocalUk": "audio/uk/retro-4c742a23.wav",
-      "audioLocalUs": "audio/us/retro-4c742a23.wav"
+      "audioLocalUk": "audio/uk/retro-4c742a23.mp3",
+      "audioLocalUs": "audio/us/retro-4c742a23.mp3"
     },
     "request": {
       "word": "request",
@@ -208,8 +208,8 @@
       "complete": true,
       "ipa_uk": "/ɹɪkwˈɛst/",
       "ipa_us": "/ɹɪkwˈɛst/",
-      "audioLocalUk": "audio/uk/request-088e29b0.wav",
-      "audioLocalUs": "audio/us/request-088e29b0.wav"
+      "audioLocalUk": "audio/uk/request-088e29b0.mp3",
+      "audioLocalUs": "audio/us/request-088e29b0.mp3"
     },
     "linkers": {
       "word": "linkers",
@@ -234,8 +234,8 @@
       "complete": true,
       "ipa_uk": "/lˈɪŋkəz/",
       "ipa_us": "/lˈɪŋkɚz/",
-      "audioLocalUk": "audio/uk/linkers-7eda432b.wav",
-      "audioLocalUs": "audio/us/linkers-7eda432b.wav"
+      "audioLocalUk": "audio/uk/linkers-7eda432b.mp3",
+      "audioLocalUs": "audio/us/linkers-7eda432b.mp3"
     },
     "questions": {
       "word": "questions",
@@ -260,8 +260,8 @@
       "complete": true,
       "ipa_uk": "/kwˈɛstʃənz/",
       "ipa_us": "/kwˈɛstʃənz/",
-      "audioLocalUk": "audio/uk/questions-ff3d39b6.wav",
-      "audioLocalUs": "audio/us/questions-ff3d39b6.wav"
+      "audioLocalUk": "audio/uk/questions-ff3d39b6.mp3",
+      "audioLocalUs": "audio/us/questions-ff3d39b6.mp3"
     },
     "responsibility": {
       "word": "responsibility",
@@ -286,8 +286,8 @@
       "complete": true,
       "ipa_uk": "/ɹɪspˌɒnsəbˈɪlɪti/",
       "ipa_us": "/ɹɪspˌɑːnsəbˈɪlɪɾi/",
-      "audioLocalUk": "audio/uk/responsibility-0cbd2645.wav",
-      "audioLocalUs": "audio/us/responsibility-0cbd2645.wav"
+      "audioLocalUk": "audio/uk/responsibility-0cbd2645.mp3",
+      "audioLocalUs": "audio/us/responsibility-0cbd2645.mp3"
     },
     "politer": {
       "word": "politer",
@@ -312,8 +312,8 @@
       "complete": true,
       "ipa_uk": "/pəlˈaɪtə/",
       "ipa_us": "/pəlˈaɪɾɚ/",
-      "audioLocalUk": "audio/uk/politer-0517f7c8.wav",
-      "audioLocalUs": "audio/us/politer-0517f7c8.wav"
+      "audioLocalUk": "audio/uk/politer-0517f7c8.mp3",
+      "audioLocalUs": "audio/us/politer-0517f7c8.mp3"
     },
     "an": {
       "word": "an",
@@ -366,8 +366,8 @@
       "complete": true,
       "ipa_uk": "/ˈan/",
       "ipa_us": "/ˈæn/",
-      "audioLocalUk": "audio/uk/an-de73eac0.wav",
-      "audioLocalUs": "audio/us/an-de73eac0.wav"
+      "audioLocalUk": "audio/uk/an-de73eac0.mp3",
+      "audioLocalUs": "audio/us/an-de73eac0.mp3"
     },
     "imperatives": {
       "word": "imperatives",
@@ -392,8 +392,8 @@
       "complete": true,
       "ipa_uk": "/ɪmpˈɛɹətˌɪvz/",
       "ipa_us": "/ɪmpˈɛɹətˌɪvz/",
-      "audioLocalUk": "audio/uk/imperatives-6c99bf8f.wav",
-      "audioLocalUs": "audio/us/imperatives-6c99bf8f.wav"
+      "audioLocalUk": "audio/uk/imperatives-6c99bf8f.mp3",
+      "audioLocalUs": "audio/us/imperatives-6c99bf8f.mp3"
     },
     "or": {
       "word": "or",
@@ -467,8 +467,8 @@
       "complete": true,
       "ipa_uk": "/ˈɔː/",
       "ipa_us": "/ˈɔːɹ/",
-      "audioLocalUk": "audio/uk/or-1758356d.wav",
-      "audioLocalUs": "audio/us/or-1758356d.wav"
+      "audioLocalUk": "audio/uk/or-1758356d.mp3",
+      "audioLocalUs": "audio/us/or-1758356d.mp3"
     },
     "a": {
       "word": "a",
@@ -542,8 +542,8 @@
       "complete": true,
       "ipa_uk": "/ˈeɪ/",
       "ipa_us": "/ˈeɪ/",
-      "audioLocalUk": "audio/uk/a-86f7e437.wav",
-      "audioLocalUs": "audio/us/a-86f7e437.wav"
+      "audioLocalUk": "audio/uk/a-86f7e437.mp3",
+      "audioLocalUs": "audio/us/a-86f7e437.mp3"
     },
     "politeness": {
       "word": "politeness",
@@ -568,8 +568,8 @@
       "complete": true,
       "ipa_uk": "/pəlˈaɪtnəs/",
       "ipa_us": "/pəlˈaɪtnəs/",
-      "audioLocalUk": "audio/uk/politeness-68b6cb14.wav",
-      "audioLocalUs": "audio/us/politeness-68b6cb14.wav"
+      "audioLocalUk": "audio/uk/politeness-68b6cb14.mp3",
+      "audioLocalUs": "audio/us/politeness-68b6cb14.mp3"
     },
     "why": {
       "word": "why",
@@ -643,8 +643,8 @@
       "complete": true,
       "ipa_uk": "/wˈaɪ/",
       "ipa_us": "/wˈaɪ/",
-      "audioLocalUk": "audio/uk/why-10cff403.wav",
-      "audioLocalUs": "audio/us/why-10cff403.wav"
+      "audioLocalUk": "audio/uk/why-10cff403.mp3",
+      "audioLocalUs": "audio/us/why-10cff403.mp3"
     },
     "are": {
       "word": "are",
@@ -690,8 +690,8 @@
       "complete": true,
       "ipa_uk": "/ˈɑː/",
       "ipa_us": "/ˈɑːɹ/",
-      "audioLocalUk": "audio/uk/are-5f9e5802.wav",
-      "audioLocalUs": "audio/us/are-5f9e5802.wav"
+      "audioLocalUk": "audio/uk/are-5f9e5802.mp3",
+      "audioLocalUs": "audio/us/are-5f9e5802.mp3"
     },
     "than": {
       "word": "than",
@@ -737,8 +737,8 @@
       "complete": true,
       "ipa_uk": "/ðˈɐn/",
       "ipa_us": "/ðˈɐn/",
-      "audioLocalUk": "audio/uk/than-d820aa5f.wav",
-      "audioLocalUs": "audio/us/than-d820aa5f.wav"
+      "audioLocalUk": "audio/uk/than-d820aa5f.mp3",
+      "audioLocalUs": "audio/us/than-d820aa5f.mp3"
     },
     "could": {
       "word": "could",
@@ -812,8 +812,8 @@
       "complete": true,
       "ipa_uk": "/kˈʊd/",
       "ipa_us": "/kˈʊd/",
-      "audioLocalUk": "audio/uk/could-e30de8fd.wav",
-      "audioLocalUs": "audio/us/could-e30de8fd.wav"
+      "audioLocalUk": "audio/uk/could-e30de8fd.mp3",
+      "audioLocalUs": "audio/us/could-e30de8fd.mp3"
     },
     "is": {
       "word": "is",
@@ -887,8 +887,8 @@
       "complete": true,
       "ipa_uk": "/ˈɪz/",
       "ipa_us": "/ˈɪz/",
-      "audioLocalUk": "audio/uk/is-b47f363e.wav",
-      "audioLocalUs": "audio/us/is-b47f363e.wav"
+      "audioLocalUk": "audio/uk/is-b47f363e.mp3",
+      "audioLocalUs": "audio/us/is-b47f363e.mp3"
     },
     "very": {
       "word": "very",
@@ -955,8 +955,8 @@
       "complete": true,
       "ipa_uk": "/vˈɛɹi/",
       "ipa_us": "/vˈɛɹi/",
-      "audioLocalUk": "audio/uk/very-e74295bf.wav",
-      "audioLocalUs": "audio/us/very-e74295bf.wav"
+      "audioLocalUk": "audio/uk/very-e74295bf.mp3",
+      "audioLocalUs": "audio/us/very-e74295bf.mp3"
     },
     "can": {
       "word": "can",
@@ -1030,8 +1030,8 @@
       "complete": true,
       "ipa_uk": "/kˈan/",
       "ipa_us": "/kˈæn/",
-      "audioLocalUk": "audio/uk/can-7e9219a0.wav",
-      "audioLocalUs": "audio/us/can-7e9219a0.wav"
+      "audioLocalUk": "audio/uk/can-7e9219a0.mp3",
+      "audioLocalUs": "audio/us/can-7e9219a0.mp3"
     },
     "polite": {
       "word": "polite",
@@ -1048,8 +1048,8 @@
       "complete": true,
       "ipa_uk": "/pəlˈaɪt/",
       "ipa_us": "/pəlˈaɪt/",
-      "audioLocalUk": "audio/uk/polite-16f57568.wav",
-      "audioLocalUs": "audio/us/polite-16f57568.wav"
+      "audioLocalUk": "audio/uk/polite-16f57568.mp3",
+      "audioLocalUs": "audio/us/polite-16f57568.mp3"
     },
     "important": {
       "word": "important",
@@ -1074,8 +1074,8 @@
       "complete": true,
       "ipa_uk": "/ɪmpˈɔːtənt/",
       "ipa_us": "/ɪmpˈoːɹtənt/",
-      "audioLocalUk": "audio/uk/important-5b400951.wav",
-      "audioLocalUs": "audio/us/important-5b400951.wav"
+      "audioLocalUk": "audio/uk/important-5b400951.mp3",
+      "audioLocalUs": "audio/us/important-5b400951.mp3"
     },
     "english": {
       "word": "english",
@@ -1092,8 +1092,8 @@
       "complete": true,
       "ipa_uk": "/ˈɪŋɡlɪʃ/",
       "ipa_us": "/ˈɪŋɡlɪʃ/",
-      "audioLocalUk": "audio/uk/english-1b669334.wav",
-      "audioLocalUs": "audio/us/english-1b669334.wav"
+      "audioLocalUk": "audio/uk/english-1b669334.mp3",
+      "audioLocalUs": "audio/us/english-1b669334.mp3"
     },
     "how": {
       "word": "how",
@@ -1167,8 +1167,8 @@
       "complete": true,
       "ipa_uk": "/hˈaʊ/",
       "ipa_us": "/hˈaʊ/",
-      "audioLocalUk": "audio/uk/how-0b064373.wav",
-      "audioLocalUs": "audio/us/how-0b064373.wav"
+      "audioLocalUk": "audio/uk/how-0b064373.mp3",
+      "audioLocalUs": "audio/us/how-0b064373.mp3"
     },
     "be": {
       "word": "be",
@@ -1242,8 +1242,8 @@
       "complete": true,
       "ipa_uk": "/bˈiː/",
       "ipa_us": "/bˈiː/",
-      "audioLocalUk": "audio/uk/be-986b1bc1.wav",
-      "audioLocalUs": "audio/us/be-986b1bc1.wav"
+      "audioLocalUk": "audio/uk/be-986b1bc1.mp3",
+      "audioLocalUs": "audio/us/be-986b1bc1.mp3"
     },
     "ways": {
       "word": "ways",
@@ -1260,8 +1260,8 @@
       "complete": true,
       "ipa_uk": "/wˈeɪz/",
       "ipa_us": "/wˈeɪz/",
-      "audioLocalUk": "audio/uk/ways-7b75b497.wav",
-      "audioLocalUs": "audio/us/ways-7b75b497.wav"
+      "audioLocalUk": "audio/uk/ways-7b75b497.mp3",
+      "audioLocalUs": "audio/us/ways-7b75b497.mp3"
     },
     "you": {
       "word": "you",
@@ -1314,8 +1314,8 @@
       "complete": true,
       "ipa_uk": "/jˈuː/",
       "ipa_us": "/jˈuː/",
-      "audioLocalUk": "audio/uk/you-8af56de6.wav",
-      "audioLocalUs": "audio/us/you-8af56de6.wav"
+      "audioLocalUk": "audio/uk/you-8af56de6.mp3",
+      "audioLocalUs": "audio/us/you-8af56de6.mp3"
     },
     "expressing": {
       "word": "expressing",
@@ -1332,8 +1332,8 @@
       "complete": true,
       "ipa_uk": "/ɛkspɹˈɛsɪŋ/",
       "ipa_us": "/ɛkspɹˈɛsɪŋ/",
-      "audioLocalUk": "audio/uk/expressing-0d25d96a.wav",
-      "audioLocalUs": "audio/us/expressing-0d25d96a.wav"
+      "audioLocalUk": "audio/uk/expressing-0d25d96a.mp3",
+      "audioLocalUs": "audio/us/expressing-0d25d96a.mp3"
     },
     "but": {
       "word": "but",
@@ -1407,8 +1407,8 @@
       "complete": true,
       "ipa_uk": "/bˈʌt/",
       "ipa_us": "/bˈʌt/",
-      "audioLocalUk": "audio/uk/but-786e97b3.wav",
-      "audioLocalUs": "audio/us/but-786e97b3.wav"
+      "audioLocalUk": "audio/uk/but-786e97b3.mp3",
+      "audioLocalUs": "audio/us/but-786e97b3.mp3"
     },
     "depending": {
       "word": "depending",
@@ -1425,8 +1425,8 @@
       "complete": true,
       "ipa_uk": "/dɪpˈɛndɪŋ/",
       "ipa_us": "/dɪpˈɛndɪŋ/",
-      "audioLocalUk": "audio/uk/depending-c16d881c.wav",
-      "audioLocalUs": "audio/us/depending-c16d881c.wav"
+      "audioLocalUk": "audio/uk/depending-c16d881c.mp3",
+      "audioLocalUs": "audio/us/depending-c16d881c.mp3"
     },
     "in": {
       "word": "in",
@@ -1500,8 +1500,8 @@
       "complete": true,
       "ipa_uk": "/ˈɪn/",
       "ipa_us": "/ˈɪn/",
-      "audioLocalUk": "audio/uk/in-af10ef20.wav",
-      "audioLocalUs": "audio/us/in-af10ef20.wav"
+      "audioLocalUk": "audio/uk/in-af10ef20.mp3",
+      "audioLocalUs": "audio/us/in-af10ef20.mp3"
     },
     "want": {
       "word": "want",
@@ -1518,8 +1518,8 @@
       "complete": true,
       "ipa_uk": "/wˈɒnt/",
       "ipa_us": "/wˈɑːnt/",
-      "audioLocalUk": "audio/uk/want-b5f23bca.wav",
-      "audioLocalUs": "audio/us/want-b5f23bca.wav"
+      "audioLocalUk": "audio/uk/want-b5f23bca.mp3",
+      "audioLocalUs": "audio/us/want-b5f23bca.mp3"
     },
     "there": {
       "word": "there",
@@ -1593,8 +1593,8 @@
       "complete": true,
       "ipa_uk": "/ðˈeə/",
       "ipa_us": "/ðˈɛɹ/",
-      "audioLocalUk": "audio/uk/there-490528f3.wav",
-      "audioLocalUs": "audio/us/there-490528f3.wav"
+      "audioLocalUk": "audio/uk/there-490528f3.mp3",
+      "audioLocalUs": "audio/us/there-490528f3.mp3"
     },
     "welcome": {
       "word": "welcome",
@@ -1611,8 +1611,8 @@
       "complete": true,
       "ipa_uk": "/wˈɛlkʌm/",
       "ipa_us": "/wˈɛlkʌm/",
-      "audioLocalUk": "audio/uk/welcome-c0b137fe.wav",
-      "audioLocalUs": "audio/us/welcome-c0b137fe.wav"
+      "audioLocalUk": "audio/uk/welcome-c0b137fe.mp3",
+      "audioLocalUs": "audio/us/welcome-c0b137fe.mp3"
     },
     "real": {
       "word": "real",
@@ -1637,8 +1637,8 @@
       "complete": true,
       "ipa_uk": "/ɹˈiəl/",
       "ipa_us": "/ɹˈiːəl/",
-      "audioLocalUk": "audio/uk/real-c9c64e07.wav",
-      "audioLocalUs": "audio/us/real-c9c64e07.wav"
+      "audioLocalUk": "audio/uk/real-c9c64e07.mp3",
+      "audioLocalUs": "audio/us/real-c9c64e07.mp3"
     },
     "different": {
       "word": "different",
@@ -1663,8 +1663,8 @@
       "complete": true,
       "ipa_uk": "/dˈɪfɹənt/",
       "ipa_us": "/dˈɪfɹənt/",
-      "audioLocalUk": "audio/uk/different-517d5a72.wav",
-      "audioLocalUs": "audio/us/different-517d5a72.wav"
+      "audioLocalUk": "audio/uk/different-517d5a72.mp3",
+      "audioLocalUs": "audio/us/different-517d5a72.mp3"
     },
     "of": {
       "word": "of",
@@ -1731,8 +1731,8 @@
       "complete": true,
       "ipa_uk": "/ˈɒv/",
       "ipa_us": "/ˈʌv/",
-      "audioLocalUk": "audio/uk/of-de04fa0e.wav",
-      "audioLocalUs": "audio/us/of-de04fa0e.wav"
+      "audioLocalUk": "audio/uk/of-de04fa0e.mp3",
+      "audioLocalUs": "audio/us/of-de04fa0e.mp3"
     },
     "bbc": {
       "word": "bbc",
@@ -1749,8 +1749,8 @@
       "complete": true,
       "ipa_uk": "/bˌiːbˌiːsˈiː/",
       "ipa_us": "/bˌiːbˌiːsˈiː/",
-      "audioLocalUk": "audio/uk/bbc-0fbe2a58.wav",
-      "audioLocalUs": "audio/us/bbc-0fbe2a58.wav"
+      "audioLocalUk": "audio/uk/bbc-0fbe2a58.mp3",
+      "audioLocalUs": "audio/us/bbc-0fbe2a58.mp3"
     },
     "learning": {
       "word": "learning",
@@ -1767,8 +1767,8 @@
       "complete": true,
       "ipa_uk": "/lˈɜːnɪŋ/",
       "ipa_us": "/lˈɜːnɪŋ/",
-      "audioLocalUk": "audio/uk/learning-ea9ffb6e.wav",
-      "audioLocalUs": "audio/us/learning-ea9ffb6e.wav"
+      "audioLocalUk": "audio/uk/learning-ea9ffb6e.mp3",
+      "audioLocalUs": "audio/us/learning-ea9ffb6e.mp3"
     },
     "today": {
       "word": "today",
@@ -1793,8 +1793,8 @@
       "complete": true,
       "ipa_uk": "/tədˈeɪ/",
       "ipa_us": "/tədˈeɪ/",
-      "audioLocalUk": "audio/uk/today-2dd2bed7.wav",
-      "audioLocalUs": "audio/us/today-2dd2bed7.wav"
+      "audioLocalUk": "audio/uk/today-2dd2bed7.mp3",
+      "audioLocalUs": "audio/us/today-2dd2bed7.mp3"
     },
     "it": {
       "word": "it",
@@ -1868,8 +1868,8 @@
       "complete": true,
       "ipa_uk": "/ˈɪt/",
       "ipa_us": "/ˈɪt/",
-      "audioLocalUk": "audio/uk/it-6c5522ca.wav",
-      "audioLocalUs": "audio/us/it-6c5522ca.wav"
+      "audioLocalUk": "audio/uk/it-6c5522ca.mp3",
+      "audioLocalUs": "audio/us/it-6c5522ca.mp3"
     },
     "talking": {
       "word": "talking",
@@ -1886,8 +1886,8 @@
       "complete": true,
       "ipa_uk": "/tˈɔːkɪŋ/",
       "ipa_us": "/tˈɔːkɪŋ/",
-      "audioLocalUk": "audio/uk/talking-a2716ecc.wav",
-      "audioLocalUs": "audio/us/talking-a2716ecc.wav"
+      "audioLocalUk": "audio/uk/talking-a2716ecc.mp3",
+      "audioLocalUs": "audio/us/talking-a2716ecc.mp3"
     },
     "on": {
       "word": "on",
@@ -1961,8 +1961,8 @@
       "complete": true,
       "ipa_uk": "/ˈɒn/",
       "ipa_us": "/ˈɑːn/",
-      "audioLocalUk": "audio/uk/on-db3d405b.wav",
-      "audioLocalUs": "audio/us/on-db3d405b.wav"
+      "audioLocalUk": "audio/uk/on-db3d405b.mp3",
+      "audioLocalUs": "audio/us/on-db3d405b.mp3"
     },
     "food": {
       "word": "food",
@@ -1979,8 +1979,8 @@
       "complete": true,
       "ipa_uk": "/fˈuːd/",
       "ipa_us": "/fˈuːd/",
-      "audioLocalUk": "audio/uk/food-39ccb32d.wav",
-      "audioLocalUs": "audio/us/food-39ccb32d.wav"
+      "audioLocalUk": "audio/uk/food-39ccb32d.mp3",
+      "audioLocalUs": "audio/us/food-39ccb32d.mp3"
     },
     "to": {
       "word": "to",
@@ -2054,8 +2054,8 @@
       "complete": true,
       "ipa_uk": "/tˈuː/",
       "ipa_us": "/tˈuː/",
-      "audioLocalUk": "audio/uk/to-4374aaee.wav",
-      "audioLocalUs": "audio/us/to-4374aaee.wav"
+      "audioLocalUk": "audio/uk/to-4374aaee.mp3",
+      "audioLocalUs": "audio/us/to-4374aaee.mp3"
     },
     "easy": {
       "word": "easy",
@@ -2129,8 +2129,8 @@
       "complete": true,
       "ipa_uk": "/ˈiːzi/",
       "ipa_us": "/ˈiːzi/",
-      "audioLocalUk": "audio/uk/easy-861c4f67.wav",
-      "audioLocalUs": "audio/us/easy-861c4f67.wav"
+      "audioLocalUk": "audio/uk/easy-861c4f67.mp3",
+      "audioLocalUs": "audio/us/easy-861c4f67.mp3"
     },
     "talk": {
       "word": "talk",
@@ -2147,8 +2147,8 @@
       "complete": true,
       "ipa_uk": "/tˈɔːk/",
       "ipa_us": "/tˈɔːk/",
-      "audioLocalUk": "audio/uk/talk-e55e91b2.wav",
-      "audioLocalUs": "audio/us/talk-e55e91b2.wav"
+      "audioLocalUk": "audio/uk/talk-e55e91b2.mp3",
+      "audioLocalUs": "audio/us/talk-e55e91b2.mp3"
     },
     "from": {
       "word": "from",
@@ -2180,8 +2180,8 @@
       "complete": true,
       "ipa_uk": "/fɹˈɒm/",
       "ipa_us": "/fɹˈʌm/",
-      "audioLocalUk": "audio/uk/from-0b1e95cf.wav",
-      "audioLocalUs": "audio/us/from-0b1e95cf.wav"
+      "audioLocalUk": "audio/uk/from-0b1e95cf.mp3",
+      "audioLocalUs": "audio/us/from-0b1e95cf.mp3"
     },
     "favourite": {
       "word": "favourite",
@@ -2206,8 +2206,8 @@
       "complete": true,
       "ipa_uk": "/fˈeɪvɹɪt/",
       "ipa_us": "/fˈeɪvɹɪt/",
-      "audioLocalUk": "audio/uk/favourite-824168b6.wav",
-      "audioLocalUs": "audio/us/favourite-824168b6.wav"
+      "audioLocalUk": "audio/uk/favourite-824168b6.mp3",
+      "audioLocalUs": "audio/us/favourite-824168b6.mp3"
     },
     "foods": {
       "word": "foods",
@@ -2232,8 +2232,8 @@
       "complete": true,
       "ipa_uk": "/fˈuːdz/",
       "ipa_us": "/fˈuːdz/",
-      "audioLocalUk": "audio/uk/foods-2b184d33.wav",
-      "audioLocalUs": "audio/us/foods-2b184d33.wav"
+      "audioLocalUk": "audio/uk/foods-2b184d33.mp3",
+      "audioLocalUs": "audio/us/foods-2b184d33.mp3"
     },
     "we": {
       "word": "we",
@@ -2265,8 +2265,8 @@
       "complete": true,
       "ipa_uk": "/wˈiː/",
       "ipa_us": "/wˈiː/",
-      "audioLocalUk": "audio/uk/we-676e6f35.wav",
-      "audioLocalUs": "audio/us/we-676e6f35.wav"
+      "audioLocalUk": "audio/uk/we-676e6f35.mp3",
+      "audioLocalUs": "audio/us/we-676e6f35.mp3"
     },
     "we'll": {
       "word": "we'll",
@@ -2291,8 +2291,8 @@
       "complete": true,
       "ipa_uk": "/wˈiːl/",
       "ipa_us": "/wˈiːl/",
-      "audioLocalUk": "audio/uk/we_ll-b1df8fa5.wav",
-      "audioLocalUs": "audio/us/we_ll-b1df8fa5.wav"
+      "audioLocalUk": "audio/uk/we_ll-b1df8fa5.mp3",
+      "audioLocalUs": "audio/us/we_ll-b1df8fa5.mp3"
     },
     "eat": {
       "word": "eat",
@@ -2309,8 +2309,8 @@
       "complete": true,
       "ipa_uk": "/ˈiːt/",
       "ipa_us": "/ˈiːt/",
-      "audioLocalUk": "audio/uk/eat-d8945575.wav",
-      "audioLocalUs": "audio/us/eat-d8945575.wav"
+      "audioLocalUk": "audio/uk/eat-d8945575.mp3",
+      "audioLocalUs": "audio/us/eat-d8945575.mp3"
     },
     "them": {
       "word": "them",
@@ -2335,8 +2335,8 @@
       "complete": true,
       "ipa_uk": "/ðˈɛm/",
       "ipa_us": "/ðˈɛm/",
-      "audioLocalUk": "audio/uk/them-98910a6e.wav",
-      "audioLocalUs": "audio/us/them-98910a6e.wav"
+      "audioLocalUk": "audio/uk/them-98910a6e.mp3",
+      "audioLocalUs": "audio/us/them-98910a6e.mp3"
     },
     "what's": {
       "word": "what's",
@@ -2361,8 +2361,8 @@
       "complete": true,
       "ipa_uk": "/wˈɒts/",
       "ipa_us": "/wˈʌts/",
-      "audioLocalUk": "audio/uk/what_s-951a34d9.wav",
-      "audioLocalUs": "audio/us/what_s-951a34d9.wav"
+      "audioLocalUk": "audio/uk/what_s-951a34d9.mp3",
+      "audioLocalUs": "audio/us/what_s-951a34d9.mp3"
     },
     "about": {
       "word": "about",
@@ -2436,8 +2436,8 @@
       "complete": true,
       "ipa_uk": "/ɐbˈaʊt/",
       "ipa_us": "/ɐbˈaʊt/",
-      "audioLocalUk": "audio/uk/about-5780daf6.wav",
-      "audioLocalUs": "audio/us/about-5780daf6.wav"
+      "audioLocalUk": "audio/uk/about-5780daf6.mp3",
+      "audioLocalUs": "audio/us/about-5780daf6.mp3"
     },
     "particular": {
       "word": "particular",
@@ -2511,8 +2511,8 @@
       "complete": true,
       "ipa_uk": "/pətˈɪkjʊlə/",
       "ipa_us": "/pɚtˈɪkjʊlɚ/",
-      "audioLocalUk": "audio/uk/particular-8c4a6b36.wav",
-      "audioLocalUs": "audio/us/particular-8c4a6b36.wav"
+      "audioLocalUk": "audio/uk/particular-8c4a6b36.mp3",
+      "audioLocalUs": "audio/us/particular-8c4a6b36.mp3"
     },
     "voice": {
       "word": "voice",
@@ -2529,8 +2529,8 @@
       "complete": true,
       "ipa_uk": "/vˈɔɪs/",
       "ipa_us": "/vˈɔɪs/",
-      "audioLocalUk": "audio/uk/voice-47ef6589.wav",
-      "audioLocalUs": "audio/us/voice-47ef6589.wav"
+      "audioLocalUk": "audio/uk/voice-47ef6589.mp3",
+      "audioLocalUs": "audio/us/voice-47ef6589.mp3"
     },
     "our": {
       "word": "our",
@@ -2555,8 +2555,8 @@
       "complete": true,
       "ipa_uk": "/ˈaʊə/",
       "ipa_us": "/ˈaʊɚ/",
-      "audioLocalUk": "audio/uk/our-2cd7484b.wav",
-      "audioLocalUs": "audio/us/our-2cd7484b.wav"
+      "audioLocalUk": "audio/uk/our-2cd7484b.mp3",
+      "audioLocalUs": "audio/us/our-2cd7484b.mp3"
     },
     "look": {
       "word": "look",
@@ -2581,8 +2581,8 @@
       "complete": true,
       "ipa_uk": "/lˈʊk/",
       "ipa_us": "/lˈʊk/",
-      "audioLocalUk": "audio/uk/look-e09315fa.wav",
-      "audioLocalUs": "audio/us/look-e09315fa.wav"
+      "audioLocalUk": "audio/uk/look-e09315fa.mp3",
+      "audioLocalUs": "audio/us/look-e09315fa.mp3"
     },
     "and": {
       "word": "and",
@@ -2656,8 +2656,8 @@
       "complete": true,
       "ipa_uk": "/ˈand/",
       "ipa_us": "/ˈænd/",
-      "audioLocalUk": "audio/uk/and-cffa50a3.wav",
-      "audioLocalUs": "audio/us/and-cffa50a3.wav"
+      "audioLocalUk": "audio/uk/and-cffa50a3.mp3",
+      "audioLocalUs": "audio/us/and-cffa50a3.mp3"
     },
     "changes": {
       "word": "changes",
@@ -2674,8 +2674,8 @@
       "complete": true,
       "ipa_uk": "/tʃˈeɪndʒɪz/",
       "ipa_us": "/tʃˈeɪndʒɪz/",
-      "audioLocalUk": "audio/uk/changes-49a04ba4.wav",
-      "audioLocalUs": "audio/us/changes-49a04ba4.wav"
+      "audioLocalUk": "audio/uk/changes-49a04ba4.mp3",
+      "audioLocalUs": "audio/us/changes-49a04ba4.mp3"
     },
     "focus": {
       "word": "focus",
@@ -2692,8 +2692,8 @@
       "complete": true,
       "ipa_uk": "/fˈəʊkəs/",
       "ipa_us": "/fˈoʊkəs/",
-      "audioLocalUk": "audio/uk/focus-78918dca.wav",
-      "audioLocalUs": "audio/us/focus-78918dca.wav"
+      "audioLocalUk": "audio/uk/focus-78918dca.mp3",
+      "audioLocalUs": "audio/us/focus-78918dca.mp3"
     },
     "sentence": {
       "word": "sentence",
@@ -2710,8 +2710,8 @@
       "complete": true,
       "ipa_uk": "/sˈɛntəns/",
       "ipa_us": "/sˈɛntəns/",
-      "audioLocalUk": "audio/uk/sentence-a17dbb9a.wav",
-      "audioLocalUs": "audio/us/sentence-a17dbb9a.wav"
+      "audioLocalUk": "audio/uk/sentence-a17dbb9a.mp3",
+      "audioLocalUs": "audio/us/sentence-a17dbb9a.mp3"
     },
     "lots": {
       "word": "lots",
@@ -2728,8 +2728,8 @@
       "complete": true,
       "ipa_uk": "/lˈɒts/",
       "ipa_us": "/lˈɑːts/",
-      "audioLocalUk": "audio/uk/lots-a75bc65e.wav",
-      "audioLocalUs": "audio/us/lots-a75bc65e.wav"
+      "audioLocalUk": "audio/uk/lots-a75bc65e.mp3",
+      "audioLocalUs": "audio/us/lots-a75bc65e.mp3"
     },
     "synonyms": {
       "word": "synonyms",
@@ -2746,8 +2746,8 @@
       "complete": true,
       "ipa_uk": "/sˈɪnənˌɪmz/",
       "ipa_us": "/sˈɪnənˌɪmz/",
-      "audioLocalUk": "audio/uk/synonyms-19409e7a.wav",
-      "audioLocalUs": "audio/us/synonyms-19409e7a.wav"
+      "audioLocalUk": "audio/uk/synonyms-19409e7a.mp3",
+      "audioLocalUs": "audio/us/synonyms-19409e7a.mp3"
     },
     "passive": {
       "word": "passive",
@@ -2772,8 +2772,8 @@
       "complete": true,
       "ipa_uk": "/pˈasɪv/",
       "ipa_us": "/pˈæsɪv/",
-      "audioLocalUk": "audio/uk/passive-8cf03f5f.wav",
-      "audioLocalUs": "audio/us/passive-8cf03f5f.wav"
+      "audioLocalUk": "audio/uk/passive-8cf03f5f.mp3",
+      "audioLocalUs": "audio/us/passive-8cf03f5f.mp3"
     },
     "choose": {
       "word": "choose",
@@ -2790,8 +2790,8 @@
       "complete": true,
       "ipa_uk": "/tʃˈuːz/",
       "ipa_us": "/tʃˈuːz/",
-      "audioLocalUk": "audio/uk/choose-9477fdc8.wav",
-      "audioLocalUs": "audio/us/choose-9477fdc8.wav"
+      "audioLocalUk": "audio/uk/choose-9477fdc8.mp3",
+      "audioLocalUs": "audio/us/choose-9477fdc8.mp3"
     },
     "let's": {
       "word": "let's",
@@ -2816,8 +2816,8 @@
       "complete": true,
       "ipa_uk": "/lˈɛts/",
       "ipa_us": "/lˈɛts/",
-      "audioLocalUk": "audio/uk/let_s-062ef401.wav",
-      "audioLocalUs": "audio/us/let_s-062ef401.wav"
+      "audioLocalUk": "audio/uk/let_s-062ef401.mp3",
+      "audioLocalUs": "audio/us/let_s-062ef401.mp3"
     },
     "often": {
       "word": "often",
@@ -2891,8 +2891,8 @@
       "complete": true,
       "ipa_uk": "/ˈɒfən/",
       "ipa_us": "/ˈɔfən/",
-      "audioLocalUk": "audio/uk/often-6b77993c.wav",
-      "audioLocalUs": "audio/us/often-6b77993c.wav"
+      "audioLocalUk": "audio/uk/often-6b77993c.mp3",
+      "audioLocalUs": "audio/us/often-6b77993c.mp3"
     },
     "use": {
       "word": "use",
@@ -2909,8 +2909,8 @@
       "complete": true,
       "ipa_uk": "/jˈuːs/",
       "ipa_us": "/jˈuːs/",
-      "audioLocalUk": "audio/uk/use-04489a12.wav",
-      "audioLocalUs": "audio/us/use-04489a12.wav"
+      "audioLocalUk": "audio/uk/use-04489a12.mp3",
+      "audioLocalUs": "audio/us/use-04489a12.mp3"
     },
     "context": {
       "word": "context",
@@ -2927,8 +2927,8 @@
       "complete": true,
       "ipa_uk": "/kˈɒntɛkst/",
       "ipa_us": "/kˈɑːntɛkst/",
-      "audioLocalUk": "audio/uk/context-ec2727b3.wav",
-      "audioLocalUs": "audio/us/context-ec2727b3.wav"
+      "audioLocalUk": "audio/uk/context-ec2727b3.mp3",
+      "audioLocalUs": "audio/us/context-ec2727b3.mp3"
     },
     "the": {
       "word": "the",
@@ -2967,8 +2967,8 @@
       "complete": true,
       "ipa_uk": "/ðˈə/",
       "ipa_us": "/ðˈə/",
-      "audioLocalUk": "audio/uk/the-bbccdf2e.wav",
-      "audioLocalUs": "audio/us/the-bbccdf2e.wav"
+      "audioLocalUk": "audio/uk/the-bbccdf2e.mp3",
+      "audioLocalUs": "audio/us/the-bbccdf2e.mp3"
     },
     "choosing": {
       "word": "choosing",
@@ -2985,8 +2985,8 @@
       "complete": true,
       "ipa_uk": "/tʃˈuːzɪŋ/",
       "ipa_us": "/tʃˈuːzɪŋ/",
-      "audioLocalUk": "audio/uk/choosing-e2d35000.wav",
-      "audioLocalUs": "audio/us/choosing-e2d35000.wav"
+      "audioLocalUk": "audio/uk/choosing-e2d35000.mp3",
+      "audioLocalUs": "audio/us/choosing-e2d35000.mp3"
     },
     "at": {
       "word": "at",
@@ -3060,8 +3060,8 @@
       "complete": true,
       "ipa_uk": "/ˈat/",
       "ipa_us": "/ˈæt/",
-      "audioLocalUk": "audio/uk/at-27e90dfa.wav",
-      "audioLocalUs": "audio/us/at-27e90dfa.wav"
+      "audioLocalUk": "audio/uk/at-27e90dfa.mp3",
+      "audioLocalUs": "audio/us/at-27e90dfa.mp3"
     },
     "do": {
       "word": "do",
@@ -3135,8 +3135,8 @@
       "complete": true,
       "ipa_uk": "/dˈuː/",
       "ipa_us": "/dˈuː/",
-      "audioLocalUk": "audio/uk/do-eadcd9bd.wav",
-      "audioLocalUs": "audio/us/do-eadcd9bd.wav"
+      "audioLocalUk": "audio/uk/do-eadcd9bd.mp3",
+      "audioLocalUs": "audio/us/do-eadcd9bd.mp3"
     },
     "which": {
       "word": "which",
@@ -3161,8 +3161,8 @@
       "complete": true,
       "ipa_uk": "/wˈɪtʃ/",
       "ipa_us": "/wˈɪtʃ/",
-      "audioLocalUk": "audio/uk/which-ed04ff4d.wav",
-      "audioLocalUs": "audio/us/which-ed04ff4d.wav"
+      "audioLocalUk": "audio/uk/which-ed04ff4d.mp3",
+      "audioLocalUs": "audio/us/which-ed04ff4d.mp3"
     },
     "think": {
       "word": "think",
@@ -3179,8 +3179,8 @@
       "complete": true,
       "ipa_uk": "/θˈɪŋk/",
       "ipa_us": "/θˈɪŋk/",
-      "audioLocalUk": "audio/uk/think-b7c61c80.wav",
-      "audioLocalUs": "audio/us/think-b7c61c80.wav"
+      "audioLocalUk": "audio/uk/think-b7c61c80.mp3",
+      "audioLocalUs": "audio/us/think-b7c61c80.mp3"
     },
     "one": {
       "word": "one",
@@ -3254,8 +3254,8 @@
       "complete": true,
       "ipa_uk": "/wˈɒn/",
       "ipa_us": "/wˈʌn/",
-      "audioLocalUk": "audio/uk/one-fe05bcdc.wav",
-      "audioLocalUs": "audio/us/one-fe05bcdc.wav"
+      "audioLocalUk": "audio/uk/one-fe05bcdc.mp3",
+      "audioLocalUs": "audio/us/one-fe05bcdc.mp3"
     },
     "key": {
       "word": "key",
@@ -3329,8 +3329,8 @@
       "complete": true,
       "ipa_uk": "/kˈiː/",
       "ipa_us": "/kˈiː/",
-      "audioLocalUk": "audio/uk/key-a62f2225.wav",
-      "audioLocalUs": "audio/us/key-a62f2225.wav"
+      "audioLocalUk": "audio/uk/key-a62f2225.mp3",
+      "audioLocalUs": "audio/us/key-a62f2225.mp3"
     },
     "right": {
       "word": "right",
@@ -3355,8 +3355,8 @@
       "complete": true,
       "ipa_uk": "/ɹˈaɪt/",
       "ipa_us": "/ɹˈaɪt/",
-      "audioLocalUk": "audio/uk/right-d27a1f11.wav",
-      "audioLocalUs": "audio/us/right-d27a1f11.wav"
+      "audioLocalUk": "audio/uk/right-d27a1f11.mp3",
+      "audioLocalUs": "audio/us/right-d27a1f11.mp3"
     },
     "word": {
       "word": "word",
@@ -3430,8 +3430,8 @@
       "complete": true,
       "ipa_uk": "/wˈɜːd/",
       "ipa_us": "/wˈɜːd/",
-      "audioLocalUk": "audio/uk/word-3cbcd90a.wav",
-      "audioLocalUs": "audio/us/word-3cbcd90a.wav"
+      "audioLocalUk": "audio/uk/word-3cbcd90a.mp3",
+      "audioLocalUs": "audio/us/word-3cbcd90a.mp3"
     },
     "words": {
       "word": "words",
@@ -3505,8 +3505,8 @@
       "complete": true,
       "ipa_uk": "/wˈɜːdz/",
       "ipa_us": "/wˈɜːdz/",
-      "audioLocalUk": "audio/uk/words-efb89361.wav",
-      "audioLocalUs": "audio/us/words-efb89361.wav"
+      "audioLocalUk": "audio/uk/words-efb89361.mp3",
+      "audioLocalUs": "audio/us/words-efb89361.mp3"
     },
     "this": {
       "word": "this",
@@ -3538,8 +3538,8 @@
       "complete": true,
       "ipa_uk": "/ðˈɪs/",
       "ipa_us": "/ðˈɪs/",
-      "audioLocalUk": "audio/uk/this-c2543fff.wav",
-      "audioLocalUs": "audio/us/this-c2543fff.wav"
+      "audioLocalUk": "audio/uk/this-c2543fff.mp3",
+      "audioLocalUs": "audio/us/this-c2543fff.mp3"
     },
     "three": {
       "word": "three",
@@ -3613,8 +3613,8 @@
       "complete": true,
       "ipa_uk": "/θɹˈiː/",
       "ipa_us": "/θɹˈiː/",
-      "audioLocalUk": "audio/uk/three-b802f384.wav",
-      "audioLocalUs": "audio/us/three-b802f384.wav"
+      "audioLocalUk": "audio/uk/three-b802f384.mp3",
+      "audioLocalUs": "audio/us/three-b802f384.mp3"
     },
     "sound": {
       "word": "sound",
@@ -3631,8 +3631,8 @@
       "complete": true,
       "ipa_uk": "/sˈaʊnd/",
       "ipa_us": "/sˈaʊnd/",
-      "audioLocalUk": "audio/uk/sound-5e2e97c3.wav",
-      "audioLocalUs": "audio/us/sound-5e2e97c3.wav"
+      "audioLocalUk": "audio/uk/sound-5e2e97c3.mp3",
+      "audioLocalUs": "audio/us/sound-5e2e97c3.mp3"
     },
     "learn": {
       "word": "learn",
@@ -3649,8 +3649,8 @@
       "complete": true,
       "ipa_uk": "/lˈɜːn/",
       "ipa_us": "/lˈɜːn/",
-      "audioLocalUk": "audio/uk/learn-7dca5d4c.wav",
-      "audioLocalUs": "audio/us/learn-7dca5d4c.wav"
+      "audioLocalUk": "audio/uk/learn-7dca5d4c.mp3",
+      "audioLocalUs": "audio/us/learn-7dca5d4c.mp3"
     },
     "pronounce": {
       "word": "pronounce",
@@ -3667,8 +3667,8 @@
       "complete": true,
       "ipa_uk": "/pɹənˈaʊns/",
       "ipa_us": "/pɹənˈaʊns/",
-      "audioLocalUk": "audio/uk/pronounce-080aebbf.wav",
-      "audioLocalUs": "audio/us/pronounce-080aebbf.wav"
+      "audioLocalUk": "audio/uk/pronounce-080aebbf.mp3",
+      "audioLocalUs": "audio/us/pronounce-080aebbf.mp3"
     },
     "properly": {
       "word": "properly",
@@ -3685,8 +3685,8 @@
       "complete": true,
       "ipa_uk": "/pɹˈɒpəli/",
       "ipa_us": "/pɹˈɑːpɚli/",
-      "audioLocalUk": "audio/uk/properly-6348da66.wav",
-      "audioLocalUs": "audio/us/properly-6348da66.wav"
+      "audioLocalUk": "audio/uk/properly-6348da66.mp3",
+      "audioLocalUs": "audio/us/properly-6348da66.mp3"
     },
     "we're": {
       "word": "we're",
@@ -3703,8 +3703,8 @@
       "complete": true,
       "ipa_uk": "/wˈiə/",
       "ipa_us": "/wˈɪɹ/",
-      "audioLocalUk": "audio/uk/we_re-8d3bbb6a.wav",
-      "audioLocalUs": "audio/us/we_re-8d3bbb6a.wav"
+      "audioLocalUk": "audio/uk/we_re-8d3bbb6a.mp3",
+      "audioLocalUs": "audio/us/we_re-8d3bbb6a.mp3"
     },
     "families": {
       "word": "families",
@@ -3721,8 +3721,8 @@
       "complete": true,
       "ipa_uk": "/fˈamɪliz/",
       "ipa_us": "/fˈæmɪliz/",
-      "audioLocalUk": "audio/uk/families-f1ac7251.wav",
-      "audioLocalUs": "audio/us/families-f1ac7251.wav"
+      "audioLocalUk": "audio/uk/families-f1ac7251.mp3",
+      "audioLocalUs": "audio/us/families-f1ac7251.mp3"
     },
     "compare": {
       "word": "compare",
@@ -3739,8 +3739,8 @@
       "complete": true,
       "ipa_uk": "/kəmpˈeə/",
       "ipa_us": "/kəmpˈɛɹ/",
-      "audioLocalUk": "audio/uk/compare-b64ca250.wav",
-      "audioLocalUs": "audio/us/compare-b64ca250.wav"
+      "audioLocalUk": "audio/uk/compare-b64ca250.mp3",
+      "audioLocalUs": "audio/us/compare-b64ca250.mp3"
     },
     "things": {
       "word": "things",
@@ -3757,8 +3757,8 @@
       "complete": true,
       "ipa_uk": "/θˈɪŋz/",
       "ipa_us": "/θˈɪŋz/",
-      "audioLocalUk": "audio/uk/things-dac16133.wav",
-      "audioLocalUs": "audio/us/things-dac16133.wav"
+      "audioLocalUk": "audio/uk/things-dac16133.mp3",
+      "audioLocalUs": "audio/us/things-dac16133.mp3"
     },
     "ten": {
       "word": "ten",
@@ -3775,8 +3775,8 @@
       "complete": true,
       "ipa_uk": "/tˈɛn/",
       "ipa_us": "/tˈɛn/",
-      "audioLocalUk": "audio/uk/ten-dd356244.wav",
-      "audioLocalUs": "audio/us/ten-dd356244.wav"
+      "audioLocalUk": "audio/uk/ten-dd356244.mp3",
+      "audioLocalUs": "audio/us/ten-dd356244.mp3"
     },
     "bathroom": {
       "word": "bathroom",
@@ -3801,8 +3801,8 @@
       "complete": true,
       "ipa_uk": "/bˈaθɹuːm/",
       "ipa_us": "/bˈæθɹuːm/",
-      "audioLocalUk": "audio/uk/bathroom-72bfb054.wav",
-      "audioLocalUs": "audio/us/bathroom-72bfb054.wav"
+      "audioLocalUk": "audio/uk/bathroom-72bfb054.mp3",
+      "audioLocalUs": "audio/us/bathroom-72bfb054.mp3"
     },
     "london": {
       "word": "london",
@@ -3819,8 +3819,8 @@
       "complete": true,
       "ipa_uk": "/lˈʌndən/",
       "ipa_us": "/lˈʌndən/",
-      "audioLocalUk": "audio/uk/london-1645ee78.wav",
-      "audioLocalUs": "audio/us/london-1645ee78.wav"
+      "audioLocalUk": "audio/uk/london-1645ee78.mp3",
+      "audioLocalUs": "audio/us/london-1645ee78.mp3"
     },
     "edinburgh": {
       "word": "edinburgh",
@@ -3837,8 +3837,8 @@
       "complete": true,
       "ipa_uk": "/ˈɛdɪnbʌɹə/",
       "ipa_us": "/ˈɛdɪnbʌɹə/",
-      "audioLocalUk": "audio/uk/edinburgh-1b4e9835.wav",
-      "audioLocalUs": "audio/us/edinburgh-1b4e9835.wav"
+      "audioLocalUk": "audio/uk/edinburgh-1b4e9835.mp3",
+      "audioLocalUs": "audio/us/edinburgh-1b4e9835.mp3"
     },
     "challenge": {
       "word": "challenge",
@@ -3855,8 +3855,8 @@
       "complete": true,
       "ipa_uk": "/tʃˈalɪndʒ/",
       "ipa_us": "/tʃˈælɪndʒ/",
-      "audioLocalUk": "audio/uk/challenge-bb064b23.wav",
-      "audioLocalUs": "audio/us/challenge-bb064b23.wav"
+      "audioLocalUk": "audio/uk/challenge-bb064b23.mp3",
+      "audioLocalUs": "audio/us/challenge-bb064b23.mp3"
     },
     "have": {
       "word": "have",
@@ -3873,8 +3873,8 @@
       "complete": true,
       "ipa_uk": "/hˈav/",
       "ipa_us": "/hˈæv/",
-      "audioLocalUk": "audio/uk/have-ff87cea4.wav",
-      "audioLocalUs": "audio/us/have-ff87cea4.wav"
+      "audioLocalUk": "audio/uk/have-ff87cea4.mp3",
+      "audioLocalUs": "audio/us/have-ff87cea4.mp3"
     },
     "then": {
       "word": "then",
@@ -3948,8 +3948,8 @@
       "complete": true,
       "ipa_uk": "/ðˈɛn/",
       "ipa_us": "/ðˈɛn/",
-      "audioLocalUk": "audio/uk/then-6f8f8e9f.wav",
-      "audioLocalUs": "audio/us/then-6f8f8e9f.wav"
+      "audioLocalUk": "audio/uk/then-6f8f8e9f.mp3",
+      "audioLocalUs": "audio/us/then-6f8f8e9f.mp3"
     },
     "used": {
       "word": "used",
@@ -3966,8 +3966,8 @@
       "complete": true,
       "ipa_uk": "/jˈuːzd/",
       "ipa_us": "/jˈuːzd/",
-      "audioLocalUk": "audio/uk/used-192a5675.wav",
-      "audioLocalUs": "audio/us/used-192a5675.wav"
+      "audioLocalUk": "audio/uk/used-192a5675.mp3",
+      "audioLocalUs": "audio/us/used-192a5675.mp3"
     },
     "language": {
       "word": "language",
@@ -3992,8 +3992,8 @@
       "complete": true,
       "ipa_uk": "/lˈaŋɡwɪdʒ/",
       "ipa_us": "/lˈæŋɡwɪdʒ/",
-      "audioLocalUk": "audio/uk/language-e11523c5.wav",
-      "audioLocalUs": "audio/us/language-e11523c5.wav"
+      "audioLocalUk": "audio/uk/language-e11523c5.mp3",
+      "audioLocalUs": "audio/us/language-e11523c5.mp3"
     },
     "app": {
       "word": "app",
@@ -4010,8 +4010,8 @@
       "complete": true,
       "ipa_uk": "/ˈap/",
       "ipa_us": "/ˈæp/",
-      "audioLocalUk": "audio/uk/app-7d104347.wav",
-      "audioLocalUs": "audio/us/app-7d104347.wav"
+      "audioLocalUk": "audio/uk/app-7d104347.mp3",
+      "audioLocalUs": "audio/us/app-7d104347.mp3"
     },
     "looking": {
       "word": "looking",
@@ -4028,8 +4028,8 @@
       "complete": true,
       "ipa_uk": "/lˈʊkɪŋ/",
       "ipa_us": "/lˈʊkɪŋ/",
-      "audioLocalUk": "audio/uk/looking-dac3990e.wav",
-      "audioLocalUs": "audio/us/looking-dac3990e.wav"
+      "audioLocalUk": "audio/uk/looking-dac3990e.mp3",
+      "audioLocalUs": "audio/us/looking-dac3990e.mp3"
     },
     "bond": {
       "word": "bond",
@@ -4054,8 +4054,8 @@
       "complete": true,
       "ipa_uk": "/bˈɒnd/",
       "ipa_us": "/bˈɑːnd/",
-      "audioLocalUk": "audio/uk/bond-1d2bba5d.wav",
-      "audioLocalUs": "audio/us/bond-1d2bba5d.wav"
+      "audioLocalUk": "audio/uk/bond-1d2bba5d.mp3",
+      "audioLocalUs": "audio/us/bond-1d2bba5d.mp3"
     },
     "between": {
       "word": "between",
@@ -4072,8 +4072,8 @@
       "complete": true,
       "ipa_uk": "/bɪtwˈiːn/",
       "ipa_us": "/bɪtwˈiːn/",
-      "audioLocalUk": "audio/uk/between-70963405.wav",
-      "audioLocalUs": "audio/us/between-70963405.wav"
+      "audioLocalUk": "audio/uk/between-70963405.mp3",
+      "audioLocalUs": "audio/us/between-70963405.mp3"
     },
     "sisters": {
       "word": "sisters",
@@ -4090,8 +4090,8 @@
       "complete": true,
       "ipa_uk": "/sˈɪstəz/",
       "ipa_us": "/sˈɪstɚz/",
-      "audioLocalUk": "audio/uk/sisters-dad69ad5.wav",
-      "audioLocalUs": "audio/us/sisters-dad69ad5.wav"
+      "audioLocalUk": "audio/uk/sisters-dad69ad5.mp3",
+      "audioLocalUs": "audio/us/sisters-dad69ad5.mp3"
     },
     "all": {
       "word": "all",
@@ -4165,8 +4165,8 @@
       "complete": true,
       "ipa_uk": "/ˈɔːl/",
       "ipa_us": "/ˈɔːl/",
-      "audioLocalUk": "audio/uk/all-d87c4480.wav",
-      "audioLocalUs": "audio/us/all-d87c4480.wav"
+      "audioLocalUk": "audio/uk/all-d87c4480.mp3",
+      "audioLocalUs": "audio/us/all-d87c4480.mp3"
     },
     "start": {
       "word": "start",
@@ -4240,8 +4240,8 @@
       "complete": true,
       "ipa_uk": "/stˈɑːt/",
       "ipa_us": "/stˈɑːɹt/",
-      "audioLocalUk": "audio/uk/start-2b020927.wav",
-      "audioLocalUs": "audio/us/start-2b020927.wav"
+      "audioLocalUk": "audio/uk/start-2b020927.mp3",
+      "audioLocalUs": "audio/us/start-2b020927.mp3"
     },
     "with": {
       "word": "with",
@@ -4273,8 +4273,8 @@
       "complete": true,
       "ipa_uk": "/wˈɪð/",
       "ipa_us": "/wˈɪð/",
-      "audioLocalUk": "audio/uk/with-8fcd25a3.wav",
-      "audioLocalUs": "audio/us/with-8fcd25a3.wav"
+      "audioLocalUk": "audio/uk/with-8fcd25a3.mp3",
+      "audioLocalUs": "audio/us/with-8fcd25a3.mp3"
     },
     "ever": {
       "word": "ever",
@@ -4334,8 +4334,8 @@
       "complete": true,
       "ipa_uk": "/ˈɛvə/",
       "ipa_us": "/ˈɛvɚ/",
-      "audioLocalUk": "audio/uk/ever-55472e53.wav",
-      "audioLocalUs": "audio/us/ever-55472e53.wav"
+      "audioLocalUk": "audio/uk/ever-55472e53.mp3",
+      "audioLocalUs": "audio/us/ever-55472e53.mp3"
     },
     "th": {
       "word": "th",
@@ -4388,8 +4388,8 @@
       "complete": true,
       "ipa_uk": "/tˌiːˈeɪtʃ/",
       "ipa_us": "/tˌiːˈeɪtʃ/",
-      "audioLocalUk": "audio/uk/th-fa6af6e9.wav",
-      "audioLocalUs": "audio/us/th-fa6af6e9.wav"
+      "audioLocalUk": "audio/uk/th-fa6af6e9.mp3",
+      "audioLocalUs": "audio/us/th-fa6af6e9.mp3"
     },
     "realistically": {
       "word": "realistically",
@@ -4412,8 +4412,8 @@
       "ipa_us": "/ɹiːəlˈɪstɪkli/",
       "phonetic_uk": "/ɹiəlˈɪstɪkli/",
       "phonetic_us": "/ɹiːəlˈɪstɪkli/",
-      "audioLocalUk": "audio/uk/realistically-770d91f7.wav",
-      "audioLocalUs": "audio/us/realistically-770d91f7.wav"
+      "audioLocalUk": "audio/uk/realistically-770d91f7.mp3",
+      "audioLocalUs": "audio/us/realistically-770d91f7.mp3"
     },
     "grammar": {
       "word": "grammar",
@@ -4436,8 +4436,8 @@
       "ipa_us": "/ɡɹˈæmɚ/",
       "phonetic_uk": "/ɡɹˈamə/",
       "phonetic_us": "/ɡɹˈæmɚ/",
-      "audioLocalUk": "audio/uk/grammar-338df5dd.wav",
-      "audioLocalUs": "audio/us/grammar-338df5dd.wav"
+      "audioLocalUk": "audio/uk/grammar-338df5dd.mp3",
+      "audioLocalUs": "audio/us/grammar-338df5dd.mp3"
     },
     "immersion": {
       "word": "immersion",
@@ -4460,8 +4460,8 @@
       "ipa_us": "/ɪmˈɜːʒən/",
       "phonetic_uk": "/ɪmˈɜːʃən/",
       "phonetic_us": "/ɪmˈɜːʒən/",
-      "audioLocalUk": "audio/uk/immersion-19cd4d31.wav",
-      "audioLocalUs": "audio/us/immersion-19cd4d31.wav"
+      "audioLocalUk": "audio/uk/immersion-19cd4d31.mp3",
+      "audioLocalUs": "audio/us/immersion-19cd4d31.mp3"
     },
     "full": {
       "word": "full",
@@ -4484,8 +4484,8 @@
       "ipa_us": "/fˈʊl/",
       "phonetic_uk": "/fˈʊl/",
       "phonetic_us": "/fˈʊl/",
-      "audioLocalUk": "audio/uk/full-52e6d8ab.wav",
-      "audioLocalUs": "audio/us/full-52e6d8ab.wav"
+      "audioLocalUk": "audio/uk/full-52e6d8ab.mp3",
+      "audioLocalUs": "audio/us/full-52e6d8ab.mp3"
     },
     "adults": {
       "word": "adults",
@@ -4508,8 +4508,8 @@
       "ipa_us": "/ɐdˈʌlts/",
       "phonetic_uk": "/ˈadʌlts/",
       "phonetic_us": "/ɐdˈʌlts/",
-      "audioLocalUk": "audio/uk/adults-bf07c56d.wav",
-      "audioLocalUs": "audio/us/adults-bf07c56d.wav"
+      "audioLocalUk": "audio/uk/adults-bf07c56d.mp3",
+      "audioLocalUs": "audio/us/adults-bf07c56d.mp3"
     },
     "achieve": {
       "word": "achieve",
@@ -4532,8 +4532,8 @@
       "ipa_us": "/ɐtʃˈiːv/",
       "phonetic_uk": "/ɐtʃˈiːv/",
       "phonetic_us": "/ɐtʃˈiːv/",
-      "audioLocalUk": "audio/uk/achieve-f9659d46.wav",
-      "audioLocalUs": "audio/us/achieve-f9659d46.wav"
+      "audioLocalUk": "audio/uk/achieve-f9659d46.mp3",
+      "audioLocalUs": "audio/us/achieve-f9659d46.mp3"
     },
     "so": {
       "word": "so",
@@ -4556,8 +4556,8 @@
       "ipa_us": "/sˈoʊ/",
       "phonetic_uk": "/sˈəʊ/",
       "phonetic_us": "/sˈoʊ/",
-      "audioLocalUk": "audio/uk/so-cd1b646e.wav",
-      "audioLocalUs": "audio/us/so-cd1b646e.wav"
+      "audioLocalUk": "audio/uk/so-cd1b646e.mp3",
+      "audioLocalUs": "audio/us/so-cd1b646e.mp3"
     },
     "can't": {
       "word": "can't",
@@ -4580,8 +4580,8 @@
       "ipa_us": "/kˈænt/",
       "phonetic_uk": "/kˈɑːnt/",
       "phonetic_us": "/kˈænt/",
-      "audioLocalUk": "audio/uk/can_t-5bac3993.wav",
-      "audioLocalUs": "audio/us/can_t-5bac3993.wav"
+      "audioLocalUk": "audio/uk/can_t-5bac3993.mp3",
+      "audioLocalUs": "audio/us/can_t-5bac3993.mp3"
     },
     "apps": {
       "word": "apps",
@@ -4604,8 +4604,8 @@
       "ipa_us": "/ˈæps/",
       "phonetic_uk": "/ˈaps/",
       "phonetic_us": "/ˈæps/",
-      "audioLocalUk": "audio/uk/apps-8025087a.wav",
-      "audioLocalUs": "audio/us/apps-8025087a.wav"
+      "audioLocalUk": "audio/uk/apps-8025087a.mp3",
+      "audioLocalUs": "audio/us/apps-8025087a.mp3"
     },
     "teach": {
       "word": "teach",
@@ -4628,8 +4628,8 @@
       "ipa_us": "/tˈiːtʃ/",
       "phonetic_uk": "/tˈiːtʃ/",
       "phonetic_us": "/tˈiːtʃ/",
-      "audioLocalUk": "audio/uk/teach-bbe5bb36.wav",
-      "audioLocalUs": "audio/us/teach-bbe5bb36.wav"
+      "audioLocalUk": "audio/uk/teach-bbe5bb36.mp3",
+      "audioLocalUs": "audio/us/teach-bbe5bb36.mp3"
     }
   }
 }
