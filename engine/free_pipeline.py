@@ -37,8 +37,8 @@ REVIEW = DATA / 'review.json'
 CONFIG = {
     'queriesPerRun': 24,
     'resultsPerQuery': 12,
-    'maxCandidates': 300,
-    'maxProcess': 60,
+    'maxCandidates': 240,
+    'maxProcess': 40,
     'minSegments': 8,
     'minCoverage': 0.90,
     'minCharsPerMinute': 42,
@@ -618,23 +618,23 @@ def fetch_english_via_transcript_txt(video_id: str):
     except Exception:
         return []
 def best_english_transcript(video_id: str, duration: float):
-    # 1) Read YouTube's actual caption tracks from player metadata.
-    #    This is the canonical track list and includes the track URL plus
-    #    YouTube's own zh translation when the track supports it.
+    # YouTube-only caption gate. This is intentionally strict and bounded:
+    # 1) player metadata caption tracks, 2) direct YouTube timedtext,
+    # 3) yt-dlp's YouTube-native subtitle download. No third-party transcript
+    # mirrors are used in the acceptance path.
     try:
         en_rows, zh_rows, source_name, lang = fetch_caption_tracks_from_player(video_id)
         if en_rows:
-            valid, coverage, reason = validate_transcript(en_rows, duration)
+            valid, coverage, _ = validate_transcript(en_rows, duration)
             if valid:
                 return None, en_rows, coverage, 'youtube-player-captions', zh_rows
     except Exception:
         pass
 
-    # 2) Direct YouTube timedtext fallback.
     try:
         ok,segs,lang,kind=fetch_english_via_timedtext(video_id)
         if ok and segs:
-            valid,coverage,reason=validate_transcript(segs,duration)
+            valid,coverage,_=validate_transcript(segs,duration)
             if valid:
                 zh_rows=[]
                 for tlang in ('zh-TW','zh-Hant','zh'):
@@ -646,31 +646,16 @@ def best_english_transcript(video_id: str, duration: float):
     except Exception:
         pass
 
-    # 3) YouTube-native captions through yt-dlp.
     try:
         en_rows, zh_rows = fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
         if en_rows:
-            valid,coverage,reason=validate_transcript(en_rows,duration)
+            valid,coverage,_=validate_transcript(en_rows,duration)
             if valid:
                 return None,en_rows,coverage,'yt-dlp-native-captions',zh_rows
     except Exception:
         pass
+    return None,None,0.0,'no-youtube-english-caption',[]
 
-    # 4) Bounded public transcript fallbacks.
-    import concurrent.futures
-    jobs=[]
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-        jobs.append(pool.submit(fetch_english_via_public_transcript,video_id))
-        jobs.append(pool.submit(fetch_english_via_free_transcript_api,video_id))
-        for f in concurrent.futures.as_completed(jobs):
-            try:
-                segs=f.result()
-                if segs:
-                    valid,coverage,reason=validate_transcript(segs,duration)
-                    if valid:return None,segs,coverage,'public-transcript',[]
-            except Exception:
-                pass
-    return None,None,0.0,'no-complete-english-transcript',[]
 def translate_public_google(text: str):
     import requests
     q=clean_text(text)
@@ -850,8 +835,8 @@ def main():
             }))
     # Keep each run bounded: repair only part of the legacy queue, then spend
     # the remaining processing budget on genuinely new videos.
-    run_budget=max(40,min(60,int(CONFIG.get('maxProcess',60))))
-    CONFIG['workers']=max(1,int(CONFIG.get('workers',12)))
+    run_budget=max(25,min(40,int(CONFIG.get('maxProcess',40))))
+    CONFIG['workers']=max(1,min(12,int(CONFIG.get('workers',12))))
     repair_budget=0  # prioritize daily new-video target
     repair_candidates=repair_candidates[:repair_budget]
 
