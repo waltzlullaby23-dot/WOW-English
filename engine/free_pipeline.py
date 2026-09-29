@@ -700,81 +700,22 @@ def process_video(video_id, meta, existing, idx=0):
     if not valid or spoken!='en' or ratio['nonEnglish']>0.18:
         return None,{'id':video_id,'title':title,'status':'review','reason':reason,'englishScore':round(ratio['english'],3),'coverage':round(coverage,3),'spokenLanguage':spoken}
 
-    zh=None; zh_source='none'
-    youtube_reference=None
-
-    # 1) Use YouTube's own translated caption directly when it is complete.
+    # Acceptance rule: use YouTube's own Chinese translation whenever it is
+    # available. Do not hide a missing YouTube translation behind a third-party
+    # translator; that was causing the pipeline to spend minutes on candidates
+    # that could never enter the library.
+    zh=None; zh_source='none'; youtube_reference=None
     if youtube_zh_rows:
         try:
             candidate=align_translation_segments(segs,youtube_zh_rows)
             if candidate and len(candidate)==len(segs) and all(clean_text(x) for x in candidate):
                 youtube_reference=candidate
                 zh=candidate
-                zh_source='youtube-tw-translation'
+                zh_source='youtube-translation'
         except Exception:
             youtube_reference=None
-
-    # 2) Only translate when YouTube native translation was unavailable.
-    try:
-        if zh is None:
-            got,src=translate_from_youtube(tr,segs) if tr is not None else (None,'none')
-            if got and len(got)==len(segs) and all(clean_text(x) for x in got):
-                zh,zh_source=got,'youtube-transcript-translation'
-    except Exception:
-        pass
-
-    # 3) Fast public Google translation fallback.
-    if zh is None and not youtube_zh_rows and duration > 600:
-        return None,{'id':video_id,'title':title,'status':'review','reason':'youtube-translation-unavailable'}
-    # Fast public Google translation only for short videos.
     if zh is None:
-        try:
-            lines=[s['en'] for s in segs]
-            got=translate_lines_public_google(lines)
-            if len(got)==len(lines) and all(got):
-                zh,zh_source=got,'google-public-translate'
-        except Exception:
-            pass
-
-    # 4) Local Argos fallback only after the network path fails.
-    if zh is None:
-        try:
-            got,src=translate_with_argos(segs)
-            if got and len(got)==len(segs) and all(clean_text(x) for x in got):
-                zh,zh_source=got,'deep-translator-google'
-        except Exception:
-            pass
-
-    # 5) Last-mile line repair.
-    if zh is None:
-        try:
-            lines=[s['en'] for s in segs]
-            recovered=[translate_one(line) for line in lines]
-            if len(recovered)==len(lines) and all(clean_text(x) for x in recovered):
-                zh,zh_source=recovered,'deep-translator-one-by-one'
-        except Exception:
-            pass
-
-    # 6) Fill only missing lines from the validated YouTube reference.
-    if zh is not None and youtube_reference:
-        if len(zh)!=len(segs):
-            zh=['']*len(segs)
-        repaired=False
-        for i in range(len(segs)):
-            if not clean_text(zh[i]):
-                zh[i]=youtube_reference[i]
-                repaired=True
-        if repaired:
-            zh_source=(zh_source or 'translation')+'+youtube-reference-repair'
-
-    # 7) Emergency fallback: a fully aligned YouTube translation is better than
-    # publishing an English-only lesson when a public translator is throttled.
-    if (zh is None or len(zh)!=len(segs) or not all(clean_text(x) for x in zh)) and youtube_reference:
-        zh=list(youtube_reference)
-        zh_source='youtube-reference-fallback'
-    if zh is None or len(zh)!=len(segs) or not all(clean_text(x) for x in zh):
-        return None,{'id':video_id,'title':title,'status':'review','reason':zh_source or 'translation-incomplete','coverage':round(coverage,3)}
-
+        return None,{'id':video_id,'title':title,'status':'review','reason':'youtube-zh-translation-unavailable','coverage':round(coverage,3)}
     transcript=[{'start':s['start'],'end':s['end'],'en':s['en'],'zh':clean_text(z)} for s,z in zip(segs,zh)]
     category=meta['category']
     sub=classify(category,meta.get('query',''),title,' '.join(x['en'] for x in transcript),idx)
