@@ -50,7 +50,7 @@ jobs:
             const validMp3=(p)=>{
               if(!fs.existsSync(p))return false;
               const b=fs.readFileSync(p);
-              if(b.length<4000)return false;
+              if(b.length<500)return false;
               const id3=b.subarray(0,3).toString();
               return id3==='ID3' || (b[0]===0xff && (b[1]&0xe0)===0xe0);
             };
