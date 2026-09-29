@@ -24,10 +24,11 @@ permissions:
 
 concurrency:
   group: sanmu-free-discovery
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   discover:
+    if: github.actor != 'sanmu-eng-bot'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -84,6 +85,7 @@ jobs:
           # which hid the real subtitle-repair failure.
           if len(accepted) == 0:
               raise SystemExit("Release blocked: zero videos passed the complete-caption acceptance gate.")
+          print("DAILY_TARGET_NOTE=target tracked in data/discovery-health.json; scheduled tranches target 100/day.")
           if len(translated) < len(accepted):
               raise SystemExit("Release blocked: accepted videos must have complete sentence-level Chinese translation.")
           PY
