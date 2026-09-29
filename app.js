@@ -49,7 +49,7 @@ window.__sanmuDiagnostics=()=>({
   transcriptCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.length:0,
   translatedCount:Array.isArray(selectedVideo()?.transcript)?selectedVideo().transcript.filter(x=>String(x.zh||'').trim()).length:0,
   activeIndex:[...document.querySelectorAll('.segment')].findIndex(x=>x.classList.contains('active')),
-  audio:window.__sanmuAudioLast||null, dictionaryWords:Object.keys(dictionaryIndex.words||{}).length,wordSource:state.word?.source||''
+  audio:window.__sanmuAudioLast||null, dictionaryWords:Object.keys(dictionaryIndex.words||{}).length,wordSource:state.word?.source||'',audioMode:'dom-audio-first'
 });
 window.addEventListener('hashchange',parseHash);
 function favs(){return load('sanmu-favs',[])} function vocab(){return load('sanmu-vocab',{})} function history(){return load('sanmu-history',[])} function prog(){return load('sanmu-lessons',{})}
@@ -531,24 +531,27 @@ function playAudioCandidates(urls,index,word,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const id=target==='en-GB'?state.word?.__ukAudioId:state.word?.__usAudioId;
-  const domAudio=id?document.getElementById(id):null;
-  if(domAudio){
+  const el=document.querySelector('.vt-pron-audio[data-locale="'+target+'"]');
+  if(el){
     try{
-      if(speechAudio&&speechAudio!==domAudio){try{speechAudio.pause();}catch{}}
-      try{domAudio.pause();}catch{}
-      domAudio.currentTime=0;
-      domAudio.muted=false;
-      speechAudio=domAudio;
-      window.__sanmuAudioLast={word:value,locale:target,status:'loading',source:'dom-audio',url:domAudio.currentSrc||domAudio.src};
-      const p=domAudio.play();
-      if(p&&p.then)p.then(()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'dom-audio',url:domAudio.currentSrc||domAudio.src};}).catch(()=>playAudioCandidates(audioCandidates(value,target),0,value,target));
+      el.pause();
+      el.currentTime=0;
+      el.volume=1;
+      window.__sanmuAudioLast={word:value,locale:target,status:'loading',source:'dom-audio',url:el.currentSrc||el.src};
+      const p=el.play();
+      if(p&&p.then){
+        p.then(()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'dom-audio',url:el.currentSrc||el.src};})
+         .catch(()=>fallbackPronunciation(value,target));
+      }
       return true;
     }catch{}
   }
+  return fallbackPronunciation(value,target);
+}
+function fallbackPronunciation(value,target){
   const urls=audioCandidates(value,target);
-  playAudioCandidates(urls,0,value,target);
-  setTimeout(()=>{const status=window.__sanmuAudioLast?.status;if(status!=='playing'&&status!=='ended')speak(value,target);},1000);
+  const ok=playAudioCandidates(urls,0,value,target);
+  if(!ok)setTimeout(()=>speak(value,target),50);
   return true;
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
@@ -560,17 +563,13 @@ function wordModal(){
   const zh=String(w.definition_zh||'查詢中…').trim();
   const uk=String(w.ipa_uk||w.phonetic_uk||'').trim();
   const us=String(w.ipa_us||w.phonetic_us||uk).trim();
-  const ukSrc=normalizeAudioUrl(w.audioLocalUk||w.audio_uk||w.audioFallbackUk||'');
-  const usSrc=normalizeAudioUrl(w.audioLocalUs||w.audio_us||w.audioFallbackUs||'');
-  const ukId='vt-audio-uk-'+Date.now();
-  const usId='vt-audio-us-'+Date.now();
-  w.__ukAudioId=ukId;w.__usAudioId=usId;
-  state.word=w;
+  const ukSrc=String(w.audioLocalUk||w.audio_uk||w.audioFallbackUk||'');
+  const usSrc=String(w.audioLocalUs||w.audio_us||w.audioFallbackUs||'');
   return `<div class="word-inline-card">
     <div class="vt-dictionary-card">
-      <audio id="${ukId}" preload="auto" src="${esc(ukSrc)}" style="display:none"></audio>
-      <audio id="${usId}" preload="auto" src="${esc(usSrc)}" style="display:none"></audio>
       <button type="button" class="vt-dictionary-close" onclick="event.stopPropagation();closeWord()" aria-label="關閉">×</button>
+      <audio class="vt-pron-audio" data-locale="en-GB" preload="auto" src="${esc(ukSrc)}"></audio>
+      <audio class="vt-pron-audio" data-locale="en-US" preload="auto" src="${esc(usSrc)}"></audio>
       <div class="vt-word">${esc(w.word||'')}</div>
       ${pos?`<div class="vt-pos">${esc(pos)}</div>`:''}
       <div class="vt-pronunciation">
