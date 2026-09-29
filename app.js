@@ -576,10 +576,10 @@ function wordModal(){
       <div class="vt-word">${esc(w.word||'')}</div>
       ${pos?`<div class="vt-pos">${esc(pos)}</div>`:''}
       <div class="vt-pronunciation">
-        <button type="button" class="vt-pron-btn" aria-label="英式發音" onpointerdown="event.preventDefault();event.stopPropagation();playPronunciation(${wordAttr},'en-GB')"><b>UK</b><span class="vt-speaker">🔊</span></button>
+        <button type="button" class="vt-pron-btn" aria-label="英式發音" onpointerdown="event.stopPropagation();playPronunciation(${wordAttr},'en-GB')" onclick="event.preventDefault();event.stopPropagation()"><b>UK</b><span class="vt-speaker">🔊</span></button>
         ${uk?`<span class="vt-ipa">${esc(uk)}</span>`:''}
         <span class="vt-pron-dot">·</span>
-        <button type="button" class="vt-pron-btn" aria-label="美式發音" onpointerdown="event.preventDefault();event.stopPropagation();playPronunciation(${wordAttr},'en-US')"><b>US</b><span class="vt-speaker">🔊</span></button>
+        <button type="button" class="vt-pron-btn" aria-label="美式發音" onpointerdown="event.stopPropagation();playPronunciation(${wordAttr},'en-US')" onclick="event.preventDefault();event.stopPropagation()"><b>US</b><span class="vt-speaker">🔊</span></button>
         ${us?`<span class="vt-ipa">${esc(us)}</span>`:''}
       </div>
       <div class="vt-divider"></div>
