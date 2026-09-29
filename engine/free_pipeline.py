@@ -643,6 +643,18 @@ def best_english_transcript(video_id: str, duration: float):
     except Exception:
         pass
 
+    # 3) Use yt-dlp's own caption extraction before public mirrors.
+    # This fallback existed but was never called, which left discovery stuck
+    # when youtube-transcript-api/timedtext was blocked on runner IPs.
+    try:
+        en_rows, zh_rows = fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
+        if en_rows:
+            valid,coverage,reason=validate_transcript(en_rows,duration)
+            if valid:
+                return None,en_rows,coverage,'yt-dlp-native-captions',zh_rows
+    except Exception:
+        pass
+
     # 3) Public transcript mirrors/API are a fallback when YouTube blocks the runner.
     import concurrent.futures
     jobs=[]
@@ -833,15 +845,15 @@ def main():
             }))
     # Keep each run bounded: repair only part of the legacy queue, then spend
     # the remaining processing budget on genuinely new videos.
-    run_budget=max(1,int(CONFIG.get('maxProcess',40)))
+    run_budget=max(25,min(30,int(CONFIG.get('maxProcess',30))))
     CONFIG['workers']=max(1,int(CONFIG.get('workers',12)))
-    repair_budget=min(len(repair_candidates),max(0,run_budget//3))
+    repair_budget=0  # prioritize daily new-video target
     repair_candidates=repair_candidates[:repair_budget]
 
     new=[];review=[]
     repaired=0
     processed=0
-    for idx,vid,meta,rec,err in process_batch(repair_candidates,existing,workers=6):
+    for idx,vid,meta,rec,err in process_batch(repair_candidates,existing,workers=int(CONFIG.get('workers',12))):
         processed+=1
         if rec:
             existing[vid]=rec;new.append(rec);repaired+=1
@@ -860,7 +872,7 @@ def main():
     candidates=list(cand.items())[:int(CONFIG['maxCandidates'])]
     remaining=max(0,run_budget-processed)
     batch=[x for x in candidates[:remaining]]
-    for idx,vid,meta,rec,err in process_batch(batch,existing,workers=6):
+    for idx,vid,meta,rec,err in process_batch(batch,existing,workers=int(CONFIG.get('workers',12))):
         processed+=1
         if rec:
             existing[vid]=rec;new.append(rec)
