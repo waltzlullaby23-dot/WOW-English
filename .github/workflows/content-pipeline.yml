@@ -8,7 +8,12 @@ on:
   push:
     paths:
       - ".github/workflows/content-pipeline.yml"
-      - "engine/**"
+      - "engine/free_pipeline.py"
+      - "engine/free_discover.py"
+      - "engine/free_repair.py"
+      - "engine/free_translate.py"
+      - "engine/free_verify.py"
+      - "engine/config.json"
       - "requirements.txt"
       - "data/taxonomy.json"
       - "data/catalog.json"
