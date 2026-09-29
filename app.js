@@ -531,16 +531,24 @@ function playAudioCandidates(urls,index,word,locale){
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  // Deterministic path: play a local/generated or remote MP3/WAV immediately.
-  // This is invoked directly by the button click, so the browser user-activation
-  // is still active when audio.play() is called.
+  const id=target==='en-GB'?state.word?.__ukAudioId:state.word?.__usAudioId;
+  const domAudio=id?document.getElementById(id):null;
+  if(domAudio){
+    try{
+      if(speechAudio&&speechAudio!==domAudio){try{speechAudio.pause();}catch{}}
+      try{domAudio.pause();}catch{}
+      domAudio.currentTime=0;
+      domAudio.muted=false;
+      speechAudio=domAudio;
+      window.__sanmuAudioLast={word:value,locale:target,status:'loading',source:'dom-audio',url:domAudio.currentSrc||domAudio.src};
+      const p=domAudio.play();
+      if(p&&p.then)p.then(()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'dom-audio',url:domAudio.currentSrc||domAudio.src};}).catch(()=>playAudioCandidates(audioCandidates(value,target),0,value,target));
+      return true;
+    }catch{}
+  }
   const urls=audioCandidates(value,target);
   playAudioCandidates(urls,0,value,target);
-  // Only use native speech as a fallback when audio files cannot start.
-  setTimeout(()=>{
-    const status=window.__sanmuAudioLast?.status;
-    if(status!=='playing'&&status!=='ended')speak(value,target);
-  },1000);
+  setTimeout(()=>{const status=window.__sanmuAudioLast?.status;if(status!=='playing'&&status!=='ended')speak(value,target);},1000);
   return true;
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
@@ -552,8 +560,16 @@ function wordModal(){
   const zh=String(w.definition_zh||'查詢中…').trim();
   const uk=String(w.ipa_uk||w.phonetic_uk||'').trim();
   const us=String(w.ipa_us||w.phonetic_us||uk).trim();
+  const ukSrc=normalizeAudioUrl(w.audioLocalUk||w.audio_uk||w.audioFallbackUk||'');
+  const usSrc=normalizeAudioUrl(w.audioLocalUs||w.audio_us||w.audioFallbackUs||'');
+  const ukId='vt-audio-uk-'+Date.now();
+  const usId='vt-audio-us-'+Date.now();
+  w.__ukAudioId=ukId;w.__usAudioId=usId;
+  state.word=w;
   return `<div class="word-inline-card">
     <div class="vt-dictionary-card">
+      <audio id="${ukId}" preload="auto" src="${esc(ukSrc)}" style="display:none"></audio>
+      <audio id="${usId}" preload="auto" src="${esc(usSrc)}" style="display:none"></audio>
       <button type="button" class="vt-dictionary-close" onclick="event.stopPropagation();closeWord()" aria-label="關閉">×</button>
       <div class="vt-word">${esc(w.word||'')}</div>
       ${pos?`<div class="vt-pos">${esc(pos)}</div>`:''}
