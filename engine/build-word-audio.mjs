@@ -64,3 +64,5 @@ if(bad.length)process.exit(1);
 // Rebuild newly preloaded runtime subtitle words.
 
 // Final trigger after workflow validation update.
+
+// Trigger validation after short-word MP3 threshold fix.
