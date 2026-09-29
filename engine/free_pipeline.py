@@ -687,11 +687,9 @@ def translate_public_google(text: str):
     return ''
 
 def translate_lines_public_google(lines):
-    out=[]
-    for line in lines:
-        out.append(translate_public_google(line))
-        time.sleep(0.12)
-    return out
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=10) as pool:
+        return list(pool.map(translate_public_google, lines))
 
 def process_video(video_id, meta, existing, idx=0):
     info=ydl_info(video_id)
@@ -736,22 +734,24 @@ def process_video(video_id, meta, existing, idx=0):
     except Exception:
         pass
 
-    # 3) Free batch translation backend.
-    if zh is None:
-        try:
-            got,src=translate_with_argos(segs)
-            if got and len(got)==len(segs) and all(clean_text(x) for x in got):
-                zh,zh_source=got,'deep-translator-google'
-        except Exception:
-            pass
-
-    # 4) Public Google Translate fallback.
+    # 3) Fast public Google translation fallback.
+    # Keep the slow local Argos engine as a last resort so one candidate
+    # cannot hold the daily discovery run for minutes.
     if zh is None:
         try:
             lines=[s['en'] for s in segs]
             got=translate_lines_public_google(lines)
             if len(got)==len(lines) and all(got):
                 zh,zh_source=got,'google-public-translate'
+        except Exception:
+            pass
+
+    # 4) Local Argos fallback only after the network path fails.
+    if zh is None:
+        try:
+            got,src=translate_with_argos(segs)
+            if got and len(got)==len(segs) and all(clean_text(x) for x in got):
+                zh,zh_source=got,'deep-translator-google'
         except Exception:
             pass
 
