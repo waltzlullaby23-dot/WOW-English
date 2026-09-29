@@ -62,3 +62,5 @@ if(bad.length)process.exit(1);
 // Force rebuild after WAV validation enhancement.
 
 // Rebuild newly preloaded runtime subtitle words.
+
+// Final trigger after workflow validation update.
