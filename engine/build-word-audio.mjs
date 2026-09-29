@@ -19,7 +19,10 @@ const safeName=w=>{
 };
 const ensure=p=>fs.mkdirSync(p,{recursive:true});
 const make= (word, locale, out)=>{
-  execFileSync('espeak',['-v',locale,'-s','150','-w',out,word],{stdio:'ignore'});
+  const wav=out.replace(/\.mp3$/i,'.wav');
+  execFileSync('espeak',['-v',locale,'-s','150','-w',wav,word],{stdio:'ignore'});
+  execFileSync('ffmpeg',['-y','-loglevel','error','-i',wav,'-codec:a','libmp3lame','-q:a','5',out],{stdio:'ignore'});
+  fs.rmSync(wav,{force:true});
   return execFileSync('espeak',['-q','--ipa','-v',locale,word],{encoding:'utf8'}).trim().replace(/^\s+|\s+$/g,'');
 };
 ensure('audio/uk');
@@ -32,8 +35,8 @@ async function worker(){
     if(i>=list.length)return;
     const word=list[i];
     const name=safeName(word);
-    const ukRel='audio/uk/'+name+'.wav';
-    const usRel='audio/us/'+name+'.wav';
+    const ukRel='audio/uk/'+name+'.mp3';
+    const usRel='audio/us/'+name+'.mp3';
     const ukPath=path.resolve(repoRoot,ukRel);
     const usPath=path.resolve(repoRoot,usRel);
     const ipaUk=make(word,'en-gb',ukPath);
