@@ -283,14 +283,30 @@ def fetch_caption_tracks_from_player(video_id: str):
     return [],[],'',''
 
 
+def fetch_timedtext(video_id: str, lang='en', kind=None, tlang=None):
+    # Direct YouTube caption endpoint. This avoids yt-dlp's runner/IP bot gate
+    # while still using YouTube's own caption track and translation layer.
+    import requests
+    params={'v':video_id,'lang':lang,'fmt':'vtt'}
+    if kind: params['kind']=kind
+    if tlang: params['tlang']=tlang
+    try:
+        r=requests.get('https://www.youtube.com/api/timedtext',params=params,timeout=12,headers={'User-Agent':'Mozilla/5.0'})
+        if not r.ok or not r.text.strip(): return []
+        from tempfile import NamedTemporaryFile
+        with NamedTemporaryFile('w+',suffix='.vtt',encoding='utf-8') as f:
+            f.write(r.text);f.flush()
+            return parse_vtt(Path(f.name))
+    except Exception:
+        return []
+
 def fetch_english_via_timedtext(video_id: str):
     for kind in (None,'asr'):
-        for lang in ('en','en-US'):
+        for lang in ('en','en-US','en-GB'):
             rows=fetch_timedtext(video_id,lang,kind)
             if rows and len(' '.join(x['en'] for x in rows))>=180:
                 return True,rows
     return None,[]
-
 def fetch_youtube_timedtext_translation(video_id: str, en_segments):
     # Ask YouTube's own timedtext service for its player translation.
     for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
@@ -601,25 +617,49 @@ def fetch_english_via_transcript_txt(video_id: str):
     except Exception:
         return []
 def best_english_transcript(video_id: str, duration: float):
-    # Fast path: YouTube caption track plus YouTube-native translation.
+    # 1) YouTube's direct timedtext endpoint: fastest, does not depend on yt-dlp.
     try:
-        en_rows,zh_rows,source_name,source_lang=fetch_caption_tracks_from_player(video_id)
-        if en_rows:
-            ok,coverage,reason=validate_transcript(en_rows,duration)
-            if ok:
-                return None,en_rows,coverage,f'youtube-{source_name}',zh_rows
+        ok,segs=fetch_english_via_timedtext(video_id)
+        if ok and segs:
+            valid,coverage,reason=validate_transcript(segs,duration)
+            if valid:
+                zh_rows=[]
+                for lang in ('en','en-US','en-GB'):
+                    for kind in (None,'asr'):
+                        for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
+                            rows=fetch_timedtext(video_id,lang,kind,tlang)
+                            if rows and len(rows)>=max(CONFIG['minSegments'],int(len(segs)*0.6)):
+                                zh_rows=rows
+                                break
+                        if zh_rows:break
+                    if zh_rows:break
+                return None,segs,coverage,'youtube-timedtext',zh_rows
     except Exception:
         pass
-    # Secondary path: official transcript API only. Avoid the slow public mirrors
-    # on the hot path so each scheduled tranche can actually finish.
+
+    # 2) YouTube transcript API as a second native source.
     try:
         tr,segs=fetch_english_transcript(video_id)
         if segs:
-            ok,coverage,reason=validate_transcript(segs,duration)
-            if ok:
-                return tr,segs,coverage,'youtube-transcript-api',[]
+            valid,coverage,reason=validate_transcript(segs,duration)
+            if valid:return tr,segs,coverage,'youtube-transcript-api',[]
     except Exception:
         pass
+
+    # 3) Public transcript mirrors/API are a fallback when YouTube blocks the runner.
+    import concurrent.futures
+    jobs=[]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+        jobs.append(pool.submit(fetch_english_via_public_transcript,video_id))
+        jobs.append(pool.submit(fetch_english_via_free_transcript_api,video_id))
+        for f in concurrent.futures.as_completed(jobs):
+            try:
+                segs=f.result()
+                if segs:
+                    valid,coverage,reason=validate_transcript(segs,duration)
+                    if valid:return None,segs,coverage,'public-transcript',[]
+            except Exception:pass
+
     return None,None,0.0,'no-complete-english-transcript',[]
 
 def translate_public_google(text: str):
