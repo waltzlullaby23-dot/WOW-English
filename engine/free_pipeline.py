@@ -661,31 +661,76 @@ print(json.dumps({'en':seg,'zh':zh},ensure_ascii=False))
         return en,zh
     except Exception:
         return [],[]
-def best_english_transcript(video_id: str, duration: float):
-    # Fast, bounded YouTube-native caption chain.
+def fetch_youtube_player_captions_bounded(video_id: str, timeout_s: int = 15):
+    # Run the YouTube player/track extraction in a child process so one
+    # problematic video can never stall the whole Actions job.
+    code = r'''
+import json,sys,re,html,requests
+from yt_dlp import YoutubeDL
+vid=sys.argv[1]
+def clean(s): return re.sub(r'\s+',' ',str(s or '')).strip()
+def ts(v):
+    v=v.replace(',','.').split()[0]; p=v.split(':')
     try:
-        en_rows, zh_rows = fetch_youtube_transcript_api_bounded(video_id, timeout_s=12)
+        if len(p)==3:return int(p[0])*3600+int(p[1])*60+float(p[2])
+        return int(p[0])*60+float(p[1])
+    except:return 0.0
+def parse_vtt(text):
+    out=[]
+    blocks=re.split(r'\n\s*\n',text.replace('\ufeff',''))
+    for b in blocks:
+        ls=[x.strip() for x in b.splitlines() if x.strip()]
+        cue=next((x for x in ls if '-->' in x),None)
+        if not cue:continue
+        a,z=[x.strip() for x in cue.split('-->',1)]
+        txt=clean(' '.join(x for x in ls if x!=cue and not x.isdigit()))
+        if txt:out.append({'start':ts(a),'end':ts(z),'en':txt})
+    return out
+opts={'quiet':True,'no_warnings':True,'skip_download':True,'noplaylist':True,'socket_timeout':8,'retries':1,'extractor_retries':1}
+with YoutubeDL(opts) as y:
+    info=y.extract_info('https://www.youtube.com/watch?v='+vid,download=False)
+tracks=info.get('subtitles') or {}; auto=info.get('automatic_captions') or {}
+pool=[]
+for source,src in [('auto',auto),('manual',tracks)]:
+    for lang,entries in src.items():
+        if not str(lang).lower().startswith('en'):continue
+        for e in entries or []:
+            if e.get('url'):pool.append((0 if source=='auto' else 1,0 if str(lang).lower() in ('en','en-us') else 1,0 if str(e.get('ext','')).lower()=='vtt' else 1,e.get('url')))
+pool.sort(key=lambda x:(x[0],x[1],x[2]))
+en=[];zh=[]
+for _,_,_,url in pool[:1]:
+    rr=requests.get(url,timeout=8,headers={'User-Agent':'Mozilla/5.0'})
+    if not rr.ok:continue
+    en=parse_vtt(rr.text)
+    if len(en)<8:continue
+    sep='&' if '?' in url else '?'
+    for target in ('zh-TW','zh-Hant','zh-Hans','zh'):
+        try:
+            zz=requests.get(url+sep+'tlang='+target,timeout=8,headers={'User-Agent':'Mozilla/5.0'})
+            if zz.ok:
+                z=parse_vtt(zz.text)
+                if len(z)>=max(8,int(len(en)*.6)): zh=z; break
+        except Exception: pass
+    if en:break
+print(json.dumps({'en':en,'zh':zh},ensure_ascii=False))
+'''
+    try:
+        p=subprocess.run([sys.executable,'-c',code,video_id],cwd=ROOT,text=True,capture_output=True,timeout=timeout_s,check=False)
+        if p.returncode!=0 or not p.stdout.strip(): return [],[]
+        data=json.loads(p.stdout.strip().splitlines()[-1])
+        return normalize_segments(data.get('en') or []), normalize_segments(data.get('zh') or [])
+    except Exception:
+        return [],[]
+def best_english_transcript(video_id: str, duration: float):
+    try:
+        en_rows, zh_rows = fetch_youtube_player_captions_bounded(video_id, timeout_s=15)
         if en_rows:
             valid,coverage,_=validate_transcript(en_rows,duration)
-            if valid:
-                return None,en_rows,coverage,'youtube-transcript-api',zh_rows
+            if valid and zh_rows:
+                return None,en_rows,coverage,'youtube-player-captions',zh_rows
     except Exception:
         pass
-
-    try:
-        ok,segs,lang,kind=fetch_english_via_timedtext(video_id)
-        if ok and segs:
-            valid,coverage,_=validate_transcript(segs,duration)
-            if valid:
-                zh_rows=[]
-                for tlang in ('zh-TW','zh-Hant','zh'):
-                    rows=fetch_timedtext(video_id,lang,kind,tlang)
-                    if rows and len(rows)>=max(CONFIG['minSegments'],int(len(segs)*0.6)):
-                        zh_rows=rows; break
-                return None,segs,coverage,'youtube-timedtext',zh_rows
-    except Exception:
-        pass
-    return None,None,0.0,'no-youtube-english-caption',[]
+    return None,None,0.0,'no-complete-youtube-captions',[]
 def translate_public_google(text: str):
     import requests
     q=clean_text(text)
