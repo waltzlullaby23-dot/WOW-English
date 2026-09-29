@@ -618,7 +618,9 @@ def fetch_english_via_transcript_txt(video_id: str):
     except Exception:
         return []
 def best_english_transcript(video_id: str, duration: float):
-    # 1) YouTube's direct timedtext endpoint: fastest, does not depend on yt-dlp.
+    # Fast deterministic caption chain for the daily 100-video pipeline.
+    # Do not call youtube-transcript-api here: its list/fetch path has no hard
+    # network timeout and was the reason the Actions job could sit for a long time.
     try:
         ok,segs,lang,kind=fetch_english_via_timedtext(video_id)
         if ok and segs:
@@ -634,18 +636,7 @@ def best_english_transcript(video_id: str, duration: float):
     except Exception:
         pass
 
-    # 2) YouTube transcript API as a second native source.
-    try:
-        tr,segs=fetch_english_transcript(video_id)
-        if segs:
-            valid,coverage,reason=validate_transcript(segs,duration)
-            if valid:return tr,segs,coverage,'youtube-transcript-api',[]
-    except Exception:
-        pass
-
-    # 3) Use yt-dlp's own caption extraction before public mirrors.
-    # This fallback existed but was never called, which left discovery stuck
-    # when youtube-transcript-api/timedtext was blocked on runner IPs.
+    # YouTube-native captions via yt-dlp, with a hard subprocess timeout.
     try:
         en_rows, zh_rows = fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
         if en_rows:
@@ -655,7 +646,7 @@ def best_english_transcript(video_id: str, duration: float):
     except Exception:
         pass
 
-    # 3) Public transcript mirrors/API are a fallback when YouTube blocks the runner.
+    # Hosted transcript fallbacks are bounded by requests timeouts.
     import concurrent.futures
     jobs=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
@@ -667,8 +658,8 @@ def best_english_transcript(video_id: str, duration: float):
                 if segs:
                     valid,coverage,reason=validate_transcript(segs,duration)
                     if valid:return None,segs,coverage,'public-transcript',[]
-            except Exception:pass
-
+            except Exception:
+                pass
     return None,None,0.0,'no-complete-english-transcript',[]
 
 def translate_public_google(text: str):
