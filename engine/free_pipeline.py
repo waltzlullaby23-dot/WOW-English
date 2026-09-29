@@ -305,8 +305,8 @@ def fetch_english_via_timedtext(video_id: str):
         for lang in ('en','en-US','en-GB'):
             rows=fetch_timedtext(video_id,lang,kind)
             if rows and len(' '.join(x['en'] for x in rows))>=180:
-                return True,rows
-    return None,[]
+                return True,rows,lang,kind
+    return False,[],None,None
 def fetch_youtube_timedtext_translation(video_id: str, en_segments):
     # Ask YouTube's own timedtext service for its player translation.
     for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
@@ -619,20 +619,16 @@ def fetch_english_via_transcript_txt(video_id: str):
 def best_english_transcript(video_id: str, duration: float):
     # 1) YouTube's direct timedtext endpoint: fastest, does not depend on yt-dlp.
     try:
-        ok,segs=fetch_english_via_timedtext(video_id)
+        ok,segs,lang,kind=fetch_english_via_timedtext(video_id)
         if ok and segs:
             valid,coverage,reason=validate_transcript(segs,duration)
             if valid:
                 zh_rows=[]
-                for lang in ('en','en-US','en-GB'):
-                    for kind in (None,'asr'):
-                        for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
-                            rows=fetch_timedtext(video_id,lang,kind,tlang)
-                            if rows and len(rows)>=max(CONFIG['minSegments'],int(len(segs)*0.6)):
-                                zh_rows=rows
-                                break
-                        if zh_rows:break
-                    if zh_rows:break
+                for tlang in ('zh-TW','zh-Hant','zh-Hans','zh'):
+                    rows=fetch_timedtext(video_id,lang,kind,tlang)
+                    if rows and len(rows)>=max(CONFIG['minSegments'],int(len(segs)*0.6)):
+                        zh_rows=rows
+                        break
                 return None,segs,coverage,'youtube-timedtext',zh_rows
     except Exception:
         pass
