@@ -38,7 +38,7 @@ CONFIG = {
     'queriesPerRun': 24,
     'resultsPerQuery': 12,
     'maxCandidates': 240,
-    'maxProcess': 40,
+    'maxProcess': 30,
     'minSegments': 8,
     'minCoverage': 0.90,
     'minCharsPerMinute': 42,
@@ -617,17 +617,58 @@ def fetch_english_via_transcript_txt(video_id: str):
         return normalize_segments(rows)
     except Exception:
         return []
-def best_english_transcript(video_id: str, duration: float):
-    # YouTube-only caption gate. This is intentionally strict and bounded:
-    # 1) player metadata caption tracks, 2) direct YouTube timedtext,
-    # 3) yt-dlp's YouTube-native subtitle download. No third-party transcript
-    # mirrors are used in the acceptance path.
+def fetch_youtube_transcript_api_bounded(video_id: str, timeout_s: int = 12):
+    # Hard-stop wrapper around youtube-transcript-api. This keeps a blocked
+    # GitHub runner from hanging the entire daily discovery workflow.
+    code = r'''
+import json,sys
+from youtube_transcript_api import YouTubeTranscriptApi
+vid=sys.argv[1]
+api=YouTubeTranscriptApi()
+items=api.list(vid)
+tracks=[]
+for tr in items:
+    code=str(getattr(tr,'language_code','') or '').lower()
+    if not code.startswith('en'): continue
     try:
-        en_rows, zh_rows, source_name, lang = fetch_caption_tracks_from_player(video_id)
+        rows=tr.fetch()
+        seg=[{'start':float(x.start),'end':float(x.start+x.duration),'en':str(x.text).strip()} for x in rows if str(x.text).strip()]
+        if len(seg)>=8: tracks.append((tr,seg))
+    except Exception: pass
+if not tracks:
+    print(json.dumps({'en':[],'zh':[]})); raise SystemExit(0)
+tr,seg=max(tracks,key=lambda x:len(x[1]))
+zh=[]
+try:
+    langs=list(getattr(tr,'translation_languages',[]) or [])
+    target=None
+    for x in langs:
+        code=str(x.get('language_code') if isinstance(x,dict) else getattr(x,'language_code',''))
+        if code in {'zh-TW','zh-Hant','zh-HK','zh'} or code.lower().startswith('zh'): target=code; break
+    if target:
+        z=tr.translate(target).fetch()
+        zh=[str(x.text).strip() for x in z if str(x.text).strip()]
+except Exception: zh=[]
+print(json.dumps({'en':seg,'zh':zh},ensure_ascii=False))
+'''
+    try:
+        p=subprocess.run([sys.executable,'-c',code,video_id],cwd=ROOT,text=True,capture_output=True,timeout=timeout_s,check=False)
+        if p.returncode!=0 or not p.stdout.strip(): return [],[]
+        data=json.loads(p.stdout.strip().splitlines()[-1])
+        en=normalize_segments(data.get('en') or [])
+        zh_raw=data.get('zh') or []
+        zh=[{'start':en[i]['start'] if i<len(en) else 0,'end':en[i]['end'] if i<len(en) else 0,'en':str(zh_raw[i]).strip()} for i in range(min(len(en),len(zh_raw)))]
+        return en,zh
+    except Exception:
+        return [],[]
+def best_english_transcript(video_id: str, duration: float):
+    # Fast, bounded YouTube-native caption chain.
+    try:
+        en_rows, zh_rows = fetch_youtube_transcript_api_bounded(video_id, timeout_s=12)
         if en_rows:
-            valid, coverage, _ = validate_transcript(en_rows, duration)
+            valid,coverage,_=validate_transcript(en_rows,duration)
             if valid:
-                return None, en_rows, coverage, 'youtube-player-captions', zh_rows
+                return None,en_rows,coverage,'youtube-transcript-api',zh_rows
     except Exception:
         pass
 
@@ -640,22 +681,11 @@ def best_english_transcript(video_id: str, duration: float):
                 for tlang in ('zh-TW','zh-Hant','zh'):
                     rows=fetch_timedtext(video_id,lang,kind,tlang)
                     if rows and len(rows)>=max(CONFIG['minSegments'],int(len(segs)*0.6)):
-                        zh_rows=rows
-                        break
+                        zh_rows=rows; break
                 return None,segs,coverage,'youtube-timedtext',zh_rows
     except Exception:
         pass
-
-    try:
-        en_rows, zh_rows = fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
-        if en_rows:
-            valid,coverage,_=validate_transcript(en_rows,duration)
-            if valid:
-                return None,en_rows,coverage,'yt-dlp-native-captions',zh_rows
-    except Exception:
-        pass
     return None,None,0.0,'no-youtube-english-caption',[]
-
 def translate_public_google(text: str):
     import requests
     q=clean_text(text)
@@ -776,7 +806,7 @@ def main():
             }))
     # Keep each run bounded: repair only part of the legacy queue, then spend
     # the remaining processing budget on genuinely new videos.
-    run_budget=max(25,min(40,int(CONFIG.get('maxProcess',40))))
+    run_budget=max(20,min(30,int(CONFIG.get('maxProcess',30))))
     CONFIG['workers']=max(1,min(12,int(CONFIG.get('workers',12))))
     repair_budget=0  # prioritize daily new-video target
     repair_candidates=repair_candidates[:repair_budget]
