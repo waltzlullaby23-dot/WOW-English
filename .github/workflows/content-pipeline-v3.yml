@@ -1,0 +1,74 @@
+name: 三木Eng Free Video Discovery V3
+
+on:
+  push:
+    paths:
+      - ".github/workflows/content-pipeline-v3.yml"
+      - "engine/free_pipeline.py"
+      - "engine/free_discover.py"
+      - "engine/config.json"
+      - "data/taxonomy.json"
+      - "data/catalog.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sanmu-free-discovery-v3
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    if: github.actor != 'sanmu-eng-bot'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install free pipeline
+        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+      - name: API smoke
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os,requests
+          k=os.environ.get('YOUTUBE_API_KEY','')
+          r=requests.get('https://www.googleapis.com/youtube/v3/search',
+            params={'part':'snippet','q':'BBC Learning English','type':'video','maxResults':1,
+                    'relevanceLanguage':'en','videoCaption':'closedCaption','key':k},timeout=15)
+          print('status=',r.status_code,'items=',len(r.json().get('items',[])) if r.ok else 0)
+          PY
+      - name: Discover 25 new videos
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          FREETRANSCRIPT_API_KEY: ${{ secrets.FREETRANSCRIPT_API_KEY }}
+        run: python engine/discover.py
+      - name: Verify
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('data/catalog.json',encoding='utf-8'))
+          stats=d.get('stats',{})
+          print(json.dumps(stats,ensure_ascii=False,indent=2))
+          if int(stats.get('newAccepted',0)) <= 0:
+            raise SystemExit('No newly accepted videos in this tranche.')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "sanmu-eng-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog.json data/discovery-cursor.json data/discovery-health.json data/review.json
+          if git diff --cached --quiet; then
+            echo "NO_DATA_CHANGE=true" >> "$GITHUB_ENV"
+          else
+            git commit -m "chore: add verified English learning videos"
+            git pull --rebase origin main
+            git push
+          fi
