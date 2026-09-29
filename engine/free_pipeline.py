@@ -37,8 +37,8 @@ REVIEW = DATA / 'review.json'
 CONFIG = {
     'queriesPerRun': 24,
     'resultsPerQuery': 12,
-    'maxCandidates': 200,
-    'maxProcess': 25,
+    'maxCandidates': 300,
+    'maxProcess': 60,
     'minSegments': 8,
     'minCoverage': 0.90,
     'minCharsPerMinute': 42,
@@ -618,9 +618,19 @@ def fetch_english_via_transcript_txt(video_id: str):
     except Exception:
         return []
 def best_english_transcript(video_id: str, duration: float):
-    # Fast deterministic caption chain for the daily 100-video pipeline.
-    # Do not call youtube-transcript-api here: its list/fetch path has no hard
-    # network timeout and was the reason the Actions job could sit for a long time.
+    # 1) Read YouTube's actual caption tracks from player metadata.
+    #    This is the canonical track list and includes the track URL plus
+    #    YouTube's own zh translation when the track supports it.
+    try:
+        en_rows, zh_rows, source_name, lang = fetch_caption_tracks_from_player(video_id)
+        if en_rows:
+            valid, coverage, reason = validate_transcript(en_rows, duration)
+            if valid:
+                return None, en_rows, coverage, 'youtube-player-captions', zh_rows
+    except Exception:
+        pass
+
+    # 2) Direct YouTube timedtext fallback.
     try:
         ok,segs,lang,kind=fetch_english_via_timedtext(video_id)
         if ok and segs:
@@ -636,7 +646,7 @@ def best_english_transcript(video_id: str, duration: float):
     except Exception:
         pass
 
-    # YouTube-native captions via yt-dlp, with a hard subprocess timeout.
+    # 3) YouTube-native captions through yt-dlp.
     try:
         en_rows, zh_rows = fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
         if en_rows:
@@ -646,7 +656,7 @@ def best_english_transcript(video_id: str, duration: float):
     except Exception:
         pass
 
-    # Hosted transcript fallbacks are bounded by requests timeouts.
+    # 4) Bounded public transcript fallbacks.
     import concurrent.futures
     jobs=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
@@ -661,7 +671,6 @@ def best_english_transcript(video_id: str, duration: float):
             except Exception:
                 pass
     return None,None,0.0,'no-complete-english-transcript',[]
-
 def translate_public_google(text: str):
     import requests
     q=clean_text(text)
@@ -841,7 +850,7 @@ def main():
             }))
     # Keep each run bounded: repair only part of the legacy queue, then spend
     # the remaining processing budget on genuinely new videos.
-    run_budget=max(25,min(30,int(CONFIG.get('maxProcess',30))))
+    run_budget=max(40,min(60,int(CONFIG.get('maxProcess',60))))
     CONFIG['workers']=max(1,int(CONFIG.get('workers',12)))
     repair_budget=0  # prioritize daily new-video target
     repair_candidates=repair_candidates[:repair_budget]
