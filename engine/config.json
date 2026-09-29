@@ -1,8 +1,8 @@
 {
   "queriesPerRun": 24,
   "resultsPerQuery": 12,
-  "maxCandidates": 300,
-  "maxProcess": 60,
+  "maxCandidates": 240,
+  "maxProcess": 30,
   "minSegments": 8,
   "minCoverage": 0.9,
   "minCharsPerMinute": 42,
@@ -10,5 +10,5 @@
   "searchRetries": 3,
   "queryCooldown": 0.03,
   "dailyTarget": 100,
-  "workers": 16
+  "workers": 12
 }
