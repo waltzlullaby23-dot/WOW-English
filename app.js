@@ -528,30 +528,36 @@ function playAudioCandidates(urls,index,word,locale){
     return true;
   }catch{return playAudioCandidates(urls,index+1,word,locale);}
 }
+function getPronAudioElement(){
+  let el=document.getElementById('sanmu-pron-audio');
+  if(!el){
+    el=document.createElement('audio');el.id='sanmu-pron-audio';el.preload='auto';el.setAttribute('playsinline','');el.style.display='none';
+    document.body.appendChild(el);
+  }
+  return el;
+}
 function playPronunciation(word,locale){
   const value=String(word||'').trim();if(!value)return false;
   const target=String(locale||'en-US').toLowerCase().startsWith('en-gb')?'en-GB':'en-US';
-  const el=document.querySelector('.vt-pron-audio[data-locale="'+target+'"]');
-  if(el){
-    try{
-      el.pause();
-      el.currentTime=0;
-      el.volume=1;
-      window.__sanmuAudioLast={word:value,locale:target,status:'loading',source:'dom-audio',url:el.currentSrc||el.src};
-      const p=el.play();
-      if(p&&p.then){
-        p.then(()=>{window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'dom-audio',url:el.currentSrc||el.src};})
-         .catch(()=>fallbackPronunciation(value,target));
-      }
-      return true;
-    }catch{}
-  }
-  return fallbackPronunciation(value,target);
-}
-function fallbackPronunciation(value,target){
   const urls=audioCandidates(value,target);
-  const ok=playAudioCandidates(urls,0,value,target);
-  if(!ok)setTimeout(()=>speak(value,target),50);
+  const audio=getPronAudioElement();
+  let started=false;
+  const tryNext=(idx)=>{
+    if(idx>=urls.length){
+      return speak(value,target);
+    }
+    const src=urls[idx];
+    audio.onplaying=()=>{started=true;window.__sanmuAudioLast={word:value,locale:target,status:'playing',source:'dom-audio',url:src};};
+    audio.onended=()=>{window.__sanmuAudioLast={word:value,locale:target,status:'ended',source:'dom-audio',url:src};};
+    audio.onerror=()=>{tryNext(idx+1)};
+    audio.src=src;audio.currentTime=0;audio.volume=1;audio.muted=false;
+    window.__sanmuAudioLast={word:value,locale:target,status:'attempting',source:'dom-audio',url:src};
+    try{const p=audio.play();if(p&&p.catch)p.catch(()=>tryNext(idx+1));}catch{tryNext(idx+1);}
+  };
+  try{audio.pause();audio.removeAttribute('src');audio.load();}catch{}
+  tryNext(0);
+  // User gesture is preserved because this function is invoked from pointerdown.
+  setTimeout(()=>{if(!started&&window.__sanmuAudioLast?.status!=='playing')speak(value,target);},700);
   return true;
 }
 async function playAudioUrl(url,fallbackText,target){return playAudioCandidates([url].filter(Boolean),0,fallbackText,target);}
@@ -563,20 +569,17 @@ function wordModal(){
   const zh=String(w.definition_zh||'查詢中…').trim();
   const uk=String(w.ipa_uk||w.phonetic_uk||'').trim();
   const us=String(w.ipa_us||w.phonetic_us||uk).trim();
-  const ukSrc=String(w.audioLocalUk||w.audio_uk||w.audioFallbackUk||'');
-  const usSrc=String(w.audioLocalUs||w.audio_us||w.audioFallbackUs||'');
+  const wordAttr=JSON.stringify(w.word||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   return `<div class="word-inline-card">
     <div class="vt-dictionary-card">
       <button type="button" class="vt-dictionary-close" onclick="event.stopPropagation();closeWord()" aria-label="關閉">×</button>
-      <audio class="vt-pron-audio" data-locale="en-GB" preload="auto" src="${esc(ukSrc)}"></audio>
-      <audio class="vt-pron-audio" data-locale="en-US" preload="auto" src="${esc(usSrc)}"></audio>
       <div class="vt-word">${esc(w.word||'')}</div>
       ${pos?`<div class="vt-pos">${esc(pos)}</div>`:''}
       <div class="vt-pronunciation">
-        <button type="button" class="vt-pron-btn" aria-label="英式發音" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-GB')"><b>UK</b><span class="vt-speaker">🔊</span></button>
+        <button type="button" class="vt-pron-btn" aria-label="英式發音" onpointerdown="event.preventDefault();event.stopPropagation();playPronunciation(${wordAttr},'en-GB')"><b>UK</b><span class="vt-speaker">🔊</span></button>
         ${uk?`<span class="vt-ipa">${esc(uk)}</span>`:''}
         <span class="vt-pron-dot">·</span>
-        <button type="button" class="vt-pron-btn" aria-label="美式發音" onclick="event.stopPropagation();playPronunciation(${JSON.stringify(w.word)},'en-US')"><b>US</b><span class="vt-speaker">🔊</span></button>
+        <button type="button" class="vt-pron-btn" aria-label="美式發音" onpointerdown="event.preventDefault();event.stopPropagation();playPronunciation(${wordAttr},'en-US')"><b>US</b><span class="vt-speaker">🔊</span></button>
         ${us?`<span class="vt-ipa">${esc(us)}</span>`:''}
       </div>
       <div class="vt-divider"></div>
