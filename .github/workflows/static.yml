@@ -1,4 +1,5 @@
 name: Deploy WOW-English
+# Retry Pages deployment after successful local pronunciation asset build
 
 on:
   push:
