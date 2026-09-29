@@ -2,7 +2,7 @@
   "queriesPerRun": 24,
   "resultsPerQuery": 12,
   "maxCandidates": 300,
-  "maxProcess": 40,
+  "maxProcess": 30,
   "minSegments": 8,
   "minCoverage": 0.9,
   "minCharsPerMinute": 42,
