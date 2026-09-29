@@ -601,38 +601,26 @@ def fetch_english_via_transcript_txt(video_id: str):
     except Exception:
         return []
 def best_english_transcript(video_id: str, duration: float):
-    candidates=[]
+    # Fast path: YouTube caption track plus YouTube-native translation.
     try:
         en_rows,zh_rows,source_name,source_lang=fetch_caption_tracks_from_player(video_id)
-        if en_rows:candidates.append((f'youtube-{source_name}',None,en_rows,zh_rows))
-    except Exception:pass
-    try:
-        en_rows,zh_rows=fetch_subtitle_bundle_via_ytdlp(f'https://www.youtube.com/watch?v={video_id}')
-        if en_rows:candidates.append(('youtube-ytdlp',None,en_rows,zh_rows))
-    except Exception:pass
-    try:
-        segs=fetch_english_via_transcript_txt(video_id)
-        if segs:candidates.append(('youtube-transcript-ai',None,segs,[]))
-    except Exception:pass
-    try:
-        segs=fetch_english_via_free_transcript_api(video_id)
-        if segs:candidates.append(('freetranscriptapi',None,segs,[]))
-    except Exception:pass
+        if en_rows:
+            ok,coverage,reason=validate_transcript(en_rows,duration)
+            if ok:
+                return None,en_rows,coverage,f'youtube-{source_name}',zh_rows
+    except Exception:
+        pass
+    # Secondary path: official transcript API only. Avoid the slow public mirrors
+    # on the hot path so each scheduled tranche can actually finish.
     try:
         tr,segs=fetch_english_transcript(video_id)
-        if segs:candidates.append(('youtube-transcript-api',tr,segs,[]))
-    except Exception:pass
-    valid=[]
-    for source,tr,segs,zhrows in candidates:
-        try:
+        if segs:
             ok,coverage,reason=validate_transcript(segs,duration)
-            if ok:valid.append((coverage,len(segs),source,tr,segs,zhrows))
-        except Exception:pass
-    if not valid:return None,None,0.0,'no-complete-english-transcript',[]
-    priority={'youtube-manual':5,'youtube-auto':5,'youtube-ytdlp':5,'youtube-transcript-api':3,'freetranscriptapi':2,'youtube-transcript-ai':1}
-    valid.sort(key=lambda x:(x[0],priority.get(x[2],0),x[1]),reverse=True)
-    coverage,_,source,tr,segs,zhrows=valid[0]
-    return tr,segs,coverage,source,zhrows
+            if ok:
+                return tr,segs,coverage,'youtube-transcript-api',[]
+    except Exception:
+        pass
+    return None,None,0.0,'no-complete-english-transcript',[]
 
 def translate_public_google(text: str):
     import requests
@@ -679,27 +667,28 @@ def process_video(video_id, meta, existing, idx=0):
     zh=None; zh_source='none'
     youtube_reference=None
 
-    # 1) Use YouTube's own translated caption as a reference/validation layer.
+    # 1) Use YouTube's own translated caption directly when it is complete.
     if youtube_zh_rows:
         try:
             candidate=align_translation_segments(segs,youtube_zh_rows)
             if candidate and len(candidate)==len(segs) and all(clean_text(x) for x in candidate):
                 youtube_reference=candidate
                 zh=candidate
-                zh_source='youtube-player-reference'
+                zh_source='youtube-tw-translation'
         except Exception:
             youtube_reference=None
 
-    # 2) Prefer a translation generated from the English transcript.
+    # 2) Only translate when YouTube native translation was unavailable.
     try:
-        got,src=translate_from_youtube(tr,segs) if tr is not None else (None,'none')
-        if got and len(got)==len(segs) and all(clean_text(x) for x in got):
-            zh,zh_source=got,'youtube-transcript-translation'
+        if zh is None:
+            got,src=translate_from_youtube(tr,segs) if tr is not None else (None,'none')
+            if got and len(got)==len(segs) and all(clean_text(x) for x in got):
+                zh,zh_source=got,'youtube-transcript-translation'
     except Exception:
         pass
 
     # 3) Free batch translation backend.
-    if zh_source in {'youtube-player-reference','none'}:
+    if zh is None:
         try:
             got,src=translate_with_argos(segs)
             if got and len(got)==len(segs) and all(clean_text(x) for x in got):
@@ -708,7 +697,7 @@ def process_video(video_id, meta, existing, idx=0):
             pass
 
     # 4) Public Google Translate fallback.
-    if zh_source in {'youtube-player-reference','none'}:
+    if zh is None:
         try:
             lines=[s['en'] for s in segs]
             got=translate_lines_public_google(lines)
@@ -807,9 +796,9 @@ def main():
             }))
     # Keep each run bounded: repair only part of the legacy queue, then spend
     # the remaining processing budget on genuinely new videos.
-    run_budget=max(1,int(CONFIG.get('maxProcess',10)))
-    CONFIG['workers']=max(1,int(CONFIG.get('workers',6)))
-    repair_budget=min(len(repair_candidates),max(0,run_budget//2))
+    run_budget=max(1,int(CONFIG.get('maxProcess',40)))
+    CONFIG['workers']=max(1,int(CONFIG.get('workers',12)))
+    repair_budget=min(len(repair_candidates),max(0,run_budget//3))
     repair_candidates=repair_candidates[:repair_budget]
 
     new=[];review=[]
@@ -851,9 +840,15 @@ def main():
     data['stats']={'accepted':len(accepted),'totalRecords':len(data['videos']),'newAccepted':len(new),'repaired':repaired,'processed':processed,'repairCandidates':len(repair_candidates),'candidates':len(cand),'queries':len(jobs),'lastRun':now_iso()}
     dump_json(CAT,data)
     health=load_json(HEALTH,{'consecutiveZeroRuns':0,'totalNewAccepted':0})
+    today=now_iso()[:10]
+    if health.get('dailyDate')!=today:
+        health['dailyDate']=today
+        health['dailyAccepted']=0
+    health['dailyAccepted']=int(health.get('dailyAccepted',0))+len(new)
     if new:health['consecutiveZeroRuns']=0
     else:health['consecutiveZeroRuns']=int(health.get('consecutiveZeroRuns',0))+1
     health['totalNewAccepted']=int(health.get('totalNewAccepted',0))+len(new)
+    health['remainingDailyTarget']=max(0,int(CONFIG.get('dailyTarget',100))-int(health.get('dailyAccepted',0)))
     health['lastRun']=now_iso();health['lastNewAccepted']=len(new);health['lastRepaired']=repaired
     dump_json(HEALTH,health)
     dump_json(REVIEW,{'generatedAt':now_iso(),'videos':review,'count':len(review)})
